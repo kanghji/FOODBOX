@@ -1,0 +1,9 @@
+-- 카테고리 테이블(foodbox)
+create table category(
+	category_no int primary key auto_increment,
+    category_code varchar(10) not null,
+    category_name varchar(100) not null
+);
+select * from category;
+drop table category;
+
