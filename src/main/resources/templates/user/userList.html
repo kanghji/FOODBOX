@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
+<div class="container w-75 mt-5">
+    <h3>회원 리스트</h3>
+
+    <form action="" method="post">
+        날짜 <input type="date" id="s_date" name="s_date"> ~ <input type="date" id="e_date" name="e_date">
+        <input type="text" name="name" placeholder="이름">
+
+        <select id="gender" name="gender">
+            <option value="ALL">전체</option>
+            <option value="남">남</option>
+            <option value="여">여</option>
+        </select>
+        <input class="btn btn-sm btn-warning" type="submit" value="검색">
+    </form>
+
+    <form id="frmTable">
+    <table class="table table-bordered">
+        <thead class="table-secondary">
+        <tr>
+            <th class="col-1">선택</th>
+            <th>회원번호</th>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>이름</th>
+            <th>성별</th>
+            <th>생년월일</th>
+            <th>이메일</th>
+            <th>주소</th>
+            <th class="col-2">수정 / 삭제</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <th:block th:each="userList : ${userList}">
+            <tr>
+                <td>
+                    <input type="checkbox" name="chkUno"> <!--th:value=""-->
+                </td>
+                <td th:text="${userList.user_no}"></td>
+                <td th:text="${userList.user_id}"></td>
+                <td th:text="${userList.user_pw}"></td>
+                <td th:text="${userList.user_name}"></td>
+                <td th:text="${userList.user_gender}"></td>
+                <td th:text="${userList.user_birthday}"></td>
+                <td th:text="${userList.user_email}"></td>
+                <td th:text="${userList.user_zibunaddr}"></td>
+
+                <td>
+                    <a href="" class="btn btn-sm btn-info">수정</a>&nbsp
+                    <a class="btn btn-sm btn-danger" th:href="@{/user/userDelete(user_no=${userList.user_no})}">삭제</a>
+                </td>
+
+            </tr>
+
+        </th:block>
+        <!--    </th:block>-->
+        </tbody>
+    </table>
+    </form>
+
+    <a href="" class="btn btn-danger" type="button" onclick="onDelete()">선택 삭제</a>
+<!--    <button class="btn btn-secondary" type="button" onclick="onDelete()">선택삭제</button>-->
+</div>
+
+<!-- 페이지네이션 -->
+<ul class="pagination justify-content-center">
+    <li class="page-item">
+        <a class="page-link" href="">이전</a>
+    </li>
+
+    <li class="page-item">
+        <a class="page-link" href="">1</a>
+    </li>
+
+    <li class="page-item">
+        <a class="page-link" href="">다음</a>
+    </li>
+</ul>
+
+<script>
+    let frm = document.getElementById("frmTable");
+
+function onDelete() {
+        let chkBoxes = document.getElementsByName("chkUno");
+        frm.setAttribute("action", "user/usersDelete");
+
+        let cnt = 0;
+        for (let chk of chkBoxes) {
+        if (chk.checked) { // 체크되어 있으면 true, 아니면 false 리턴
+        cnt++;
+    }
+}
+    if (cnt == 0) {
+    alert("삭제할 회원을 체크하세요!!");
+    return;
+}
+
+    frm.submit();
+}
+</script>
+
+
+
+<!-- 푸터 -->
+<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
+</body>
+</html>
