@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-시작페이지 - 로그인을 해주세요
+<!-- header -->
+<th:block th:replace="/inc/header :: headerFragment"></th:block>
 
-<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
-</body>
-</html>
+<!-- main -->
+<th:block th:replace="/inc/main :: mainFragment"></th:block>
+
+<!-- footer -->
+<th:block th:replace="/inc/footer :: footerFragment"></th:block>
