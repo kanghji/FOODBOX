@@ -4,19 +4,18 @@
 <th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
 <div class="container w-75 mt-5">
     <h3>회원 리스트</h3>
+    <!-- 회원 검색 기능-->
+    <form action="/user/userSearch" method="post">
+        <input type="text" id="user_name" name="user_name" placeholder="회원이름">
 
-    <form action="" method="post">
-        날짜 <input type="date" id="s_date" name="s_date"> ~ <input type="date" id="e_date" name="e_date">
-        <input type="text" name="name" placeholder="이름">
-
-        <select id="gender" name="gender">
+        <select id="user_gender" name="user_gender">
             <option value="ALL">전체</option>
-            <option value="남">남</option>
-            <option value="여">여</option>
+            <option value="남자">남</option>
+            <option value="여자">여</option>
         </select>
         <input class="btn btn-sm btn-warning" type="submit" value="검색">
     </form>
-
+<!--회원 리스트 부분-->
     <form id="frmTable">
     <table class="table table-bordered">
         <thead class="table-secondary">
@@ -30,18 +29,20 @@
             <th>생년월일</th>
             <th>이메일</th>
             <th>주소</th>
-            <th class="col-2">수정 / 삭제</th>
+            <th class="col-2">삭제</th>
         </tr>
         </thead>
 
         <tbody>
         <th:block th:each="userList : ${userList}">
+
             <tr>
                 <td>
-                    <input type="checkbox" name="chkUno"> <!--th:value=""-->
+                <input type="checkbox" name="chkUno" th:value="${userList.user_no}">
                 </td>
                 <td th:text="${userList.user_no}"></td>
-                <td th:text="${userList.user_id}"></td>
+<!--                <td th:text="${userList.user_id}"></td>-->
+                <td><a th:text="${userList.user_id}" th:href="@{/user/userInfo(user_no=${userList.user_no})}"></a></td>
                 <td th:text="${userList.user_pw}"></td>
                 <td th:text="${userList.user_name}"></td>
                 <td th:text="${userList.user_gender}"></td>
@@ -50,20 +51,17 @@
                 <td th:text="${userList.user_zibunaddr}"></td>
 
                 <td>
-                    <a href="" class="btn btn-sm btn-info">수정</a>&nbsp
                     <a class="btn btn-sm btn-danger" th:href="@{/user/userDelete(user_no=${userList.user_no})}">삭제</a>
                 </td>
 
             </tr>
 
         </th:block>
-        <!--    </th:block>-->
         </tbody>
     </table>
     </form>
-
-    <a href="" class="btn btn-danger" type="button" onclick="onDelete()">선택 삭제</a>
-<!--    <button class="btn btn-secondary" type="button" onclick="onDelete()">선택삭제</button>-->
+<!--선택 삭제-->
+    <button class="btn btn-danger" type="button" onclick="onDelete()">선택 삭제</button>
 </div>
 
 <!-- 페이지네이션 -->
@@ -81,12 +79,14 @@
     </li>
 </ul>
 
+<!-- 회원 선택 삭제 시 체크 안하고 삭제 누르면 alert 뜸 -->
+
 <script>
     let frm = document.getElementById("frmTable");
 
 function onDelete() {
         let chkBoxes = document.getElementsByName("chkUno");
-        frm.setAttribute("action", "user/usersDelete");
+        frm.setAttribute("action", "/user/usersDelete");
 
         let cnt = 0;
         for (let chk of chkBoxes) {
