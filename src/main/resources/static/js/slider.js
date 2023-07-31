@@ -9,8 +9,8 @@ $(function (){
         speed: 850,
         cssEase: "ease-in-out",
         dots: false,
-        prevArrow: "<i class='xi-angle-left-thin best-prev best-btn'></i>",
-        nextArrow: "<i class='xi-angle-right-thin best-next best-btn'></i>"
+        prevArrow: "<i class='xi-angle-left-thin new-prev new-btn'></i>",
+        nextArrow: "<i class='xi-angle-right-thin new-next new-btn'></i>"
     });
 
 });
