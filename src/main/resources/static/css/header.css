@@ -8,7 +8,7 @@
 
 a{
     text-decoration: none;
-    color: #333;
+    color: #424242;
 }
 
 li {
@@ -17,10 +17,6 @@ li {
 
 
 /* header */
-
-/*.header_container {*/
-/*    position: relative;*/
-/*}*/
 
 .header {
     background-color: #fff;
@@ -43,18 +39,15 @@ a:hover {
 }
 
 .wrap {
-    /*width: 1450px;*/
     width: 1200px;
     display: flex;
     margin: auto;
     margin-top: 1.3em;
-    /*padding: 1.3em;*/
-    /*border: 1px solid #000;*/
 }
 
 .header_innerbox1 {
     display: flex;
-    /*border: 1px solid #000;*/
+    margin-left: 1.5em;
 }
 
 .gnb {
@@ -65,13 +58,8 @@ a:hover {
 
 .gnb__menu {
     display: flex;
-    /* justify-content: space-around; */
     font-size: 17px;
     font-weight: 600;
-}
-
-.gnb__store {
-    /*padding-left: 2em;*/
 }
 
 .main_menu {
@@ -82,7 +70,6 @@ a:hover {
 .submenu {
     padding: 3em 1.3em 1.3em 1.3em;
     background-color: #fff;
-    /* font-weight: 550; */
     display: none;
     font-size: 15px;
 }
@@ -93,9 +80,8 @@ a:hover {
 
 .header_innerbox2 {
     display: flex;
-    margin-left: 11em;
+    margin-left: 10em;
     margin-top: 0.8em;
-    /*border: 1px solid #000;*/
 }
 
 .inner_right {
@@ -112,9 +98,28 @@ a:hover {
     font-weight: 550;
 }
 
-.mypage_dropdown:hover .mypage__submenu {
-    display: block;
-    position: absolute;
+.mypage__submenu {
+    width: 13em;
+    padding: 3.5em 1.3em 1.3em 1.3em;
+    background-color: #fff;
+    font-size: 15px;
+}
+
+.mypage__submenu li:not(.mypage_logout){
+    padding: 1em 0 1em 0;
+    border-bottom: 1px solid #dddddd;
+    font-size: 14px;
+}
+
+.mypage__submenu a:not(.mypage_logout):hover {
+    color: #f29a1a;
+}
+
+
+.mypage__submenu li:nth-child(6) {
+    padding: 2em 0;
+    font-weight: 550;
+    color: #dddddd;
 }
 
 .login__dropdown:hover .login__submenu {
