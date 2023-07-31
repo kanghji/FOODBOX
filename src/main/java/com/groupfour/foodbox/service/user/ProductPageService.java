@@ -1,4 +1,4 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.user;
 
 import com.groupfour.foodbox.domain.ProductDTO;
 import org.springframework.stereotype.Service;
@@ -11,4 +11,6 @@ public interface ProductPageService {
     List<ProductDTO> productPage();
     //사용자페이지 상품상세정보 가져오기
     ProductDTO productView(int prod_code);
+    //사용자페이지 상품상세이미지 가져오기
+    List<String> productImageList(int prod_code);
 }

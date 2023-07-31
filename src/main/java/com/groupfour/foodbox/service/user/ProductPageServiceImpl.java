@@ -1,7 +1,7 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.user;
 
 import com.groupfour.foodbox.domain.ProductDTO;
-import com.groupfour.foodbox.mapper.ProductPageMapper;
+import com.groupfour.foodbox.mapper.user.ProductPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +22,11 @@ public class ProductPageServiceImpl implements ProductPageService{
     public ProductDTO productView(int prod_code) {
         ProductDTO productDTO = productPageMapper.productView(prod_code);
         return productDTO;
+    }
+
+    @Override
+    public List<String> productImageList(int prod_code) {
+        List<String> productImageList = productPageMapper.productImageList(prod_code);
+        return productImageList;
     }
 }

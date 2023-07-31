@@ -1,8 +1,70 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
-<div class="container">
-    <div class=""
+<div class="container d-flex col-6 mt-5">
+    <div class="me-4">
+        <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:500px;">
+    </div>
+    <div>
+      <p class="m-3" th:text="${productDTO.prod_comment}"></p>
+        <h4 class="m-3" th:text="&lbrack;+${productDTO.getProd_brand()}+&rbrack;+${productDTO.prod_name}"></h4>
+        <br>
+        <br>
+        <br>
+        <h3 class="m-3 text-end" th:text="${productDTO.prod_price}"></h3>
+        <hr class="m-3">
+        <div class="d-flex w-100 col-6">
+            <h7 class="m-3" style="width:70px;" th:text="배송"></h7>
+            <p class="m-3">5만원이상 구매시 무료배송</p>
+        </div>
+        <div class="d-flex w-100 col-6">
+            <h7 class="m-3" style="width:70px;" th:text="원산지"></h7>
+            <p class="m-3" th:text="${productDTO.prod_country}"></p>
+        </div>
+        <div class="d-flex w-100 col-6">
+            <h7 class="m-3" style="width:70px;" th:text="제조사"></h7>
+            <p class="m-3" th:text="${productDTO.prod_brand}"></p>
+        </div>
+        <div class="d-flex w-100 col-6">
+            <p class="m-3"></p>
+        </div>
+        <div class="d-flex w-100 m-2 justify-content-end">
+            <input type='button' value='-' class='btn btn-sm btn-outline-secondary m-1' onclick = "minusQty()">
+            <input class="text-center border-0" type="text" name="order_qty" id="order_qty" size="3" value="1"/><br/>
+            <input type='button' value='+' class='btn btn-sm btn-outline-secondary m-1' onclick = "plusQty()">
+        </div>
+        <div class="d-flex justify-content-center">
+            <input type='button' value='장바구니' class='btn btn-sm me-3' onclick = "">
+            <input type='button' value='바로구매' class='btn btn-sm' onclick = "">
+        </div>
+    </div>
 </div>
+<br>
+<br>
+<div class="container d-flex">
+    <h3 class="me-4">상세정보</h3>
+    <h5>리뷰</h5>
+</div>
+
+<div class="container">
+    <th:block th:each="productImage : ${productImageList}" class="d-block">
+        <img th:src="@{/image/}+${productImage}" alt="Card image" style="width:500px;">
+    </th:block>
+</div>
+<script>
+
+    function minusQty(){
+        let orderQty = Number($("#order_qty").val())-1;
+        document.getElementById("order_qty").value=orderQty;
+        if(orderQty==0){
+            alert("1개 미만으로 담을 수 없습니다.");
+           document.getElementById("order_qty").value=1;
+        }
+    }
+    function plusQty(){
+        let orderQty = Number($("#order_qty").val())+1;
+        document.getElementById("order_qty").value=orderQty;
+    }
+</script>
 </body>
 </html>

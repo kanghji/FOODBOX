@@ -1,7 +1,7 @@
 package com.groupfour.foodbox.controller.user;
 
 import com.groupfour.foodbox.domain.ProductDTO;
-import com.groupfour.foodbox.service.ProductPageService;
+import com.groupfour.foodbox.service.user.ProductPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,8 @@ public class ProductPageController {
     public String productView(int prod_code, Model model){
         ProductDTO productDTO = productPageService.productView(prod_code);
         model.addAttribute("productDTO",productDTO);
+        List<String> productImageList = productPageService.productImageList(prod_code);
+        model.addAttribute("productImageList", productImageList);
         return "/user/productView";
     }
 }

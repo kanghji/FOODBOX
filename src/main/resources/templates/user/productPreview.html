@@ -8,7 +8,7 @@
         <img class="card-image" th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:100%">
     </a>
     <div class="card-body">
-        <h7 class="card-title" style= "font-size:15px;"><b th:text="${productDTO.prod_brand}+| ${productDTO.prod_name}"></b></h7>
+        <h7 class="" style= "font-size:15px;"><b th:text="${productDTO.prod_brand}+| ${productDTO.prod_name}"></b></h7>
         <p class="card-text" th:text="${productDTO.prod_price}"></p>
     </div>
 </div>

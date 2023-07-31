@@ -1,4 +1,4 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.CategoryDTO;
 import com.groupfour.foodbox.domain.ProductDTO;

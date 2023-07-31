@@ -1,8 +1,7 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.admin;
 
-import com.groupfour.foodbox.domain.CategoryDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
-import com.groupfour.foodbox.mapper.ProductMapper;
+import com.groupfour.foodbox.mapper.admin.ProductMapper;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
