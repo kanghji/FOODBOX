@@ -1,10 +1,9 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.CategoryDTO;
-import com.groupfour.foodbox.mapper.CategoryMapper;
+import com.groupfour.foodbox.mapper.admin.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

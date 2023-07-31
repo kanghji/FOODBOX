@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
+<div class="container w-75 mt-3">
+    <h3 class="mt-3 text-center">상품 리스트</h3>
+    <a href="/admin/productRegister" class="btn btn-success ms-auto">상품 등록</a>
+    <button class="btn btn-secondary" type="button" onclick="onDelete()">선택삭제</button>
+    <form id="frmTable" action="" method="post">
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th></th>
+                <th>상품 코드</th>
+                <th>상품 카테고리 코드</th>
+                <th>상품 이름</th>
+                <th>상품 회사</th>
+                <th>상품 수량</th>
+                <th>상품 가격</th>
+                <th>상품 등록일</th>
+                <th>삭제</th>
+            </tr>
+
+            </thead>
+            <tbody class="text-center">
+            <th:block th:each="productDTO : ${productList}">
+                <tr>
+                    <!--map의 get을 이용하면 에러코드 없이 수행함-->
+                    <td><input type="checkbox" name="chkCategory_no"/></td>
+                    <td  th:text="${productDTO.prod_code}"></td>
+                    <td th:text="${productDTO.prod_cat_code}"></td>
+                    <td ><a th:text="${productDTO.prod_name}" th:href="@{/admin/productInfo(prod_code=${productDTO.prod_code})}"></a></td>
+                    <td th:text="${productDTO.prod_brand}"></td>
+                    <td th:text="${productDTO.prod_qty}"></td>
+                    <td th:text="${productDTO.prod_price}"></td>
+                    <td th:text="${productDTO.prod_inputdate}"></td>
+                    <td><a class="btn btn-danger btn-sm" th:href="@{/admin/productDelete(prod_code=${productDTO.prod_code})}">삭제</a></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
