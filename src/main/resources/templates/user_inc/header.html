@@ -1,0 +1,107 @@
+
+<th:block th:fragment="headerFragment">
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Foodbox</title>
+</head>
+<body>
+<div class="header_container">
+<header class="header header__fixed">
+    <div class="wrap">
+        <div class="header_innerbox1">
+            <!-- logo -->
+            <h1 class="logo ">
+                <a href="/">Foodbox</a>
+            </h1>
+            <!-- menu -->
+            <nav class="gnb">
+                <ul class="gnb__menu">
+                    <li class="gnb__store main_menu">
+                        <a href="#스토어">스토어</a>
+                        <ul class="store__submenu submenu">
+                            <li class="sub_title"><span>푸드</span></li>
+                            <li><a href="#">카테고리1</a></li>
+                            <li><a href="#">카테고리2</a></li>
+                            <li><a href="#">카테고리3</a></li>
+                            <li><a href="#">카테고리4</a></li>
+                            <li><a href="#">카테고리5</a></li>
+                            <li><a href="#">카테고리6</a></li>
+                            <li><a href="#">카테고리7</a></li>
+                            <li><a href="#">카테고리8</a></li>
+                            <li><a href="#">카테고리9</a></li>
+                            <li><a href="#">카테고리10</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnb__best main_menu"><a href="#레시피">레시피</a></li>
+                    <li class="gnb__best main_menu"><a href="#베스트">베스트</a></li>
+                    <li class="gnb__new main_menu"><a href="#신상품">신상품</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header_innerbox2">
+            <!-- search -->
+            <div class="search inner_right">
+                <a href="#search아이콘"><i class="fa fa-search fa-lg"></i></a>
+            </div>
+            <!-- cart -->
+            <div class="cart inner_right">
+                <a href="#cart아이콘"><i class="fa fa-shopping-cart fa-lg"></i></a>
+            </div>
+            <!-- login -->
+            <!-- 비 로그인 시 보이기  -->
+            <div class="login_box">
+                <ul class="login inner_right">
+                    <li class="login__dropdown">
+                        <a href="#로그인"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
+                        <ul class="login__submenu submenu">
+                            <li><a href="#회원가입">회원가입</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- mypage -->
+            <!-- 로그인 시 보이기 -->
+            <div class="mypage_box">
+                <ul class="mypage inner_right">
+                    <li class="mypage_dropdown">
+                        <a href="#마이페이지">
+                            <i class="fa fa-heart-o fa-lg"></i>
+                            <span class="">마이페이지</span>
+                        </a>
+                        <ul class="mypage__submenu">
+                            <li><p class="username">홍길동 님</p></li>
+                            <li><a href="#">주문내역 조회</a></li>
+                            <li><a href="#">책갈피한 레시피</a></li>
+                            <li><a href="#">회원정보 수정</a></li>
+                            <li><a href="#">비밀번호 변경</a></li>
+                            <li class="mypage_logout"><a href="#">로그아웃</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+</div>
+</th:block>
