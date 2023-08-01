@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- header -->
+<th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
+<style>
+    td{vertical-align:middle;}
+</style>
+
+<div class="container d-flex col-6 mt-5">
+
+<!--    <c:if test="${requestScope.msg !=null}">-->
+<!--        <script>-->
+<!--            alert("${requestScope.msg}");-->
+<!--        </script>-->
+<!--    </c:if>-->
+        <h3>장바구니 리스트</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>상품이미지</th>
+                <th>상품명</th>
+                <th>수량</th>
+                <th>판매가</th>
+                <th>합계</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:if="|${dtos==null || dtos.size() ==0}|">
+                <tr>
+                    <td colspan="6">장바구니가 비었습니다!!</td>
+                </tr>
+            </th:block>
+            <th:block th:if="|${dtos!=null || dtos.size() !=0}|">
+<!--                <c:set var="cartTotPrice" value="0"/>-->
+<!--                <c:set var="cartTotPoint" value="0"/>-->
+
+<!--                <c:forEach var="dto" items="${dtos}">-->
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <a href="<c:url value="/product/prodView.do?pnum=${dto.pnum}&pspec=${dto.pspec}"/>">-->
+<!--                            <img src="<c:url value="/productRepo/${dto.pimage}"/>" style="width:60px"/>-->
+<!--                            </a>-->
+<!--                        </td>-->
+<!--                        <td>${dto.pname}</td>-->
+<!--                        <td>-->
+<!--                            <form action="cartModify.do" method="post">-->
+<!--                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+<!--                                <input type="hidden" name="cnum" value="${dto.cnum}"/>-->
+<!--                                <input type="text" size="3" name="pqty" value="${dto.pqty}"/>개<br/>-->
+<!--                                <input type="submit" class="btn btn-sm btn-secondary mt-3" value="수정"/>-->
+<!--                            </form>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <fmt:formatNumber value="${dto.price}"/>원<br/>-->
+<!--                            <fmt:formatNumber value="${dto.ppoint}"/>포인트-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <fmt:formatNumber value="${dto.totPrice}"/>원<br/>-->
+<!--                            <fmt:formatNumber value="${dto.totPoint}"/>포인트-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <%&#45;&#45;-->
+<!--                            pnum 파라미터 노출-->
+<!--                            <a href="cartDelete.do?pnum=${dto.pnum}" class="btn btn-sm btn-danger">삭제</a>-->
+<!--                            &#45;&#45;%>-->
+<!--                            <form action="cartDelete.do" method="post">-->
+<!--                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+<!--                                <input type="hidden" name="cnum" value="${dto.cnum}"/>-->
+<!--                                <input type="submit" class="btn btn-sm btn-danger" value="삭제"/>-->
+<!--                                <%&#45;&#45; <a href="cartDelete.do?pnum=${dto.pnum}" class="btn btn-sm btn-danger">삭제</a> &#45;&#45;%>-->
+<!--                            </form>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <c:set var="cartTotPrice" value="${cartTotPrice + dto.totPrice}"/>-->
+<!--                    <c:set var="cartTotPoint" value="${cartTotPoint + dto.totPoint}"/>-->
+
+                </th:block>
+            </tbody>
+        </table>
+        <!-- 장바구니 총액 표시 -->
+        <div class="text-end">
+            장바구니 총액 : <fmt:formatNumber value="${cartTotPrice}"/> 원 <br/>
+            총 포인트 : <fmt:formatNumber value="${cartTotPoint}"/> 포인트
+        </div>
+        <div class="text-center">
+            <a href="<c:url value="user/checkout.do"/>" class="btn btn-primary me-2">구매하기</a>
+            <a href="javascript:history.back()" class="btn btn-outline-primary me-2">계속 쇼핑하기</a>
+        </div>
+
+</div>
+
+<!-- footer -->
+<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
