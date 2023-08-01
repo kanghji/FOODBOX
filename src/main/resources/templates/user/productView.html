@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
+<style>
+    .container{
+        width:1200px;
+    }
+    .direct:hover{
+         border-color:#f29a1a;
+         background-color:white;
+         color:black;
+    }
+    .cart:hover{
+        border-color: black;
+        background-color:#f29a1a;
+        color:white;
+    }
+    .info:hover{
+        color:#f29a1a;
+        cursor:pointer;
+    }
+    .review:hover{
+        color:#f29a1a;
+        cursor:pointer;
+    }
+</style>
 <div class="container d-flex col-6 mt-5">
-    <div class="me-4">
-        <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:500px;">
+    <div class="me-3 col">
+        <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:700px;">
     </div>
     <div>
-      <p class="m-3" th:text="${productDTO.prod_comment}"></p>
+      <p class="m-3 col" th:text="${productDTO.prod_comment}"></p>
         <h4 class="m-3" th:text="&lbrack;+${productDTO.getProd_brand()}+&rbrack;+${productDTO.prod_name}"></h4>
         <br>
         <br>
@@ -14,42 +37,52 @@
         <h3 class="m-3 text-end" th:text="${productDTO.prod_price}"></h3>
         <hr class="m-3">
         <div class="d-flex w-100 col-6">
-            <h7 class="m-3" style="width:70px;" th:text="배송"></h7>
-            <p class="m-3">5만원이상 구매시 무료배송</p>
+            <h7 class="m-2" style="width:70px;" th:text="배송"></h7>
+            <p class="m-2">5만원이상 구매시 무료배송</p>
         </div>
         <div class="d-flex w-100 col-6">
-            <h7 class="m-3" style="width:70px;" th:text="원산지"></h7>
-            <p class="m-3" th:text="${productDTO.prod_country}"></p>
+            <h7 class="m-2" style="width:70px;" th:text="원산지"></h7>
+            <p class="m-2" th:text="${productDTO.prod_country}"></p>
         </div>
         <div class="d-flex w-100 col-6">
-            <h7 class="m-3" style="width:70px;" th:text="제조사"></h7>
-            <p class="m-3" th:text="${productDTO.prod_brand}"></p>
+            <h7 class="m-2" style="width:70px;" th:text="제조사"></h7>
+            <p class="m-2" th:text="${productDTO.prod_brand}"></p>
         </div>
         <div class="d-flex w-100 col-6">
-            <p class="m-3"></p>
+            <p class="m-2">*****</p>
         </div>
         <div class="d-flex w-100 m-2 justify-content-end">
-            <input type='button' value='-' class='btn btn-sm btn-outline-secondary m-1' onclick = "minusQty()">
+            <input type='button' value='-' class='btn rounded-circle btn-outline-secondary m-1' onclick = "minusQty()" style="width:40px;">
             <input class="text-center border-0" type="text" name="order_qty" id="order_qty" size="3" value="1"/><br/>
-            <input type='button' value='+' class='btn btn-sm btn-outline-secondary m-1' onclick = "plusQty()">
+            <input type='button' value='+' class='btn rounded-circle btn-outline-secondary m-1' onclick = "plusQty()" style="width:40px;">
         </div>
-        <div class="d-flex justify-content-center">
-            <input type='button' value='장바구니' class='btn btn-sm me-3' onclick = "">
-            <input type='button' value='바로구매' class='btn btn-sm' onclick = "">
+        <div class="d-flex justify-content-center" style="margin-top:40px;">
+            <input type='button' value='장바구니' class='btn cart btn-lg p-2' style="border-color:#f29a1a; margin-right:60px; width:150px;" onclick = "">
+            <input type='button' value='바로구매' class='btn direct btn-lg p-2' style="color:white; background-color:#f29a1a; width:150px;" onclick = "">
         </div>
     </div>
 </div>
 <br>
 <br>
-<div class="container d-flex">
-    <h3 class="me-4">상세정보</h3>
-    <h5>리뷰</h5>
+<div class="container d-flex mt-5 align-items-end">
+    <h3 class="info me-4">상세정보</h3>
+    <h4 class="review center-block">리뷰</h4>
 </div>
 
-<div class="container">
-    <th:block th:each="productImage : ${productImageList}" class="d-block">
-        <img th:src="@{/image/}+${productImage}" alt="Card image" style="width:500px;">
+<div class="container d-flex flex-column mt-4" id="productImage" style="height:800px; overflow:hidden;">
+    <th:block th:each="productImage : ${productImageList}" class="m-0 p-0">
+        <img th:src="@{/image/}+${productImage}" alt="Card image" style="width:800px;">
     </th:block>
+</div>
+<div class="container mb-5">
+    <div id="infoShow">
+        <input type="button" class="btn p-3" id="productShowBtn" value="상품정보 더보기" onclick="productInfoShow()"
+               style="border:none; width:800px; background-color: #f29a1a; color:white; font-size:2em;">
+    </div>
+    <div id="infoHide" style="width:800px; display:none;">
+        <hr class="mt-3">
+        <h3 class="text-center" onclick="productInfoHide()" style="cursor:pointer;">접기</h3>
+    </div>
 </div>
 <script>
 
@@ -64,6 +97,18 @@
     function plusQty(){
         let orderQty = Number($("#order_qty").val())+1;
         document.getElementById("order_qty").value=orderQty;
+    }
+    function productInfoShow(){
+        document.getElementById("productImage").style.overflow="visible";
+        document.getElementById("productShowBtn").style.display="none";
+        document.getElementById("infoHide").style.display="block";
+        document.getElementById("productImage").style.height="100%";
+    }
+    function productInfoHide(){
+        document.getElementById("productImage").style.overflow="hidden";
+        document.getElementById("productShowBtn").style.display="block";
+        document.getElementById("infoHide").style.display="none";
+        document.getElementById("productImage").style.height="800px";
     }
 </script>
 </body>
