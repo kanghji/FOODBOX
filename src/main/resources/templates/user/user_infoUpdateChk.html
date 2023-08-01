@@ -1,0 +1,42 @@
+
+<th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
+<div class="userinfo_container">
+    <div class="userinfo_wrap">
+        <p class="userinfo_title">개인 정보 수정</p>
+        <div class="userinfo_pwChk">
+            <div class="pwChk_text">
+                <p>비밀번호 재확인</p>
+                <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요</p>
+            </div>
+            <form class="userinfo_input" action="" method="post">
+                <div class="pwChk_box">
+                    <div class="username_box pwChk_inner">
+                        <div class="label_box user_label">
+                            <label for="user_name">아이디</label>
+                        </div>
+                        <div class="input_box">
+<!--                            <input type="text" id="user_name" name="user_name" class="info_input" th:value="${}" readonly />-->
+                            <input type="text" id="user_name" name="user_name" class="info_input"  readonly />
+                        </div>
+                    </div>
+                    <div class="userpw_box pwChk_inner">
+                        <div class="label_box pw_label">
+                            <label for="user_pw">비밀번호</label>
+                        </div>
+                        <div class="input_box">
+                            <input type="password" id="user_pw" name="user_pw" class="info_input" placeholder="현재 비밀번호를 입력해주세요" />
+                        </div>
+                    </div>
+                </div>
+                <div class="userinfo_btn_box">
+                    <div class="btn_inner">
+                        <button type="submit" class="userinfo_btn" onclick="userInfoBtn()">확인</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
