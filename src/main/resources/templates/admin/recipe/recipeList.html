@@ -4,11 +4,25 @@
 <!-- header -->
 <th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
 
+
+
 <!-- Card -->
 <div class="container w-50 mt-3">
     <h3>레시피 리스트 </h3>
-<!--    <a th:href="@{/user/productView(prod_code=${productDTO.prod_code})}" style="height:200px; overflow:hidden;">-->
-        <!--        <img class="card-image" th:src="@{C://image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:100%">-->
+
+    <form action="" method="post">
+        <input type="text" name="name" placeholder="검색">
+
+        <select id="gender" name="gender">
+            <option value="ALL">전체</option>
+            <option value=""></option>
+            <option value="여">여</option>
+        </select>
+        <input class="btn btn-sm btn-warning" type="submit" value="검색">
+    </form>
+
+
+
         <table class="table">
             <thead>
             <tr><!--메뉴-->
