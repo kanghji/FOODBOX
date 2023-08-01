@@ -16,8 +16,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
-
     @Autowired
     private UserService userService;
 
@@ -36,7 +34,7 @@ public class UserController {
         return  "redirect:/user/userList";
     }
 
-    // 회원 리스트
+    // 회원리스트
     @GetMapping("/userList")
     public String userList(Model model){
         // data 만들기
@@ -46,17 +44,17 @@ public class UserController {
         return "/user/userList";
     }
 
-    // 회원 삭제
+    // 회원삭제
     @RequestMapping ("/userDelete")
-    public String userDelete(String user_no){
+    public String userDelete(int user_no){
         int n = userService.userDelete(user_no);
 
         return "redirect:/user/userList";
     }
 
     // 선택삭제
-    @PostMapping("/usersDelete")
-    public String usersDelete(@RequestParam("chkMno") List<String> chkList) {
+    @GetMapping("/usersDelete")
+    public String usersDelete(@RequestParam("chkUno") List<String> chkList) {
         System.out.println("chkList = " + chkList);
 
         if(chkList != null) {
@@ -65,15 +63,34 @@ public class UserController {
         return  "redirect:/user/userList";
     }
 
+    // 회원검색
+    @PostMapping("/userSearch")
+    public String userSearch(String user_name, String user_gender, Model model){
+        System.out.println("user_name = " + user_name);
+        System.out.println("user_gender = " + user_gender);
+        List<UserDTO> userList = userService.userSearch(user_name, user_gender);
+        System.out.println("userList = " + userList);
+        model.addAttribute("userList", userList);
 
-//    // 회원 정보
-//    @GetMapping("/userInfo")
-//    public String userInfo(String user_no, Model model){
-//       UserDTO userDto = userService.userInfo(user_no);
-//        return "/user/userInfo";
-//    }
+        return "/user/userList";
+    }
 
+    // 회원 정보
+    @GetMapping("/userInfo")
+    public String userInfo(int user_no, Model model){
+       UserDTO userDto = userService.userInfo(user_no);
+       model.addAttribute("userDto", userDto);
 
+        return "/user/userInfo";
+    }
+
+    // 회원 수정
+    @PostMapping("/userModify")
+    public String userModify(UserDTO userDto){
+        userService.userModify(userDto);
+
+        return  "redirect:/user/userList";
+    }
 
 
 

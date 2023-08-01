@@ -1,7 +1,7 @@
 package com.groupfour.foodbox.controller.admin;
 
 import com.groupfour.foodbox.domain.CategoryDTO;
-import com.groupfour.foodbox.service.CategoryService;
+import com.groupfour.foodbox.service.admin.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

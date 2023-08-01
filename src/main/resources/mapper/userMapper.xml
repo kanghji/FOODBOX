@@ -29,13 +29,37 @@
     <delete id="usersDelete">
         delete from user
         <where>
-            <foreach item="item" index="index" collection="chkList" open="user_id in ("
+            <foreach item="item" index="index" collection="chkList" open="user_no in ("
                      separator="," close=")">
                 #{item}
             </foreach>
         </where>
     </delete>
 
+    <!--회원 검색-->
+    <select id="userSearch" resultType="userDTO">
+        select user_no, user_name, user_id, user_pw, user_email, user_tel,
+        user_gender, user_birthday, user_zipcode, user_zibunaddr, user_detailaddr
+        from user
+        where 1=1
+        <if test="user_name != 'all'">
+            and user_name like concat(#{user_name},'%')
+        </if>
+        <if test="user_gender != 'all'">
+            and user_gender = #{user_gender}
+        </if>
+    </select>
 
+    <!-- 회원 정보-->
+    <select id="userInfo" parameterType="Integer" resultType="userDTO">
+        SELECT * FROM user WHERE user_no = #{user_no}
+    </select>
+
+    <!-- 회원 수정-->
+    <update id="userModify" parameterType="userDTO">
+        UPDATE user SET user_name=#{user_name}, user_pw=#{user_pw}, user_email=#{user_email},
+        user_tel=#{user_tel}, user_zibunaddr=#{user_zibunaddr}
+        WHERE user_no=#{user_no}
+    </update>
 
 </mapper>

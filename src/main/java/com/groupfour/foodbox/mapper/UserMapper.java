@@ -15,11 +15,19 @@ public interface UserMapper {
    List<UserDTO> userList();
 
    // 회원 삭제
-   int userDelete(String user_no);
+   int userDelete(int user_no);
 
    // 회원 선택삭제
    int usersDelete(List<String> chkList);
 
-//   // 회원 정보
-//   UserDTO userInfo(String user_no);
+   // 회원 검색
+   List<UserDTO> userSearch(String user_name, String user_gender);
+
+   // 회원 정보
+   UserDTO userInfo(int user_no);
+
+   // 회원 수정
+   void userModify(UserDTO userDto);
+
+
 }

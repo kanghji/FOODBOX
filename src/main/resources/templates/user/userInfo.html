@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <title>Document</title>
-</head>
-<body>
+<th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
 <!-- 본문 -->
-<div class='container w-50 shadow mt-5 p-5 rounded-3 border'>
-  <h2>회원 정보</h2>
+<div class="container w-50 mt-5">
+  <!-- 뒤로가기버튼(목록으로 이동) -->
+  <a href="javascript:history.back();"><i class="fa fa-arrow-left" style="color:black;"></i></a>
 
-    <input type='hidden' name='no' value='${userDTO.user_name}'>
+  <!-- 수정버튼 클릭시 회원 정보 수정 -->
+    <form action="/user/userModify" method="post">
     <table class='table table-borderless'>
       <thead>
-      <th colspan='2'><h3 class='text-center'>${userDTO.user_name} 님 회원정보 </h3>
+      <th colspan='2'>
+        <!-- 테이블 head -->
+        <h3 class='text-center'>회원 정보</h3>
+      </th>
       </thead>
+      <!-- 테이블 내용 -->
       <tr>
-        <td>번호</td>
-        <td><input class='form-control' type='text' name='no' value='${userDTO.user_no}' disabled /></td>
+        <td>회원번호</td>
+        <!-- 각칼럼에 해당하는 값 -->
+        <td><input class='form-control' type='text' name="user_no" th:value="${userDto.user_no}" readonly/></td>
       </tr>
       <tr>
         <td>아이디</td>
-        <td><input class='form-control' type='text' name='id' value='${userDTO.user_id}' disabled /></td>
+        <td><input class='form-control' type='text' name="user_id" th:value="${userDto.user_id}" readonly/></td>
       </tr>
       <tr>
         <td>비밀번호</td>
-        <td><input class='form-control' type='text' name='pw' value='${userDTO.user_pw}' disabled /></td>
+        <td><input class='form-control' type='text' name="user_pw" th:value="${userDto.user_pw}"></td>
       </tr>
       <tr>
         <td>이름</td>
-        <td><input class='form-control' type='text' name='name' value='${userDTO.user_name}' disabled /></td>
-      </tr>
-      <tr>
-        <td>나이</td>
-        <td><input class='form-control' type='text' name='age' value='${userDTO.user_birthday}'/></td>
-      </tr>
-      <tr>
-        <td>이메일</td>
-        <td><input class='form-control' type='text' name='email' value='${userDTO.user_email}'/></td>
+        <td><input class='form-control' type='text' name="user_name" th:value="${userDto.user_name}"></td>
       </tr>
       <tr>
         <td>전화번호</td>
-        <td><input class='form-control' type='text' name='tel' value='${userDTO.user_tel}'/></td>
+        <td><input class='form-control' type='text' name="user_tel" th:value="${userDto.user_tel}"></td>
       </tr>
       <tr>
-        <td colspan='2' class='text-center p-4'>
-          <input type='submit' value='수정하기' class='btn btn-primary'>
-          <input type='reset' value='취소' class='btn btn-warning'>
-          <a href='/user/userList' class='btn btn-info'>리스트</a>
-        </td>
+        <td>성별</td>
+        <td><input class='form-control' type='text' name="user_gender" th:value="${userDto.user_gender}" readonly/></td>
       </tr>
+      <tr>
+        <td>생년월일</td>
+        <td><input class='form-control' type='text' name="user_birthday" th:value="${userDto.user_birthday}" readonly/></td>
+      </tr>
+      <tr>
+        <td>이메일</td>
+        <td><input class='form-control' type='text' name="user_email" th:value="${userDto.user_email}"></td>
+      </tr>
+      <tr>
+        <td>주소</td>
+        <td><input class='form-control' type='text' name="user_zibunaddr" th:value="${userDto.user_zibunaddr}"></td>
+      </tr>
+
     </table>
+      <input type='submit' value='수정' class='btn btn-sm btn-outline-success m-1'>
+      <input type='reset' value='취소' class='btn btn-sm btn-outline-warning m-1'>
   </form>
 </div>
-    </table>
-  </form>
-</div>
+
+</body>
+</html>

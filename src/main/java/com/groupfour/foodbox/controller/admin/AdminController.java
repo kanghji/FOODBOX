@@ -1,7 +1,7 @@
 package com.groupfour.foodbox.controller.admin;
 
 import com.groupfour.foodbox.domain.AdminDTO;
-import com.groupfour.foodbox.service.AdminService;
+import com.groupfour.foodbox.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String admin() {
         return "admin/admin_main";
     }

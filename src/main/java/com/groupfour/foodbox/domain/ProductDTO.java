@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Data
 public class ProductDTO {
-    private String prod_code;
+    private int prod_code;
     private String prod_cat_code;
     private String prod_name;
     private String prod_brand;

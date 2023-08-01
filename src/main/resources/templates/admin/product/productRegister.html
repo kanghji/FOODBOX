@@ -2,12 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
 <div class="container w-50 mt-5">
+    <a href="javascript:history.back();"><i class="fa fa-arrow-left" style="color:black;"></i></a>
     <h3 class="text-center mb-4">상품등록</h3>
-    <form action="/admin/productRegister" method="post" name="product_input_form">
+    <form action="/admin/productRegister" method="post" name="product_input_form" enctype="multipart/form-data">
         <!--카테고리 코드 입력-->
         <p>
-            <select class="form-select form-select-sm">
-                <option th:each="categoryDTO : ${categorylist}" id="prod_cat_code" name="prod_cat_code" th:value="${categoryDTO.category_code}"
+            <select class="form-select form-select-sm"  name="prod_cat_code" >
+                <option th:each="categoryDTO : ${categorylist}" th:value="${categoryDTO.category_code}"
                         >[[${categoryDTO.category_name}]] [ [[${categoryDTO.category_code}]] ]</option>
             </select>
         </p>
@@ -30,7 +31,7 @@
         <p><input class="form-control" type="text" id="prod_country" name="prod_country" placeholder="원산지"></p>
         <!--상품스펙 입력-->
         <p>
-            <select class="form-select form-select-sm">
+            <select class="form-select form-select-sm" name="prod_spec">
                 <option value="none" selected>일반</option>
                 <option th:each="prod_spec : ${prodSpec}" th:value="${prod_spec.name()}"
                 >[[${prod_spec.value}]]</option>
@@ -119,5 +120,6 @@
         $("#div-file").empty();
     }
 </script>
+<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
 </body>
 </html>
