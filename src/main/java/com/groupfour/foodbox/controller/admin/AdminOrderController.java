@@ -10,6 +10,6 @@ public class AdminOrderController {
 
     @GetMapping("/orderList")
     public String orderList() {
-        return "admin/admin_orderList";
+        return "admin/order/admin_orderList";
     }
 }
