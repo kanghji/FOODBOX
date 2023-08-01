@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+
+<!-- header -->
+<th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
+
+<!-- Card -->
+<div class="container w-50 mt-3">
+    <h3>레시피 리스트 </h3>
+<!--    <a th:href="@{/user/productView(prod_code=${productDTO.prod_code})}" style="height:200px; overflow:hidden;">-->
+        <!--        <img class="card-image" th:src="@{C://image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:100%">-->
+        <table class="table">
+            <thead>
+            <tr><!--메뉴-->
+                <th>레시피사진</th>
+                <th>메뉴이름</th>
+                <th>메뉴종류</th>
+                <th>조리종류</th>
+                <th>해시태그</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="recipe: ${list}">
+                <block th:each="dto: ${recipe}">
+                <tr>
+                    <td>
+                        <img th:src="${dto.ATT_FILE_NO_MAIN}" width="100">
+                    </td>
+                    <td th:text="${dto.RCP_NM}"></td>
+                    <td th:text="${dto.RCP_PAT2}"></td>
+                    <td th:text="${dto.RCP_WAY2}"></td>
+                    <td th:text="${dto.HASH_TAG}"></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                </block>
+            </th:block>
+            </tbody>
+        </table>
+</div>
+
+<!-- footer -->
+<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
