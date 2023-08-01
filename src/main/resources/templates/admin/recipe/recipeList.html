@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" >
+
+<!-- header -->
+<th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
+
+
+
+<!-- Card -->
+<div class="container w-50 mt-3">
+    <h3>레시피 리스트 </h3>
+
+    <form action="" method="post">
+        <input type="text" name="name" placeholder="검색">
+
+        <select id="gender" name="gender">
+            <option value="ALL">전체</option>
+            <option value=""></option>
+            <option value="여">여</option>
+        </select>
+        <input class="btn btn-sm btn-warning" type="submit" value="검색">
+    </form>
+
+
+
+        <table class="table">
+            <thead>
+            <tr><!--메뉴-->
+                <th>레시피사진</th>
+                <th>메뉴이름</th>
+                <th>메뉴종류</th>
+                <th>조리종류</th>
+                <th>해시태그</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="recipe: ${list}">
+                <block th:each="dto: ${recipe}">
+                <tr>
+                    <td>
+                        <img th:src="${dto.ATT_FILE_NO_MAIN}" width="100">
+                    </td>
+                    <td th:text="${dto.RCP_NM}"></td>
+                    <td th:text="${dto.RCP_PAT2}"></td>
+                    <td th:text="${dto.RCP_WAY2}"></td>
+                    <td th:text="${dto.HASH_TAG}"></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                </block>
+            </th:block>
+            </tbody>
+        </table>
+</div>
+
+<!-- footer -->
+<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>

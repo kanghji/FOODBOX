@@ -1,8 +1,9 @@
 
-// 마이페이지 클릭 이벤트
-$(function (){
-    $(".mypage .mypage__submenu").hide();
-    $(".mypage").click(function (){
-        $(".mypage .mypage__submenu").toggle();
-    });
-});
+// 카테고리 펼치기
+// $(document).ready(function (){
+//    $.ajax({
+//        type: "get",
+//        url: "user/categoryCodeList",
+//
+//    }) ;
+// });
