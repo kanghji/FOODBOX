@@ -1,16 +1,15 @@
-package com.groupfour.foodbox.service.user;
+package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.RecipeDTO;
 import com.groupfour.foodbox.mapper.user.RecipeMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.groupfour.foodbox.service.admin.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class RecipeServiceImpl implements RecipeService{
+public class RecipeServiceImpl implements RecipeService {
     @Autowired
     private RecipeMapper recipeMapper;
 
@@ -20,5 +19,11 @@ public class RecipeServiceImpl implements RecipeService{
         List<List<RecipeDTO>> list = recipeMapper.getList();
 
         return list;
+    }
+
+    @Override
+    public RecipeDTO recipeInfo(int id) {
+        RecipeDTO recipeDTO = recipeMapper.recipeInfo(id);
+        return recipeDTO;
     }
 }
