@@ -1,0 +1,63 @@
+.footer {
+    height: 250px;
+    position: relative;
+}
+
+.footer__wrap {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.info__box {
+    padding: 0.8em;
+    background-color: #676257;
+}
+
+.info__list {
+    display: flex;
+    justify-content: flex-start;
+    width: 1200px;
+    margin: auto;
+    font-size: 12px;
+    font-weight: 650;
+    /*border: 1px solid #333333;*/
+}
+
+.info__list li {
+    padding: 0.5em;
+}
+
+.addr__wrap {
+    width: 1200px;
+    margin: auto;
+    padding: 1em;
+    /*border: 1px solid #333333;*/
+}
+
+.addr__inner {
+    display: flex;
+    /*padding: 1.5em;*/
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.f-logo {
+    padding-top: 0.5em;
+    padding-left: 40em;
+    /*border: 1px solid #333333;*/
+}
+
+.addr__info {
+    font-size: 13px;
+    /*margin-left: 5em;*/
+    /*border: 1px solid #333333;*/
+}
+
+.addr__text {
+    font-size: 15px;
+    font-weight: 550;
+}
+
+
+

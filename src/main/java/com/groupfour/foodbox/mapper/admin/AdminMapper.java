@@ -1,4 +1,4 @@
-package com.groupfour.foodbox.mapper;
+package com.groupfour.foodbox.mapper.admin;
 
 import com.groupfour.foodbox.domain.AdminDTO;
 import org.apache.ibatis.annotations.Mapper;

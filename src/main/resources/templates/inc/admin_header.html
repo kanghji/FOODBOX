@@ -31,11 +31,17 @@
             <nav class="gnb">
                 <ul class="gnb__menu">
                     <li class="gnb__store main_menu">
-                        <a href="#">회원관리</a>
+                        <a class="nav-link" href="#">HOME</a>
                     </li>
-                    <li class="gnb__best main_menu"><a href="#">카테고리관리</a></li>
-                    <li class="gnb__new main_menu"><a href="#">상품관리</a></li>
-                    <li class="gnb__new main_menu"><a href="#">주문관리</a></li>
+
+                    <li class="gnb__store main_menu">
+                        <a class="nav-link" href="/user/userRegister">회원가입</a>
+                    </li>
+
+                    <li class="gnb__store main_menu">
+                        <a class="nav-link" href="/user/userList">회원리스트</a>
+                    </li>
+
                 </ul>
             </nav>
         </div>
@@ -44,32 +50,12 @@
             <div class="login_box">
                 <ul class="login inner_right">
                     <li class="login__dropdown">
-<!--                        <a href="#로그인"><i class="fa fa-user-o fa-lg"></i> 로그인</a>-->
-                        <th:block th:if="${session.adminLoginDto == null}">
-                        <a th:href="@{/admin/adminLogin}"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
-                        </th:block>
-                            <th:block th:if="${session.adminLoginDto != null}">
-                        <a href="#"><i class="fa fa-user-o fa-lg"></i> 로그아웃</a>
-                            <!--javascript:logout()-->
-                        </th:block>
-<!--                            <c:if test="${sessionScope.loginDto.id != null}">-->
-<!--                            <a href="javascript:logout()">로그아웃</a>-->
-<!--                            </c:if>-->
-                       <!--타임리프 함수값 전달방법-->
-<!--                        <a th:if="${session.loginDto?.id != null}" href="javascript:logout()">로그아웃</a>-->
+                        <a href="#로그인"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
                     </li>
-
-
                 </ul>
             </div>
         </div>
     </div>
 </header>
 </div>
-<script>
-    function logout(){
-        // location.href="<c:url value="/member/logout.do"/>"
-        location.href ="@{/member/logout.do}";
-    }
-</script>
 </th:block>

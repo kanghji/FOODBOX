@@ -1,7 +1,7 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.AdminDTO;
-import com.groupfour.foodbox.mapper.AdminMapper;
+import com.groupfour.foodbox.mapper.admin.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
