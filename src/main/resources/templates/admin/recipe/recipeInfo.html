@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
+<!-- 본문 -->
+<div class="container w-50 mt-5">
+
+
+  <!-- 수정버튼 클릭시 상세페이지로 이동 -->
+  <form action="/recipe/recipeModify" method="post">
+    <table class='table table-borderless'>
+      <thead>
+        <!-- 테이블 head -->
+        <h3 class='text-center'>레시피 정보</h3>
+      </thead>
+      <!-- 테이블 내용 -->
+      <tr>
+        <td>레시피번호</td>
+        <!-- 각칼럼에 해당하는 값 -->
+        <td><input class='form-control' type='text' name="id"
+                   th:value="${recipeDTO.id}" readonly/></td>
+<!--        <td>레시피 이름</td>-->
+<!--        <td><input class='form-control' type='text' name="RCP_NM"-->
+<!--                   th:value="${recipeDTO.RCP_NM}" readonly/></td>-->
+      </tr>
+
+    </table>
+  </form>
+  </div>
