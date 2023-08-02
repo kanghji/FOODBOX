@@ -1,4 +1,4 @@
-package com.groupfour.foodbox.service.user;
+package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.RecipeDTO;
 import org.springframework.stereotype.Service;
@@ -10,4 +10,6 @@ import java.util.Map;
 public interface RecipeService {
 
     List<List<RecipeDTO>> getList();
+
+    RecipeDTO recipeInfo(int id);
 }

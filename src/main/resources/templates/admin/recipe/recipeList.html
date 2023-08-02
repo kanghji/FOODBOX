@@ -21,8 +21,6 @@
         <input class="btn btn-sm btn-warning" type="submit" value="검색">
     </form>
 
-
-
         <table class="table">
             <thead>
             <tr><!--메뉴-->
@@ -38,21 +36,23 @@
             <tbody>
             <th:block th:each="recipe: ${list}">
                 <block th:each="dto: ${recipe}">
+<!--                    <input type="hidden" th:value="${dto.id}">-->
                 <tr>
                     <td>
-                        <img th:src="${dto.ATT_FILE_NO_MAIN}" width="100">
+                        <a><img th:src="${dto.ATT_FILE_NO_MAIN}" width="100"></a>
                     </td>
-                    <td th:text="${dto.RCP_NM}"></td>
+
+                    <td><a th:text="${dto.RCP_NM}" th:href="@{/admin/recipeInfo/{id}(id=${dto.id})}"></a></td>
                     <td th:text="${dto.RCP_PAT2}"></td>
                     <td th:text="${dto.RCP_WAY2}"></td>
                     <td th:text="${dto.HASH_TAG}"></td>
+<!--                    <td><a class="btn btn-info btn-sm" th:href="@{/recipe/recipeModify(pno=${prod.get('pno')})}">수정</a></td>-->
                     <td></td>
-                    <td></td>
-
                 </tr>
                 </block>
             </th:block>
             </tbody>
+
         </table>
 </div>
 
