@@ -64,18 +64,16 @@
             </div>
             <!-- login -->
             <!-- 비 로그인 시 보이기  -->
-<!--            <th:block th:if="${session.??? == null }"-->
-                <div class="login_box">
-                    <ul class="login inner_right">
-                        <li class="login__dropdown">
-                            <a href="#로그인"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
-                            <ul class="login__submenu submenu">
-                                <li><a href="#회원가입">회원가입</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-<!--        </th:block>-->
+            <div class="login_box">
+                <ul class="login inner_right">
+                    <li class="login__dropdown">
+                        <a th:href="@{/user/userLogin}"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
+                        <ul class="login__submenu submenu">
+                            <li><a href="#회원가입">회원가입</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
             <!-- mypage -->
             <!-- 로그인 시 보이기 -->
 <!--            <th:block th:if="${session.??? != null}">-->

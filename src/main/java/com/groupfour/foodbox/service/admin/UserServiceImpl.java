@@ -1,8 +1,7 @@
-package com.groupfour.foodbox.service;
+package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.UserDTO;
-import com.groupfour.foodbox.mapper.UserMapper;
-import com.groupfour.foodbox.service.UserService;
+import com.groupfour.foodbox.mapper.admin.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +12,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
-    // 회원 가입
-    @Override
-    public int userRegister(UserDTO userDto) {
-        int n = userMapper.userRegister(userDto);
-        return n;
-    }
 
     // 회원 리스트
     @Override
@@ -52,7 +44,7 @@ public class UserServiceImpl implements UserService {
     // 회원 정보
     @Override
     public UserDTO userInfo(int user_no){
-      return userMapper.userInfo(user_no);
+        return userMapper.userInfo(user_no);
     }
 
     // 회원 수정
@@ -60,8 +52,6 @@ public class UserServiceImpl implements UserService {
     public void userModify(UserDTO userDto){
         userMapper.userModify(userDto);
     }
-
-
 
 
 }

@@ -16,6 +16,7 @@ import java.util.List;
 public class ProductPageController {
     @Autowired
     private ProductPageService productPageService;
+
     @GetMapping("/productPage")
     public String productPage(@RequestParam("category_code") String category_code,
                               @RequestParam("category_name") String category_name,

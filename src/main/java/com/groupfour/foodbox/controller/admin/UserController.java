@@ -1,7 +1,7 @@
 package com.groupfour.foodbox.controller;
 
 import com.groupfour.foodbox.domain.UserDTO;
-import com.groupfour.foodbox.service.UserService;
+import com.groupfour.foodbox.service.admin.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,25 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin")
 public class UserController {
     @Autowired
     private UserService userService;
-
-    // 회원가입 페이지로 이동
-    @GetMapping("/userRegister")
-    public String userRegister(UserDTO userDto){
-
-        return "/user/userRegister";
-    }
-
-    // 회원가입
-    @PostMapping("/userRegister")
-    public String userRegisterPost(UserDTO userDto){
-        int n = userService.userRegister(userDto);
-
-        return  "redirect:/user/userList";
-    }
 
     // 회원리스트
     @GetMapping("/userList")
@@ -40,7 +25,7 @@ public class UserController {
         List<UserDTO> userList = userService.userList();
         model.addAttribute("userList", userList);
 
-        return "/user/userList";
+        return "/admin/user/userList";
     }
 
     // 회원삭제
@@ -48,7 +33,7 @@ public class UserController {
     public String userDelete(int user_no){
         int n = userService.userDelete(user_no);
 
-        return "redirect:/user/userList";
+        return "redirect:/admin/userList";
     }
 
     // 선택삭제
@@ -59,7 +44,7 @@ public class UserController {
         if(chkList != null) {
             int n = userService.usersDelete(chkList);
         }
-        return  "redirect:/user/userList";
+        return  "redirect:/admin/userList";
     }
 
     // 회원검색
@@ -71,16 +56,16 @@ public class UserController {
         System.out.println("userList = " + userList);
         model.addAttribute("userList", userList);
 
-        return "/user/userList";
+        return "/admin/userList";
     }
 
     // 회원 정보
     @GetMapping("/userInfo")
     public String userInfo(int user_no, Model model){
-       UserDTO userDto = userService.userInfo(user_no);
-       model.addAttribute("userDto", userDto);
+        UserDTO userDto = userService.userInfo(user_no);
+        model.addAttribute("userDto", userDto);
 
-        return "/user/userInfo";
+        return "/admin/user/userInfo";
     }
 
     // 회원 수정
@@ -88,20 +73,9 @@ public class UserController {
     public String userModify(UserDTO userDto){
         userService.userModify(userDto);
 
-        return  "redirect:/user/userList";
+        return  "redirect:/admin/userList";
     }
 
-    // 회원수정정보 비밀번호 재확인 view (임시)
-    @GetMapping("/user_infoUpdateChk")
-    public String infoUpdateChk() {
-        return "user/user_infoUpdateChk";
-    }
-
-    // 비밀번호 변경 페이지 (임시)
-    @GetMapping("/user_pwUpdate")
-    public String pwUpdate() {
-        return "user/user_pwUpdate";
-    }
 
 
 
