@@ -5,7 +5,7 @@
 
 <mapper namespace="com.groupfour.foodbox.mapper.user.ProductPageMapper">
     <select id="productPage" resultType="productDTO">
-        SELECT * FROM product
+        SELECT * FROM product WHERE prod_cat_code = #{category_code}
     </select>
     <select id="productView" resultType="productDTO">
         SELECT * FROM product WHERE prod_code=#{prod_code}

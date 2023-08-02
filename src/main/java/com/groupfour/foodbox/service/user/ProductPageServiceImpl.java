@@ -13,8 +13,8 @@ public class ProductPageServiceImpl implements ProductPageService{
     private ProductPageMapper productPageMapper;
     //사용자페이지 상품리스트 가져오기
     @Override
-    public List<ProductDTO> productPage() {
-        List<ProductDTO> productList = productPageMapper.productPage();
+    public List<ProductDTO> productPage(String category_code) {
+        List<ProductDTO> productList = productPageMapper.productPage(category_code);
         return productList;
     }
     //사용자페이지 상품 상세정보 가져오기

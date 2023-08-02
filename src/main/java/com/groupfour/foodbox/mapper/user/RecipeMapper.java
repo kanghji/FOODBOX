@@ -9,4 +9,6 @@ import java.util.Map;
 @Mapper
 public interface RecipeMapper {
      List<List<RecipeDTO>> getList();
+
+    RecipeDTO recipeInfo(int id);
 }
