@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface UserCartService {
 
-    void insertCart(String user_id, int prod_code, String prod_thumbnail, int prod_price, int order_qty);
+    void insertCart(UserCartDTO userCartDTO);
 
 
     List<UserCartDTO> cartList(String user_id);

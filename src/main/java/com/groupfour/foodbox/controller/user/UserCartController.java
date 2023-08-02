@@ -23,16 +23,12 @@ public class UserCartController {
         return "redirect:/";
     }
 
-    @PostMapping("/addCart/{user_id}")
-    public @ResponseBody String insertCart(String user_id,
-                                           int prod_code,
-                                           String prod_thumbnail,
-                                           int prod_price,
-                                           int order_qty) {
+    @PostMapping("/addCart")
+    public @ResponseBody String insertCart(@RequestBody UserCartDTO userCartDTO) {
 
-        userCartService.insertCart(user_id, prod_code, prod_thumbnail, prod_price, order_qty);
+        userCartService.insertCart(userCartDTO);
 
-        return "redirect:/user/userCartList";
+        return "redirect:/user/productPage";
     }
 
     @GetMapping("/userCartList")

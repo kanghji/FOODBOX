@@ -9,6 +9,7 @@ import java.util.Date;
 @Setter
 public class UserCartDTO {
 
+    private int cart_no;
     private String user_id;
     private String user_name;
 
@@ -17,6 +18,7 @@ public class UserCartDTO {
     private String prod_thumbnail;
     private int prod_price;
     private int prod_qty;
+    private int order_qty;
 
     private Date order_inputDate;
 }

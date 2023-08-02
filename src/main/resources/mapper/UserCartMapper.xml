@@ -9,9 +9,11 @@
         SELECT * FROM usercart WHERE user_id = #{user_id}
     </select>
 
+
     <insert id="insertCart">
         INSERT INTO usercart(user_id, prod_code, prod_thumbnail, prod_price, order_qty)
         VALUES(#{user_id}, #{prod_code}, #{prod_thumbnail}, #{prod_price}, #{order_qty})
-
     </insert>
+
+
 </mapper>

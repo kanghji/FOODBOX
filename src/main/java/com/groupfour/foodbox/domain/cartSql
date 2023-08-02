@@ -1,8 +1,8 @@
 create table usercart (
+	cart_no int primary key auto_increment,
 	user_id varchar(50) not null,
     prod_code int not null,
     prod_thumbnail varchar(300) not null,
     prod_price int not null,
-    orderQty int not null,
-    unique(user_id)
-)
+    order_qty int not null
+);

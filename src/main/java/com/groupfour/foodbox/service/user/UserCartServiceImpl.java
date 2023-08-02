@@ -15,8 +15,8 @@ public class UserCartServiceImpl implements UserCartService {
     UserCartMapper userCartMapper;
 
     @Override
-    public void insertCart(String user_id, int prodCode, String prod_thumbnail, int prod_price, int order_qty) {
-        userCartMapper.insertCart(user_id, prodCode, prod_thumbnail, prod_price, order_qty);
+    public void insertCart(UserCartDTO userCartDTO) {
+        userCartMapper.insertCart(userCartDTO);
     }
 
     @Override
