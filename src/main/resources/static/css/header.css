@@ -104,8 +104,13 @@ a:hover {
     padding-left: 1.5em;
 }
 
-.gnb__store:hover .store__submenu {
-    display: block;
+/*.gnb__store:hover .store__submenu {*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*}*/
+
+.gnb__store .store__submenu {
+    display: none;
     position: absolute;
 }
 

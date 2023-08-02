@@ -38,13 +38,13 @@
             <!-- menu -->
             <nav class="gnb">
                 <ul class="gnb__menu">
-                    <li class="gnb__store main_menu">
+                    <li class="gnb__store main_menu"  onmouseenter="storeSubmenuOver(this)" onmouseleave="storeSubmenuOut(this)">
                         <a href="/user/productPage">스토어</a>
-                        <ul class="store__submenu submenu">
-                            <li class="sub_title"><span>푸드</span></li>
-                            <th:block th:each="list : ${list}">
-                                <li><a href="@{/user/productPage(category_code=${categoryDTO.category_code})}" th:text="${list.category_name}">카테고리1</a></li>
-                            </th:block>
+                        <ul class="store__submenu submenu" id="storeCategory">
+<!--                            <li class="sub_title"><span>푸드</span></li>-->
+<!--                            <th:block th:each="categoryDTO : ${categoryList}">-->
+<!--                                <li><a th:href="@{/user/productPage(category_code=${categoryDTO.category_code}, category_name=${category_name})}" th:text="${categoryDTO.category_name}">카테고리</a></li>-->
+<!--                            </th:block>-->
                         </ul>
                     </li>
                     <li class="gnb__best main_menu"><a href="#레시피">레시피</a></li>
@@ -64,7 +64,7 @@
             </div>
             <!-- login -->
             <!-- 비 로그인 시 보이기  -->
-<!--            <th:block th:if="${session.???? == null }"-->
+<!--            <th:block th:if="${session.??? == null }"-->
                 <div class="login_box">
                     <ul class="login inner_right">
                         <li class="login__dropdown">
