@@ -15,6 +15,7 @@ import java.util.List;
 public class ProductPageController {
     @Autowired
     private ProductPageService productPageService;
+
     @GetMapping("/productPage")
     public String productPage(Model model){
         List<ProductDTO> productList = productPageService.productPage();

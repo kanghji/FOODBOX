@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
+<th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
 <!-- 본문 -->
 <div class="container w-50 mt-5">
   <!-- 뒤로가기버튼(목록으로 이동) -->
   <a href="javascript:history.back();"><i class="fa fa-arrow-left" style="color:black;"></i></a>
 
   <!-- 수정버튼 클릭시 회원 정보 수정 -->
-    <form action="/user/userModify" method="post">
+    <form action="/admin/userModify" method="post">
     <table class='table table-borderless'>
       <thead>
       <th colspan='2'>
