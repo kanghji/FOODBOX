@@ -1,13 +1,20 @@
 package com.groupfour.foodbox.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    @RequestMapping("/")
-    public String root(){
 
-        return "home";
+    @RequestMapping("/")
+    public String root() {
+
+        return "home/user_home";
     }
+
+//    @GetMapping("/user/categoryCodeList")
+//    public String categoryCodeList() {
+//
+//    }
 }
