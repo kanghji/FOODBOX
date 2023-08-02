@@ -15,7 +15,7 @@
 
         <select id="gender" name="gender">
             <option value="ALL">전체</option>
-            <option value=""></option>
+            <option value="남">남</option>
             <option value="여">여</option>
         </select>
         <input class="btn btn-sm btn-warning" type="submit" value="검색">
@@ -46,7 +46,7 @@
                     <td th:text="${dto.RCP_PAT2}"></td>
                     <td th:text="${dto.RCP_WAY2}"></td>
                     <td th:text="${dto.HASH_TAG}"></td>
-<!--                    <td><a class="btn btn-info btn-sm" th:href="@{/recipe/recipeModify(pno=${prod.get('pno')})}">수정</a></td>-->
+                    <!--<td><a class="btn btn-info btn-sm" th:href="@{/admin/recipeInfo(pno=${prod.get('pno')})}">수정</a></td>-->
                     <td></td>
                 </tr>
                 </block>

@@ -14,13 +14,64 @@
       </thead>
       <!-- 테이블 내용 -->
       <tr>
-        <td>레시피번호</td>
+        <th>레시피 이미지</th>
+        <td><img th:src="${recipeDTO.ATT_FILE_NO_MK}"></td>
+      </tr>
+      <tr>
+        <th>레시피번호</th>
         <!-- 각칼럼에 해당하는 값 -->
         <td><input class='form-control' type='text' name="id"
                    th:value="${recipeDTO.id}" readonly/></td>
-<!--        <td>레시피 이름</td>-->
-<!--        <td><input class='form-control' type='text' name="RCP_NM"-->
-<!--                   th:value="${recipeDTO.RCP_NM}" readonly/></td>-->
+      </tr>
+      <tr>
+        <th>레시피이름</th>
+        <td><input class='form-control' type='text' name="RCP_NM"
+                   th:value="${recipeDTO.RCP_NM}"/></td>
+      </tr>
+      <tr>
+        <th>조리방법</th>
+        <td><input class='form-control' type='text' name="RCP_WAY2"
+                   th:value="${recipeDTO.RCP_WAY2}"/></td>
+      </tr>
+      <tr>
+        <th>해시태그</th>
+        <td><input class='form-control' type='text' name="HASH_TAG"
+                   th:value="${recipeDTO.HASH_TAG}"/></td>
+      </tr>
+      <tr>
+        <th>무게(1인당)</th>
+        <td><input class='form-control' type='text' name="INFO_WGT"
+                   th:value="${recipeDTO.INFO_WGT}"/></td>
+      </tr>
+      <tr>
+      <th>칼로리</th>
+      <td><input class='form-control' type='text' name="INFO_ENG"
+                 th:value="${recipeDTO.INFO_ENG}"/></td>
+      </tr>
+      <tr>
+      <th>탄수화물</th>
+      <td><input class='form-control' type='text' name="INFO_CAR"
+                 th:value="${recipeDTO.INFO_CAR}"/></td>
+      </tr>
+      <tr>
+      <th>단백질</th>
+      <td><input class='form-control' type='text' name="INFO_PRO"
+                 th:value="${recipeDTO.INFO_PRO}"/></td>
+      </tr>
+      <tr>
+      <th>지방</th>
+      <td><input class='form-control' type='text' name="INFO_FAT"
+                 th:value="${recipeDTO.INFO_FAT}"/></td>
+      </tr>
+      <tr>
+      <th>나트륨</th>
+      <td><input class='form-control' type='text' name="INFO_NA"
+                 th:value="${recipeDTO.INFO_NA}"/></td>
+      </tr>
+      <tr>
+        <th>성분정보</th>
+        <td><input class='form-control' type='text' name="RCP_PARTS_DTLS"
+                   th:value="${recipeDTO.RCP_PARTS_DTLS}"/></td>
       </tr>
 
     </table>
