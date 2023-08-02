@@ -26,4 +26,10 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeDTO recipeDTO = recipeMapper.recipeInfo(id);
         return recipeDTO;
     }
+
+    @Override
+    public List<List<RecipeDTO>> recipeSearch(String RCP_NM) {
+        List<List<RecipeDTO>> list = recipeMapper.recipeSearch(RCP_NM);
+        return list;
+    }
 }

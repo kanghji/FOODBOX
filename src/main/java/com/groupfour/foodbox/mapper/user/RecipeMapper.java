@@ -11,4 +11,6 @@ public interface RecipeMapper {
      List<List<RecipeDTO>> getList();
 
     RecipeDTO recipeInfo(int id);
+
+    List<List<RecipeDTO>> recipeSearch(String rcpNm);
 }

@@ -1,4 +1,4 @@
-package com.groupfour.foodbox.controller;
+package com.groupfour.foodbox.controller.admin;
 
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.admin.UserService;
