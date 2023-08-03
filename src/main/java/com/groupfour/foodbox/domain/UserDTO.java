@@ -21,9 +21,6 @@ public class UserDTO {
         private String user_zibunaddr;
         private String user_detailaddr;
 
-        // 기본생성자
-        public UserDTO() {}
-
 
 }
 

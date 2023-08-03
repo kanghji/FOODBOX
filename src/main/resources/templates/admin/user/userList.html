@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!-- 헤더 -->
-<th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
+<th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
 <div class="container w-75 mt-5">
     <h3>회원 리스트</h3>
     <!-- 회원 검색 기능-->
-    <form action="/user/userSearch" method="post">
+    <form action="/admin/userSearch" method="post">
         <input type="text" id="user_name" name="user_name" placeholder="회원이름">
 
         <select id="user_gender" name="user_gender">
@@ -42,7 +42,7 @@
                 </td>
                 <td th:text="${userList.user_no}"></td>
 <!--                <td th:text="${userList.user_id}"></td>-->
-                <td><a th:text="${userList.user_id}" th:href="@{/user/userInfo(user_no=${userList.user_no})}"></a></td>
+                <td><a th:text="${userList.user_id}" th:href="@{/admin/userInfo(user_no=${userList.user_no})}"></a></td>
                 <td th:text="${userList.user_pw}"></td>
                 <td th:text="${userList.user_name}"></td>
                 <td th:text="${userList.user_gender}"></td>
@@ -51,7 +51,7 @@
                 <td th:text="${userList.user_zibunaddr}"></td>
 
                 <td>
-                    <a class="btn btn-sm btn-danger" th:href="@{/user/userDelete(user_no=${userList.user_no})}">삭제</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/admin/userDelete(user_no=${userList.user_no})}">삭제</a>
                 </td>
 
             </tr>

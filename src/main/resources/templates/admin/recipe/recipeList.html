@@ -10,18 +10,46 @@
 <div class="container w-50 mt-3">
     <h3>레시피 리스트 </h3>
 
-    <form action="" method="post">
-        <input type="text" name="name" placeholder="검색">
+    <form th:action="@{/admin/recipe/recipeSearch}" method="post">
 
-        <select id="gender" name="gender">
-            <option value="ALL">전체</option>
-            <option value=""></option>
-            <option value="여">여</option>
-        </select>
-        <input class="btn btn-sm btn-warning" type="submit" value="검색">
+            <div>
+        <input type="text" name="RCP_NM" placeholder="전체 검색">
+                <input class="btn btn-sm btn-warning" type="submit" value="검색">
+            </div>
+        <div>
+<!--            <조리종류>-->
+        <label><input type="checkbox" name="RCP_WAY2" value="볶기">볶기</label>
+        <label><input type="checkbox" name="RCP_WAY2" value="굽기">굽기</label>
+        <label><input type="checkbox" name="RCP_WAY2" value="튀기기">튀기기</label>
+        <label><input type="checkbox" name="RCP_WAY2" value="끓이기">끓이기</label>
+        <label><input type="checkbox" name="RCP_WAY2" value="찌기">찌기</label>
+        <label><input type="checkbox" name="RCP_WAY2" value="기타">기타</label>
+
+
+<!--        <select id="rcp_pat2" name="rcp_pat2">-->
+<!--            <option value="ALL">메뉴종류</option>-->
+<!--            <option value="남"></option>-->
+<!--            <option value="여">여</option>-->
+<!--            <option value="여">여</option>-->
+<!--            <option value="여">여</option>-->
+<!--            <option value="여">여</option>-->
+<!--        </select>-->
+
+        </div>
+        <div>
+<!--            <메뉴종류>-->
+            <label><input type="checkbox" name="RCP_PAT2" value="반찬">반찬</label>
+            <label><input type="checkbox" name="RCP_PAT2" value="일품">일품</label>
+            <label><input type="checkbox" name="RCP_PAT2" value="국&찌개">국&찌개</label>
+            <label><input type="checkbox" name="RCP_PAT2" value="후식">후식</label>
+            <label><input type="checkbox" name="RCP_PAT2" value="기타">기타</label>
+            <label><input type="checkbox" name="RCP_PAT2" value="밥">밥</label>
+        </div>
+
     </form>
 
         <table class="table">
+
             <thead>
             <tr><!--메뉴-->
                 <th>레시피사진</th>
@@ -46,7 +74,7 @@
                     <td th:text="${dto.RCP_PAT2}"></td>
                     <td th:text="${dto.RCP_WAY2}"></td>
                     <td th:text="${dto.HASH_TAG}"></td>
-<!--                    <td><a class="btn btn-info btn-sm" th:href="@{/recipe/recipeModify(pno=${prod.get('pno')})}">수정</a></td>-->
+                    <!--<td><a class="btn btn-info btn-sm" th:href="@{/admin/recipeInfo(pno=${prod.get('pno')})}">수정</a></td>-->
                     <td></td>
                 </tr>
                 </block>
