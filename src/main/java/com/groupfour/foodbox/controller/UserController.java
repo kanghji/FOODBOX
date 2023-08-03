@@ -91,18 +91,22 @@ public class UserController {
         return  "redirect:/user/userList";
     }
 
-    // 회원수정정보 비밀번호 재확인 view (임시)
+    // 사용자페이지 - 비밀번호 재확인 view (임시)
     @GetMapping("/user_infoUpdateChk")
     public String infoUpdateChk() {
         return "user/user_infoUpdateChk";
     }
 
-    // 비밀번호 변경 페이지 (임시)
+    // 사용자페이지 - 비밀번호 변경 view (임시)
     @GetMapping("/user_pwUpdate")
     public String pwUpdate() {
         return "user/user_pwUpdate";
     }
 
-
+    // 사용자페이지 - 회원수정정보 view
+    @GetMapping("/user_infoUpdateView")
+    public String infoUpdateView() {
+        return "user/user_infoUpdateView";
+    }
 
 }
