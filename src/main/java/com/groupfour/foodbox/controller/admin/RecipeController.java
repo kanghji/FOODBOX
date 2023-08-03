@@ -5,9 +5,7 @@ import com.groupfour.foodbox.service.admin.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +35,16 @@ public class RecipeController {
         model.addAttribute("recipeDTO", recipeDTO);
 
         return "/admin/recipe/recipeInfo";
+    }
+    //메뉴 이름 검색
+    @PostMapping("/recipe/recipeSearch")
+    public String recipeSearch(@RequestParam(value = "RCP_NM", defaultValue = "ALL")String RCP_NM,
+                                                Model model){
+        List<List<RecipeDTO>> list = recipeService.recipeSearch(RCP_NM);
+        model.addAttribute("list", list);
+
+        return "/admin/recipe/recipeList";
+
     }
 
 

@@ -12,4 +12,6 @@ public interface RecipeService {
     List<List<RecipeDTO>> getList();
 
     RecipeDTO recipeInfo(int id);
+
+    List<List<RecipeDTO>> recipeSearch(String rcpNm);
 }
