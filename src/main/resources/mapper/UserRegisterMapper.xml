@@ -12,5 +12,9 @@
         #{user_birthday}, #{user_zipcode}, #{user_zibunaddr}, #{user_detailaddr})
     </insert>
 
+    <!--아이디 중복체크-->
+    <select id="checkUser_id" resultType="userDTO">
+        SELECT * FROM user WHERE user_id=#{user_id}
+    </select>
 
 </mapper>
