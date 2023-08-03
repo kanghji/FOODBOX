@@ -11,4 +11,7 @@ public interface UserRegisterMapper {
     // 회원 가입
     int userRegister(UserDTO userDto);
 
+    // 아이디 중복체크
+    UserDTO checkUser_id(String user_id);
+
 }
