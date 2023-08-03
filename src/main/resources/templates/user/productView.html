@@ -26,7 +26,6 @@
 </style>
 <div class="container d-flex col-6 mt-5">
     <div class="me-3 col">
-        <div id="prod_image" th:value="${productDTO.prod_thumbnail}"></div>
         <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="Card image" style="width:700px;">
     </div>
     <div>
@@ -58,7 +57,7 @@
             <input type='button' value='+' class='btn rounded-circle btn-outline-secondary m-1' onclick = "plusQty()" style="width:40px;">
         </div>
         <div class="d-flex justify-content-center" style="margin-top:40px;">
-            <input type='button' value='장바구니' class='btn cart btn-lg p-2' style="border-color:#f29a1a; margin-right:60px; width:150px;" th:onclick = "userOrderObject.insertCart([[${productDTO.prod_code}]], [[${session.user_id}]], [[${productDTO.prod_thumbnail}]])">
+            <input type='button' value='장바구니' class='btn cart btn-lg p-2' style="border-color:#f29a1a; margin-right:60px; width:150px;" th:onclick = "userOrderObject.insertCart([[${productDTO.prod_code}]], [[${session.userLoginDto.user_id}]], [[${productDTO.prod_thumbnail}]])">
             <input type='button' value='바로구매' class='btn direct btn-lg p-2' style="color:white; background-color:#f29a1a; width:150px;" onclick = "">
         </div>
     </div>

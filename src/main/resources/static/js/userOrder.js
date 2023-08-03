@@ -11,7 +11,6 @@ let userOrderObject = {
         //     prod_price: $("#prod_price").val(),
         //     order_qty: $("#order_qty").val()
         // }
-        alert(prod_thumbnail);
         let prod_price = $("#prod_price").text();
         let order_qty = $("#order_qty").val();
 
