@@ -15,7 +15,8 @@
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
-    <link rel="stylesheet" th:href="@{/css/mypage.css}">
+    <link rel="stylesheet" th:href="@{/css/pwupdate.css}">
+    <link rel="stylesheet" th:href="@{/css/infoupdate.css}">
 
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
@@ -39,7 +40,7 @@
             <nav class="gnb">
                 <ul class="gnb__menu">
                     <li class="gnb__store main_menu"  onmouseenter="storeSubmenuOver(this)" onmouseleave="storeSubmenuOut(this)">
-                        <a href="/user/productPage">스토어</a>
+                        <a href="/user/productPage?category_code=all&category_name=all">스토어</a>
                         <ul class="store__submenu submenu" id="storeCategory">
 <!--                            <li class="sub_title"><span>푸드</span></li>-->
 <!--                            <th:block th:each="categoryDTO : ${categoryList}">-->
@@ -90,8 +91,9 @@
                                 <li><a href="#">주문내역 조회</a></li>
                                 <li><a href="#">책갈피한 레시피</a></li>
 <!--                                <li><a th:href="${user/user_infoUpdate(user_no=${user.???})}">회원정보 수정</a></li>-->
-                                <li><a href="/user/user_infoUpdateChk">회원정보 수정</a></li>
-                                <li><a href="/user/user_pwUpdate">비밀번호 변경</a></li>
+                                <li><a href="/user/user_infoUpdateView">회원정보 수정</a></li>
+<!--                                <li><a href="/user/user_pwUpdate">비밀번호 변경</a></li>-->
+                                <li><a href="/user/user_infoUpdateChk">비밀번호 변경</a></li>
                                 <li class="mypage_logout"><a href="#">로그아웃</a></li>
                             </ul>
                         </li>
