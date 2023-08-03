@@ -1,7 +1,6 @@
 package com.groupfour.foodbox.controller.user;
 
 import com.groupfour.foodbox.domain.UserDTO;
-import com.groupfour.foodbox.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
