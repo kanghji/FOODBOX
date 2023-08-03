@@ -53,6 +53,7 @@ a:hover {
     display: flex;
     margin: auto;
     margin-top: 1.3em;
+    /*height: 0px;*/
 }
 
 .header_innerbox1 {
@@ -70,6 +71,7 @@ a:hover {
     width: 35em;
     margin-right: 4.5em;
     padding-top: 0.5em;
+    height: auto;
 }
 
 .gnb__menu {

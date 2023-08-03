@@ -77,7 +77,7 @@
             </div>
             <!-- mypage -->
             <!-- 로그인 시 보이기 -->
-<!--            <th:block th:if="${session.??? != null}">-->
+            <th:block th:if="${session.userLoginDto != null}">
                 <div class="mypage_box">
                     <ul class="mypage inner_right">
                         <li class="mypage_dropdown">
@@ -94,12 +94,12 @@
                                 <li><a href="/user/user_infoUpdateView">회원정보 수정</a></li>
 <!--                                <li><a href="/user/user_pwUpdate">비밀번호 변경</a></li>-->
                                 <li><a href="/user/user_infoUpdateChk">비밀번호 변경</a></li>
-                                <li class="mypage_logout"><a href="#">로그아웃</a></li>
+                                <li class="mypage_logout"> <a th:href="@{/user/userLogout}">로그아웃</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-<!--            </th:block>-->
+            </th:block>
         </div>
     </div>
 </header>
