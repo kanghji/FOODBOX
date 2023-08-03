@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,8 +18,10 @@ public class ProductPageController {
     private ProductPageService productPageService;
 
     @GetMapping("/productPage")
-    public String productPage(Model model){
-        List<ProductDTO> productList = productPageService.productPage();
+    public String productPage(@RequestParam("category_code") String category_code,
+                              @RequestParam("category_name") String category_name,
+                              Model model){
+        List<ProductDTO> productList = productPageService.productPage(category_code);
         model.addAttribute("productList", productList);
         return "/user/productPage";
     }

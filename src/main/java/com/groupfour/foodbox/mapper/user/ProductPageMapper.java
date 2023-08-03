@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface ProductPageMapper {
     //사용자페이지 상품리스트 가져오기
-    List<ProductDTO> productPage();
+    List<ProductDTO> productPage(String category_code);
     //사용자페이지 상품상세정보 가져오기
     ProductDTO productView(int prod_code);
     //사용자페이지 상품상세이미지 가져오기

@@ -1,0 +1,42 @@
+
+<th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
+<div class="userinfo_container">
+    <div class="userinfo_wrap">
+        <p class="userinfo_title">개인 정보 수정</p>
+        <div class="userinfo_pwChk">
+            <div class="pwChk_text new_pw_text">
+                <p>비밀번호 변경</p>
+            </div>
+            <form class="userinfo_input" action="" method="post">
+                <div class="pwChk_box new_pw_box">
+                    <div class="username_box pwChk_inner">
+                        <div class="label_box user_label new_pw_label">
+                            <label for="user_name">새 비밀번호</label>
+                        </div>
+                        <div class="input_box">
+<!--                            <input type="text" id="user_name" name="user_name" class="info_input" th:value="${}" readonly />-->
+                            <input type="text" id="user_name" name="user_name" class="info_input" onkeyup="inputPwChk()"/>
+                        </div>
+                    </div>
+                    <div class="userpw_box pwChk_inner">
+                        <div class="label_box pw_label">
+                            <label for="user_pw">새 비밀번호 확인</label>
+                        </div>
+                        <div class="input_box">
+                            <input type="password" id="user_pw" name="user_pw" class="info_input" placeholder="현재 비밀번호를 입력해주세요" />
+                        </div>
+                    </div>
+                </div>
+                <div class="userinfo_btn_box">
+                    <div class="btn_inner">
+                        <button type="submit" class="userinfo_btn" onclick="userPwBtn()">비밀번호 변경</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>-->
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>

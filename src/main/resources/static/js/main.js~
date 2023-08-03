@@ -10,8 +10,6 @@ function storeSubmenuOver() {
            let storeCategory = document.querySelector('#storeCategory');
            let addCategoryListStr="<li class='sub_title'><span>푸드</span></li>";
 
-           storeCategory.innerHTML= "<li class='sub_title'><span>푸드</span></li>"
-
            $.each(data,function(index, value) {
                    // alert(value.category_name);
                addCategoryListStr+="<li><a href='/user/productPage?category_code="+value.category_code+"&" +
@@ -19,6 +17,8 @@ function storeSubmenuOver() {
 
                    storeCategory.innerHTML=addCategoryListStr;
                });
+
+           storeCategory.innerHTML= "<li class='sub_title'><span>푸드</span></li>"
 
            $("#storeCategory").css('display', 'block');
        }

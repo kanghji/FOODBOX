@@ -28,12 +28,15 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </footer>-->
+</th:block>
 
-<script type="text/javascript">
-    $.noConflict();
-</script>
-<script type="text/javascript" th:src="@{/js/slider.js}"></script>
-<script type="text/javascript" th:src="@{/js/main.js}"></script>
-</body>
-</html>
+<th:block th:fragment="scriptFragment">
+    <script type="text/javascript">
+        $.noConflict();
+    </script>
+    <script type="text/javascript" th:src="@{/js/slider.js}"></script>
+    <script type="text/javascript" th:src="@{/js/mypage.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    </body>
+    </html>
 </th:block>
