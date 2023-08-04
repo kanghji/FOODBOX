@@ -65,19 +65,21 @@
             </div>
             <!-- login -->
             <!-- 비 로그인 시 보이기  -->
-            <div class="login_box">
-                <ul class="login inner_right">
-                    <li class="login__dropdown">
-                        <a th:href="@{/user/userLogin}"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
-                        <ul class="login__submenu submenu">
-                            <li><a href="#회원가입">회원가입</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            <th:block th:if="${session.userLoginDto == null}">
+                <div class="login_box">
+                    <ul class="login inner_right">
+                        <li class="login__dropdown">
+                            <a th:href="@{/user/userLogin}"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
+                            <ul class="login__submenu submenu">
+                                <li><a href="#회원가입">회원가입</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </th:block>
             <!-- mypage -->
             <!-- 로그인 시 보이기 -->
-<!--            <th:block th:if="${session.??? != null}">-->
+            <th:block th:if="${session.userLoginDto != null}">
                 <div class="mypage_box">
                     <ul class="mypage inner_right">
                         <li class="mypage_dropdown">
@@ -99,7 +101,7 @@
                         </li>
                     </ul>
                 </div>
-<!--            </th:block>-->
+            </th:block>
         </div>
     </div>
 </header>

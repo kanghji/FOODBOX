@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -15,13 +14,6 @@ public class UserCartController {
 
     @Autowired
     UserCartService userCartService;
-
-    @GetMapping("/login")
-    public String login(HttpSession session) {
-        session.setAttribute("user_id", "test");
-
-        return "redirect:/";
-    }
 
     @PostMapping("/addCart")
     public @ResponseBody String insertCart(@RequestBody UserCartDTO userCartDTO) {
