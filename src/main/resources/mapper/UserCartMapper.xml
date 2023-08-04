@@ -9,6 +9,14 @@
         SELECT * FROM usercart WHERE user_id = #{user_id}
     </select>
 
+    <select id="checkCart" resultType="com.groupfour.foodbox.dto.UserCartDTO">
+        SELECT * FROM usercart WHERE user_id = #{user_id} AND prod_code = #{prod_code}
+    </select>
+
+    <update id="modifyQty">
+        UPDATE usercart SET order_qty = #{order_qty} WHERE cart_no = #{cart_no}
+    </update>
+
 
     <insert id="insertCart">
         INSERT INTO usercart(user_id, prod_code, order_qty)

@@ -19,7 +19,7 @@ let userOrderObject = {
             data: JSON.stringify({user_id: user_id, prod_code: prod_code, order_qty: order_qty}),
             contentType: "application/json; charset=utf-8"
         }).done(function (response) {
-            location = "/user/userCartList";
+            location = "/user/userCartList/" + user_id;
         }).fail(function (error) {
             alert("에러발생 : " + error);
         });

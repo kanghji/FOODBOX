@@ -4,6 +4,7 @@ import com.groupfour.foodbox.dto.UserCartDTO;
 import com.groupfour.foodbox.service.user.UserCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,14 +19,25 @@ public class UserCartController {
     @PostMapping("/addCart")
     public @ResponseBody String insertCart(@RequestBody UserCartDTO userCartDTO) {
 
-        userCartService.insertCart(userCartDTO);
+        String id = userCartDTO.getUser_id();
+
+        UserCartDTO userCartDtoId = userCartService.checkCart(id, userCartDTO.getProd_code());
+
+        if(userCartDtoId == null) {
+            userCartService.insertCart(userCartDTO);
+        } else {
+            int order_qty = userCartDTO.getOrder_qty() + userCartDtoId.getOrder_qty();
+            userCartService.modifyQty(order_qty, userCartDtoId.getCart_no());
+        }
 
         return "redirect:/user/productPage";
     }
 
-    @GetMapping("/userCartList")
-    public String userCartList(String user_id) {
-        List<UserCartDTO> cartList = userCartService.cartList(user_id);
+    @GetMapping("/userCartList/{id}")
+    public String userCartList(String user_id, Model model) {
+        List<UserCartDTO> cartList = userCartService.userCartList(user_id);
+
+        model.addAttribute("cartList", cartList);
 
         return "/user/userCartList";
     }

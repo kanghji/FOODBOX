@@ -10,6 +10,10 @@ public interface UserCartService {
 
     void insertCart(UserCartDTO userCartDTO);
 
+    UserCartDTO checkCart(String id, int prod_code);
 
-    List<UserCartDTO> cartList(String user_id);
+    void modifyQty(int order_qty, int cart_no);
+
+    List<UserCartDTO> userCartList(String user_id);
+
 }
