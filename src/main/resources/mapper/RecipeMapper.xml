@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.groupfour.foodbox.mapper.user.RecipeMapper">
+<mapper namespace="com.groupfour.foodbox.mapper.admin.RecipeMapper">
+
+    <!-- 전체 게시글 수 -->
+
+    <select id="totalCnt" resultType="Integer">
+        SELECT count(*) FROM recipeinfo
+    </select>
+
     <select id="getList" resultType="recipeDTO">
-        SELECT * FROM recipeinfo limit 0,20
+        SELECT * FROM recipeinfo
+            ORDER BY id DESC LIMIT #{startIndex}, #{cntPerPage}
     </select>
     <select id="recipeInfo" resultType="recipeDTO">
         SELECT * FROM recipeinfo WHERE id=#{id}
     </select>
+
+    <select id="searchCnt" resultType="Integer">
+        SELECT count(*) FROM recipeinfo WHERE RCP_NM
+        like concat('%', #{RCP_NM}, '%')
+    </select>
+
     <select id="recipeSearch" resultType="recipeDTO">
         SELECT * FROM recipeinfo WHERE RCP_NM
-            like concat('%', #{RCP_NM}, '%')
+        like concat('%', #{RCP_NM}, '%')
+        ORDER BY id
+        LIMIT #{startIndex}, #{cntPerPage}
+<!--        <include refid="criteria"></include>-->
     </select>
+
+<!--    <sql id="criteria">-->
+<!--        &lt;!&ndash; 'S' 문자열 변환이 없으면 문자형(ascii)숫자로 인식-->
+<!--            NumberFormat 예외발생, toString()-->
+<!--        &ndash;&gt;-->
+<!--        <if test=" == 'S'.toString()">-->
+<!--            WHERE recipeinfo LIKE CONCAT('%', #{keyWord}, '%')-->
+<!--        </if>-->
+<!--    </sql>-->
 
 </mapper>
 
