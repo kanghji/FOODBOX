@@ -2,6 +2,7 @@ package com.groupfour.foodbox.service.admin;
 
 import com.groupfour.foodbox.domain.CategoryDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
+import com.groupfour.foodbox.domain.ProductImageDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -17,5 +18,9 @@ public interface ProductService {
     //상품 정보페이지
     ProductDTO productInfo(int prod_code);
     //상품상세이미지리스트 조회
-    List<String> productImageList(int prod_code);
+    List<ProductImageDTO> productImageList(int prod_code);
+    //상품수정
+    void adminProductModify(MultipartHttpServletRequest mr, HttpServletRequest request);
+    //상품삭제
+    void adminProductDelete(int prod_code, HttpServletRequest request);
 }

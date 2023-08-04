@@ -2,6 +2,7 @@ package com.groupfour.foodbox.controller.admin;
 
 import com.groupfour.foodbox.domain.CategoryDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
+import com.groupfour.foodbox.domain.ProductImageDTO;
 import com.groupfour.foodbox.service.admin.CategoryService;
 import com.groupfour.foodbox.service.admin.ProductService;
 import com.groupfour.foodbox.util.ProductSpec;
@@ -51,9 +52,24 @@ public class ProductController {
     //상품 정보페이지로 이동
     @GetMapping("/productInfo")
     public String productInfo(int prod_code, Model model){
+        List<CategoryDTO> categorylist =  categoryService.adminCategoryList();
+        model.addAttribute("categorylist", categorylist);
         ProductDTO productDTO = productService.productInfo(prod_code);
         model.addAttribute("productDTO", productDTO);
-        List<String> productImageList = productService.productImageList(prod_code);
+        List<ProductImageDTO> productImageList = productService.productImageList(prod_code);
+        model.addAttribute("productImageList", productImageList);
+        ProductSpec[] prodSpec = ProductSpec.values();
+        model.addAttribute("prodSpec", prodSpec);
         return "/admin/product/productInfo";
+    }
+    @PostMapping("/productModify")
+    public String productModify(MultipartHttpServletRequest mr, HttpServletRequest request){
+        productService.adminProductModify(mr, request);
+        return "redirect:/admin/productList";
+    }
+    @GetMapping("/productDelete")
+    public String productDelete(int prod_code, HttpServletRequest request){
+        productService.adminProductDelete(prod_code, request);
+        return "redirect:/admin/productList";
     }
 }

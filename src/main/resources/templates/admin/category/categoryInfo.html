@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
     <!-- 본문 -->
     <div class="container w-50 mt-5">
@@ -11,7 +11,7 @@
                 <thead>
                 <th colspan='2'>
                     <!-- 테이블 head -->
-                    <h3 class='text-center'>정보</h3>
+                    <h3 class='text-center'>카테고리 정보</h3>
                     <div class=''>
 
                     </div>
@@ -35,9 +35,12 @@
                     <td>카테고리 명</td>
                     <td><input class="form-control" type="text" id="category_name" name="category_name" th:value="${categoryDTO.category_name}"></td>
                 </tr>
+
+            </table>
+            <div class="d-flex justify-content-center">
                 <input type='button' value='수정' class='btn btn-sm btn-outline-success m-1' onclick = "inputCheck()">
                 <input type='reset' value='취소' class='btn btn-sm btn-outline-warning m-1'>
-            </table>
+            </div>
         </form>
     </div>
     <script>
