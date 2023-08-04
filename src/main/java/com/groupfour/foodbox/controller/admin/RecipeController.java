@@ -1,5 +1,6 @@
 package com.groupfour.foodbox.controller.admin;
 
+import com.groupfour.foodbox.domain.PageDTO;
 import com.groupfour.foodbox.domain.RecipeDTO;
 import com.groupfour.foodbox.service.admin.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,18 @@ public class RecipeController {
 
     //레시피 리스트 페이지 연결
     @GetMapping("/recipe")
-    public String recipeList(Model model){
+    public String recipeList(@ModelAttribute("pageDTO") PageDTO pageDTO, Model model){
         //Model 을 넘겨야 view에서 list를 띄울 수 있음.
         /*맵을 사용하여 data 만들기, 리스트를 service로 넘기기*/
-        List<List<RecipeDTO>> list = recipeService.getList();
+        List<List<RecipeDTO>> list = recipeService.getList(pageDTO);
 
         model.addAttribute("list",list);
-
+        model.addAttribute("pageDTO", pageDTO);
         //System.out.println("list = " + list);
         return "/admin/recipe/recipeList";
     }
+
+
     //레시피 수정 클릭시 상세 보기 페이지 이동
     @GetMapping("/recipeInfo/{id}")
     public String recipeInfo(@PathVariable int id, Model model){
@@ -39,8 +42,9 @@ public class RecipeController {
     //메뉴 이름 검색
     @PostMapping("/recipe/recipeSearch")
     public String recipeSearch(@RequestParam(value = "RCP_NM", defaultValue = "ALL")String RCP_NM,
+                               @ModelAttribute("pageDTO") PageDTO pageDTO,
                                                 Model model){
-        List<List<RecipeDTO>> list = recipeService.recipeSearch(RCP_NM);
+        List<List<RecipeDTO>> list = recipeService.recipeSearch(RCP_NM, pageDTO);
         model.addAttribute("list", list);
 
         return "/admin/recipe/recipeList";
