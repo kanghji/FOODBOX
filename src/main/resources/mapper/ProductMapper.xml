@@ -14,9 +14,31 @@
     <insert id="adminProductImageRegister">
         INSERT INTO product_image(image_prod_code, image_prod_image)VALUES((SELECT prod_code FROM product ORDER BY prod_code DESC LIMIT 1), #{image_prod_image})
     </insert>
+    <select id="productCount" resultType="Integer">
+        SELECT count(*) FROM product
+        WHERE 1=1
+        <include refid="criteria"/>
+    </select>
     <select id="productList" resultType="productDTO">
         SELECT * FROM product
+        WHERE 1=1
+        <include refid="criteria"/>
+        ORDER BY prod_code DESC LIMIT #{pageDTO.startIndex}, #{pageDTO.cntPerPage}
     </select>
+    <sql id="criteria">
+<!--        <if test="searchType== 'ALL'.toString() and keyword=='ALL'.toString()">-->
+<!--            WHERE 1=1-->
+<!--        </if>-->
+        <if test="searchType != 'ALL'.toString()">
+            AND prod_cat_code = #{searchType}
+        </if>
+
+        <if test="!keyword.equals('ALL')">
+            AND prod_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+
+    </sql>
+
     <select id="productInfo" resultType="productDTO">
         SELECT * FROM product WHERE prod_code=#{prod_code}
     </select>

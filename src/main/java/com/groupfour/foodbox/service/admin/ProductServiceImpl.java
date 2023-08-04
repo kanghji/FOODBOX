@@ -1,9 +1,11 @@
 package com.groupfour.foodbox.service.admin;
 
+import com.groupfour.foodbox.domain.PageDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.ProductImageDTO;
 import com.groupfour.foodbox.mapper.admin.ProductMapper;
 import lombok.SneakyThrows;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,23 +76,32 @@ public class ProductServiceImpl implements ProductService{
             }//if
         }//while
         System.out.println("map = " + map);
-
-        productMapper.adminProductRegister(map);
-        for(Object objkey : map.keySet() ){
-            String key = objkey.toString();
-            System.out.println( String.format("키 -> %s, 값 -> %s", key, map.get(key)) );
-            String keyValue = map.get(key).toString();
-            if(key.contains("image_prod_image")){
-                productMapper.adminProductImageRegister(keyValue);
+        for(int i=0; i<30; i++) {
+            productMapper.adminProductRegister(map);
+            for (Object objkey : map.keySet()) {
+                String key = objkey.toString();
+                System.out.println(String.format("키 -> %s, 값 -> %s", key, map.get(key)));
+                String keyValue = map.get(key).toString();
+                if (key.contains("image_prod_image")) {
+                    productMapper.adminProductImageRegister(keyValue);
+                }
             }
         }
     }
     //상품리스트
     @Override
-    public List<ProductDTO> productList() {
-        List<ProductDTO> productList = productMapper.productList();
+    public List<ProductDTO> productList(String keyword, String searchType, PageDTO pageDTO) {
+
+        List<ProductDTO> productList = productMapper.productList(keyword,searchType, pageDTO);
         return productList;
     }
+
+    @Override
+    public int productCount(String keyword, String searchType) {
+        int productCount =productMapper.productCount(keyword,searchType);
+        return productCount;
+    }
+
     //상품상세정보
     @Override
     public ProductDTO productInfo(int prod_code) {

@@ -1,6 +1,7 @@
 package com.groupfour.foodbox.controller.admin;
 
 import com.groupfour.foodbox.domain.CategoryDTO;
+import com.groupfour.foodbox.domain.PageDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.ProductImageDTO;
 import com.groupfour.foodbox.service.admin.CategoryService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,10 +45,19 @@ public class ProductController {
         return "redirect:/admin/productList";
     }
     //상품목록페이지로 이동
-    @GetMapping("/productList")
-    public String productList(Model model){
-        List<ProductDTO> productList = productService.productList();
+    @RequestMapping("/productList")
+    public String productList(@RequestParam(defaultValue = "ALL") String keyword,
+                              @RequestParam(defaultValue="ALL") String searchType,
+                              PageDTO pageDTO, Model model){
+        int productCount = productService.productCount(keyword,searchType);
+        pageDTO.setValue(productCount);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("searchType",searchType);
+        model.addAttribute("pageDTO", pageDTO);
+        List<ProductDTO> productList = productService.productList(keyword,searchType, pageDTO);
         model.addAttribute("productList", productList);
+        List<CategoryDTO> categorylist =  categoryService.adminCategoryList();
+        model.addAttribute("categorylist", categorylist);
         return "/admin/product/productList";
     }
     //상품 정보페이지로 이동
