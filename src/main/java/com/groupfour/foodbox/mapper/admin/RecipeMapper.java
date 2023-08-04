@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Mapper
 public interface RecipeMapper {
-     List<List<RecipeDTO>> getList(@Param("RCP_NM")String RCP_NM,@Param("pageDTO")PageDTO pageDTO);
+     List<RecipeDTO> getList(@Param("RCP_NM")String RCP_NM,@Param("pageDTO")PageDTO pageDTO);
 
 
     int totalCnt(PageDTO pageDTO);

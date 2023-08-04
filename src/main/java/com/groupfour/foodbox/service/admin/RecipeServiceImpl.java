@@ -14,7 +14,7 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeMapper recipeMapper;
 
     @Override
-    public List<List<RecipeDTO>> getList(String RCP_NM,PageDTO pageDTO){
+    public List<RecipeDTO> getList(String RCP_NM,PageDTO pageDTO){
 
         //DAO영속성 계층
         int totalCnt = recipeMapper.totalCnt(pageDTO);

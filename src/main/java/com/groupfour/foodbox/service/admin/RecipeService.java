@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface RecipeService {
 
-    List<List<RecipeDTO>> getList(String RCP_NM,PageDTO pageDTO);
+    List<RecipeDTO> getList(String RCP_NM,PageDTO pageDTO);
 
     RecipeDTO recipeInfo(int id);
 

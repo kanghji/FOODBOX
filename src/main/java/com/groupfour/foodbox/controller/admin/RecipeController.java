@@ -23,7 +23,7 @@ public class RecipeController {
             @ModelAttribute("pageDTO") PageDTO pageDTO, Model model){
         //Model 을 넘겨야 view에서 list를 띄울 수 있음.
         /*맵을 사용하여 data 만들기, 리스트를 service로 넘기기*/
-        List<List<RecipeDTO>> list = recipeService.getList(RCP_NM,pageDTO);
+        List<RecipeDTO> list = recipeService.getList(RCP_NM,pageDTO);
         System.out.println("RCP_NM = " + RCP_NM);
         model.addAttribute("list",list);
         model.addAttribute("pageDTO", pageDTO);
