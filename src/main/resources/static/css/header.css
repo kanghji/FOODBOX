@@ -53,6 +53,7 @@ a:hover {
     display: flex;
     margin: auto;
     margin-top: 1.3em;
+    height: auto;
 }
 
 .header_innerbox1 {
@@ -147,4 +148,9 @@ a:hover {
 .login__dropdown:hover .login__submenu {
     display: block;
     position: absolute;
+}
+
+.username{
+    /*font-size: 15px;*/
+    font-weight: 500;
 }

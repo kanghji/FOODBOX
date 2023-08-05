@@ -4,6 +4,6 @@
 
 <mapper namespace="com.groupfour.foodbox.mapper.user.MypageMapper">
         <select id="infoUpdateChk" resultType="userDTO">
-            SELECT * FROM user WHERE user_id = #{user_id}
+            SELECT user_pw FROM user WHERE user_id = #{user_id}
         </select>
 </mapper>
