@@ -93,7 +93,7 @@
             <div id="div-file">
                 <th:block th:each="productImage, imagecount : ${productImageList}">
                     <img class="prod_image" th:src="@{/image/}+${productImage.image_prod_image}" alt="Product image" style="width:75px;">
-                    <p>[[${imagecount.count}]]</p>
+<!--                    <p>[[${imagecount.count}]]</p>-->
                     <input type="file" class="form-control" th:name="image_prod_image+${imagecount.count}" onchange="preViewImg(this)"/>
                     <input type="hidden" class="form-control" th:name="image_no" th:value="${productImage.image_no}"/>
                     <input type="hidden" class="form-control" th:name="image_prod_image+${imagecount.count}+old"

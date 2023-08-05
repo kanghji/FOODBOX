@@ -20,7 +20,6 @@ public class PageDTO {
     private int cntPerPage = 10;
 
 
-
     public void setValue(int totalCnt) {
         this.totalCnt = totalCnt;
         // 전체 페이지수

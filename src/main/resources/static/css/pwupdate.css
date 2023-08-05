@@ -13,7 +13,7 @@
 
 .userinfo_wrap {
     padding-top: 10em;
-    width: 80%;
+    width: 65%;
     height: auto;
     margin: auto;
 }
@@ -124,3 +124,5 @@
 .new_pw_text {
     border-bottom: 1.4px solid #333333;
 }
+
+
