@@ -8,6 +8,6 @@ user_tel varchar(50) not null,
 user_gender varchar(50) not null,
 user_birthday date not null,
 user_zipcode varchar(100) null,
-user_zibunaddr varchar(100) null,
+user_roadaddr varchar(100) null,
 user_detailaddr varchar(100) not null
 );

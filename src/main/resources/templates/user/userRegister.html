@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!-- 헤더 -->
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
 <link href="/css/userRegister.css" rel="stylesheet"/>
+<script src="/js/zipcode.js"></script>
 <!-- 컨텐츠 영역 -->
 <div class="user_register_wrap">
 
-  <!-- 회원가입 헤더부분-->
+    <!-- 회원가입 헤더부분-->
   <div class="user_register_header">
     <div class="user_register">회원가입</div>
     <div class="must_write">
@@ -16,58 +16,207 @@
     <div class="register_line"></div>
  </div>
 
-  <!-- 회원가입 입력부분-->
-    <form action="/user/userRegister" method="post">
+  <!-- 회원가입 메인부분-->
+    <form class= "user_register_form" action="/user/userRegister" method="post">
 
-    <div class="user_register_main">
         <!-- 아이디 입력부분-->
-        <div class="register_id">
+        <div class="register_content_wrap">
             <div class="register_content01">
                 <span class="must_write03">아이디</span>
                 <span class="must_write04">&ast;</span>
             </div>
             <div class="register_content02">
-                <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16" onkeyup="checkUser_id()"  placeholder="아이디를 입력해주세요."/>
-                <p id="checkUser_idMessage"></p>
+                <div class="content_box">
+                    <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16" onclick="checkUser_id()" placeholder="아이디를 입력해주세요."/>
+                    <p id="checkUser_idMessage"></p>
+                </div>
             </div>
             <div class="register_content03">
-                <input class="register_content_botton" type="button" onclick="checkUser_id()" value="중복확인"/>
+                <div class="content_button">
+                    <input class="register_content_button" type="button" onclick="checkUser_id()" value="중복확인"/>
+                </div>
             </div>
         </div>
+
         <!-- 비밀번호 입력부분-->
-        <div class="register_pw">
+        <div class="register_content_wrap">
             <div class="register_content01">
                 <span class="must_write03">비밀번호</span>
                 <span class="must_write04">&ast;</span>
             </div>
             <div class="register_content02">
-                <input class="register_content_box" type="text" id="user_pw" name="user_pw" placeholder="비밀번호를 입력해주세요."/>
-                <!--        <input class="form-control mb-2" onkeyup="userIdCheck()" type="text" id="user_id" name="user_id" placeholder="아이디"/>-->
-                <!--        <p id="chkMsg" maxlength="16" class="mb-2"></p>-->
+                <div class="content_box">
+                    <input class="register_content_box" type="password" id="user_pw" name="user_pw"  placeholder="비밀번호를 입력해주세요."/>
+                    <p id="p_check">유효성검사</p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+        <!-- 비밀번호 확인부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">비밀번호 확인</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <input class="register_content_box" type="password" id="user_pw2" name="user_pw2" onkeyup="user_pw_samecheck()" placeholder="비밀번호를 다시 입력해주세요."/>
+                    <p id="checkUser_pwMessage"></p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+        <!-- 이름 입력부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">이름</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <input class="register_content_box" type="text" id="user_name" name="user_name" placeholder="이름을 입력해주세요."/>
+                    <p id="p_check">유효성검사</p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+        <!-- 이메일 입력부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">이메일</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <input class="register_content_box" type="text" id="user_email" name="user_email" placeholder="이메일을 입력해주세요."/>
+                    <p id="p_check">유효성검사</p>
+                </div>
             </div>
             <div class="register_content03">
+                <div class="content_button">
+                    <input class="register_content_button" type="button" onclick="checkUser_id()" value="인증메일"/>
+                </div>
             </div>
         </div>
 
-        <div class="register_name">
-            <p><input type="text" id="user_name" name="user_name" placeholder="이름을 입력해주세요."></p>
+        <!-- 전화번호 입력부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">전화번호</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <input class="register_content_box" type="text" id="user_tel" name="user_tel" placeholder="전화번호를 입력해주세요."/>
+                    <p id="p_check">유효성검사</p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
         </div>
 
-    <p><input type="text" id="user_email" name="user_email" placeholder="이메일"></p>
-    <p><input type="text" id="user_tel" name="user_tel" placeholder="전화번호"></p>
-    <p><select id="user_gender" name="user_gender">
-      <option value="남자">남자</option>
-      <option value="여자">여자</option>
-    </select></p>
-    <p><input type="date" id="user_birthday" name="user_birthday" min="1990-01-01" max="2022-12-31"
-              data-placeholder="생년월일" required/></p>
-    <p><input type="text" id="user_zipcode" name="user_zipcode" placeholder="우편번호"></p>
-    <p><input type="text" id="user_zibunaddr" name="user_zibunaddr" placeholder="지번주소"></p>
-    <p><input type="text" id="user_detailaddr" name="user_detailaddr" placeholder="상세주소"></p>
-    <p><input type="submit" value="회원등록"/></p>
+        <!-- 성별 입력부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">성별</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <p><select class="register_content_box" id="user_gender" name="user_gender">
+                        <option value="남자">남자</option>
+                        <option value="여자">여자</option>
+                    </select></p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+        <!-- 생년월일 입력부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">생년월일</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <p><input class="register_content_box" type="date" id="user_birthday" name="user_birthday" min="1990-01-01" max="2022-12-31"
+                              data-placeholder="생년월일" required/></p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+        <!-- 주소 부분-->
+        <div class="user_register_header">
+            <div class="user_register">기본 배송지</div>
+            <div class="register_line"></div>
+        </div>
 
 
-        <div class="user_register_main">
+        <!-- 주소 입력부분-->
+        <div class="adress_wrap">
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">우편번호</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_zipcode" placeholder="우편번호"></p>
+                </div>
+            </div>
+            <div class="register_content03">
+                <div class="content_button">
+                    <input class="register_content_button" type="button" onclick="sample4_execDaumPostcode()" value="주소검색"/>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 도로명주소 -->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">도로명주소</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <p><input class="register_content_box" type="text" id="sample4_roadAddress" name="user_roadaddr" placeholder="도로명주소" readonly></p>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+        <!-- 상세주소 입력부분-->
+        <div class="register_content_wrap">
+            <div class="register_content01">
+                <span class="must_write03">상세주소</span>
+            </div>
+            <div class="register_content02">
+                <div class="content_box">
+                    <input class="register_content_box" type="text" id="user_detailaddr" name="user_detailaddr" placeholder="상세주소를 입력해주세요."/>
+                </div>
+            </div>
+            <div class="register_content03"></div>
+        </div>
+
+
+
+
+        <!-- 회원 가입 버튼 --->
+        <div class="register_content_wrap">
+            <div class="register_content01"></div>
+                <div class="register_content02">
+                    <div class="content_box">
+                <p><input class="register_content_box" id="register_button" type="submit" value="회원가입"/></p>
+                    </div>
+                </div>
+            <div class="register_content03"></div>
+        </div>
+        </div>
+
+
+
   </form>
 
 </div>
@@ -76,15 +225,17 @@
 <!-- 푸터 -->
 <th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
 
+<!-- 주소찾기 API-->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
 
+    let user_id = $("#user_id").val();
   function checkUser_id(){
-    var user_id = $("#user_id").val();
 
     if(user_id.length<6 || user_id.length<17){
-        $("#checkUser_idMessage").html("아이디 길이는 6자리 이상, 16자 이하여야 합니다.")
-        $("#checkUser_idMessage").css({"color":"red", "font-size":"13px"});
+        $("#checkUser_idMessage").html("6자리 이상, 16자 이하의 영문 또는 영문과 숫자를 조합해주세요.")
+        $("#checkUser_idMessage").css({"color":"red", "font-size":"11px"});
         return;
     }
 
@@ -97,11 +248,11 @@
 
         if(responseData == "yes"){
           $("#checkUser_idMessage").html("사용가능한 아이디 입니다!!");
-          $("#checkUser_idMessage").css({"color":"blue", "font-size":"13px"});
+          $("#checkUser_idMessage").css({"color":"blue", "font-size":"11px"});
           alert("사용 가능한 아이디입니다.");
         }else{
           $("#checkUser_idMessage").html("사용할 수 없는 아이디 입니다!!");
-          $("#checkUser_idMessage").css({"color":"red", "font-size":"13px"});
+          $("#checkUser_idMessage").css({"color":"red", "font-size":"11px"});
           alert("이미 사용중인 아이디입니다.");
         }
       },
@@ -109,12 +260,27 @@
         $("#checkUser_idMessage").html("서버 에러 입니다!!!");
       }
     });
-
-
-
   }
 
+    <!-- 비밀번호 일치 확인-->
+    function user_pw_samecheck() {
+        var p1 = document.getElementById('user_pw').value;
+        var p2 = document.getElementById('user_pw2').value;
+
+        if (p1 != p2) {
+            $("#checkUser_pwMessage").html("비밀번호가 일치하지 않습니다.");
+            $("#checkUser_pwMessage").css({"color":"red", "font-size":"11px"});
+            return false;
+        } else {
+            $("#checkUser_pwMessage").html("비밀번호가 일치합니다.");
+            $("#checkUser_pwMessage").css({"color":"blue", "font-size":"11px"});
+            return true;
+        }
+    }
+
+
 </script>
+
 
 
 
