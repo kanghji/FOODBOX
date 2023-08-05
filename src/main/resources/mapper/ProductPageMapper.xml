@@ -5,7 +5,29 @@
 
 <mapper namespace="com.groupfour.foodbox.mapper.user.ProductPageMapper">
     <select id="productPage" resultType="productDTO">
-        SELECT * FROM product WHERE prod_cat_code = #{category_code}
+        SELECT * FROM product
+        WHERE 1=1
+        <include refid="criteria"/>
+        LIMIT #{pageDTO.startIndex}, #{pageDTO.cntPerPage}
+    </select>
+    <sql id="criteria">
+        <if test="!category_code.equals('ALL')">
+            AND prod_cat_code = #{category_code}
+        </if>
+        <if test="!prod_spec.equals('ALL')">
+            AND prod_spec = #{prod_spec}
+        </if>
+        <if test="priceSort.equals('LOW')">
+            ORDER BY prod_price ASC
+        </if>
+        <if test="priceSort.equals('HIGH')">
+            ORDER BY prod_price DESC
+        </if>
+    </sql>
+    <select id="productCount" resultType="Integer">
+        SELECT count(*) FROM product
+        WHERE 1=1
+        <include refid="criteria"/>
     </select>
     <select id="productView" resultType="productDTO">
         SELECT * FROM product WHERE prod_code=#{prod_code}

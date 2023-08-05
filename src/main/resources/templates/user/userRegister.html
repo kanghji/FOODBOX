@@ -1,78 +1,120 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!-- 헤더 -->
-<th:block th:replace="/inc/admin_header :: headerFragment"></th:block>
+<th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 <link href="/css/userRegister.css" rel="stylesheet"/>
 <!-- 컨텐츠 영역 -->
-<div class="container">
-  <h3>회원 등록</h3>
+<div class="user_register_wrap">
+
+  <!-- 회원가입 헤더부분-->
+  <div class="user_register_header">
+    <div class="user_register">회원가입</div>
+    <div class="must_write">
+        <span class="must_write01">&ast;</span>
+        <span class="must_write02">필수입력사항</span>
+    </div>
+    <div class="register_line"></div>
+ </div>
+
+  <!-- 회원가입 입력부분-->
     <form action="/user/userRegister" method="post">
-    <!--        <input class="form-control mb-2" onkeyup="userIdCheck()" type="text" id="user_id" name="user_id" placeholder="아이디"/>-->
-    <!--        <p id="chkMsg" maxlength="16" class="mb-2"></p>-->
-    <input class="form-control mb-2" type="text" id="user_id" name="user_id" maxlength="16" placeholder="아이디를 입력해주세요."/>
-<!--    <input class="btn btn-success" type="button" onclick="userIdCheck()" value="중복확인"/>-->
-    <p><input class="form-control" type="text" id="user_name" name="user_name" placeholder="이름을 입력해주세요."></p>
-    <p><input class="form-control" type="text" id="user_pw" name="user_pw" placeholder="비밀번호를 입력해주세요."></p>
-    <p><input class="form-control" type="text" id="user_email" name="user_email" placeholder="이메일"></p>
-    <p><input class="form-control" type="text" id="user_tel" name="user_tel" placeholder="전화번호"></p>
-    <p><select class="form-control" id="user_gender" name="user_gender">
+
+    <div class="user_register_main">
+        <!-- 아이디 입력부분-->
+        <div class="register_id">
+            <div class="register_content01">
+                <span class="must_write03">아이디</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16" onkeyup="checkUser_id()"  placeholder="아이디를 입력해주세요."/>
+                <p id="checkUser_idMessage"></p>
+            </div>
+            <div class="register_content03">
+                <input class="register_content_botton" type="button" onclick="checkUser_id()" value="중복확인"/>
+            </div>
+        </div>
+        <!-- 비밀번호 입력부분-->
+        <div class="register_pw">
+            <div class="register_content01">
+                <span class="must_write03">비밀번호</span>
+                <span class="must_write04">&ast;</span>
+            </div>
+            <div class="register_content02">
+                <input class="register_content_box" type="text" id="user_pw" name="user_pw" placeholder="비밀번호를 입력해주세요."/>
+                <!--        <input class="form-control mb-2" onkeyup="userIdCheck()" type="text" id="user_id" name="user_id" placeholder="아이디"/>-->
+                <!--        <p id="chkMsg" maxlength="16" class="mb-2"></p>-->
+            </div>
+            <div class="register_content03">
+            </div>
+        </div>
+
+        <div class="register_name">
+            <p><input type="text" id="user_name" name="user_name" placeholder="이름을 입력해주세요."></p>
+        </div>
+
+    <p><input type="text" id="user_email" name="user_email" placeholder="이메일"></p>
+    <p><input type="text" id="user_tel" name="user_tel" placeholder="전화번호"></p>
+    <p><select id="user_gender" name="user_gender">
       <option value="남자">남자</option>
       <option value="여자">여자</option>
     </select></p>
-    <p><input class="form-control" type="date" id="user_birthday" name="user_birthday" min="1990-01-01" max="2022-12-31"
+    <p><input type="date" id="user_birthday" name="user_birthday" min="1990-01-01" max="2022-12-31"
               data-placeholder="생년월일" required/></p>
-    <p><input class="form-control" type="text" id="user_zipcode" name="user_zipcode" placeholder="우편번호"></p>
-    <p><input class="form-control" type="text" id="user_zibunaddr" name="user_zibunaddr" placeholder="지번주소"></p>
-    <p><input class="form-control" type="text" id="user_detailaddr" name="user_detailaddr" placeholder="상세주소"></p>
-    <p><input class="btn btn-success" type="submit" value="회원등록"/></p>
+    <p><input type="text" id="user_zipcode" name="user_zipcode" placeholder="우편번호"></p>
+    <p><input type="text" id="user_zibunaddr" name="user_zibunaddr" placeholder="지번주소"></p>
+    <p><input type="text" id="user_detailaddr" name="user_detailaddr" placeholder="상세주소"></p>
+    <p><input type="submit" value="회원등록"/></p>
+
+
+        <div class="user_register_main">
   </form>
 
 </div>
 
 
 <!-- 푸터 -->
-<th:block th:replace="/inc/footer :: footerFragment"></th:block>
-
-<!--<script>-->
-
-<!--  function userIdCheck(){-->
-<!--    var user_id = $("#user_id").val();-->
-
-<!--    // if(user_id.length<3){-->
-<!--    //     $("#chkMsg").html("아이디 길이는 3자리 이상이어야 합니다.")-->
-<!--    //     $("#chkMsg").css({"color":"red", "font-size":"13px"});-->
-<!--    //     return;-->
-<!--    // }-->
-
-<!--    $.ajax({-->
-<!--      url:"/user/user/userIdCheck",-->
-<!--      type: "get",-->
-<!--      data:{"user_id":user_id}, // 서버에 전송할 데이터-->
-<!--      success: function(responseData){-->
-<!--        // responseData = "yes" or "no", yes:사용가능 no:사용불가-->
-
-<!--        if(responseData == "yes"){-->
-<!--          // $("#chkMsg").html("사용가능한 아이디 입니다!!");-->
-<!--          // $("#chkMsg").css({"color":"blue", "font-size":"13px"});-->
-<!--          alert("사용 가능한 아이디입니다.");-->
-<!--        }else{-->
-<!--          // $("#chkMsg").html("사용할 수 없는 아이디 입니다!!");-->
-<!--          // $("#chkMsg").css({"color":"red", "font-size":"13px"});-->
-<!--          alert("이미 사용중인 아이디입니다.");-->
-<!--        }-->
-<!--        // $("#chkModal").modal("show");-->
-<!--      },-->
-<!--      error : function(){-->
-<!--        $("#chkMsg").html("서버 에러 입니다!!!");-->
-<!--        $("#chkModal").modal("show");-->
-<!--      }-->
-<!--    });-->
+<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
 
 
+<script>
 
-<!--  }-->
+  function checkUser_id(){
+    var user_id = $("#user_id").val();
 
-<!--</script>-->
+    if(user_id.length<6 || user_id.length<17){
+        $("#checkUser_idMessage").html("아이디 길이는 6자리 이상, 16자 이하여야 합니다.")
+        $("#checkUser_idMessage").css({"color":"red", "font-size":"13px"});
+        return;
+    }
+
+    $.ajax({
+      url:"/user/checkUser_id",
+      type: "get",
+      data:{"user_id":user_id}, // 서버에 전송할 데이터
+      success: function(responseData){
+        // responseData = "yes" or "no", yes:사용가능 no:사용불가
+
+        if(responseData == "yes"){
+          $("#checkUser_idMessage").html("사용가능한 아이디 입니다!!");
+          $("#checkUser_idMessage").css({"color":"blue", "font-size":"13px"});
+          alert("사용 가능한 아이디입니다.");
+        }else{
+          $("#checkUser_idMessage").html("사용할 수 없는 아이디 입니다!!");
+          $("#checkUser_idMessage").css({"color":"red", "font-size":"13px"});
+          alert("이미 사용중인 아이디입니다.");
+        }
+      },
+      error : function(){
+        $("#checkUser_idMessage").html("서버 에러 입니다!!!");
+      }
+    });
+
+
+
+  }
+
+</script>
 
 
 
