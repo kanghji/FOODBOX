@@ -21,6 +21,7 @@ public class PageDTO {
 
     private String searchType;
     private String keyWord;
+    private String RCP_NM;
 
     public void setValue(int totalCnt) {
         this.totalCnt = totalCnt;

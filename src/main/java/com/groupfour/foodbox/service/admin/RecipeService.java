@@ -9,9 +9,9 @@ import java.util.List;
 @Service
 public interface RecipeService {
 
-    List<List<RecipeDTO>> getList(PageDTO pageDTO);
+    List<RecipeDTO> getList(String RCP_NM,PageDTO pageDTO);
 
     RecipeDTO recipeInfo(int id);
 
-    List<List<RecipeDTO>> recipeSearch(String rcpNm, PageDTO pageDTO);
+//    List<List<RecipeDTO>> recipeSearch(String RCP_NM, PageDTO pageDTO);
 }
