@@ -14,15 +14,29 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeMapper recipeMapper;
 
     @Override
-    public List<List<RecipeDTO>> getList(PageDTO pageDTO){
+    public List<RecipeDTO> getList(String RCP_NM,PageDTO pageDTO){
 
         //DAO영속성 계층
         int totalCnt = recipeMapper.totalCnt(pageDTO);
+//        int searchCnt = recipeMapper.searchCnt(RCP_NM);
+//        pageDTO.setValue(searchCnt);
         System.out.println("totalCnt = " + totalCnt);
+        System.out.println("pageDTO.getCntPerPage() = " + pageDTO.getStartIndex());
+
         pageDTO.setValue(totalCnt);
 
-        return recipeMapper.getList(pageDTO);
+        return recipeMapper.getList(RCP_NM,pageDTO);
     }
+//    @Override
+//    public List<List<RecipeDTO>> recipeSearch(String RCP_NM, PageDTO pageDTO) {
+//        int searchCnt = recipeMapper.searchCnt(RCP_NM);
+//        pageDTO.setValue(searchCnt);
+//        System.out.println("pageDTO.getCntPerPage() = " + pageDTO.getStartIndex());
+//
+//
+//        List<List<RecipeDTO>> list = recipeMapper.recipeSearch(RCP_NM, pageDTO);
+//        return list;
+//    }
 
 
 
@@ -32,11 +46,4 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeDTO;
     }
 
-    @Override
-    public List<List<RecipeDTO>> recipeSearch(String RCP_NM, PageDTO pageDTO) {
-        int searchCnt = recipeMapper.searchCnt(RCP_NM);
-        pageDTO.setValue(searchCnt);
-        List<List<RecipeDTO>> list = recipeMapper.recipeSearch(RCP_NM, pageDTO);
-        return list;
-    }
 }
