@@ -38,4 +38,9 @@ public class UserCartServiceImpl implements UserCartService {
 
         return userCartList;
     }
+
+    @Override
+    public void userCartDelete(int cartNo) {
+        userCartMapper.userCartDelete(cartNo);
+    }
 }

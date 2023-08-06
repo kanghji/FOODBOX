@@ -14,4 +14,5 @@ public interface UserCartMapper {
 
     List<UserCartDTO> userCartList(String user_id);
 
+    void userCartDelete(int cartNo);
 }

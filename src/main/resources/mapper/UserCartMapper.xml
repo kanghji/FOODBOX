@@ -6,7 +6,14 @@
 <mapper namespace="com.groupfour.foodbox.mapper.user.UserCartMapper">
 
     <select id="userCartList" resultType="com.groupfour.foodbox.dto.UserCartDTO">
-        SELECT * FROM usercart WHERE user_id = #{user_id}
+        SELECT c.cart_no, c.user_id, c.prod_code, u.user_name, p.prod_name, p.prod_thumbnail,
+        p.prod_price, p.prod_qty, c.order_qty
+        FROM usercart c
+            JOIN user u
+            ON  c.user_id = u.user_id
+            JOIN product p
+            ON c.prod_code = p.prod_code
+        WHERE c.user_id = #{user_id}
     </select>
 
     <select id="checkCart" resultType="com.groupfour.foodbox.dto.UserCartDTO">
@@ -22,6 +29,10 @@
         INSERT INTO usercart(user_id, prod_code, order_qty)
         VALUES(#{user_id}, #{prod_code}, #{order_qty})
     </insert>
+
+    <delete id="userCartDelete">
+        DELETE FROM usercart WHERE cart_no = #{cartNo}
+    </delete>
 
 
 </mapper>
