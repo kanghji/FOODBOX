@@ -12,7 +12,7 @@
                             <label for="user_id">아이디</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_id" name="user_id" class="update_input" value="" readonly />
+                            <input type="text" id="user_id" name="user_id" class="update_input" th:value="${session.userLoginDto.user_id}" readonly />
                         </div>
                     </div>
                     <div class="info_inner">
@@ -48,11 +48,11 @@
                         <div class="input_box">
                             <input type="text" id="user_tel" name="user_tel" class="update_input" value="" />
                         </div>
-                        <button type="button" class="confirm_btn" onclick="telBtn()">휴대폰 인증</button>
+<!--                        <button type="button" class="confirm_btn" onclick="telBtn()">휴대폰 인증</button>-->
                     </div>
-                    <div class="validation validation_input_tel">
-                        <p class="validation_text">휴대폰 번호를 입력해주세요</p>
-                    </div>
+<!--                    <div class="validation validation_input_tel">-->
+<!--                        <p class="validation_text">휴대폰 번호를 입력해주세요</p>-->
+<!--                    </div>-->
                     <div class="userinfo_box info_inner ">
                         <div class="label_box gender_label">
                             <span>성별</span>
@@ -80,7 +80,7 @@
                                 <label for="user_zipcode">우편번호</label>
                             </div>
                             <div class="input_box">
-                                <input type="text" id="user_zipcode" name="user_zipcode" class="addr_num_input" value=""/>
+                                <input type="text" id="user_zipcode" name="user_zipcode" class="addr_num_input" />
                             </div>
                         </div>
                         <div class="info_inner userAddr_box">
@@ -105,7 +105,7 @@
             </form>
             <div class="btn_inner">
                 <button type="button" class="userUpdate_btn deleteBtn" onclick="userDeleteBtn()">탈퇴하기</button>
-                <button type="submit" class="userUpdate_btn" onclick="userUpdateBtn()">회원정보수정</button>
+                <button type="button" class="userUpdate_btn" onclick="userUpdateBtn()">회원정보수정</button>
             </div>
         </div>
     </div>

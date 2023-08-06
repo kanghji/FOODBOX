@@ -7,7 +7,7 @@
     <!--회원 리스트-->
     <select id="userList">
         select user_no, user_name, user_id, user_pw, user_email, user_tel,
-        user_gender, user_birthday, user_zipcode, user_zibunaddr, user_detailaddr
+        user_gender, user_birthday, user_zipcode, user_roadaddr, user_detailaddr
         from user
     </select>
 
@@ -31,7 +31,7 @@
     <!--회원 검색-->
     <select id="userSearch" resultType="userDTO">
         select user_no, user_name, user_id, user_pw, user_email, user_tel,
-        user_gender, user_birthday, user_zipcode, user_zibunaddr, user_detailaddr
+        user_gender, user_birthday, user_zipcode, user_roadaddr, user_detailaddr
         from user
         where 1=1
         <if test="user_name != 'all'">
@@ -50,7 +50,7 @@
     <!-- 회원 수정-->
     <update id="userModify" parameterType="userDTO">
         UPDATE user SET user_name=#{user_name}, user_pw=#{user_pw}, user_email=#{user_email},
-        user_tel=#{user_tel}, user_zibunaddr=#{user_zibunaddr}
+        user_tel=#{user_tel}, user_roadaddr=#{_user_roadaddr}, user_zipcode=#{user_zipcode}, user_detailaddr=#{user_detailaddr}
         WHERE user_no=#{user_no}
     </update>
 
