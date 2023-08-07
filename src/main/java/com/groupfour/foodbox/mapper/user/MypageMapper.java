@@ -13,4 +13,8 @@ public interface MypageMapper {
     UserDTO infoUpdateChk(String user_id);
 
     int pwUpdate(UserDTO userDTO);
+
+    UserDTO infoList(String user_id);
+
+    void infoUpdate(UserDTO userDTO);
 }

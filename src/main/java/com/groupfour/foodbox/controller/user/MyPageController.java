@@ -34,7 +34,6 @@ public class MyPageController {
 
     // 비밀번호 수정
     @PostMapping("/user_pwModify")
-//    @RequestMapping(value="/user_pwModify", method=RequestMethod.POST, consumes = "application/json")
     @ResponseBody
     public int pwModify(@RequestBody UserDTO userDTO) {
         int new_pw = mypageService.pwModify(userDTO);
@@ -49,8 +48,17 @@ public class MyPageController {
 
     // 회원정보 수정 view
     @GetMapping("/user_infoUpdateView")
-    public String infoUpdateView() {
+    public String infoUpdateView(HttpSession session, Model model) {
+        UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
+        model.addAttribute("userDTO", mypageService.infoList(userDTO.getUser_id()));
         return "user/user_infoUpdateView";
+    }
+
+    // 회원정보 수정
+    @PostMapping("/user_infoUpdataView")
+    public String infoModify(UserDTO userDTO) {
+        mypageService.infoModify(userDTO);
+        return "redirect:/user/infoUpdateView";
     }
 
 }

@@ -22,4 +22,17 @@ public class MypageServiceImpl implements MypageService{
         int new_pw = mypageMapper.pwUpdate(userDTO);
        return new_pw;
     }
+
+    @Override
+    public UserDTO infoList(String user_id) {
+       UserDTO userDTO = mypageMapper.infoList(user_id);
+       return userDTO;
+    }
+
+    @Override
+    public void infoModify(UserDTO userDTO) {
+        mypageMapper.infoUpdate(userDTO);
+    }
+
+
 }
