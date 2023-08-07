@@ -53,6 +53,7 @@ a:hover {
     display: flex;
     margin: auto;
     margin-top: 1.3em;
+    height: auto;
 }
 
 .header_innerbox1 {
