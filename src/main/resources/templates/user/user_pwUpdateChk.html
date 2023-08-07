@@ -24,8 +24,8 @@
                             <label for="user_pw_input">비밀번호</label>
                         </div>
                         <div class="input_box">
-                            <input type="password" id="user_pw_input" name="user_pw" class="info_input" maxlength="10" placeholder="현재 비밀번호를 입력해주세요" />
-                            <input type="hidden" id="user_pw_db" name="user_pw_db" class="info_input" maxlength="10" th:value="${userDTO.user_pw}" />
+                            <input type="password" id="user_pw_input" name="user_pw" class="info_input" minlength="10" placeholder="현재 비밀번호를 입력해주세요" />
+                            <input type="hidden" id="user_pw_db" name="user_pw_db" class="info_input" minlength="10" th:value="${userDTO.user_pw}" />
                         </div>
                         <p id="infoPwChk_text"></p>
                     </div>
