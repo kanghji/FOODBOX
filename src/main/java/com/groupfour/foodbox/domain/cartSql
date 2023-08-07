@@ -4,3 +4,13 @@ create table usercart (
     prod_code int not null,
     order_qty int not null
 );
+
+create table userorder (
+    order_no int primary key auto_increment,
+    user_id varchar(50) not null,
+    prod_code int not null,
+    order_qty int not null,
+    prod_thumbnail varchar(300) not null,
+    prod_name varchar(100) not null,
+    order_inputDate Date not null
+);

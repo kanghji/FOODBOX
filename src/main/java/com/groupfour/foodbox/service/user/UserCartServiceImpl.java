@@ -16,13 +16,31 @@ public class UserCartServiceImpl implements UserCartService {
 
     @Override
     public void insertCart(UserCartDTO userCartDTO) {
+        List<UserCartDTO> userCartList = userCartMapper.userCartList(userCartDTO.getUser_id());
+
         userCartMapper.insertCart(userCartDTO);
     }
 
     @Override
-    public List<UserCartDTO> cartList(String user_id) {
+    public UserCartDTO checkCart(String id, int prod_code) {
+        return userCartMapper.checkCart(id, prod_code);
+    }
+
+    @Override
+    public void modifyQty(int order_qty, int cart_no) {
+        userCartMapper.modifyQty(order_qty, cart_no);
+    }
+
+    @Override
+    public List<UserCartDTO> userCartList(String user_id) {
+
         List<UserCartDTO> userCartList = userCartMapper.userCartList(user_id);
 
         return userCartList;
+    }
+
+    @Override
+    public void userCartDelete(int cartNo) {
+        userCartMapper.userCartDelete(cartNo);
     }
 }
