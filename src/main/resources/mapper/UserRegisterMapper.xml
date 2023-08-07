@@ -7,9 +7,9 @@
     <!--회원 가입-->
     <insert id="userRegister">
         insert into user (user_no, user_name, user_id, user_pw, user_email, user_tel,
-        user_gender, user_birthday, user_zipcode, user_zibunaddr, user_detailaddr)
+        user_gender, user_birthday, user_zipcode, user_roadaddr, user_detailaddr)
         values(#{user_no}, #{user_name}, #{user_id}, #{user_pw}, #{user_email}, #{user_tel}, #{user_gender},
-        #{user_birthday}, #{user_zipcode}, #{user_zibunaddr}, #{user_detailaddr})
+        #{user_birthday}, #{user_zipcode}, #{user_roadaddr}, #{user_detailaddr})
     </insert>
 
     <!--아이디 중복체크-->

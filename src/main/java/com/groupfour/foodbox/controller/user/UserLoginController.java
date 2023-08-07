@@ -42,12 +42,12 @@ public class UserLoginController {
         return "redirect:/";
     }
 
-//    // 로그아웃
-//    @GetMapping("/userLogout")
-//    public String userLogout(HttpSession session) {
-//        session.invalidate(); // 세션 초기화
-//        return "redirect:/";
-//    }
+    // 로그아웃
+    @GetMapping("/userLogout")
+    public String userLogout(HttpSession session) {
+        session.invalidate(); // 세션 초기화
+        return "redirect:/";
+    }
 
 }
 

@@ -40,7 +40,7 @@
             <nav class="gnb">
                 <ul class="gnb__menu">
                     <li class="gnb__store main_menu"  onmouseenter="storeSubmenuOver(this)" onmouseleave="storeSubmenuOut(this)">
-                        <a href="/user/productPage?category_code=all&category_name=all">스토어</a>
+                        <a href="/user/productPage">스토어</a>
                         <ul class="store__submenu submenu" id="storeCategory">
 <!--                            <li class="sub_title"><span>푸드</span></li>-->
 <!--                            <th:block th:each="categoryDTO : ${categoryList}">-->
@@ -49,8 +49,8 @@
                         </ul>
                     </li>
                     <li class="gnb__best main_menu"><a href="#레시피">레시피</a></li>
-                    <li class="gnb__best main_menu"><a href="#베스트">베스트</a></li>
-                    <li class="gnb__new main_menu"><a href="#신상품">신상품</a></li>
+                    <li class="gnb__best main_menu"><a href="/user/productPage?prod_spec=BEST">베스트</a></li>
+                    <li class="gnb__new main_menu"><a href="/user/productPage?prod_spec=NEW">신상품</a></li>
                 </ul>
             </nav>
         </div>
@@ -93,8 +93,9 @@
                                 <li><a href="#">책갈피한 레시피</a></li>
 <!--                                <li><a th:href="${user/user_infoUpdate(user_no=${user.???})}">회원정보 수정</a></li>-->
                                 <li><a href="/user/user_infoUpdateView">회원정보 수정</a></li>
-                                <li><a href="/user/user_pwUpdateChk">비밀번호 변경</a></li>
-                                <li class="mypage_logout"><a href="#">로그아웃</a></li>
+<!--                                <li><a href="/user/user_pwUpdate">비밀번호 변경</a></li>-->
+                                <li><a href="/user/user_infoUpdateChk">비밀번호 변경</a></li>
+                                <li class="mypage_logout"> <a th:href="@{/user/userLogout}">로그아웃</a></li>
                             </ul>
                         </li>
                     </ul>

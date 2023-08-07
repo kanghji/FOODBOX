@@ -17,7 +17,7 @@ public class UserDTO {
         private String user_gender;
         private String user_birthday;
         private String user_zipcode;
-        private String user_zibunaddr;
+        private String user_roadaddr;
         private String user_detailaddr;
 
         private String new_pw;
