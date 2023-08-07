@@ -51,13 +51,13 @@
                             </form>
                         </td>
                         <td th:text="${#numbers.formatInteger(dto.prod_price, 0, 'COMMA') + '원'}">
-<!--                            <span th:text="${#numbers.formatDecimal(dto.prod_price, 0, 'NUMBER')}">0</span>원<br/>-->
                         </td>
+
                         <td th:text="${#numbers.formatInteger(dto.totPrice, 0, 'COMMA') + '원'}">
-<!--                            <fmt:formatNumber value="${dto.totPrice}"/>원<br/>-->
                         </td>
+
                         <td>
-                                <button class="btn btn-sm btn-danger" th:onclick="|userOrderObject.deleteCart(${dto.cart_no})|">삭제</button>
+                                <button class="btn btn-sm btn-danger" th:onclick="|userCartObject.deleteCart(${dto.cart_no})|">삭제</button>
                         </td>
                     </tr>
                 </th:block>
@@ -76,6 +76,6 @@
 
 </div>
 
-<script src="/js/userOrder.js"></script>
+<script src="/js/userCart.js"></script>
 <!-- footer -->
 <th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
