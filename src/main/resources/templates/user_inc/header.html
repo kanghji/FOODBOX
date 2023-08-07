@@ -70,9 +70,9 @@
                     <ul class="login inner_right">
                         <li class="login__dropdown">
                             <a th:href="@{/user/userLogin}"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
-                            <ul class="login__submenu submenu">
-                                <li><a th:href="@{/user/userRegister}">회원가입</a></li>
-                            </ul>
+<!--                            <ul class="login__submenu submenu">-->
+<!--                                <li><a th:href="@{/user/userRegister}">회원가입</a></li>-->
+<!--                            </ul>-->
                         </li>
                     </ul>
                 </div>
@@ -88,7 +88,7 @@
                                 <span class="">마이페이지</span>
                             </a>
                             <ul class="mypage__submenu">
-                                <li><p class="username" th:text="|${session.userLoginDto.user_id}&nbsp;&nbsp;님|">회원아이디</p></li>
+                                <li><p class="username" id="header_userId" th:text="|${session.userLoginDto.user_id}&nbsp;&nbsp;님|">회원아이디</p></li>
                                 <li><a href="#">주문내역 조회</a></li>
                                 <li><a href="#">책갈피한 레시피</a></li>
 <!--                                <li><a th:href="${user/user_infoUpdate(user_no=${user.???})}">회원정보 수정</a></li>-->

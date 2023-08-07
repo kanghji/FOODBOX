@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-
         private int user_no;
         private String user_name;
         private String user_id;
@@ -21,6 +20,6 @@ public class UserDTO {
         private String user_zibunaddr;
         private String user_detailaddr;
 
-
+        private String new_pw;
 }
 
