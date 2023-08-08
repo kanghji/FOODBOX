@@ -28,8 +28,9 @@
                     <td>
                         <img th:src="@{/image/}+${dto.prod_thumbnail}" width="80px"/>
                     </td>
-                    <td th:text="${dto.prod_name}"></td>
-                    <td th:text="${dto.order_qty} + ' 개'"></td>
+                    <td id="prod_name" th:text="${dto.prod_name}"></td>
+                    <input type="hidden" id="order_qty" th:value="${dto.order_qty}"/>
+                    <td class="d" th:text="${dto.order_qty}"></td>
                     <td th:text="${#numbers.formatInteger(dto.prod_price, 0, 'COMMA') + '원'}"></td>
                     <td th:text="${#numbers.formatInteger(dto.totPrice, 0, 'COMMA') + '원'}"></td>
                 </tr>
@@ -59,15 +60,15 @@
             <tbody>
             <tr>
                 <td>이름</td>
-                <td th:text="${userDTO.user_name}"></td>
+                <td id="user_name" th:text="${userDTO.user_name}"></td>
             </tr>
             <tr>
                 <td>이메일</td>
-                <td th:text="${userDTO.user_email}"></td>
+                <td id="user_email" th:text="${userDTO.user_email}"></td>
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td th:text="${userDTO.user_tel}"></td>
+                <td id="user_tel" th:text="${userDTO.user_tel}"></td>
             </tr>
             <tr>
                 <td><b>받는사람 정보</b></td>
@@ -78,7 +79,8 @@
             </tr>
             <tr>
                 <td>배송지 주소</td>
-                <td th:text="|${userDTO.user_zipcode} ${userDTO.user_roadaddr} ${userDTO.user_detailaddr}|"></td>
+                <td id="user_zipcode" th:text="${userDTO.user_zipcode}"></td>
+                <td id="user_addr" th:text="|${userDTO.user_roadaddr} ${userDTO.user_detailaddr}|"></td>
             </tr>
             <tr>
                 <td>전화번호</td>
