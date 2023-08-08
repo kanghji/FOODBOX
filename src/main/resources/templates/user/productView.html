@@ -92,10 +92,10 @@
 <div class="container mt-3" id="replyArea">
 
     <textarea class="w-100" id="reply_content" name="reply_content"
-              th:placeholder="${session.userLoginDto.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}" onclick="reviewTextArea()"></textarea>
-    <th:block th:if="${session.userLoginDto.user_id!=null}">
+              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}" onclick="reviewTextArea()"></textarea>
+    <th:block th:if="${session.userLoginDto?.user_id!=null}">
         <div class="d-flex justify-content-end m-3">
-        <th:block th:if="${session.userLoginDto.user_id!=null}" class="d-flex">
+        <th:block th:if="${session.userLoginDto?.user_id!=null}" class="d-flex">
             <select id="reply_rating" name="reply_rating">
                 <option value="0">별점</option>
                 <option value="1">1</option>
@@ -137,14 +137,14 @@
         document.getElementById("productImage").style.height="800px";
     }
     function reviewTextArea(){
-        if([[${session.userLoginDto.user_id==null}]]){
+        if([[${session.userLoginDto?..user_id==null}]]){
             alert("로그인 후 작성 가능합니다");
             return;
         }
     }
     $(document).ready(function(){
         let reply_prod_code = [[${productDTO.prod_code}]]
-        let reply_user_id = [[${session.userLoginDto.user_id}]];
+        let reply_user_id = [[${session.userLoginDto?.user_id}]];
         let replyArea = $("replyArea");//댓글 영역 해당 객체
         let viewPage = 1;
 

@@ -25,7 +25,7 @@
                 <td>
                     <select class="form-select form-select-sm"  name="prod_cat_code" >
                         <option th:each="categoryDTO : ${categorylist}" th:value="${categoryDTO.category_code}"
-                                th:if="${categoryDTO.category_code==productDTO.prod_cat_code? 'selected':''}">
+                                th:selected="${categoryDTO.category_code} == ${productDTO.prod_cat_code}">
                             [[${categoryDTO.category_name}]] [ [[${categoryDTO.category_code}]] ]</option>
                     </select>
                 </td>
@@ -69,8 +69,8 @@
                 <td><select class="form-select form-select-sm" name="prod_spec">
                     <option value="none" th:if="${none==productDTO.prod_spec?'selected':''}">일반</option>
                     <option th:each="prod_spec : ${prodSpec}" th:value="${prod_spec.name()}"
-                            th:if="${prod_spec==productDTO.prod_spec?'selected':''}"
-                    >[[${prod_spec.value}]]</option>
+                            th:selected="${prod_spec} == ${productDTO.prod_spec}">
+                        [[${prod_spec.value}]]</option>
                     </select>
                 </td>
             </tr>
