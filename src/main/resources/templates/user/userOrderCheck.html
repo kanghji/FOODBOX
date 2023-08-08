@@ -28,9 +28,8 @@
                     <td>
                         <img th:src="@{/image/}+${dto.prod_thumbnail}" width="80px"/>
                     </td>
-                    <td id="prod_name" th:text="${dto.prod_name}"></td>
-                    <input type="hidden" id="order_qty" th:value="${dto.order_qty}"/>
-                    <td class="d" th:text="${dto.order_qty}"></td>
+                    <td th:text="${dto.prod_name}"></td>
+                    <td th:text="${dto.order_qty}"></td>
                     <td th:text="${#numbers.formatInteger(dto.prod_price, 0, 'COMMA') + '원'}"></td>
                     <td th:text="${#numbers.formatInteger(dto.totPrice, 0, 'COMMA') + '원'}"></td>
                 </tr>
@@ -49,12 +48,14 @@
         </table>
         <div class="text-center">
             <p>장바구니 총액:&nbsp;<span th:text="${#numbers.formatInteger(cartTotPrice, 0, 'COMMA')}">0</span>원</p>
+            <input type="hidden" id="cartTotPrice" th:value="${cartTotPrice}"/>
         </div>
 
         <table class="table">
             <thead>
             <tr>
                 <th>구매자 정보</th>
+                <td></td>
             </tr>
             </thead>
             <tbody>
@@ -72,14 +73,18 @@
             </tr>
             <tr>
                 <td><b>받는사람 정보</b></td>
+                <td></td>
             </tr>
             <tr>
                 <td>이름</td>
                 <td th:text="${userDTO.user_name}"></td>
             </tr>
             <tr>
-                <td>배송지 주소</td>
+                <td>우편번호</td>
                 <td id="user_zipcode" th:text="${userDTO.user_zipcode}"></td>
+            </tr>
+            <tr>
+                <td>배송지 주소</td>
                 <td id="user_addr" th:text="|${userDTO.user_roadaddr} ${userDTO.user_detailaddr}|"></td>
             </tr>
             <tr>
@@ -88,6 +93,7 @@
             </tr>
             <tr>
                 <td><b>결제정보</b></td>
+                <td></td>
             </tr>
             <tr>
                 <td>총 결제금액</td>
@@ -98,7 +104,7 @@
         </table>
 
         <div class="text-center p-4">
-            <button class="btn btn-primary" th:onclick="orderBtn()">결제하기</button>
+            <button class="btn btn-primary" th:onclick="orderBtn([[${orderList}]])">결제하기</button>
             <a th:href="@{/}" class="btn btn-outline-primary">계속 쇼핑하기</a>
         </div>
     </section>

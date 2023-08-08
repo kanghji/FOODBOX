@@ -61,7 +61,7 @@
             </div>
             <!-- cart -->
             <div class="cart inner_right">
-                <a href="#cart아이콘"><i class="fa fa-shopping-cart fa-lg"></i></a>
+                <a th:href="|@{/user/userCartList/{user_id}(user_id=${session.userLoginDto?.user_id})}|"><i class="fa fa-shopping-cart fa-lg"></i></a>
             </div>
             <!-- login -->
             <!-- 비 로그인 시 보이기  -->
@@ -90,7 +90,6 @@
                             <ul class="mypage__submenu">
                                 <li><p class="username" th:text="|${session.userLoginDto.user_id}&nbsp;&nbsp;님|">회원아이디</p></li>
                                 <input type="hidden" id="user_id" th:value="${session.userLoginDto.user_id}">
-                                <li><a th:href="|@{/user/userCartList/{user_id}(user_id=${session.userLoginDto.user_id})}|">장바구니 조회</a></li>
                                 <li><a href="#">주문내역 조회</a></li>
                                 <li><a href="#">책갈피한 레시피</a></li>
                                 <li><a th:href="@{/user/user_infoUpdateView}">회원정보 수정</a></li>
