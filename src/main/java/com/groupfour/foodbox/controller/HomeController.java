@@ -27,8 +27,10 @@ public class HomeController {
 
     // 메인 페이지
     @RequestMapping("/")
-    public String root() {
-
+    public String root(Model model) {
+        // 신상품 이미지 슬라이더
+        List<ProductDTO> prodSlideList = homeService.productSlider();
+        model.addAttribute("prodSlideList", prodSlideList);
         return "home/user_home";
     }
 
@@ -43,10 +45,10 @@ public class HomeController {
     }
 
     // 신상품 이미지 슬라이더
-    @GetMapping("/newProdocutSlider")
-    public String ProductSlider(Model model) {
-        List<ProductDTO> prodSlideList = homeService.productSlider();
-        model.addAttribute("prodSlideList", prodSlideList);
-        return "user_inc/main";
-    }
+//    @GetMapping("/newProdocutSlider")
+//    public String ProductSlider(Model model) {
+//        List<ProductDTO> prodSlideList = homeService.productSlider();
+//        model.addAttribute("prodSlideList", prodSlideList);
+//        return "user_inc/main";
+//    }
 }
