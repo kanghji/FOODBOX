@@ -7,12 +7,24 @@
 
     <select id="totalCnt" resultType="Integer">
         SELECT count(*) FROM recipeinfo
+        <include refid="criteria"></include>
     </select>
 
     <select id="getList" resultType="recipeDTO">
         SELECT * FROM recipeinfo
-            ORDER BY id DESC LIMIT #{startIndex}, #{cntPerPage}
+
+<!--      RCP_NM  like concat('%', #{RCP_NM}, '%')-->
+        <include refid="criteria"></include>
+            ORDER BY id DESC LIMIT #{pageDTO.startIndex}, #{pageDTO.cntPerPage}
     </select>
+<!--    <select id="recipeSearch" resultType="recipeDTO">-->
+<!--        SELECT * FROM recipeinfo WHERE RCP_NM-->
+<!--        like concat('%', #{RCP_NM}, '%')-->
+<!--        ORDER BY id-->
+<!--        LIMIT #{pageDTO.startIndex}, #{pageDTO.cntPerPage}-->
+<!--        &lt;!&ndash;        <include refid="criteria"></include>&ndash;&gt;-->
+<!--    </select>-->
+<!--    -->
     <select id="recipeInfo" resultType="recipeDTO">
         SELECT * FROM recipeinfo WHERE id=#{id}
     </select>
@@ -22,22 +34,16 @@
         like concat('%', #{RCP_NM}, '%')
     </select>
 
-    <select id="recipeSearch" resultType="recipeDTO">
-        SELECT * FROM recipeinfo WHERE RCP_NM
-        like concat('%', #{RCP_NM}, '%')
-        ORDER BY id
-        LIMIT #{startIndex}, #{cntPerPage}
-<!--        <include refid="criteria"></include>-->
-    </select>
+    <sql id="criteria">
+        <!-- 'S' 문자열 변환이 없으면 문자형(ascii)숫자로 인식
+            NumberFormat 예외발생, toString()
+        -->
 
-<!--    <sql id="criteria">-->
-<!--        &lt;!&ndash; 'S' 문자열 변환이 없으면 문자형(ascii)숫자로 인식-->
-<!--            NumberFormat 예외발생, toString()-->
-<!--        &ndash;&gt;-->
-<!--        <if test=" == 'S'.toString()">-->
-<!--            WHERE recipeinfo LIKE CONCAT('%', #{keyWord}, '%')-->
-<!--        </if>-->
-<!--    </sql>-->
+<!--        <if test="RCP_NM!='ALL'">-->
+        <if test="RCP_NM!=null">
+            WHERE RCP_NM LIKE CONCAT('%', #{RCP_NM}, '%')
+        </if>
+    </sql>
 
 </mapper>
 

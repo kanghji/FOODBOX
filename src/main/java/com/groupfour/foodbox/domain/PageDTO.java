@@ -19,6 +19,9 @@ public class PageDTO {
     private int startIndex; // 각페이지별 시작값(offset, 0, 10, 20,...)
     private int cntPerPage = 10;
 
+    private String searchType;
+    private String keyWord;
+    private String RCP_NM;
 
     public void setValue(int totalCnt) {
         this.totalCnt = totalCnt;

@@ -149,3 +149,8 @@ a:hover {
     display: block;
     position: absolute;
 }
+
+.username{
+    /*font-size: 15px;*/
+    font-weight: 500;
+}
