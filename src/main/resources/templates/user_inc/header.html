@@ -88,7 +88,8 @@
                                 <span class="">마이페이지</span>
                             </a>
                             <ul class="mypage__submenu">
-                                <li><p class="username" id="header_userId" th:text="|${session.userLoginDto.user_id}&nbsp;&nbsp;님|">회원아이디</p></li>
+                                <li><p class="username" th:text="|${session.userLoginDto.user_id}&nbsp;&nbsp;님|">회원아이디</p></li>
+                                <li><a th:href="|@{/user/userCartList/{user_id}(user_id=${session.userLoginDto.user_id})}|">장바구니 조회</a></li>
                                 <li><a href="#">주문내역 조회</a></li>
                                 <li><a href="#">책갈피한 레시피</a></li>
                                 <li><a th:href="@{/user/user_infoUpdateView}">회원정보 수정</a></li>

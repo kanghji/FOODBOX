@@ -17,6 +17,13 @@ public class UserOrderDTO {
     private String prod_thumbnail;
     private int prod_price;
     private int prod_qty;
+    private int order_qty;
+
+    private int totPrice;
 
     private Date order_inputDate;
+
+    public void setTotPrice(int totPrice) {
+        this.totPrice = prod_price * order_qty;
+    }
 }
