@@ -64,16 +64,23 @@ public class ProductPageController {
         return "/user/productView";
     }
 
-//    @GetMapping("/productReply")
-//    @ResponseBody
-//    public ProductReplyDTO productReply(@RequestParam("reply_prod_code") int reply_prod_code){
-//        ProductReplyDTO productReplyDTO = productPageService.productReply(reply_prod_code);
-//        return productReplyDTO;
-//    }
+    @GetMapping("/productReply/{reply_prod_code}/{viewPage}")
+    @ResponseBody
+    public List<ProductReplyDTO> productReply(@PathVariable("reply_prod_code") int reply_prod_code,
+                                              @PathVariable("viewPage") int viewPage){
+        List<ProductReplyDTO> productReplyList = productPageService.productReply(reply_prod_code);
+        return productReplyList;
+    }
     @PostMapping("/prodReplyRegister")
     @ResponseBody
     public String prodReplyRegister(@RequestBody ProductReplyDTO reply){
         int n = productPageService.prodReplyRegister(reply);
+        return n==1?"ok":"fail";
+    }
+    @GetMapping("/prodReplyDelete/{reply_no}")
+    @ResponseBody
+    public String prodReplyDelete(@PathVariable("reply_no") int reply_no){
+        int n = productPageService.prodReplyDelete(reply_no);
         return n==1?"ok":"fail";
     }
 }

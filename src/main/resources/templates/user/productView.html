@@ -70,7 +70,7 @@
 <br>
 <div class="container d-flex mt-5 align-items-end">
     <h3 class="info me-4">상세정보</h3>
-    <h4 class="review center-block">리뷰</h4>
+    <h4 href="#replyArea" class="review center-block">리뷰</h4>
 </div>
 <th:block th:if="${productImageList.size()!=0}">
 <div class="container d-flex flex-column mt-4" id="productImage" style="height:800px; overflow:hidden;">
@@ -157,28 +157,47 @@
         let reviewRegisterBtn = $('#reviewRegisterBtn');
         // var reply_content = $('#reply_content');
         let reply_content = document.getElementById('reply_content');
-        // displayList(viewPage);
+        displayList(viewPage);
 
-        // function displayList(viewPage){
-        //     let str = "";
-        //     replyFunc.getList({reply_prod_code: reply_prod_code, viewPage: viewPage||1 }, function(data){
-        //         console.log(data);
-        //         let list = data.list;
-        //         //댓글이 있는 경우
-        //         for(let i=0; i<list.length; i++){
-        //             str+='<hr mb-3>'
-        //                 +'<div class="form-control shadow">'
-        //                 +'<div class="d-flex justify-content-around">'
-        //                 +'<h6>'+list[i].reply_user_id+'</h6><span>'+replyFunc.showDateTime(list[i].reply_date)+'</span>'
-        //                 +'</div>'
-        //                 +'<p>'+list[i].reply_content+'</p>'
-        //                 +'</div>';
-        //
-        //         }
-        //         replyArea.append(str);
-        //         showPgNavi(data);
-        //     });
-        // }
+        function displayList(viewPage){
+            let str = "";
+
+                $.ajax({
+                    url: "/user/productReply/" + reply_prod_code + '/' + viewPage,
+                    type: "get",
+                    success: (productReplyList) => {
+                        console.log(productReplyList);
+                        //댓글이 있는 경우
+                        for(let i=0; i<productReplyList.length; i++){
+                            str+='<div class="form-control bd-1 mb-2">'
+                                +'<div class="d-flex justify-content-between">'
+                                +'<h6>'+productReplyList[i].reply_user_id+'</h6><div><span  class="me-2">'+productReplyList[i].reply_date+'</span>'
+                                +'<span class="me-2" onclick="replyDelete('
+                                +productReplyList[i].reply_no+')" style="cursor:pointer;"><i class="fa fa-trash"></i></span></div></div>'
+                                +'<p class="p-2">'+productReplyList[i].reply_content+'</p><div class="d-flex">';
+                            if(productReplyList[i].reply_rating!=0){
+                                for(let starcount=0; starcount<productReplyList[i].reply_rating; starcount++){
+                                    str+='<p style="color:#f29a1a;">&#9733;</p>';
+                                }
+                            }
+                            if(productReplyList[i].reply_rating!=5){
+                                for(let starcount=productReplyList[i].reply_rating; starcount<5; starcount++){
+                                    str+='<p style="color:#f29a1a;">&#9734;</p>';
+                                }
+                            }
+                                str+='</div></div>';
+
+                        }
+                        replyArea.append(str);
+                        // showPgNavi(data);
+                    },
+                    error: () => {
+                        alert("요청실패")
+                    }
+
+
+            });
+        }
         //
         // //////////pageNation 처리///////////
         // let pageArea = $(".pagination");
@@ -225,7 +244,7 @@
                 return;
             }
             let reply = {reply_user_id:reply_user_id, reply_content:reply_content.value,
-                reply_prod_code:reply_prod_code, reply_rating:$('reply_rating').val()};
+                reply_prod_code:reply_prod_code, reply_rating:$('#reply_rating').val()};
 
             $.ajax({
                 url:"/user/prodReplyRegister",
@@ -234,7 +253,7 @@
                 contentType: "application/json; charset=utf8",
                 success:function(result){
                     if(result.equals("ok")) {
-                        // displayList(1);
+                        displayList(viewPage);
                     }else{
                         alert("등록실패")
                     }
@@ -242,6 +261,21 @@
                 error:()=>{alert("요청을 실패하였습니다")}
             });
         });
+        function replyDelete(reply_no){
+            $.ajax({
+                url:"/user/prodReplyDelete/"+reply_no,
+                type:"get",
+                contentType: "application/json; charset=utf8",
+                success:function(result){
+                    if(result.equals("ok")) {
+                        displayList(viewPage);
+                    }else{
+                        alert("삭제실패")
+                    }
+                },
+                error:()=>{alert("요청을 실패하였습니다")}
+            });
+        }
     })
 </script>
 <script src="/js/productReply.js"></script>

@@ -42,4 +42,7 @@
         INSERT INTO product_reply(reply_prod_code, reply_user_id, reply_content, reply_rating)
         VALUES(#{reply_prod_code}, #{reply_user_id},#{reply_content}, #{reply_rating})
     </insert>
+    <delete id="prodReplyDelete">
+        DELETE FROM product_reply WHERE reply_no=#{reply_no}
+    </delete>
 </mapper>

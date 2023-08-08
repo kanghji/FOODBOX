@@ -39,14 +39,20 @@ public class ProductPageServiceImpl implements ProductPageService{
     }
     //상품별 댓글 리스트
     @Override
-    public ProductReplyDTO productReply(int reply_prod_code) {
-        ProductReplyDTO productReplyDTO = productPageMapper.productReply(reply_prod_code);
-        return productReplyDTO;
+    public List<ProductReplyDTO> productReply(int reply_prod_code) {
+        List<ProductReplyDTO> productReplyList = productPageMapper.productReply(reply_prod_code);
+        return productReplyList;
     }
     //상품 댓글 등록
     @Override
     public int prodReplyRegister(ProductReplyDTO reply) {
         int n = productPageMapper.prodReplyRegister(reply);
+        return n;
+    }
+    //상품 댓글 삭제
+    @Override
+    public int prodReplyDelete(int reply_no) {
+        int n = productPageMapper.prodReplyDelete(reply_no);
         return n;
     }
 }

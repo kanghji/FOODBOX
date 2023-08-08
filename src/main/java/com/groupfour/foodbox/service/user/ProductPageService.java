@@ -18,7 +18,9 @@ public interface ProductPageService {
     //상품개수
     int productCount(String categoryCode, String prodSpec, String priceSort);
     //상품별 댓글 리스트
-    ProductReplyDTO productReply(int reply_prod_code);
+    List<ProductReplyDTO> productReply(int reply_prod_code);
     //상품 댓글 등록
     int prodReplyRegister(ProductReplyDTO reply);
+    //상품 댓글 삭제
+    int prodReplyDelete(int reply_no);
 }
