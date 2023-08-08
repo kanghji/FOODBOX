@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.CategoryDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.service.admin.CategoryService;
 import com.groupfour.foodbox.service.admin.ProductService;
+import com.groupfour.foodbox.service.user.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class HomeController {
 
     @Autowired
     private CategoryService categoryService;
+
+   @Autowired
+   private HomeService homeService;
 
 
     // 메인 페이지
@@ -36,5 +40,13 @@ public class HomeController {
         model.addAttribute("categoryList", categoryList);
 //        return "user_inc/header";
         return categoryList;
+    }
+
+    // 신상품 이미지 슬라이더
+    @GetMapping("/newProdocutSlider")
+    public String ProductSlider(Model model) {
+        List<ProductDTO> prodSlideList = homeService.productSlider();
+        model.addAttribute("prodSlideList", prodSlideList);
+        return "user_inc/main";
     }
 }
