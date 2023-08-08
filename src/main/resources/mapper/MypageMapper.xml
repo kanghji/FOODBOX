@@ -11,4 +11,14 @@
         <update id="pwUpdate" parameterType="userDTO">
             UPDATE user SET user_pw = #{new_pw} WHERE user_id = #{user_id}
         </update>
+        <!-- 회원 정보 불러오기  -->
+        <select id="infoList">
+            SELECT * FROM user WHERE user_id = #{user_id}
+        </select>
+        <!--  회원정보 수정 -->
+        <update id="infoUpdate">
+            UPDATE user SET user_name = #{user_name}, user_email = #{user_email}, user_tel = #{user_tel},
+            user_zipcode = #{user_zipcode}, user_roadaddr = #{user_roadaddr}, user_detailaddr = #{user_detailaddr}
+            WHERE user_id = #{user_id}
+        </update>
 </mapper>

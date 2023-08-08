@@ -9,4 +9,8 @@ public interface MypageService {
     UserDTO infoUpdateChk(String user_id);
 
     int pwModify(UserDTO userDTO);
+
+    UserDTO infoList(String user_id);
+
+    void infoModify(UserDTO userDTO);
 }
