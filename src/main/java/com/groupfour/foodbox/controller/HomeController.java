@@ -44,6 +44,12 @@ public class HomeController {
         return categoryList;
     }
 
+    // 검색 페이지
+    @GetMapping("/search")
+    public String search() {
+        return "user/userSearch";
+    }
+
     // 신상품 이미지 슬라이더
 //    @GetMapping("/newProdocutSlider")
 //    public String ProductSlider(Model model) {

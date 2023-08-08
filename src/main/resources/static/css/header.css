@@ -54,6 +54,7 @@ a:hover {
     margin: auto;
     margin-top: 1.3em;
     height: 0;
+    min-height: calc(100% - 120px);
 }
 
 .header_innerbox1 {
