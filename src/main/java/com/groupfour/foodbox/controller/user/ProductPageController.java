@@ -6,10 +6,7 @@ import com.groupfour.foodbox.service.user.ProductPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,17 +34,24 @@ public class ProductPageController {
         model.addAttribute("pageDTO",pageDTO);
         return "/user/productPage";
     }
-    @GetMapping("/productPageRoad")
+    @GetMapping("/productPageRoad/{category_code}/{prod_spec}/{priceSort}/{viewPage}")
     @ResponseBody
-    public List<ProductDTO> productPageRoad(@RequestParam(defaultValue = "ALL") String category_code,
-                              @RequestParam int viewPage,
-                              @RequestParam(defaultValue = "ALL") String prod_spec,
-                              @RequestParam(defaultValue = "ALL") String priceSort,
+//    public List<ProductDTO> productPageRoad(@RequestParam(defaultValue = "ALL") String category_code,
+//                              @RequestParam int viewPage,
+//                              @RequestParam(defaultValue = "ALL") String prod_spec,
+//                              @RequestParam(defaultValue = "ALL") String priceSort,
+//                              Model model){
+    public List<ProductDTO> productPageRoad(@PathVariable("category_code") String category_code,
+                                            @PathVariable("viewPage") int viewPage,
+                                            @PathVariable("prod_spec") String prod_spec,
+                                            @PathVariable("priceSort") String priceSort,
                               Model model){
+//        System.out.println("category_code = " + category_code);
         ProductPageDTO pageDTO = new ProductPageDTO();
         int productCount = productPageService.productCount(category_code,prod_spec,priceSort);
         pageDTO.setValue(productCount, viewPage);
         List<ProductDTO> productList = productPageService.productPage(category_code,prod_spec,priceSort,pageDTO);
+//        System.out.println("productList = " + productList);
         return productList;
     }
     @GetMapping("/productView")

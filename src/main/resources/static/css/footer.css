@@ -6,6 +6,7 @@
 .footer__wrap {
     width: 100%;
     position: absolute;
+    /*height: 30em;*/
     bottom: 0;
 }
 
@@ -26,6 +27,10 @@
 
 .info__list li {
     padding: 0.5em;
+}
+
+.info__list a {
+    color: #dddddd;
 }
 
 .addr__wrap {
