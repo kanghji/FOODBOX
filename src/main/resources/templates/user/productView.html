@@ -15,7 +15,7 @@
         background-color:#f29a1a;
         color:white;
     }
-    .review:hover{
+    #product_reply:hover{
         background-color:#f29a1a;
         color:white;
     }
@@ -72,7 +72,7 @@
     <h3 class="info me-4">상세정보</h3>
     <h4 class="review center-block">리뷰</h4>
 </div>
-
+<th:block th:if="${productImageList.size()!=0}">
 <div class="container d-flex flex-column mt-4" id="productImage" style="height:800px; overflow:hidden;">
     <th:block th:each="productImage : ${productImageList}" class="m-0 p-0">
         <img th:src="@{/image/}+${productImage}" alt="Card image" style="width:800px;">
@@ -88,14 +88,14 @@
         <h3 class="text-center" onclick="productInfoHide()" style="cursor:pointer;">접기</h3>
     </div>
 </div>
-<hr class="mt-3">
-<div class="container mt-3" id="replyArea">
+</th:block>
+<hr class="container mt-3">
+<div class="container mt-3 mb-3" id="replyArea">
 
-    <textarea class="w-100" id="reply_content" name="reply_content"
-              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}" onclick="reviewTextArea()"></textarea>
-    <th:block th:if="${session.userLoginDto?.user_id!=null}">
+    <textarea class="w-100 p-2" id="reply_content" name="reply_content"
+              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}"></textarea>
         <div class="d-flex justify-content-end m-3">
-        <th:block th:if="${session.userLoginDto?.user_id!=null}" class="d-flex">
+<!--        <th:block th:if="${session.userLoginDto?.user_id!=null}" class="d-flex">-->
             <select id="reply_rating" name="reply_rating">
                 <option value="0">별점</option>
                 <option value="1">1</option>
@@ -104,14 +104,21 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-        </th:block>
-            <input type="submit" class="btn review btn-lg p-2 ms-3" style="border-color:#f29a1a; color:black;" value="상품리뷰 등록" onclick="reviewRegister()">
+<!--        </th:block>-->
+            <input type="button" id="reviewRegisterBtn" class="btn btn-lg p-2 ms-3"  style="border-color:#f29a1a; color:black;" value="상품리뷰 등록">
     </div>
+
+    <hr class="mt-3">
 
 </div>
 
 <script>
-
+    function replyLoginCheck(){
+        if([[${session.userLoginDto?.user_id==null}]]){
+            alert("로그인이 필요한 서비스입니다");
+            return;
+        }
+    }
     function minusQty(){
         let orderQty = Number($("#order_qty").val())-1;
         document.getElementById("order_qty").value=orderQty;
@@ -136,84 +143,105 @@
         document.getElementById("infoHide").style.display="none";
         document.getElementById("productImage").style.height="800px";
     }
-    function reviewTextArea(){
-        if([[${session.userLoginDto?..user_id==null}]]){
-            alert("로그인 후 작성 가능합니다");
-            return;
-        }
-    }
+    // function reviewTextArea(){
+    //     if([[${session.userLoginDto?.user_id==null}]]){
+    //         alert("로그인 후 작성 가능합니다");
+    //         return;
+    //     }
+    // }
     $(document).ready(function(){
         let reply_prod_code = [[${productDTO.prod_code}]]
-        let reply_user_id = [[${session.userLoginDto?.user_id}]];
-        let replyArea = $("replyArea");//댓글 영역 해당 객체
+        let reply_user_id = "[[${session.userLoginDto?.user_id}]]";
+        let replyArea = $("#replyArea");//댓글 영역 해당 객체
         let viewPage = 1;
+        let reviewRegisterBtn = $('#reviewRegisterBtn');
+        // var reply_content = $('#reply_content');
+        let reply_content = document.getElementById('reply_content');
+        // displayList(viewPage);
 
-        displayList(viewPage);
+        // function displayList(viewPage){
+        //     let str = "";
+        //     replyFunc.getList({reply_prod_code: reply_prod_code, viewPage: viewPage||1 }, function(data){
+        //         console.log(data);
+        //         let list = data.list;
+        //         //댓글이 있는 경우
+        //         for(let i=0; i<list.length; i++){
+        //             str+='<hr mb-3>'
+        //                 +'<div class="form-control shadow">'
+        //                 +'<div class="d-flex justify-content-around">'
+        //                 +'<h6>'+list[i].reply_user_id+'</h6><span>'+replyFunc.showDateTime(list[i].reply_date)+'</span>'
+        //                 +'</div>'
+        //                 +'<p>'+list[i].reply_content+'</p>'
+        //                 +'</div>';
+        //
+        //         }
+        //         replyArea.append(str);
+        //         showPgNavi(data);
+        //     });
+        // }
+        //
+        // //////////pageNation 처리///////////
+        // let pageArea = $(".pagination");
+        //
+        // function showPgNavi(data){
+        //     let prevPage = data.prevPage;
+        //     let nextPage = data.nextPage;
+        //     let blockStart = data.blockStart;
+        //     let blockEnd = data.blockEnd;
+        //
+        //     let totalPage = data.totalPage;
+        //     let viewPage = data.viewPage;
+        //
+        //     let str = "";
+        //
+        //     if(prevPage){
+        //         str +='<li class="page-item"> '
+        //             + '<a class="page-link" href="'+prevPage+'>이전</a>'
+        //             + '</li>';
+        //     }
+        //     for(let i = blockStart; i<=blockEnd; i++){
+        //         let active = viewPage==i?"active": "";
+        //         str+='<li class="page-item '+active+'">'
+        //             +'<a class="page-link" href="'+i+'">'+i+'</a>'
+        //             +'</li>';
+        //     }
+        //
+        //     if(blockEnd<totalPage){
+        //         str+= '<li class="page-item">'
+        //             + '<a class="page-link" href="'+nextPage+'>다음</a>'
+        //             +'</li>';
+        //     }
+        //     pageArea.html(str);
+        //
+        // }//showPgNavi
 
-        function displayList(viewPage){
-            let str = "";
-            replyFunc.getList({reply_prod_code: reply_prod_code, viewPage: viewPage||1 }, function(data){
-                console.log(data);
-                let list = data.list;
-                //댓글이 있는 경우
-                for(let i=0; i<list.length; i++){
-                    str+='<hr mb-3>'
-                        +'<li class="mb-2 p-0" data-rno="'+list[i].rno+'" style="cursor: pointer;">'
-                        +'<div class="form-control">'
-                        +'<div class="d-flex justify-content-between">'
-                        +'<h6>'+list[i].replyer+'</h6><span>'+replyFunc.showDateTime(list[i].r_date)+'</span>'
-                        +'</div>'
-                        +'<p>'+list[i].r_contents+'</p>'
-                        +'</div>'
-                        +'</li>';
-                }
-                replyArea.append(str);
-                showPgNavi(data);
+
+        //댓글 등록
+        reviewRegisterBtn.on("click", ()=>{
+            if(reply_content.value==null || reply_content.value.trim()==""){
+                alert(reply_content.value);
+                alert("리뷰를 입력하세요");
+                reply_content.focus();
+                return;
+            }
+            let reply = {reply_user_id:reply_user_id, reply_content:reply_content.value,
+                reply_prod_code:reply_prod_code, reply_rating:$('reply_rating').val()};
+
+            $.ajax({
+                url:"/user/prodReplyRegister",
+                type:"post",
+                data:JSON.stringify(reply), // JSON객체를 문자열(텍스트) 변환
+                contentType: "application/json; charset=utf8",
+                success:function(result){
+                    if(result.equals("ok")) {
+                        // displayList(1);
+                    }else{
+                        alert("등록실패")
+                    }
+                },
+                error:()=>{alert("요청을 실패하였습니다")}
             });
-        }
-
-        //////////pageNation 처리///////////
-        let pageArea = $(".pagination");
-
-        function showPgNavi(data){
-            let prevPage = data.prevPage;
-            let nextPage = data.nextPage;
-            let blockStart = data.blockStart;
-            let blockEnd = data.blockEnd;
-
-            let totalPage = data.totalPage;
-            let viewPage = data.viewPage;
-
-            let str = "";
-
-            if(prevPage){
-                str +='<li class="page-item"> '
-                    + '<a class="page-link" href="'+prevPage+'>이전</a>'
-                    + '</li>';
-            }
-            for(let i = blockStart; i<=blockEnd; i++){
-                let active = viewPage==i?"active": "";
-                str+='<li class="page-item '+active+'">'
-                    +'<a class="page-link" href="'+i+'">'+i+'</a>'
-                    +'</li>';
-            }
-
-            if(blockEnd<totalPage){
-                str+= '<li class="page-item">'
-                    + '<a class="page-link" href="'+nextPage+'>다음</a>'
-                    +'</li>';
-            }
-            pageArea.html(str);
-
-        }//showPgNavi
-
-        pageArea.on("click", "li a", function(e){
-            e.preventDefault();
-            //$(this)는 a태그
-            let targetPage = $(this).attr("href");
-            viewPage = targetPage;
-            displayList(viewPage);
-        })
+        });
     })
 </script>
 <script src="/js/productReply.js"></script>

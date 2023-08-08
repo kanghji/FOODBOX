@@ -35,4 +35,11 @@
     <select id="productImageList" resultType="String">
         SELECT image_prod_image FROM product_image WHERE image_prod_code=#{prod_code} ORDER BY image_no ASC
     </select>
+    <select id="productReply" resultType="productReplyDTO">
+        SELECT * FROM product_reply WHERE reply_prod_code=#{reply_prod_code}
+    </select>
+    <insert id="prodReplyRegister">
+        INSERT INTO product_reply(reply_prod_code, reply_user_id, reply_content, reply_rating)
+        VALUES(#{reply_prod_code}, #{reply_user_id},#{reply_content}, #{reply_rating})
+    </insert>
 </mapper>

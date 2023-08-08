@@ -2,6 +2,7 @@ package com.groupfour.foodbox.service.user;
 
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.ProductPageDTO;
+import com.groupfour.foodbox.domain.ProductReplyDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface ProductPageService {
     List<String> productImageList(int prod_code);
     //상품개수
     int productCount(String categoryCode, String prodSpec, String priceSort);
+    //상품별 댓글 리스트
+    ProductReplyDTO productReply(int reply_prod_code);
+    //상품 댓글 등록
+    int prodReplyRegister(ProductReplyDTO reply);
 }

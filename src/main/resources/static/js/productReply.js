@@ -5,7 +5,7 @@ let replyFunc = (() => {
         let viewPage = param.viewPage;
 
         $.ajax({
-            url: "/bbs2/replies/list/" + reply_prod_code + '/' + viewPage,
+            url: "/user/productReply" + reply_prod_code + '/' + viewPage,
             type: "get",
             success: (result) => {
                 if (cb) cb(result);
@@ -15,6 +15,7 @@ let replyFunc = (() => {
             }
         });
     }
+
 
     return{
         getList: getList,

@@ -2,6 +2,7 @@ package com.groupfour.foodbox.controller.user;
 
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.ProductPageDTO;
+import com.groupfour.foodbox.domain.ProductReplyDTO;
 import com.groupfour.foodbox.service.user.ProductPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,5 +62,18 @@ public class ProductPageController {
         List<String> productImageList = productPageService.productImageList(prod_code);
         model.addAttribute("productImageList", productImageList);
         return "/user/productView";
+    }
+
+//    @GetMapping("/productReply")
+//    @ResponseBody
+//    public ProductReplyDTO productReply(@RequestParam("reply_prod_code") int reply_prod_code){
+//        ProductReplyDTO productReplyDTO = productPageService.productReply(reply_prod_code);
+//        return productReplyDTO;
+//    }
+    @PostMapping("/prodReplyRegister")
+    @ResponseBody
+    public String prodReplyRegister(@RequestBody ProductReplyDTO reply){
+        int n = productPageService.prodReplyRegister(reply);
+        return n==1?"ok":"fail";
     }
 }

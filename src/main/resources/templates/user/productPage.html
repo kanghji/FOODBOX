@@ -59,7 +59,7 @@
 $(window).scroll(()=>{
    let checkNum=$(window).scrollTop()-($(document).height()-$(window).height());
    console.log(checkNum);
-   if(checkNum<1&&checkNum>-1){
+   if(checkNum<1&&checkNum>-1&&[[${pageDTO.totalPage>viewPage}]]){
        viewPage++;
        // alert(viewPage);
        productLoad(viewPage);
