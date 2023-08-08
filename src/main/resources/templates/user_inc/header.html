@@ -70,9 +70,9 @@
                     <ul class="login inner_right">
                         <li class="login__dropdown">
                             <a th:href="@{/user/userLogin}"><i class="fa fa-user-o fa-lg"></i> 로그인</a>
-                            <ul class="login__submenu submenu">
-                                <li><a th:href="@{/user/userRegister}">회원가입</a></li>
-                            </ul>
+<!--                            <ul class="login__submenu submenu">-->
+<!--                                <li><a th:href="@{/user/userRegister}">회원가입</a></li>-->
+<!--                            </ul>-->
                         </li>
                     </ul>
                 </div>
@@ -92,10 +92,8 @@
                                 <li><a th:href="|@{/user/userCartList/{user_id}(user_id=${session.userLoginDto.user_id})}|">장바구니 조회</a></li>
                                 <li><a href="#">주문내역 조회</a></li>
                                 <li><a href="#">책갈피한 레시피</a></li>
-<!--                                <li><a th:href="${user/user_infoUpdate(user_no=${user.???})}">회원정보 수정</a></li>-->
-                                <li><a href="/user/user_infoUpdateView">회원정보 수정</a></li>
-<!--                                <li><a href="/user/user_pwUpdate">비밀번호 변경</a></li>-->
-                                <li><a href="/user/user_infoUpdateChk">비밀번호 변경</a></li>
+                                <li><a th:href="@{/user/user_infoUpdateView}">회원정보 수정</a></li>
+                                <li><a th:href="@{/user/user_pwUpdateChk}">비밀번호 변경</a></li>
                                 <li class="mypage_logout"> <a th:href="@{/user/userLogout}">로그아웃</a></li>
                             </ul>
                         </li>

@@ -41,49 +41,76 @@
           </th:block>
 
           <div class="col-sm-9">
-              <th:block th:if="${productList.size()!=0}">
-                  <div class="d-flex mt-3 w-100" id="productpreview">
-<!--                      <th:set var = "cnt" value = "0"/>-->
+                  <div class="d-flex mt-3 w-100">
                       <th:block th:each="productDTO, productcnt : ${productList}">
                           <th:block th:replace="/user/productPreview"/>
                       </th:block>
+                      <div class="w-100" id="productpreview"></div>
                   </div>
-              </th:block>
+          </div>
+
+
           </div>
       </section>
 
   </div>
 <script>
-$(window).scroll(()=>{
     let viewPage =1;
+$(window).scroll(()=>{
    let checkNum=$(window).scrollTop()-($(document).height()-$(window).height());
    console.log(checkNum);
-   if(checkNum<1&& checkNum>-1){
+   if(checkNum<1&&checkNum>-1){
        viewPage++;
-       alert(viewPage);
+       // alert(viewPage);
        productLoad(viewPage);
    }
 });
 function productLoad(viewPage){
+    let category_code = "[[${category_code}]]";
+    let prod_spec = "[[${prod_spec}]]";
+    let priceSort = "[[${priceSort}]]";
 
     $.ajax({
         type: 'get',
-        data: {
-            category_code : "[[${category_code}]]",
-            prod_spec : "[[${prod_spec}]]",
-            priceSort : "[[${priceSort}]]",
-            viewPage : viewPage
-        },
-        url:"/user/productPageRoad",
-        success: function(data) {
-            let productViewLine = '<th:block th:each="productDTO, productcnt : ${'+data+'}">'+
-                ' <th:block th:replace="/user/productPreview"/>'+
-                '</th:block>';
-            $('productpreview').append(productViewLine);
+        // data: JSON.stringify({
+        //     category_code : "[[${category_code}]]",
+        //     prod_spec : "[[${prod_spec}]]",
+        //     priceSort : "[[${priceSort}]]",
+        //     viewPage : viewPage
+        // }),
+        // contentType: "application/json; charset=utf8",
+        // url:"/user/productPageRoad?category_code="+category_code+"&prod_spec="+prod_spec+"&priceSort="+priceSort+"&viewPage="+viewPage,
+        url:"/user/productPageRoad/"+category_code+"/"+prod_spec+"/"+priceSort+"/"+viewPage,
+
+        success: function(productList) {
+            // let productList = data.list;
+
+            let productViewLine='</div><div class="d-flex mt-3 w-100">';
+            let productCount =1;
+            for(let i=0; i<productList.length; i++){
+
+                productViewLine+='<div class="card me-5 mb-3" style="width:300px; border:none; height:300px;">'
+                    +'<a href="/user/productView?prod_code='+productList[i].prod_code+'" style="height:180px; overflow:hidden;">'
+                    +'<img class="card-image" src="/image/'+productList[i].prod_thumbnail+'" alt="Card image" style="width:100%">'
+                    +'</a>'
+                    +'<div class="card-body">'
+                    +'<h7 class="" style="font-size:15px;">'
+                    +'<b>'+productList[i].prod_brand+productList[i].prod_name+'</b></h7>'
+                    +'<p class="card-text">'+productList[i].prod_price+'</p>'
+                    +'</div>'
+                    +'</div>';
+                    if(productCount%4==0) {
+                     productViewLine+='</div>'
+                         +'<div class="d-flex mt-3 w-100">';
+                    }
+                    productCount++;
+            }
+            $('#productpreview').append(productViewLine);
         },
 
     });
 }
 </script>
-</body>
-</html>
+
+<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>
