@@ -1,0 +1,27 @@
+<th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
+<div class="search_container">
+    <div class="search-box">
+        <div class="search_inner">
+            <input type="search" value="" name="q" id="" placeholder="검색어를 입력해주세요" size="55" class="search__inp">
+            <button class="searchBtn">
+                <a href="#">
+                    <i class="fa fa-search fa-lg search__img"></i>
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="btn_box">
+            <div class="btn_inner">
+                <button type="button" class="prod_btn search_btn" onclick="">상품 <span>&lbbrk;0&rbbrk;</span></button>
+                <button type="button" class="recipe_btn search_btn" onclick="">레시피 <span>&lbbrk;0&rbbrk;</span></button>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>

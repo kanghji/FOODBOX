@@ -1,0 +1,74 @@
+.search-box {
+    padding-top: 10em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search_inner {
+    width: 30%;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 4px 10px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.search__inp {
+    border: none;
+    padding: 0.5em 0 ;
+    outline: none;
+}
+
+
+.searchBtn {
+    border: none;
+    background-color: #fff;
+    margin-left: 0.4em;
+    cursor: pointer;
+}
+
+.search__img {
+    width: 1.8em;
+    height: 1.8em;
+    padding-top: 0.5em;
+}
+
+
+.btn_box {
+    margin-top: 1.5em;
+    border: 1px solid #000;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5em;
+    height: 1000px;
+}
+
+.btn_inner {
+    /* border: 1px solid #000; */
+    width: 20%;
+}
+
+.search_btn {
+    width: 13em;
+    height: 3.8em;
+    font-size: 13px;
+    border: none;
+}
+
+.prod_btn {
+    background-color: #f29a1a;
+    color: #fff;
+    border-radius: 4px 0 0 4px;
+    margin-right: -3px;
+}
+
+.recipe_btn {
+    border: 1px solid #f29a1a;
+    background-color: #fff;
+    border-radius: 0 4px 4px 0;
+    margin-left: -3px;
+}
