@@ -1,9 +1,9 @@
     let userCartObject = {
 
-    insertCart: function (prod_code, user_id) {
-
+    insertCart: function (prod_code) {
 
         let order_qty = $("#order_qty").val();
+        let user_id = $("#user_id").val();
 
         $.ajax({
             type: "post",
