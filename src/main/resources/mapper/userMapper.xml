@@ -50,7 +50,7 @@
     <!-- 회원 수정-->
     <update id="userModify" parameterType="userDTO">
         UPDATE user SET user_name=#{user_name}, user_pw=#{user_pw}, user_email=#{user_email},
-        user_tel=#{user_tel}, user_roadaddr=#{_user_roadaddr}, user_zipcode=#{user_zipcode}, user_detailaddr=#{user_detailaddr}
+        user_tel=#{user_tel}, user_roadaddr=#{user_roadaddr}, user_zipcode=#{user_zipcode}, user_detailaddr=#{user_detailaddr}
         WHERE user_no=#{user_no}
     </update>
 

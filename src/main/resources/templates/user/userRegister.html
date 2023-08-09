@@ -2,7 +2,8 @@
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
 <link href="/css/userRegister.css" rel="stylesheet"/>
-<!--<script src="/js/zipcode.js"></script>-->
+<script src="/js/zipcode.js"></script>
+
 <!-- 컨텐츠 영역 -->
 <div class="user_register_wrap">
 
@@ -17,7 +18,7 @@
  </div>
 
   <!-- 회원가입 메인부분-->
-    <form class= "user_register_form" action="/user/userRegister" method="post">
+    <form class= "user_register_form" name="user_register_form" action="/user/userRegister" method="post">
 
         <!-- 아이디 입력부분-->
         <div class="register_content_wrap">
@@ -27,7 +28,7 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16" onclick="checkUser_id()" placeholder="아이디를 입력해주세요."/>
+                    <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16"  placeholder="아이디를 입력해주세요."/>
                     <p id="checkUser_idMessage"></p>
                 </div>
             </div>
@@ -47,7 +48,7 @@
             <div class="register_content02">
                 <div class="content_box">
                     <input class="register_content_box" type="password" id="user_pw" name="user_pw"  placeholder="비밀번호를 입력해주세요."/>
-                    <p id="p_check">유효성검사</p>
+                    <p id="checkUser_pwMessage"></p><
                 </div>
             </div>
             <div class="register_content03"></div>
@@ -61,8 +62,8 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="password" id="user_pw2" name="user_pw2" onkeyup="user_pw_samecheck()" placeholder="비밀번호를 다시 입력해주세요."/>
-                    <p id="checkUser_pwMessage"></p>
+                    <input class="register_content_box" type="password" id="user_pw2" name="user_pw2" placeholder="비밀번호를 다시 입력해주세요."/>
+                    <p id="checkUser_pw2Message"></p>
                 </div>
             </div>
             <div class="register_content03"></div>
@@ -77,7 +78,7 @@
             <div class="register_content02">
                 <div class="content_box">
                     <input class="register_content_box" type="text" id="user_name" name="user_name" placeholder="이름을 입력해주세요."/>
-                    <p id="p_check">유효성검사</p>
+                    <p id="checkUser_nameMessage"></p>
                 </div>
             </div>
             <div class="register_content03"></div>
@@ -92,13 +93,16 @@
             <div class="register_content02">
                 <div class="content_box">
                     <input class="register_content_box" type="text" id="user_email" name="user_email" placeholder="이메일을 입력해주세요."/>
-                    <p id="p_check">유효성검사</p>
+                    <p id="checkUser_emailMessage"></p>
                 </div>
             </div>
             <div class="register_content03">
                 <div class="content_button">
-                    <input class="register_content_button" type="button" onclick="checkUser_id()" value="인증메일"/>
+                    <input class="register_content_button" type="button" onclick="emailCheck()" value="인증메일"/>
                 </div>
+            </div>
+            <!-- 이메일 인증코드 확인하기 -->
+            <div class="row" id="confirmEmail">
             </div>
         </div>
 
@@ -111,7 +115,7 @@
             <div class="register_content02">
                 <div class="content_box">
                     <input class="register_content_box" type="text" id="user_tel" name="user_tel" placeholder="전화번호를 입력해주세요."/>
-                    <p id="p_check">유효성검사</p>
+                    <p id="checkUser_telMessage"></p>
                 </div>
             </div>
             <div class="register_content03"></div>
@@ -125,6 +129,7 @@
             <div class="register_content02">
                 <div class="content_box">
                     <p><select class="register_content_box" id="user_gender" name="user_gender">
+                        <option value="선택안함">선택안함</option>
                         <option value="남자">남자</option>
                         <option value="여자">여자</option>
                     </select></p>
@@ -164,6 +169,7 @@
             <div class="register_content02">
                 <div class="content_box">
                     <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_zipcode" placeholder="우편번호"></p>
+                    <p id="checkUser_addrMessage"></p>
                 </div>
             </div>
             <div class="register_content03">
@@ -208,7 +214,7 @@
             <div class="register_content01"></div>
                 <div class="register_content02">
                     <div class="content_box">
-                <p><input class="register_content_box" id="register_button" type="submit" value="회원가입"/></p>
+                <p><input class="register_content_box" id="register_button" type="submit" onclick="validation()" value="회원가입"/></p>
                     </div>
                 </div>
             <div class="register_content03"></div>
@@ -230,14 +236,10 @@
 
 <script>
 
-    let user_id = $("#user_id").val();
-  function checkUser_id(){
 
-    if(user_id.length<6 || user_id.length<17){
-        $("#checkUser_idMessage").html("6자리 이상, 16자 이하의 영문 또는 영문과 숫자를 조합해주세요.")
-        $("#checkUser_idMessage").css({"color":"red", "font-size":"11px"});
-        return;
-    }
+ <!--아이디 중복체크-->
+  function checkUser_id(){
+     let user_id = $('#user_id').val();
 
     $.ajax({
       url:"/user/checkUser_id",
@@ -247,36 +249,204 @@
         // responseData = "yes" or "no", yes:사용가능 no:사용불가
 
         if(responseData == "yes"){
-          $("#checkUser_idMessage").html("사용가능한 아이디 입니다!!");
-          $("#checkUser_idMessage").css({"color":"blue", "font-size":"11px"});
+
           alert("사용 가능한 아이디입니다.");
+
         }else{
-          $("#checkUser_idMessage").html("사용할 수 없는 아이디 입니다!!");
-          $("#checkUser_idMessage").css({"color":"red", "font-size":"11px"});
-          alert("이미 사용중인 아이디입니다.");
+
+            alert("이미 사용중인 아이디입니다.");
         }
       },
       error : function(){
-        $("#checkUser_idMessage").html("서버 에러 입니다!!!");
+          alert("서버에러 입니다.");
       }
     });
   }
 
-    <!-- 비밀번호 일치 확인-->
-    function user_pw_samecheck() {
-        var p1 = document.getElementById('user_pw').value;
-        var p2 = document.getElementById('user_pw2').value;
 
-        if (p1 != p2) {
-            $("#checkUser_pwMessage").html("비밀번호가 일치하지 않습니다.");
-            $("#checkUser_pwMessage").css({"color":"red", "font-size":"11px"});
-            return false;
-        } else {
-            $("#checkUser_pwMessage").html("비밀번호가 일치합니다.");
-            $("#checkUser_pwMessage").css({"color":"blue", "font-size":"11px"});
-            return true;
-        }
+function validation() {
+    // 아이디 6글자 이상 16이하, 영어/숫자만 가능
+    let okId = /^[a-zA-Z0-9]{6,16}$/;
+    // 비밀번호 10글자 이상, 20이하, 영어/숫자/특수문자 포함
+    let okPw = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,20}$/;
+    // 비밀번호 확인 변수
+    let user_pw2 = document.getElementById('user_pw2').value;
+    // 이메일 영문자/숫자/_/./- @ 영문자/숫자/- . 영문자/숫자/-
+    let okEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+$/;
+    // 전화번호 01(0,1,6,7,8,9)+ 3~4글자 + 3~4글자
+    let okTel = /^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$/
+
+
+    let user_id = document.getElementById('user_id').value;
+    let user_pw = document.getElementById('user_pw').value;
+    let user_name = document.getElementById('user_name').value;
+    let user_email = document.getElementById('user_email').value;
+    let user_tel = document.getElementById('user_tel').value;
+    let user_zipcode = document.getElementById('user_zipcode').value;
+
+    <!-- 아이디가 빈칸일때 -->
+
+    if (user_id == "") {
+        $("#checkUser_idMessage").html("아이디를 입력해주세요.");
+        $("#checkUser_idMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_id.focus();
+        return;
     }
+
+    <!-- 아이디가 조건에 맞는지 확인 -->
+
+    if (!okId.test(user_id)) {
+        $("#checkUser_idMessage").html("6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합하여 사용해주세요.");
+        $("#checkUser_idMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_id.focus();
+        return;
+    }
+
+    <!-- 비밀번호가 빈칸일때 -->
+
+    if (user_pw == "") {
+        $("#checkUser_pwMessage").html("비밀번호를 입력해주세요.");
+        $("#checkUser_pwMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_pw.focus();
+        return;
+    }
+
+    <!-- 비밀번호가 조건에 맞는지 확인 -->
+
+    if (!okPw.test(user_pw)) {
+        $("#checkUser_pwMessage").html("10자 이상 20자 이하의 영어/숫자/특수문자를 조합하여 사용해주세요.");
+        $("#checkUser_pwMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_pw.focus();
+        return;
+    }
+
+    <!-- 비밀번호 확인창이 빈칸일때 -->
+
+    if (user_pw2 == "") {
+        $("#checkUser_pw2Message").html("비밀번호를 다시 입력해주세요.");
+        $("#checkUser_pw2Message").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_pw2.focus();
+        return;
+    }
+
+    <!-- 비밀번호 확인 -->
+
+    if (user_pw != user_pw2) {
+        $("#checkUser_pw2Message").html("비밀번호가 일치하지 않습니다.");
+        $("#checkUser_pw2Message").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_pw2.focus();
+        return;
+    } else {
+        $("#checkUser_pw2Message").html("비밀번호가 일치합니다.");
+        $("#checkUser_pw2Message").css({"color": "blue", "font-size": "11px"});
+    }
+
+
+    <!-- 이름이 빈칸일때 -->
+
+    if(user_name=="") {
+        $("#checkUser_nameMessage").html("이름을 입력해주세요.");
+        $("#checkUser_nameMessage").css({"color":"red", "font-size":"11px"});
+        user_register_form.user_name.focus();
+        return;
+    }
+
+    <!-- 이메일이 빈칸일때 -->
+
+    if (user_email == "") {
+        $("#checkUser_emailMessage").html("이메일을 입력해주세요.");
+        $("#checkUser_emailMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_email.focus();
+        return;
+    }
+
+    <!-- 이메일이 조건에 맞는지 확인 -->
+
+    if (!okEmail.test(user_email)) {
+        $("#checkUser_emailMessage").html("올바른 이메일 형식을 입력해주세요.");
+        $("#checkUser_emailMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_email.focus();
+        return;
+    }
+
+    <!-- 전화번호가 빈칸일때 -->
+
+    if (user_tel== "") {
+        $("#checkUser_telMessage").html("전화번호를 입력해주세요.");
+        $("#checkUser_telMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_email.focus();
+        return;
+    }
+
+    // <!-- 전화번호가 조건에 맞는지 확인 -->
+    //
+    // if (!okTel.test(user_tel)) {
+    //     $("#checkUser_telMessage").html("올바른 전화번호를 입력해주세요.");
+    //     $("#checkUser_telMessage").css({"color": "red", "font-size": "11px"});
+    //     user_register_form.user_tel.focus();
+    //     return;
+    // }
+
+    <!-- 주소가 빈칸일때 -->
+
+    if (user_zipcode== "") {
+        $("#checkUser_addrMessage").html("주소를 입력해주세요.");
+        $("#checkUser_addrMessage").css({"color": "red", "font-size": "11px"});
+        user_register_form.user_zipcode.focus();
+        return;
+    }
+
+    <!-- 조건에 맞지 않은채로 가입버튼 누르면 다시 돌아감 -->
+    document.user_register_form.submit();
+}
+
+
+    <!-- 이메일 인증-->
+    let serverUUID = "";
+    let isEmailChk = false;
+    function emailCheck(){
+     let uEmail = $("#user_email").val();
+
+     $.ajax({
+         url:"/user/emailConfirm",
+         type: "get",
+         data: {"uEmail":uEmail},
+         success: function(ePw){
+             if(ePw != "fail"){
+                 serverUUID = ePw;
+                 console.log("이메일 인증코드 : " + ePw);
+                 $("#confirmEmail").html('<div>'
+                     +'<input type="text" id="confirmUUID"/></div>'
+                     +'<div>'
+                     +'<span onclick="emailConfirm()"> 인증코드확인</span></div>'
+                 );
+             }else{
+                 alert("이메일을 다시 확인하세요!!");
+                 $("#user_email").select();
+             }
+         },
+         error:function(){
+             alert("인증 실패!!");
+         }
+     });
+ }
+
+ function emailConfirm(){
+     let confirmUUID = $("#confirmUUID").val();
+
+     if(confirmUUID == null || confirmUUID ==""){
+         alert("인증 코드 확인하세요!!!");
+         $("#confirmUUID").select();
+     }else if(serverUUID == confirmUUID){
+         alert("인증 성공!!");
+         isEmailChk = true;
+     }else{
+         alert("인증코드를 다시 확인하세요!!");
+         $("#confirmUUID").select();
+         return;
+     }
+ }
+
 
 
 </script>
