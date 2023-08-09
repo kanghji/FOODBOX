@@ -40,7 +40,7 @@
     </select>
     <select id="productReply" resultType="productReplyDTO">
         SELECT * FROM product_reply WHERE reply_prod_code=#{reply_prod_code} ORDER BY reply_date DESC
-        LIMIT #{replyPageDTO.startIndex}, #{replyPageDTO.cntPerPage};
+        LIMIT #{replyPageDTO.startIndex}, #{replyPageDTO.cntPerPage}
     </select>
     <select id="productRatingSum" resultType="Integer">
         SELECT SUM(reply_rating) FROM product_reply WHERE reply_prod_code=#{reply_prod_code}

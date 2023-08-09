@@ -46,8 +46,7 @@ public class ProductPageController {
     public List<ProductDTO> productPageRoad(@PathVariable("category_code") String category_code,
                                             @PathVariable("viewPage") int viewPage,
                                             @PathVariable("prod_spec") String prod_spec,
-                                            @PathVariable("priceSort") String priceSort,
-                              Model model){
+                                            @PathVariable("priceSort") String priceSort){
 //        System.out.println("category_code = " + category_code);
         ProductPageDTO pageDTO = new ProductPageDTO();
         int productCount = productPageService.productCount(category_code,prod_spec,priceSort);

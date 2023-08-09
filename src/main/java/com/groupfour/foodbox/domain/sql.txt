@@ -51,13 +51,28 @@ admin_tel varchar(50) not null,
 primary key (admin_id)
 );
 insert into admin values('홍길동', 'admin', '1234', 'test@gmail.com','010-9999-4444');
-
--- 상품 댓글 테이블
+-- 상품댓글 테이블
 create table product_reply(
 	reply_no int primary key auto_increment,
     reply_prod_code int not null,
     reply_user_id varchar(50) not null,
     reply_content varchar(1000) not null,
     reply_rating int not null,
-    reply_date datetime default now()
+    reply_date datetime default now(),
+    foreign key (reply_prod_code) references product(prod_code)
+	on delete cascade
+);
+-- 레시피 북마크 테이블
+create table bookmark(
+	bm_no int primary key auto_increment,
+    bm_user_no int not null,
+    bm_recipe_id bigint not null,
+    bm_recipe_rcp_nm varchar(255) not null,
+    bm_recipe_att_file_no_main varchar(255) not null,
+    bm_recipe_rcp_pat2 varchar(255) not null,
+	bm_recipe_rcp_way2 varchar(255) not null,
+    foreign key (bm_user_no) references user(user_no)
+	on delete cascade,
+    foreign key (bm_recipe_id) references recipeinfo(id)
+	on delete cascade
 );
