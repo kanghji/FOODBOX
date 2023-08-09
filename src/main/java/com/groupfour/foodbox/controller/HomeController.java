@@ -34,6 +34,14 @@ public class HomeController {
         return "home/user_home";
     }
 
+    // 신상품 이미지 슬라이더
+//    @GetMapping("/newProdocutSlider")
+//    public String ProductSlider(Model model) {
+//        List<ProductDTO> prodSlideList = homeService.productSlider();
+//        model.addAttribute("prodSlideList", prodSlideList);
+//        return "user_inc/main";
+//    }
+
     // navigation 카테고리 메뉴 불러오기
     @GetMapping("/categoryCodeList")
     @ResponseBody
@@ -44,17 +52,11 @@ public class HomeController {
         return categoryList;
     }
 
-    // 검색 페이지
+    // 검색 페이지 이동
     @GetMapping("/search")
     public String search() {
         return "user/userSearch";
     }
 
-    // 신상품 이미지 슬라이더
-//    @GetMapping("/newProdocutSlider")
-//    public String ProductSlider(Model model) {
-//        List<ProductDTO> prodSlideList = homeService.productSlider();
-//        model.addAttribute("prodSlideList", prodSlideList);
-//        return "user_inc/main";
-//    }
+
 }

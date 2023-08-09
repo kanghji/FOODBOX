@@ -1,16 +1,16 @@
 package com.groupfour.foodbox.controller.user;
 
 import com.groupfour.foodbox.domain.UserDTO;
-import com.groupfour.foodbox.dto.UserOrderDTO;
+import com.groupfour.foodbox.dto.UserOrderCheckDTO;
+import com.groupfour.foodbox.dto.UserOrderDetailDTO;
 import com.groupfour.foodbox.service.user.UserOrderService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,10 +22,10 @@ public class UserOrderController {
 
     @GetMapping("/userOrder/{user_id}")
     public String userOrder(@PathVariable String user_id, Model model) {
-        List<UserOrderDTO> orderList = userOrderService.userOrder(user_id);
+        List<UserOrderCheckDTO> orderList = userOrderService.userOrder(user_id);
         int cartTotPrice = 0;
 
-        for(UserOrderDTO dto : orderList) {
+        for(UserOrderCheckDTO dto : orderList) {
             cartTotPrice += dto.getTotPrice();
         }
 
@@ -38,4 +38,26 @@ public class UserOrderController {
         return "/user/userOrderCheck";
     }
 
+    @PostMapping("/userOrder/pay")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void userPay(@RequestBody List<UserOrderCheckDTO> orderList) {
+        userOrderService.addOrderList(orderList);
+    }
+
+    @GetMapping("/userOrder/success")
+    public String userOrderSuccess() {
+
+        return "/user/userOrderSuccess";
+    }
+
+    @GetMapping("/userOrder/orderlist")
+    public String userOrderlist(HttpSession session, Model model) {
+        UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
+        String id = userDTO.getUser_id();
+
+        List<UserOrderDetailDTO> orderList = userOrderService.getUserOrderList(id);
+        model.addAttribute("orderList", orderList);
+        System.out.println("orderList = " + orderList);
+        return "/user/userOrderList";
+    }
 }

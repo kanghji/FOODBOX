@@ -62,4 +62,5 @@ public class ProductPageController {
         model.addAttribute("productImageList", productImageList);
         return "/user/productView";
     }
+
 }
