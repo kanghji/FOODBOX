@@ -56,7 +56,7 @@ public class UserController {
         System.out.println("userList = " + userList);
         model.addAttribute("userList", userList);
 
-        return "/admin/userList";
+        return "/admin/user/userList";
     }
 
     // 회원 정보

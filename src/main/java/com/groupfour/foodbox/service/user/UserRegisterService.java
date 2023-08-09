@@ -3,6 +3,8 @@ package com.groupfour.foodbox.service.user;
 import com.groupfour.foodbox.domain.UserDTO;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
+
 @Service
 public interface UserRegisterService {
 
@@ -11,5 +13,11 @@ public interface UserRegisterService {
 
     // 아이디 중복체크
     UserDTO checkUser_id(String user_id);
+
+    // 이메일 인증
+    MimeMessage createMessage(String to)throws Exception;
+
+    // 이메일 인증
+    String sendSimpleMessage(String to)throws Exception;
 
 }
