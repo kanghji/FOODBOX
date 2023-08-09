@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.CategoryDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.service.admin.CategoryService;
 import com.groupfour.foodbox.service.admin.ProductService;
+import com.groupfour.foodbox.service.user.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +21,16 @@ public class HomeController {
     @Autowired
     private CategoryService categoryService;
 
+   @Autowired
+   private HomeService homeService;
+
 
     // 메인 페이지
     @RequestMapping("/")
-    public String root() {
-
+    public String root(Model model) {
+        // 신상품 이미지 슬라이더
+        List<ProductDTO> prodSlideList = homeService.productSlider();
+        model.addAttribute("prodSlideList", prodSlideList);
         return "home/user_home";
     }
 
@@ -37,4 +43,18 @@ public class HomeController {
 //        return "user_inc/header";
         return categoryList;
     }
+
+    // 검색 페이지
+    @GetMapping("/search")
+    public String search() {
+        return "user/userSearch";
+    }
+
+    // 신상품 이미지 슬라이더
+//    @GetMapping("/newProdocutSlider")
+//    public String ProductSlider(Model model) {
+//        List<ProductDTO> prodSlideList = homeService.productSlider();
+//        model.addAttribute("prodSlideList", prodSlideList);
+//        return "user_inc/main";
+//    }
 }

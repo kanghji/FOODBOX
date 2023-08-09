@@ -11,5 +11,28 @@ public class MypageServiceImpl implements MypageService{
     @Autowired
     MypageMapper mypageMapper;
 
+    @Override
+    public UserDTO infoUpdateChk(String user_id) {
+//        System.out.println("mypageMapper.infoUpdateChk(user_id) = " + mypageMapper.infoUpdateChk(user_id));
+        return mypageMapper.infoUpdateChk(user_id);
+    }
+
+    @Override
+    public int pwModify(UserDTO userDTO) {
+        int new_pw = mypageMapper.pwUpdate(userDTO);
+       return new_pw;
+    }
+
+    @Override
+    public UserDTO infoList(String user_id) {
+       UserDTO userDTO = mypageMapper.infoList(user_id);
+       return userDTO;
+    }
+
+    @Override
+    public void infoModify(UserDTO userDTO) {
+        mypageMapper.infoUpdate(userDTO);
+    }
+
 
 }

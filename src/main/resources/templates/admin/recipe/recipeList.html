@@ -10,7 +10,7 @@
 <div class="container w-50 mt-3">
     <h3>레시피 리스트 </h3>
 
-    <form th:action="@{/admin/recipe/recipeSearch}" method="post">
+    <form th:action="@{/admin/recipe}" method="post">
 
             <div>
         <input type="text" name="RCP_NM" placeholder="전체 검색">
@@ -45,8 +45,6 @@
             <label><input type="checkbox" name="RCP_PAT2" value="기타">기타</label>
             <label><input type="checkbox" name="RCP_PAT2" value="밥">밥</label>
         </div>
-
-    </form>
 
         <table class="table">
 
@@ -85,24 +83,18 @@
 <!--페이지 네이션-->
     <ul class="pagination justify-content-center my-5">
         <li class="page-item" th:class="${pageDTO.prevPage &lt;= 0 ? 'disabled' : ''}">
-            <a class="page-link" th:href="@{/admin/recipe(viewPage=${pageDTO.prevPage})}">이전</a>
+            <a class="page-link" th:href="@{/admin/recipe(viewPage=${pageDTO.prevPage},RCP_NM=${pageDTO.RCP_NM})}">이전</a>
         </li>
         <!-- pDto를 넘겨받음 -->
-<!--        <c:forEach var="i" begin="${pageDTO.blockStart}" end="${pageDTO.blockEnd}">-->
-<!--            <li class="page-item ${pageDTO.viewPage == i ? 'active':''}">-->
-<!--                <a class="page-link" href="recipeList?viewPage=${i}">${i}</a>-->
-<!--            </li>-->
-<!--        </c:forEach>-->
-
         <th:block th:each="i : ${#numbers.sequence(pageDTO.blockStart, pageDTO.blockEnd)}">
             <li class="page-item" th:class="${pageDTO.viewPage == i ? 'active':''}">
-               <a class="page-link" th:href="@{/admin/recipe(viewPage=${i})}" th:text="${i}"></a>
+               <a class="page-link" th:href="@{/admin/recipe/(viewPage=${i}, RCP_NM=${pageDTO.RCP_NM})}" th:text="${i}"></a>
             </li>
         </th:block>
 
 
         <li class="page-item" th:class="${pageDTO.blockEnd &gt;= pageDTO.totalPage ? 'disabled' : ''}">
-            <a class="page-link" th:href="@{/admin/recipe(viewPage=${pageDTO.nextPage})}">다음</a>
+            <a class="page-link" th:href="@{/admin/recipe(viewPage=${pageDTO.nextPage},RCP_NM=${pageDTO.RCP_NM})}">다음</a>
         </li>
     </ul>
 
