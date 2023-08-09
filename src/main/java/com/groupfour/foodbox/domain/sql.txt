@@ -59,6 +59,5 @@ create table product_reply(
     reply_user_id varchar(50) not null,
     reply_content varchar(1000) not null,
     reply_rating int not null,
-    reply_date datetime default now(),
-    reply_reply_no int
+    reply_date datetime default now()
 );

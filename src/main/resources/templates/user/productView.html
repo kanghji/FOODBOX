@@ -52,8 +52,8 @@
             <h7 class="m-2" style="width:70px;" th:text="제조사"></h7>
             <p class="m-2" th:text="${productDTO.prod_brand}"></p>
         </div>
-        <div class="d-flex w-100 col-6">
-            <p class="m-2">*****</p>
+        <div class="d-flex w-100 m-2 col-6 align-items-center" id="productRating">
+
         </div>
         <div class="d-flex w-100 m-2 justify-content-end">
             <input type='button' value='-' class='btn rounded-circle btn-outline-secondary m-1' onclick = "minusQty()" style="width:40px;">
@@ -90,12 +90,13 @@
 </div>
 </th:block>
 <hr class="container mt-3">
-<div class="container mt-3 mb-3" id="replyArea">
+<div class="container mt-3 mb-3">
 
-    <textarea class="w-100 p-2" id="reply_content" name="reply_content"
-              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}"></textarea>
-        <div class="d-flex justify-content-end m-3">
-<!--        <th:block th:if="${session.userLoginDto?.user_id!=null}" class="d-flex">-->
+    <textarea class="w-100 p-2" id="reply_content" name="reply_content" onclick="replyLoginCheck()"
+              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}">
+    </textarea>
+    <div class="d-flex justify-content-end m-3">
+        <th:block th:if="${session.userLoginDto?.user_id!=null}" class="d-flex">
             <select id="reply_rating" name="reply_rating">
                 <option value="0">별점</option>
                 <option value="1">1</option>
@@ -104,14 +105,18 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-<!--        </th:block>-->
-            <input type="button" id="reviewRegisterBtn" class="btn btn-lg p-2 ms-3"  style="border-color:#f29a1a; color:black;" value="상품리뷰 등록">
+        </th:block>
+        <input type="button" id="reviewRegisterBtn" class="btn btn-lg p-2 ms-3"
+               style="border-color:#f29a1a; color:black;" value="상품리뷰 등록">
     </div>
-
     <hr class="mt-3">
+</div>
+<div class="container mt-3 mb-3" id="replyArea">
 
 </div>
 
+    <ul class="pagination justify-content-center my-5">
+    </ul>
 <script>
     function replyLoginCheck(){
         if([[${session.userLoginDto?.user_id==null}]]){
@@ -149,7 +154,7 @@
     //         return;
     //     }
     // }
-    $(document).ready(function(){
+    $(document).ready(function() {
         let reply_prod_code = [[${productDTO.prod_code}]]
         let reply_user_id = "[[${session.userLoginDto?.user_id}]]";
         let replyArea = $("#replyArea");//댓글 영역 해당 객체
@@ -159,124 +164,144 @@
         let reply_content = document.getElementById('reply_content');
         displayList(viewPage);
 
-        function displayList(viewPage){
+        function displayList(viewPage) {
             let str = "";
 
-                $.ajax({
-                    url: "/user/productReply/" + reply_prod_code + '/' + viewPage,
-                    type: "get",
-                    success: (productReplyList) => {
-                        console.log(productReplyList);
-                        //댓글이 있는 경우
-                        for(let i=0; i<productReplyList.length; i++){
-                            str+='<div class="form-control bd-1 mb-2">'
-                                +'<div class="d-flex justify-content-between">'
-                                +'<h6>'+productReplyList[i].reply_user_id+'</h6><div><span  class="me-2">'+productReplyList[i].reply_date+'</span>'
-                                +'<span class="me-2" onclick="replyDelete('
-                                +productReplyList[i].reply_no+')" style="cursor:pointer;"><i class="fa fa-trash"></i></span></div></div>'
-                                +'<p class="p-2">'+productReplyList[i].reply_content+'</p><div class="d-flex">';
-                            if(productReplyList[i].reply_rating!=0){
-                                for(let starcount=0; starcount<productReplyList[i].reply_rating; starcount++){
-                                    str+='<p style="color:#f29a1a;">&#9733;</p>';
-                                }
-                            }
-                            if(productReplyList[i].reply_rating!=5){
-                                for(let starcount=productReplyList[i].reply_rating; starcount<5; starcount++){
-                                    str+='<p style="color:#f29a1a;">&#9734;</p>';
-                                }
-                            }
-                                str+='</div></div>';
+            $.ajax({
+                url: "/user/productReply/" + reply_prod_code + '/' + viewPage,
+                type: "get",
+                success: (replyPageDTO) => {
+                    let productReplyList = replyPageDTO.list;
+                    // console.log(productReplyList);
+                    //댓글이 있는 경우
+                    for (let i = 0; i < productReplyList.length; i++) {
 
+                        str += '<div class="form-control bd-1 mb-2">'
+                            + '<div class="d-flex justify-content-between">'
+                            + '<h6>' + productReplyList[i].reply_user_id + '</h6>'
+                            + '<div><span  class="me-2" value="">' + productReplyList[i].reply_date + '</span>'
+                            + '<span class="me-2" style="cursor:pointer;">';
+                            if(productReplyList[i].reply_user_id==reply_user_id) {
+                                str += '<a style="color:#f29a1a;" href="/user/prodReplyDelete/' + productReplyList[i].reply_no + '/' + reply_prod_code + '">'
+                                    + '<i  class="fa fa-trash"></i></a>';
+                            }
+                            str+= '</span></div></div><p class="p-2">' + productReplyList[i].reply_content + '</p>'
+                            + '<div class="d-flex">';
+                        if (productReplyList[i].reply_rating != 0) {
+                            for (let starcount = 0; starcount < productReplyList[i].reply_rating; starcount++) {
+                                str += '<p style="color:#f29a1a;">&#9733;</p>';
+                            }
                         }
-                        replyArea.append(str);
-                        // showPgNavi(data);
-                    },
-                    error: () => {
-                        alert("요청실패")
+                        if (productReplyList[i].reply_rating != 5) {
+                            for (let starcount = productReplyList[i].reply_rating; starcount < 5; starcount++) {
+                                str += '<p style="color:#f29a1a;">&#9734;</p>';
+                            }
+                        }
+                        str += '</div></div>';
                     }
+                    let ratingAverage = replyPageDTO.productRatingSum/replyPageDTO.totalCnt;
+                    let ratingStr = '';
+                    if (Math.round(ratingAverage)!= 0) {
+                        for (let starcount = 0; starcount < Math.round(ratingAverage); starcount++) {
+                            ratingStr += '<h5 style="color:#f29a1a;">&#9733;</h5>';
+                        }
+                    }
+                    if (Math.round(ratingAverage)!= 5) {
+                        for (let starcount = Math.round(ratingAverage); starcount < 5; starcount++) {
+                            ratingStr += '<h5 style="color:#f29a1a;">&#9734;</h5>';
+                        }
+                    }
+                    ratingStr+='<h4 class="ms-3" style="color:#f29a1a;">&#9733;</h4><h6>'+ratingAverage+'</h6>';
+                    replyArea.html(str);
+                    $('#productRating').html(ratingStr);
+                    showPgNavi(replyPageDTO);
+                },
+                error: () => {
+                    alert("요청실패")
+                }
 
 
             });
         }
-        //
-        // //////////pageNation 처리///////////
-        // let pageArea = $(".pagination");
-        //
-        // function showPgNavi(data){
-        //     let prevPage = data.prevPage;
-        //     let nextPage = data.nextPage;
-        //     let blockStart = data.blockStart;
-        //     let blockEnd = data.blockEnd;
-        //
-        //     let totalPage = data.totalPage;
-        //     let viewPage = data.viewPage;
-        //
-        //     let str = "";
-        //
-        //     if(prevPage){
-        //         str +='<li class="page-item"> '
-        //             + '<a class="page-link" href="'+prevPage+'>이전</a>'
-        //             + '</li>';
-        //     }
-        //     for(let i = blockStart; i<=blockEnd; i++){
-        //         let active = viewPage==i?"active": "";
-        //         str+='<li class="page-item '+active+'">'
-        //             +'<a class="page-link" href="'+i+'">'+i+'</a>'
-        //             +'</li>';
-        //     }
-        //
-        //     if(blockEnd<totalPage){
-        //         str+= '<li class="page-item">'
-        //             + '<a class="page-link" href="'+nextPage+'>다음</a>'
-        //             +'</li>';
-        //     }
-        //     pageArea.html(str);
-        //
-        // }//showPgNavi
 
+
+        //////////pageNation 처리///////////
+        let pageArea = $(".pagination");
+
+        function showPgNavi(replyPageDTO){
+            let prevPage = replyPageDTO.prevPage;
+            let nextPage = replyPageDTO.nextPage;
+            let blockStart = replyPageDTO.blockStart;
+            let blockEnd = replyPageDTO.blockEnd;
+
+            let totalPage = replyPageDTO.totalPage;
+            let viewPage = replyPageDTO.viewPage;
+
+            let str = "";
+
+            if(prevPage){
+                str +='<li class="page-item"> '
+                    + '<a class="page-link" href="'+prevPage+'">이전</a>'
+                    + '</li>';
+            }
+            for(let i = blockStart; i<=blockEnd; i++){
+                let active = viewPage==i?"active": "";
+                str+='<li class="page-item '+active+'">'
+                    +'<a class="page-link" href="'+i+'">'+i+'</a>'
+                    +'</li>';
+            }
+
+            if(blockEnd<totalPage){
+                str+= '<li class="page-item">'
+                    + '<a class="page-link" href="'+nextPage+'">다음</a>'
+                    +'</li>';
+            }
+            pageArea.html(str);
+
+        }//showPgNavi
+        pageArea.on("click", "li a", function(e){
+            e.preventDefault();
+            let targetPage = $(this).attr("href");
+            viewPage = targetPage;
+            displayList(viewPage);
+        });
 
         //댓글 등록
-        reviewRegisterBtn.on("click", ()=>{
-            if(reply_content.value==null || reply_content.value.trim()==""){
+        reviewRegisterBtn.on("click", () => {
+            if([[${session.userLoginDto?.user_id==null}]]){
+                alert("로그인이 필요한 서비스입니다");
+                return;
+            }
+            if (reply_content.value == null || reply_content.value.trim() == "") {
                 alert(reply_content.value);
                 alert("리뷰를 입력하세요");
                 reply_content.focus();
                 return;
             }
-            let reply = {reply_user_id:reply_user_id, reply_content:reply_content.value,
-                reply_prod_code:reply_prod_code, reply_rating:$('#reply_rating').val()};
+            let reply = {
+                reply_user_id: reply_user_id, reply_content: reply_content.value,
+                reply_prod_code: reply_prod_code, reply_rating: $('#reply_rating').val()
+            };
 
             $.ajax({
-                url:"/user/prodReplyRegister",
-                type:"post",
-                data:JSON.stringify(reply), // JSON객체를 문자열(텍스트) 변환
+                url: "/user/prodReplyRegister",
+                type: "post",
+                data: JSON.stringify(reply), // JSON객체를 문자열(텍스트) 변환
                 contentType: "application/json; charset=utf8",
-                success:function(result){
-                    if(result.equals("ok")) {
-                        displayList(viewPage);
-                    }else{
+                success: function (result) {
+                    if (result == "ok") {
+                        location.href = "/user/productView?prod_code=" + reply_prod_code;
+                    } else {
                         alert("등록실패")
                     }
                 },
-                error:()=>{alert("요청을 실패하였습니다")}
+                error: () => {
+                    alert("요청을 실패하였습니다")
+                }
             });
         });
-        function replyDelete(reply_no){
-            $.ajax({
-                url:"/user/prodReplyDelete/"+reply_no,
-                type:"get",
-                contentType: "application/json; charset=utf8",
-                success:function(result){
-                    if(result.equals("ok")) {
-                        displayList(viewPage);
-                    }else{
-                        alert("삭제실패")
-                    }
-                },
-                error:()=>{alert("요청을 실패하였습니다")}
-            });
-        }
-    })
+    });
+
 </script>
 <script src="/js/productReply.js"></script>
 <script src="/js/userOrder.js"></script>

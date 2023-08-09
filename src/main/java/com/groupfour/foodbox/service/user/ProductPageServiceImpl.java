@@ -3,6 +3,7 @@ package com.groupfour.foodbox.service.user;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.ProductPageDTO;
 import com.groupfour.foodbox.domain.ProductReplyDTO;
+import com.groupfour.foodbox.domain.ReplyPageDTO;
 import com.groupfour.foodbox.mapper.user.ProductPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,16 @@ public class ProductPageServiceImpl implements ProductPageService{
     }
     //상품별 댓글 리스트
     @Override
-    public List<ProductReplyDTO> productReply(int reply_prod_code) {
-        List<ProductReplyDTO> productReplyList = productPageMapper.productReply(reply_prod_code);
-        return productReplyList;
+    public ReplyPageDTO productReply(int reply_prod_code, int viewPage) {
+        int productReplyCount = productPageMapper.productReplyCount(reply_prod_code);
+        int productRatingSum = productPageMapper.productRatingSum(reply_prod_code);
+        ReplyPageDTO replyPageDTO = new ReplyPageDTO();
+        replyPageDTO.setViewPage(viewPage);
+        replyPageDTO.setProductRatingSum(productRatingSum);
+        replyPageDTO.setValue(productReplyCount);
+        List<ProductReplyDTO> productReplyList = productPageMapper.productReply(reply_prod_code, replyPageDTO);
+        replyPageDTO.setList(productReplyList);
+        return replyPageDTO;
     }
     //상품 댓글 등록
     @Override

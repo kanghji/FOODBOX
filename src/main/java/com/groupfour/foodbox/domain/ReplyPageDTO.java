@@ -2,6 +2,8 @@ package com.groupfour.foodbox.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ReplyPageDTO {
     private int viewPage = 1; // 현재 페이지
@@ -14,10 +16,12 @@ public class ReplyPageDTO {
     private int totalPage;
     private int totalCnt;
     private int startRowNum;
-
+    
+    private List<ProductReplyDTO> list;
+    private int productRatingSum;
 
     private int startIndex; // 각페이지별 시작값(offset, 0, 10, 20,...)
-    private int cntPerPage = 10;
+    private int cntPerPage = 5;
 
     public void setValue(int totalCnt) {
         this.totalCnt = totalCnt;

@@ -35,8 +35,15 @@
     <select id="productImageList" resultType="String">
         SELECT image_prod_image FROM product_image WHERE image_prod_code=#{prod_code} ORDER BY image_no ASC
     </select>
+    <select id="productReplyCount" resultType="Integer">
+        SELECT count(*) FROM product_reply WHERE reply_prod_code=#{reply_prod_code}
+    </select>
     <select id="productReply" resultType="productReplyDTO">
-        SELECT * FROM product_reply WHERE reply_prod_code=#{reply_prod_code}
+        SELECT * FROM product_reply WHERE reply_prod_code=#{reply_prod_code} ORDER BY reply_date DESC
+        LIMIT #{replyPageDTO.startIndex}, #{replyPageDTO.cntPerPage};
+    </select>
+    <select id="productRatingSum" resultType="Integer">
+        SELECT SUM(reply_rating) FROM product_reply WHERE reply_prod_code=#{reply_prod_code}
     </select>
     <insert id="prodReplyRegister">
         INSERT INTO product_reply(reply_prod_code, reply_user_id, reply_content, reply_rating)
