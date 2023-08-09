@@ -6,8 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface HomeMapper {
-    List<ProductDTO> prodSlideList();
+public interface SearchMapper {
 
-
+    List<ProductDTO> getSearchList(String prod_name);
 }
