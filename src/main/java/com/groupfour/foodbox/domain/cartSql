@@ -17,14 +17,16 @@ create table userorder (
 
 create table orderlist (
 	order_no int primary key auto_increment,
+    order_status varchar(50),
     user_id varchar(50),
     user_name varchar(50),
     ordertotprice int,
-    order_inputDate date
+    order_inputDate datetime
 );
 
 create table orderdetail (
 	order_detail_no int primary key auto_increment,
+    order_status varchar(50),
     order_no int,
     user_id varchar(50),
     user_name varchar(50),
@@ -34,7 +36,7 @@ create table orderdetail (
     prod_price int,
     prod_qty int,
     order_qty int,
-    order_inputDate date,
+    order_inputDate datetime,
 
     constraint fk_order_no
     FOREIGN key(order_no)

@@ -90,7 +90,7 @@
                             <ul class="mypage__submenu">
                                 <li><p class="username" th:text="|${session.userLoginDto.user_id}&nbsp;&nbsp;님|">회원아이디</p></li>
                                 <input type="hidden" id="user_id" th:value="${session.userLoginDto.user_id}">
-                                <li><a href="#">주문내역 조회</a></li>
+                                <li><a th:href="@{/user/userOrder/orderlist}">주문내역 조회</a></li>
                                 <li><a href="#">책갈피한 레시피</a></li>
                                 <li><a th:href="@{/user/user_infoUpdateView}">회원정보 수정</a></li>
                                 <li><a th:href="@{/user/user_pwUpdateChk}">비밀번호 변경</a></li>

@@ -2,6 +2,7 @@ package com.groupfour.foodbox.service.user;
 
 
 import com.groupfour.foodbox.domain.UserDTO;
+import com.groupfour.foodbox.dto.OrderStatus;
 import com.groupfour.foodbox.dto.UserOrderCheckDTO;
 import com.groupfour.foodbox.dto.UserOrderDTO;
 import com.groupfour.foodbox.dto.UserOrderDetailDTO;
@@ -47,6 +48,7 @@ public class UserOrderServiceImpl implements UserOrderService {
             orderTotPrice += dto.getTotPrice();
         }
         userOrderDTO.setOrderTotPrice(orderTotPrice);
+        userOrderDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
         userOrderMapper.insertOrderList(userOrderDTO);
 
         String id = userOrderDTO.getUser_id();
@@ -56,6 +58,7 @@ public class UserOrderServiceImpl implements UserOrderService {
         for(UserOrderCheckDTO dto: orderList) {
             UserOrderDetailDTO userOrderDetailDTO = new UserOrderDetailDTO();
             userOrderDetailDTO.setOrder_no(generatedOrderNo);
+            userOrderDetailDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
             userOrderDetailDTO.setUser_id(id);
             userOrderDetailDTO.setUser_name(name);
             userOrderDetailDTO.setProd_code(dto.getProd_code());
@@ -67,5 +70,16 @@ public class UserOrderServiceImpl implements UserOrderService {
 
             userOrderMapper.insertOrderDetail(userOrderDetailDTO);
         }
+    }
+
+    @Override
+    public List<UserOrderDetailDTO> getUserOrderList(String id) {
+        List<UserOrderDetailDTO> orderList = userOrderMapper.getUserOrderList(id);
+
+        for(UserOrderDetailDTO dto : orderList) {
+            dto.setTotPrice(dto.getTotPrice());
+        }
+
+        return orderList;
     }
 }

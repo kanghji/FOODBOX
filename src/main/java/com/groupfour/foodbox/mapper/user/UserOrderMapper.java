@@ -17,4 +17,6 @@ public interface UserOrderMapper {
     void insertOrderList(UserOrderDTO userOrderDTO);
 
     void insertOrderDetail(UserOrderDetailDTO userOrderDetailDTO);
+
+    List<UserOrderDetailDTO> getUserOrderList(String id);
 }

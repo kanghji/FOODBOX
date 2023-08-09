@@ -21,14 +21,18 @@
     </select>
 
     <insert id="insertOrderList" useGeneratedKeys="true" keyProperty="order_no">
-        INSERT INTO orderlist (user_id, user_name, ordertotprice, order_inputDate)
-        VALUES(#{user_id}, #{user_name}, #{orderTotPrice}, now())
+        INSERT INTO orderlist (order_status, user_id, user_name, ordertotprice, order_inputDate)
+        VALUES(#{order_status}, #{user_id}, #{user_name}, #{orderTotPrice}, now())
     </insert>
 
     <insert id="insertOrderDetail">
-        INSERT INTO orderdetail(order_no, user_id, user_name, prod_code, prod_name, prod_thumbnail,
+        INSERT INTO orderdetail(order_no, order_status, user_id, user_name, prod_code, prod_name, prod_thumbnail,
         prod_price, prod_qty, order_qty, order_inputDate)
-        VALUES(#{order_no}, #{user_id}, #{user_name}, #{prod_code}, #{prod_name}, #{prod_thumbnail}, #{prod_price},
+        VALUES(#{order_no}, #{order_status}, #{user_id}, #{user_name}, #{prod_code}, #{prod_name}, #{prod_thumbnail}, #{prod_price},
         #{prod_qty}, #{order_qty}, now())
     </insert>
+
+    <select id="getUserOrderList">
+        SELECT * FROM orderdetail WHERE user_id = #{id}
+    </select>
 </mapper>
