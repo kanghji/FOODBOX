@@ -113,3 +113,19 @@ function orderBtn(orderList) {
             });
     }
 }
+
+function payBtn(orderList) {
+
+    $.ajax({
+        type: "post",
+        url: "/user/userOrder/pay",
+        data: JSON.stringify(orderList),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            window.location.href = "/user/userOrder/success";
+        },
+        error: function (error) {
+            console.error("에러:", error);
+        }
+    });
+}
