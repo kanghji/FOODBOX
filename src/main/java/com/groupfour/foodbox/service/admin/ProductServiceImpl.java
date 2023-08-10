@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService{
         while(enu.hasMoreElements()) {
             String paramName = enu.nextElement();
             String paramValue = mr.getParameter(paramName);
-            System.out.println(paramName + " : "+ paramValue);
+//            System.out.println(paramName + " : "+ paramValue);
             map.put(paramName, paramValue);
         }
         //파일
@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService{
             //MultipartFile : 파일정보를 갖고 있는 객체
             MultipartFile mFile = mr.getFile(fileParamName);
             String originName = mFile.getOriginalFilename();
-            System.out.println("originName : " + originName);
+//            System.out.println("originName : " + originName);
 
             File file = new File(savePath+"\\"+fileParamName);
             if(mFile.getSize() != 0) {//업로드된 경우
@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService{
             productMapper.adminProductRegister(map);
             for (Object objkey : map.keySet()) {
                 String key = objkey.toString();
-                System.out.println(String.format("키 -> %s, 값 -> %s", key, map.get(key)));
+//                System.out.println(String.format("키 -> %s, 값 -> %s", key, map.get(key)));
                 String keyValue = map.get(key).toString();
                 if (key.contains("image_prod_image")) {
                     productMapper.adminProductImageRegister(keyValue);
@@ -130,7 +130,7 @@ public class ProductServiceImpl implements ProductService{
         while (enu.hasMoreElements()) {
             String paramName = enu.nextElement();
             String paramValue = mr.getParameter(paramName);
-            System.out.println(paramName + " : " + paramValue);
+//            System.out.println(paramName + " : " + paramValue);
             map.put(paramName, paramValue);
         }
         int oldimageCnt = 0;
@@ -158,7 +158,7 @@ public class ProductServiceImpl implements ProductService{
         while (iter.hasNext()) {
 
             String fileParamName = iter.next();
-            System.out.println("fileParamName : " + fileParamName);
+//            System.out.println("fileParamName : " + fileParamName);
             //MultipartFile : 파일정보를 갖고 있는 객체
             MultipartFile mFile = mr.getFile(fileParamName);
             String originName = mFile.getOriginalFilename();
@@ -214,10 +214,10 @@ public class ProductServiceImpl implements ProductService{
         productMapper.adminProductModify(map);
         for (Object objkey : map.keySet()) {
             String key = objkey.toString();
-            System.out.println(String.format("키 -> %s, 값 -> %s", key, map.get(key)));
+//            System.out.println(String.format("키 -> %s, 값 -> %s", key, map.get(key)));
             String keyValue = map.get(key).toString();
             if (key.contains("image_prod_image") && map.get(key) != null && !key.contains("old")) {
-                productMapper.adminProductImageRegister(keyValue);
+                productMapper.adminProductImageModify(keyValue,Integer.parseInt((String)map.get("prod_code")));
             }
         }
     }
