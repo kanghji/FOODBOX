@@ -54,7 +54,7 @@
 .btn__inner {
     /*border: 1px solid #000;*/
     border-bottom: 1px solid #dddddd;
-    width: 60%;
+    width: 50%;
     height: 4.5em;
     text-align: center;
 }
@@ -94,5 +94,8 @@
     font-size: 18px;
     color: #888888;
 
+}
+.tab_on {
+    display: block;
 }
 
