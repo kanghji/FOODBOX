@@ -20,4 +20,5 @@ public class HomeServiceImpl implements HomeService{
         List<ProductDTO> prodSlideList = homeMapper.prodSlideList();
         return prodSlideList;
     }
+
 }

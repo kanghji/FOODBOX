@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
   <div class="container" style="padding-top:150px;">
       <th:block th:if="${prod_spec=='ALL'}">
         <h4 class="w-100 mb-5 text-center">| C A T E G O R Y |</h4>
@@ -49,7 +51,6 @@
                   </div>
           </div>
 
-
           </div>
       </section>
 
@@ -59,7 +60,7 @@
 $(window).scroll(()=>{
    let checkNum=$(window).scrollTop()-($(document).height()-$(window).height());
    console.log(checkNum);
-   if(checkNum<1&&checkNum>-1){
+   if(checkNum<1&&checkNum>-1&&[[${pageDTO.totalPage>viewPage}]]){
        viewPage++;
        // alert(viewPage);
        productLoad(viewPage);

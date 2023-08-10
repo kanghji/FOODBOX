@@ -17,6 +17,7 @@
     <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" th:href="@{/css/pwupdate.css}">
     <link rel="stylesheet" th:href="@{/css/infoupdate.css}">
+    <link rel="stylesheet" th:href="@{/css/search.css}">
 
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css"
@@ -48,7 +49,7 @@
 <!--                            </th:block>-->
                         </ul>
                     </li>
-                    <li class="gnb__best main_menu"><a href="#레시피">레시피</a></li>
+                    <li class="gnb__best main_menu"><a href="/user/recipe">레시피</a></li>
                     <li class="gnb__best main_menu"><a href="/user/productPage?prod_spec=BEST">베스트</a></li>
                     <li class="gnb__new main_menu"><a href="/user/productPage?prod_spec=NEW">신상품</a></li>
                 </ul>
@@ -57,7 +58,7 @@
         <div class="header_innerbox2">
             <!-- search -->
             <div class="search inner_right">
-                <a href="#search아이콘"><i class="fa fa-search fa-lg"></i></a>
+                <a th:href="@{/search}"><i class="fa fa-search fa-lg"></i></a>
             </div>
             <!-- cart -->
             <div class="cart inner_right">
