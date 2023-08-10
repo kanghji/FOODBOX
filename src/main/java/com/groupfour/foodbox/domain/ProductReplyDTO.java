@@ -12,6 +12,4 @@ public class ProductReplyDTO {
     private String reply_content;
     private int reply_rating;
     private Date reply_date;
-    private int reply_reply_no;
-
 }
