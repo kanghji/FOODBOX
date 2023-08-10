@@ -9,7 +9,10 @@
     </a>
     <div class="card-body">
         <h7 class="" style= "font-size:15px;"><b th:text="${productDTO.prod_brand}+| ${productDTO.prod_name}"></b></h7>
-        <p class="card-text" th:text="${#numbers.formatInteger(productDTO.prod_price, 3, 'COMMA')}"></p>
+        <th:block th:if="${productDTO.prod_price>=50000}">
+            <p class="card-text">무료배송</p>
+        </th:block>
+        <p class="card-text" th:text="${#numbers.formatInteger(productDTO.prod_price, 3, 'COMMA')}+원"></p>
     </div>
 </div>
 <th:block th:if="${(productcnt.count%4==0)&&(productcnt!=productList.size())}">
