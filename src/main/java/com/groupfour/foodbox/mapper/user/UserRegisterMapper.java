@@ -14,4 +14,6 @@ public interface UserRegisterMapper {
     // 아이디 중복체크
     UserDTO checkUser_id(String user_id);
 
+    // 아이디 찾기
+    String findId(UserDTO userDto);
 }

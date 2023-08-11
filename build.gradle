@@ -37,6 +37,8 @@ dependencies {
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
 //    // https://mvnrepository.com/artifact/javax.mail/mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+//시큐리티
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
 
 }
 

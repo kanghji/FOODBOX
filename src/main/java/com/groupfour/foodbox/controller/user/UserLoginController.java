@@ -4,9 +4,7 @@ import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.user.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +47,39 @@ public class UserLoginController {
         return "redirect:/";
     }
 
+    // 아이디 찾기 페이지 가져오기
+    @GetMapping("/findId")
+    public String findIdPage() {
+        return "user/findId";
+    }
+
+
+    // 아이디 찾기
+    @PostMapping("/findId")
+    @ResponseBody
+    public String findId(@RequestParam("name") String name, @RequestParam("email") String email) {
+        System.out.println("name = " + name);
+        System.out.println("email = " + email);
+
+        String resultId = userLoginService.findId(name, email);
+
+        return resultId;
+    }
+
+    // 비밀번호 찾기 페이지 가져오기
+    @GetMapping("/findPw")
+    public String findPwPage() {
+        return "user/findPw";
+    }
+
+    // 비밀번호 찾기
+    @PostMapping("/findPw")
+    @ResponseBody
+    public int findPw(String uid, String uEmail, String tempPw) {
+        int n = userLoginService.findPw(uid,uEmail);
+        System.out.println("n = " + n);
+        return n;
+    }
 }
 
 
