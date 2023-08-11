@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.user.UserRegisterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
@@ -19,11 +20,15 @@ public class UserRegisterServiceImpl implements UserRegisterService {
 
     @Autowired
     private JavaMailSender mailSender;
+    //비밀번호 암호화
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     // 회원 가입
     @Override
     public int userRegister(UserDTO userDto) {
+        userDto.setUser_pw(passwordEncoder.encode(userDto.getUser_pw()));
         int n = userRegisterMapper.userRegister(userDto);
         return n;
     }

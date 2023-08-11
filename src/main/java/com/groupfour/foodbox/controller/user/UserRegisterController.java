@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.user.UserRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,10 @@ public class UserRegisterController {
 
     @Autowired
     private UserRegisterService userRegisterService;
+
+    //비밀번호 암호화
+//    @Autowired
+  //  private PasswordEncoder passwordEncoder;
 
     // 회원가입 페이지로 이동
     @GetMapping("/userRegister")

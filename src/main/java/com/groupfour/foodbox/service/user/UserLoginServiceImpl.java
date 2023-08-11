@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.user.UserLoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
@@ -22,6 +23,10 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     JavaMailSender mailSender;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
     // 로그인 하기
     @Override
     public boolean userLogin(UserDTO userDto, HttpServletRequest req) {
@@ -34,7 +39,7 @@ public class UserLoginServiceImpl implements UserLoginService {
             String inputPw= userDto.getUser_pw(); // 사용자가 입력한 비번
             String dbPw = userLoginDto.getUser_pw(); // DB 비번
 
-            if(inputPw.equals(dbPw)){ // 비번 일치
+            if(true ==passwordEncoder.matches(inputPw,dbPw)){ // 비번 일치
                 session.setAttribute("userLoginDto", userLoginDto);
                 System.out.println("로그인 성공");
                 return true;
