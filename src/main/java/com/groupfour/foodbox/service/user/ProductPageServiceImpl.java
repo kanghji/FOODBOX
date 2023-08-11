@@ -42,10 +42,11 @@ public class ProductPageServiceImpl implements ProductPageService{
     @Override
     public ReplyPageDTO productReply(int reply_prod_code, int viewPage) {
         int productReplyCount = productPageMapper.productReplyCount(reply_prod_code);
-        int productRatingSum = productPageMapper.productRatingSum(reply_prod_code);
+        Integer productRatingSum = productPageMapper.productRatingSum(reply_prod_code);
+        if(productRatingSum==null) productRatingSum=0;
         ReplyPageDTO replyPageDTO = new ReplyPageDTO();
         replyPageDTO.setViewPage(viewPage);
-        replyPageDTO.setProductRatingSum(productRatingSum);
+        replyPageDTO.setProductRatingSum((int)productRatingSum);
         replyPageDTO.setValue(productReplyCount);
         List<ProductReplyDTO> productReplyList = productPageMapper.productReply(reply_prod_code, replyPageDTO);
         replyPageDTO.setList(productReplyList);

@@ -21,17 +21,19 @@ public class SearchController {
     // 검색
     @PostMapping("/user/prodSeach")
     @ResponseBody
-    public String prodSearch(@RequestBody @RequestParam(value = "prod_name", defaultValue = "noSearch") String prod_name, Model model) {
+    public List<ProductDTO> prodSearch(@RequestParam(value = "prod_name", defaultValue = "noSearch") String prod_name) {
         List<ProductDTO> getProdSearchList = searchService.getProdSearchList(prod_name);
+        System.out.println("getProdSearchList = " + getProdSearchList);
 
         // 사용자가 입력한 키워드가 null이거나 빈 문자열이면
-        if (getProdSearchList.isEmpty()) {
-            model.addAttribute("getProdSearchList", "noSearch");
-        } else {
-            model.addAttribute("getProdSearchList", getProdSearchList);
-        }
+//        if (getProdSearchList.isEmpty()) {
+//            model.addAttribute("productDTO", "noSearch");
+//
+//        } else {
+//            model.addAttribute("productDTO", getProdSearchList);
+//        }
 
-        return "user/userSearch";
+        return getProdSearchList;
     }
 
 

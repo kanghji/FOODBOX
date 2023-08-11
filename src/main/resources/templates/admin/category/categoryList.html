@@ -6,10 +6,9 @@
     <a href="/admin/categoryRegister" class="btn btn-success ms-auto">카테고리 등록</a>
     <button class="btn btn-secondary" type="button" onclick="onDelete()">선택삭제</button>
     <form id="frmTable" action="" method="post">
-        <table class="table">
-            <thead class="text-center">
+        <table class="table table-bordered">
+            <thead class="table-secondary text-center">
             <tr>
-                <th></th>
                 <th>카테고리 번호</th>
                 <th>카테고리 코드</th>
                 <th>카테고리 명</th>
@@ -20,8 +19,6 @@
             <tbody class="text-center">
             <th:block th:each="category : ${list}">
                 <tr>
-                    <!--map의 get을 이용하면 에러코드 없이 수행함-->
-                    <td><input type="checkbox" name="chkCategory_no"/></td>
                     <td th:text="${category.category_no}"></td>
                     <td><a th:text="${category.category_code}" th:href="@{/admin/categoryInfo(category_no=${category.category_no})}"></a></td>
                     <td th:text="${category.category_name}"></td>

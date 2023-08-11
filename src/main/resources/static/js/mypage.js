@@ -98,14 +98,38 @@ function pwModifyBtn(user_id) {
             data: JSON.stringify(user),
             contentType: 'application/json; charset=utf8',
             success: function (result) {
-                if (result > 0) {
+
+                if (pwConfirm == false) {
+                    alert("비밀번호가 일치하지 않습니다");
+                    return;
+                } else {
                     alert("비밀번호가 변경되었습니다");
-                    location.href = "/user/user_pwUpdataChkPage";
                 }
+                    location.href = "/user/user_pwUpdataChkPage";
             },
             error:function(){alert("비밀번호 변경 요청 실패");}
         });
 }
 
-// 회원정보 수정 유효성 검사
+// 북마크 삭제
+
+function bookmarkDel(bm_recipe_id) {
+    if(confirm("책갈피를 삭제하시겠습니까?") == true) {
+        $.ajax({
+            url: '/user/user_bookmarkDel',
+            type: 'post',
+            data: JSON.stringify({bm_recipe_id: bm_recipe_id}),
+            contentType: 'application/json; charset=utf-8'
+        }).done(function () {
+            alert("책갈피가 삭제되었습니다");
+            // 삭제는 되는데 경로가 에러남 *** 확인!! ***
+            location.href = '/user/bookmarkList';
+        }).fail(function (error) {
+            alert("책갈피 삭제 에러");
+        });
+    }
+    else {
+        return;
+    }
+}
 

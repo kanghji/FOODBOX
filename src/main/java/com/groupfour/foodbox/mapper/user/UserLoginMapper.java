@@ -9,5 +9,9 @@ public interface UserLoginMapper {
     // 로그인
      UserDTO userLogin(UserDTO userDto);
 
+    // 아이디 찾기
+    String findId(String name, String email);
 
+    // 비밀번호 찾기
+    int findPw(String uid, String uEmail, String tempPw);
 }

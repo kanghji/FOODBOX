@@ -1,9 +1,6 @@
 package com.groupfour.foodbox.service.user;
 
-import com.groupfour.foodbox.domain.BookmarkDTO;
-import com.groupfour.foodbox.domain.ProductPageDTO;
-import com.groupfour.foodbox.domain.RecipeDTO;
-import com.groupfour.foodbox.domain.UserDTO;
+import com.groupfour.foodbox.domain.*;
 import com.groupfour.foodbox.mapper.user.RecipePageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +30,12 @@ public class RecipePageServiceImpl implements RecipePageService {
         RecipeDTO recipeDTO = recipePageMapper.recipeView(id);
         return recipeDTO;
     }
+    //추천상품가져오기
+    @Override
+    public List<ProductDTO> recommendProduct() {
+        List<ProductDTO> productList = recipePageMapper.recommendProduct();
+        return productList;
+    }
     //사용자가 레시피를 북마크했는지 체크
     @Override
     public BookmarkDTO bookmarkCheck(BookmarkDTO bookmarkDTO) {
@@ -51,4 +54,5 @@ public class RecipePageServiceImpl implements RecipePageService {
         UserDTO userDTO = recipePageMapper.userCheck(user_id);
         return userDTO;
     }
+
 }
