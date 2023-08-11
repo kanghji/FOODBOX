@@ -60,6 +60,7 @@
             </thead>
             <tbody>
             <tr>
+                <input type="hidden" th:value="${userDTO.user_id}"/>
                 <td>이름</td>
                 <td id="user_name" th:text="${userDTO.user_name}"></td>
             </tr>
@@ -81,11 +82,21 @@
             </tr>
             <tr>
                 <td>우편번호</td>
-                <td id="user_zipcode" th:text="${userDTO.user_zipcode}"></td>
+                <td>
+                    <div class="content_box">
+                    <input class="register_content_box" type="text" id="sample4_postcode" name="user_zipcode" placeholder="우편번호" th:value="${userDTO.user_zipcode}" readonly required/>
+                    <input class="register_content_button" type="button" onclick="sample4_execDaumPostcode()" value="주소검색"/>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>배송지 주소</td>
-                <td id="user_addr" th:text="|${userDTO.user_roadaddr} ${userDTO.user_detailaddr}|"></td>
+                <td>
+                    <div class="content_box">
+                    <input class="register_content_box" type="text" id="sample4_roadAddress" name="user_roadaddr" placeholder="도로명주소" th:value="${userDTO.user_roadaddr}" readonly/>
+                    <input class="register_content_box" type="text" id="user_detailaddr" name="user_detailaddr" placeholder="상세주소를 입력해주세요." th:value="${userDTO.user_detailaddr}"/>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>전화번호</td>
@@ -113,7 +124,9 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script src="/js/zipcode.js"></script>
 <script src="/js/userOrder.js"></script>
 <script src="/js/userOrderCheck.js"></script>
 <!-- footer -->
 <th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>

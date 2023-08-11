@@ -17,6 +17,9 @@ public class UserOrderDetailDTO {
 
     private String user_id;
     private String user_name;
+    private String user_zipcode;
+    private String user_roadaddr;
+    private String user_detailaddr;
 
     private int prod_code;
     private String prod_name;
