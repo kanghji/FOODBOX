@@ -73,13 +73,26 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
-    public List<UserOrderDetailDTO> getUserOrderList(String id) {
-        List<UserOrderDetailDTO> orderList = userOrderMapper.getUserOrderList(id);
+    public List<UserOrderDTO> getUserOrderList(String id) {
+        List<UserOrderDTO> orderlist = userOrderMapper.getUserOrderList(id);
 
-        for(UserOrderDetailDTO dto : orderList) {
+        return orderlist;
+    }
+
+    @Override
+    public List<UserOrderDetailDTO> getUserOrderDetail(int order_no) {
+        List<UserOrderDetailDTO> orderDetail = userOrderMapper.getUserOrderDetail(order_no);
+
+        for(UserOrderDetailDTO dto : orderDetail) {
             dto.setTotPrice(dto.getTotPrice());
         }
 
-        return orderList;
+        return orderDetail;
+    }
+
+    @Override
+    public void userOrderDelete(int orderNo) {
+        userOrderMapper.userOrderDelete(orderNo);
+        userOrderMapper.userOrderListDelete(orderNo);
     }
 }

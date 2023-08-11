@@ -1,80 +1,62 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-<!-- 헤더 -->
 <th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
-
-<div class="container w-75 mt-5">
-  <h3>제목</h3>
-
-  <form action="" method="post">
-    날짜 <input type="date" id="s_date" name="s_date"> ~ <input type="date" id="e_date" name="e_date">
-    <input type="text" name="name" placeholder="이름">
-
-    <select id="gender" name="gender">
+<div class="container w-75 mt-3">
+  <h3 class="mt-3 text-center">주문 리스트</h3>
+  <form action="/admin/productList" method="post">
+    <select id="searchType" name="searchType">
       <option value="ALL">전체</option>
-      <option value="남">남</option>
-      <option value="여">여</option>
     </select>
-    <input class="btn btn-sm btn-warning" type="submit" value="검색">
+    <input type="text" id="keyword" name="keyword" placeholder="주문Id">
+    <input class="btn btn-sm btn-warning" type="submit" value="주문검색">
   </form>
+  <form id="frmTable" action="" method="post">
+    <table class="table table-bordered">
+      <thead class="table-secondary text-center">
+      <tr>
+        <th>주문 코드</th>
+        <th>주문자 ID</th>
+        <th>주문자 이름</th>
+        <th>주문 상품명</th>
+        <th>주문수량</th>
+        <th>주문상태</th>
+        <th>주문배송주소</th>
+        <th>주문합계</th>
+        <th>삭제</th>
+      </tr>
 
-  <table class="table table-bordered mt-3">
-    <thead class="table-secondary">
-    <tr>
-      <th class="col-1">선택</th>
-      <th>주문번호</th>
-      <th>회원ID</th>
-      <th>상품명</th>
-      <th>수량</th>
-      <th>결제금액</th>
-      <th>주문상태</th>
-      <th class="col-2">수정 / 삭제</th>
-    </tr>
-    </thead>
-
-<!--    <th:block th:each="member : ${list}">-->
-    <tbody>
-    <tr>
-
-      <td>
-        <input type="checkbox" name="chkNo"> <!--th:value=""-->
-      </td>
-      <td>요소1</td>
-      <td>요소2</td>
-      <td>요소3</td>
-      <td>요소4</td>
-      <td>요소5</td>
-      <td>요소6</td>
-
-      <td>
-        <a href="" class="btn btn-sm btn-info">수정</a>&nbsp
-        <a href="" class="btn btn-sm btn-danger">삭제</a>
-      </td>
-    </tr>
-<!--    </th:block>-->
-    </tbody>
-  </table>
-
-  <a href="" class="btn btn-danger">선택 삭제</a>
+      </thead>
+      <tbody class="text-center">
+      <th:block th:each="productDTO : ${productList}">
+        <tr>
+          <td  th:text="${productDTO.prod_code}"></td>
+          <td th:text="${productDTO.prod_cat_code}"></td>
+          <td ><a th:text="${productDTO.prod_name}" th:href="@{/admin/productInfo(prod_code=${productDTO.prod_code})}"></a></td>
+          <td th:text="${productDTO.prod_brand}"></td>
+          <td th:text="${productDTO.prod_qty}"></td>
+          <td th:text="${productDTO.prod_price}"></td>
+          <td th:text="${productDTO.prod_inputdate}"></td>
+          <td><a class="btn btn-danger btn-sm" th:href="@{/admin/productDelete(prod_code=${productDTO.prod_code})}">삭제</a></td>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </form>
 </div>
-
-<!-- 페이지네이션 -->
 <ul class="pagination justify-content-center">
-  <li class="page-item">
-    <a class="page-link" href="">이전</a>
+  <li class="page-item" th:class="${pageDTO.prevPage<=0} ? 'disabled'">
+    <a class="page-link" th:href="@{/admin/productList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
   </li>
-
-<li class="page-item">
-  <a class="page-link" href="">1</a>
-</li>
-
-  <li class="page-item">
-    <a class="page-link" href="">다음</a>
+  <th:block th:each="i: ${#numbers.sequence(pageDTO.blockStart,pageDTO.blockEnd)}">
+    <th:block th:if="${i!=0}">
+      <li class="page-item" th:classappend="${pageDTO.viewPage == i? 'active':''}">
+        <a class="page-link" th:href="@{/admin/productList(viewPage=${i},keyword=${keyword},searchType=${searchType})}">[[${i}]]</a>
+      </li>
+    </th:block>
+  </th:block>
+  <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage} ? 'disabled'">
+    <a class="page-link" th:href="@{/admin/productList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
   </li>
 </ul>
-
-<!-- 푸터 -->
-<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
 </body>
 </html>

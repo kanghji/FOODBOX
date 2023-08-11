@@ -2,6 +2,7 @@ package com.groupfour.foodbox.controller.user;
 
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.dto.UserOrderCheckDTO;
+import com.groupfour.foodbox.dto.UserOrderDTO;
 import com.groupfour.foodbox.dto.UserOrderDetailDTO;
 import com.groupfour.foodbox.service.user.UserOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +56,30 @@ public class UserOrderController {
         UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
         String id = userDTO.getUser_id();
 
-        List<UserOrderDetailDTO> orderList = userOrderService.getUserOrderList(id);
+        List<UserOrderDTO> orderList = userOrderService.getUserOrderList(id);
         model.addAttribute("orderList", orderList);
-        System.out.println("orderList = " + orderList);
         return "/user/userOrderList";
+    }
+
+    @GetMapping("/userOrder/orderdetail")
+    public String userOrderDetail(int order_no, Model model) {
+        List<UserOrderDetailDTO> orderDetail = userOrderService.getUserOrderDetail(order_no);
+        int orderTotprice = 0;
+
+        for(UserOrderDetailDTO dto: orderDetail) {
+            orderTotprice += dto.getTotPrice();
+        }
+
+        model.addAttribute("orderDetail", orderDetail);
+        model.addAttribute("orderTotprice", orderTotprice);
+
+        return "/user/userOrderDetail";
+    }
+
+    @PostMapping("/userOrder/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void userOrderDelete(@RequestBody String order_no) {
+        int userNo = Integer.parseInt(order_no);
+        userOrderService.userOrderDelete(userNo);
     }
 }

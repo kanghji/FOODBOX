@@ -129,3 +129,26 @@ function payBtn(orderList) {
         }
     });
 }
+
+function orderList() {
+}
+
+function orderCancle(order_no) {
+    if(confirm("주문을 취소하시겠습니까?") == true) {
+        $.ajax({
+            type: "post",
+            url: "/user/userOrder/delete",
+            data: JSON.stringify(order_no),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                window.location.replace("/user/userOrder/orderlist");
+                alert("주문취소 되었습니다");
+            },
+            error: function (error) {
+                console.error("에러:", error);
+            }
+        });
+    } else {
+        return;
+    }
+}
