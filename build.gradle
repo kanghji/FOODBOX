@@ -38,7 +38,7 @@ dependencies {
 //    // https://mvnrepository.com/artifact/javax.mail/mail
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 //시큐리티
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 }
 
