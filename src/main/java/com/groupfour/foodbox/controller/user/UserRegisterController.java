@@ -35,14 +35,15 @@ public class UserRegisterController {
     }
 
     // 아이디 중복체크
-    @GetMapping("/checkUser_id")
+    @PostMapping("/checkUser_id")
     @ResponseBody
-    public String checkUser_id(@RequestParam("user_id") String user_id){
+    public String checkUser_id(@RequestParam("user_id") String user_id) {
         System.out.println("user_id = " + user_id);
         //db에 회원이 입력한 user_id가 있는지 조회
-        UserDTO userDto= userRegisterService.checkUser_id(user_id);
+        UserDTO userDto = userRegisterService.checkUser_id(user_id);
+        System.out.println("userDto: " + userDto);
 //        if(userDto !=null || "".equals(user_id.trim())){
-        if(userDto!=null){
+        if (userDto != null) {
             return "no";
         }
         return "yes";
@@ -50,13 +51,9 @@ public class UserRegisterController {
 
     // 이메일 인증
     @GetMapping("/emailConfirm")
-    public String emailConfirm(@RequestParam String user_email) throws Exception {
-
-        String confirm = userRegisterService.sendSimpleMessage(user_email);
-
+    @ResponseBody
+    public String emailConfirm(@RequestParam("uEmail") String uEmail) throws Exception {
+        String confirm = userRegisterService.emailCheck(uEmail);
         return confirm;
     }
-
-
-
 }

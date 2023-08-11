@@ -1,0 +1,58 @@
+
+<th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+
+<div class="container w-50 shadow rounded border p-5 mt-5">
+    <form action="/user/findId" method="post" name="product_input_form">
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <%-- 아이디 pannel --%>
+            <div id="findIdSuccess" style="display:none" class="px-4">
+                <p class="text-center mt-4">가입시 아이디는 <b><span id="resultId"></span></b>입니다.</p>
+                <a class="btn btn-primary mt-3 w-100" type="button" href="">로그인</a>
+            </div>
+            <div id="findIdBefore" class="px-4">
+                <p>이름과 이메일을 입력하세요.</p>
+                <input class="form-control mb-2" type="text" id="user_name" name="user_name" placeholder="이름"/>
+                <input class="form-control mb-2" type="text" id="user_email" name="user_email" placeholder="이메일"/>
+                <input class="btn btn-primary mt-3 w-100" type="button" value="아이디 찾기" onclick="idFind()"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+        <script>
+            function idFind(){
+                let name = $("#user_name").val();
+                let email = $("#user_email").val();
+                let str = "";
+
+                $.ajax({
+                    // url:"<c:url value='/member/findId.do?name='/>"+name+"&tel="+tel,
+                    url: "/user/findId",
+                    type: "post",
+                    data: { "name" : name, "email": email } ,
+                    success: function (data){ //datasms 찾기 실패시 0, 찾으면 해당 아이디값
+
+
+                        $("#resultId").text(str);
+                        if(data==0){
+                            alert("이름 및 이메일을 다시 확인하기 바랍니다.")
+                        } else { // 아이디 찾기 성공
+                            str = data;
+                            console.log(data);
+                            $("#findIdBefore").css("display", "none");
+                            $("#findIdSuccess").css("display", "block");
+                            $("#resultId").text(str);
+                        }
+                    },
+                    error:function(){alert("아이디 찾기 요청 실패!!")}
+                });
+            }
+
+        </script>
+
+
+
+
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>
