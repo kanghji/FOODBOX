@@ -20,7 +20,7 @@ public interface UserOrderMapper {
 
     List<UserOrderDTO> getUserOrderList(String id);
 
-    List<UserOrderDetailDTO> getUserOrderDetail(String id);
+    List<UserOrderDetailDTO> getUserOrderDetail(int order_no);
 
     void userOrderDelete(int orderNo);
 

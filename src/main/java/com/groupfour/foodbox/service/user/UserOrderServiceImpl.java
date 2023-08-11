@@ -80,8 +80,8 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
-    public List<UserOrderDetailDTO> getUserOrderDetail(String id) {
-        List<UserOrderDetailDTO> orderDetail = userOrderMapper.getUserOrderDetail(id);
+    public List<UserOrderDetailDTO> getUserOrderDetail(int order_no) {
+        List<UserOrderDetailDTO> orderDetail = userOrderMapper.getUserOrderDetail(order_no);
 
         for(UserOrderDetailDTO dto : orderDetail) {
             dto.setTotPrice(dto.getTotPrice());

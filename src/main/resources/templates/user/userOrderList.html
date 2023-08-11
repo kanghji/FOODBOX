@@ -10,65 +10,51 @@
 
 <div class="container col-6" style="padding-top: 150px; height: 1000px">
 
-        <h3>주문 리스트</h3>
-        <table class="table table-bordered">
-            <thead>
+    <h3>주문 리스트</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>주문번호</th>
+            <th>주문자 이름</th>
+            <th>주문합계</th>
+            <th>주문상태</th>
+            <th>주문날짜</th>
+            <th>주문취소</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:if="|${orderList==null || orderList.size() ==0}|">
             <tr>
-                <th>주문번호</th>
-                <th>상품이미지</th>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>판매가</th>
-                <th>합계</th>
-                <th>주문상태</th>
-                <th>주문날짜</th>
-                <th>주문취소</th>
+                <td colspan="6">주문내역이 없습니다!!</td>
             </tr>
-            </thead>
-            <tbody>
-            <th:block th:if="|${orderDetail==null || orderDetail.size() ==0}|">
+        </th:block>
+
+        <th:block th:if="|${orderList!=null || orderList.size() !=0}|">
+            <th:block th:each="dto : ${orderList}">
                 <tr>
-                    <td colspan="6">주문내역이 없습니다!!</td>
+                    <td>
+                        <a th:href="@{/user/userOrder/orderdetail(order_no=${dto.order_no})}" th:text="|${dto.order_no} 상세보기|" style="text-decoration: underline; display: block;"/>
+                    </td>
+
+                    <td th:text="${dto.user_name}"></td>
+
+                    <td th:text="${#numbers.formatInteger(dto.orderTotPrice, 0, 'COMMA') + '원'}">
+                    </td>
+
+                    <td th:text="${dto.order_status.status}"></td>
+
+                    <td th:text="${#temporals.format(dto.order_inputDate, 'YYYY-MM-dd HH:mm')}">
+                    </td>
+
+
+                    <td>
+                        <button class="btn btn-sm btn-danger" th:onclick="|orderCancle(${dto.order_no})|">주문취소</button>
+                    </td>
                 </tr>
             </th:block>
-
-            <th:block th:if="|${orderDetail!=null || orderDetail.size() !=0}|">
-                <th:block th:each="dto : ${orderDetail}">
-                    <tr>
-                        <td th:text="${dto.order_no}"></td>
-                        <td>
-                            <img th:src="@{/image/}+${dto.prod_thumbnail}" width="100px">
-<!--                            <a href="<c:url value="/product/prodView.do?pnum=${dto.pnum}&pspec=${dto.pspec}"/>">-->
-<!--                            <img src="<c:url value="/productRepo/${dto.pimage}"/>" style="width:60px"/>-->
-<!--                            </a>-->
-                        </td>
-                        <td th:text="${dto.prod_name}"></td>
-                        <td th:text="|${dto.order_qty}개|"></td>
-<!--                            <form th:action="@{/user/userCartModify/(user_id = ${dto.user_id}, cart_no=${dto.cart_no})}" method="post">-->
-<!--                                <input type="text" size="3" name="order_qty" th:value="${dto.order_qty}"/>개<br/>-->
-<!--                                <input type="submit" class="btn btn-sm btn-secondary mt-3" value="수정"/>-->
-<!--                            </form>-->
-                        </td>
-                        <td th:text="${#numbers.formatInteger(dto.prod_price, 0, 'COMMA') + '원'}">
-                        </td>
-
-                        <td th:text="${#numbers.formatInteger(dto.totPrice, 0, 'COMMA') + '원'}">
-                        </td>
-
-                        <td th:text="${dto.order_status.status}">
-                        </td>
-
-                        <td th:text="${#temporals.format(dto.order_inputDate, 'YYYY-MM-dd HH:mm')}">
-                        </td>
-
-                        <td>
-                            <button class="btn btn-sm btn-danger" th:onclick="|orderCancle(${dto.order_no})|">주문취소</button>
-                        </td>
-                    </tr>
-                </th:block>
-            </th:block>
-            </tbody>
-        </table>
+        </th:block>
+        </tbody>
+    </table>
 
 </div>
 

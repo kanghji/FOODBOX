@@ -37,7 +37,7 @@
     </select>
 
     <select id="getUserOrderDetail" resultType="com.groupfour.foodbox.dto.UserOrderDetailDTO">
-        SELECT * FROM orderdetail WHERE user_id = #{id}
+        SELECT * FROM orderdetail WHERE order_no = #{order_no}
     </select>
 
     <update id="userOrderDelete">

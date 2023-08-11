@@ -56,12 +56,24 @@ public class UserOrderController {
         UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
         String id = userDTO.getUser_id();
 
-
         List<UserOrderDTO> orderList = userOrderService.getUserOrderList(id);
-        List<UserOrderDetailDTO> orderDetail = userOrderService.getUserOrderDetail(id);
         model.addAttribute("orderList", orderList);
-        model.addAttribute("orderDetail", orderDetail);
         return "/user/userOrderList";
+    }
+
+    @GetMapping("/userOrder/orderdetail")
+    public String userOrderDetail(int order_no, Model model) {
+        List<UserOrderDetailDTO> orderDetail = userOrderService.getUserOrderDetail(order_no);
+        int orderTotprice = 0;
+
+        for(UserOrderDetailDTO dto: orderDetail) {
+            orderTotprice += dto.getTotPrice();
+        }
+
+        model.addAttribute("orderDetail", orderDetail);
+        model.addAttribute("orderTotprice", orderTotprice);
+
+        return "/user/userOrderDetail";
     }
 
     @PostMapping("/userOrder/delete")
