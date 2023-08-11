@@ -15,9 +15,6 @@ public interface UserRegisterService {
     UserDTO checkUser_id(String user_id);
 
     // 이메일 인증
-    MimeMessage createMessage(String to)throws Exception;
-
-    // 이메일 인증
-    String sendSimpleMessage(String to)throws Exception;
+    String emailCheck(String user_email)throws Exception;
 
 }
