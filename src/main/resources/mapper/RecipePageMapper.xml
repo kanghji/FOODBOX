@@ -30,7 +30,7 @@
     </select>
     <select id="recommendProduct" resultType="productDTO">
         SELECT * FROM product ORDER BY prod_code DESC
-        LIMIT 16
+        LIMIT 8
     </select>
 </mapper>
 
