@@ -37,10 +37,17 @@ public class AdminController {
             rttr.addAttribute("result", 0); //->실패시 다 시 로그인 폼으로이동
             return "redirect:/admin/adminLogin";  //redirect는 get방식
         }
-        session.setAttribute("adminLoginDto", dto);
+        session.setAttribute("adminLoginDto",dto);
 
         //jsp는 직접 view로 넘기는게 아니기 때문에 redirect불가
-        return "redirect:/admin/";
+        return "redirect:/admin";
+    }
+    @GetMapping("/adminLogout")
+    public String adminLogout(HttpSession session) {
+        // 로그인할때 만들어 두었던 세션 초기화
+        session.invalidate();
+
+        return "redirect:/admin";
     }
 
 
