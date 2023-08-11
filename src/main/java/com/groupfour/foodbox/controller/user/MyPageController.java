@@ -1,7 +1,10 @@
 package com.groupfour.foodbox.controller.user;
 
+import com.groupfour.foodbox.domain.BookmarkDTO;
+import com.groupfour.foodbox.domain.RecipeDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.user.MypageService;
+import com.groupfour.foodbox.service.user.RecipePageService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.awt.print.Book;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -16,6 +21,9 @@ public class MyPageController {
 
     @Autowired
     MypageService mypageService;
+
+    @Autowired
+    RecipePageService recipePageService;
 
     // 비밀번호 재확인
     @GetMapping("/user_pwUpdateChk")
@@ -60,5 +68,27 @@ public class MyPageController {
         mypageService.infoModify(userDTO);
         return "redirect:/user/infoUpdateView";
     }
+
+    // 북마크 리스트
+    @GetMapping("/user_bookmarkView")
+    public String bookmarkListView(HttpSession session, Model model) {
+       UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
+        String id = userDTO.getUser_id();
+       List<BookmarkDTO> bookmarkList = mypageService.bookmarkView(id);
+//        System.out.println("bookmarkList = " + bookmarkList);
+       model.addAttribute("bookmarkList", bookmarkList);
+        return "user/bookmarkList";
+    }
+
+    // 북마크 삭제
+    @PostMapping("/user_bookmarkDel")
+    @ResponseBody
+    public void deleteBookmark(@RequestBody BookmarkDTO bookmarkDTO) {
+        Long bm_recipe_id = bookmarkDTO.getBm_recipe_id();
+        mypageService.bookmarkDelete(bm_recipe_id);
+    }
+
+
+
 
 }
