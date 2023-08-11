@@ -16,16 +16,10 @@ public class EmailConfig {
 
     @Value("${mail.smtp.port}")
     private int port;
-    @Value("${mail.smtp.socketFactory.port}")
-    private int socketPort;
     @Value("${mail.smtp.auth}")
     private boolean auth;
     @Value("${mail.smtp.starttls.enable}")
     private boolean starttls;
-    @Value("${mail.smtp.starttls.required}")
-    private boolean startlls_required;
-    @Value("${mail.smtp.socketFactory.fallback}")
-    private boolean fallback;
     @Value("${AdminMail.id}")
     private String id;
     @Value("${AdminMail.password}")
@@ -33,25 +27,24 @@ public class EmailConfig {
 
 
     @Bean
-    public JavaMailSender javaMailService() {
-        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setUsername("taktochu@gmail.com");
-        javaMailSender.setPassword("hrxjczlowvhkfbnd");
-        javaMailSender.setPort(587);
-        javaMailSender.setJavaMailProperties(getMailProperties());
-        javaMailSender.setDefaultEncoding("UTF-8");
-        return javaMailSender;
-    }
-    private Properties getMailProperties()
-    {
-        Properties pt = new Properties();
-        pt.put("mail.smtp.socketFactory.port", socketPort);
-        pt.put("mail.smtp.auth", auth);
-        pt.put("mail.smtp.starttls.enable", starttls);
-        pt.put("mail.smtp.starttls.required", startlls_required);
-        pt.put("mail.smtp.socketFactory.fallback",fallback);
-        pt.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        return pt;
+    public JavaMailSender getJavaMailSender() {
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.transport.protocol", "smtp");
+        properties.put("mail.smtp.starttls.enable", starttls);
+        properties.put("mail.debug", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(port);
+        mailSender.setUsername(id);
+        mailSender.setPassword(password);
+        mailSender.setDefaultEncoding("utf-8");
+        mailSender.setJavaMailProperties(properties);
+
+        return mailSender;
     }
 }
