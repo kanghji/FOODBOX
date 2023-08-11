@@ -20,39 +20,36 @@
                             <label for="user_name">이름</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_name" name="user_name" class="update_input" th:value="${userDTO.user_name}"/>
+                            <input type="text" id="user_name" name="user_name" class="update_input" onkeyup="inputName()" th:value="${userDTO.user_name}"/>
                         </div>
                     </div>
                     <div class="validation validation_input_name">
-                        <p class="validation_text">이름을 입력해주세요</p>
+                        <p class="validation_text" id="checkNameMsg"></p>
                     </div>
                     <div class="info_inner">
                         <div class="label_box email_label">
                             <label for="user_email">이메일</label>
                         </div>
                         <div class="input_box">
-                            <input type="email" id="user_email" name="user_email" class="update_input" th:value="${userDTO.user_email}" />
+                            <input type="email" id="user_email" name="user_email" class="update_input" onkeyup="inputEmail()" th:value="${userDTO.user_email}" />
                         </div>
                         <button type="button" class="confirm_btn " onclick="emailBtn()">이메일 인증</button>
                     </div>
-                    <div class="validation validation_email">
-                        <p class="validation_text">이메일 형식으로 입력해주세요</p>
-                    </div>
-                    <div class="validation validation_input_email">
-                        <p class="validation_text">이메일을 입력해주세요</p>
+                    <div class="validation validation_input_name">
+                        <p class="validation_text" id="checkEmailMsg"></p>
                     </div>
                     <div class="info_inner">
                         <div class="label_box tel_label">
                             <label for="user_tel">휴대폰</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_tel" name="user_tel" class="update_input" th:value="${userDTO.user_tel}" />
+                            <input type="text" id="user_tel" name="user_tel" class="update_input" onkeyup="inputTel()" oninput="hypenTel(this)" maxlength="13" th:value="${userDTO.user_tel}" />
                         </div>
 <!--                        <button type="button" class="confirm_btn" onclick="telBtn()">휴대폰 인증</button>-->
                     </div>
-<!--                    <div class="validation validation_input_tel">-->
-<!--                        <p class="validation_text">휴대폰 번호를 입력해주세요</p>-->
-<!--                    </div>-->
+                    <div class="validation validation_input_name">
+                        <p class="validation_text" id="checkTelMsg"></p>
+                    </div>
                     <div class="userinfo_box info_inner ">
                         <div class="label_box gender_label">
                             <span>성별</span>

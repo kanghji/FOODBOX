@@ -3,14 +3,12 @@ package com.groupfour.foodbox.service.user;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.user.UserRegisterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Random;
 import java.util.UUID;
 
 @Service
