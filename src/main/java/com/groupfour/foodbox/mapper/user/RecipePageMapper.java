@@ -1,9 +1,6 @@
 package com.groupfour.foodbox.mapper.user;
 
-import com.groupfour.foodbox.domain.BookmarkDTO;
-import com.groupfour.foodbox.domain.ProductPageDTO;
-import com.groupfour.foodbox.domain.RecipeDTO;
-import com.groupfour.foodbox.domain.UserDTO;
+import com.groupfour.foodbox.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,4 +20,6 @@ public interface RecipePageMapper {
     int bookmarkRegister(@Param("bookmarkDTO") BookmarkDTO bookmarkDTO);
     //사용자 정보가져오기
     UserDTO userCheck(String user_id);
+    //추천상품 가져오기
+    List<ProductDTO> recommendProduct();
 }

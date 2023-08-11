@@ -23,7 +23,7 @@ public interface ProductPageMapper {
     //상품별 댓글 개수
     int  productReplyCount(int reply_prod_code);
     //상품별 댓글 별점 합계
-    int productRatingSum(int reply_prod_code);
+    Integer productRatingSum(int reply_prod_code);
     //상품 댓글 등록
     int prodReplyRegister(ProductReplyDTO reply);
     //상품 댓글 삭제

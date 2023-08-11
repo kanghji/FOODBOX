@@ -36,5 +36,6 @@ public interface ProductMapper {
     void adminProductDelete(int prod_code);
     //상품 상세이미지 삭제
     void adminProductImageDelete(int prod_code);
-
+    //상품 상세이미지 수정
+    void adminProductImageModify(String image_prod_image, int prod_code);
 }

@@ -5,28 +5,29 @@
     .container{
         width:1200px;
     }
-    .direct:hover{
+    .goCart:hover{
+             border-color: black;
+             background-color:#f29a1a;
+             color:white;
+         }
+    .dirBuy:hover{
          border-color:#f29a1a;
          background-color:white;
          color:black;
     }
-    .cart:hover{
-        border-color: black;
-        background-color:#f29a1a;
-        color:white;
-    }
-    #product_reply:hover{
-        background-color:#f29a1a;
-        color:white;
-    }
+
     .info:hover{
         color:#f29a1a;
         cursor:pointer;
     }
-    .review:hover{
+    .review a:hover{
         color:#f29a1a;
         cursor:pointer;
     }
+    #reviewRegisterBtn:hover{
+         background-color:#f29a1a;
+         color:white;
+     }
 </style>
 <div class="container d-flex col-6" style="padding-top:150px;">
     <div class="me-3 col">
@@ -34,7 +35,7 @@
     </div>
     <div>
       <p class="m-3 col" th:text="${productDTO.prod_comment}"></p>
-        <h4 class="m-3" th:text="&lbrack;+${productDTO.getProd_brand()}+&rbrack;+${productDTO.prod_name}"></h4>
+        <h4 class="m-3" th:text="&lbrack;+${productDTO.getProd_brand()}+&rbrack;+' '+${productDTO.prod_name}"></h4>
         <br>
         <br>
         <br>
@@ -70,7 +71,7 @@
 <br>
 <div class="container d-flex mt-5 align-items-end">
     <h3 class="info me-4">상세정보</h3>
-    <h4 href="#replyArea" class="review center-block">리뷰</h4>
+    <h4 class="review center-block"><a href="#replyTextInput">리뷰</a></h4>
 </div>
 <th:block th:if="${productImageList.size()!=0}">
 <div class="container d-flex flex-column mt-4" id="productImage" style="height:800px; overflow:hidden;">
@@ -90,11 +91,10 @@
 </div>
 </th:block>
 <hr class="container mt-3">
-<div class="container mt-3 mb-3">
+<div class="container mt-3 mb-3" id="replyTextInput">
 
     <textarea class="w-100 p-2" id="reply_content" name="reply_content" onclick="replyLoginCheck()"
-              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}">
-    </textarea>
+              th:placeholder="${session.userLoginDto?.user_id==null?'로그인 후 작성가능합니다':'상품리뷰를 작성하세요'}"></textarea>
     <div class="d-flex justify-content-end m-3">
         <th:block th:if="${session.userLoginDto?.user_id!=null}" class="d-flex">
             <select id="reply_rating" name="reply_rating">
@@ -148,12 +148,6 @@
         document.getElementById("infoHide").style.display="none";
         document.getElementById("productImage").style.height="800px";
     }
-    // function reviewTextArea(){
-    //     if([[${session.userLoginDto?.user_id==null}]]){
-    //         alert("로그인 후 작성 가능합니다");
-    //         return;
-    //     }
-    // }
     $(document).ready(function() {
         let reply_prod_code = [[${productDTO.prod_code}]]
         let reply_user_id = "[[${session.userLoginDto?.user_id}]]";
@@ -172,6 +166,7 @@
                 type: "get",
                 success: (replyPageDTO) => {
                     let productReplyList = replyPageDTO.list;
+                    let ratingAverage = 0;
                     // console.log(productReplyList);
                     //댓글이 있는 경우
                     for (let i = 0; i < productReplyList.length; i++) {
@@ -199,7 +194,10 @@
                         }
                         str += '</div></div>';
                     }
-                    let ratingAverage = replyPageDTO.productRatingSum/replyPageDTO.totalCnt;
+
+                    if(replyPageDTO.productRatingSum==0) ratingAverage = 0;
+                    else ratingAverage = replyPageDTO.productRatingSum/replyPageDTO.totalCnt;
+
                     let ratingStr = '';
                     if (Math.round(ratingAverage)!= 0) {
                         for (let starcount = 0; starcount < Math.round(ratingAverage); starcount++) {
