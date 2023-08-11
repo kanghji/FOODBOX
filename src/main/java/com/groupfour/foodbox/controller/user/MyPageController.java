@@ -1,13 +1,19 @@
 package com.groupfour.foodbox.controller.user;
 
+import com.groupfour.foodbox.domain.BookmarkDTO;
+import com.groupfour.foodbox.domain.RecipeDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.user.MypageService;
+import com.groupfour.foodbox.service.user.RecipePageService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.awt.print.Book;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -15,6 +21,9 @@ public class MyPageController {
 
     @Autowired
     MypageService mypageService;
+
+    @Autowired
+    RecipePageService recipePageService;
 
     // 비밀번호 재확인
     @GetMapping("/user_pwUpdateChk")
@@ -25,19 +34,61 @@ public class MyPageController {
         return "user/user_pwUpdateChk";
     }
 
-    // 비밀번호 재확인 후 비밀번호 변경
+    // 비밀번호 재확인 후 비밀번호 변경 페이지 이동
     @PostMapping("/user_pwUpdate")
     public String pwUpdateView() {
         return "user/user_pwUpdate";
     }
 
+    // 비밀번호 수정
+    @PostMapping("/user_pwModify")
+    @ResponseBody
+    public int pwModify(@RequestBody UserDTO userDTO) {
+        int new_pw = mypageService.pwModify(userDTO);
+        return new_pw;
+    }
 
-
+    // 새 비밀번호 변경 후 페이지 이동
+    @GetMapping("/user_pwUpdataChkPage")
+    public String pwModifyOk() {
+        return "redirect:/user/user_pwUpdateChk";
+    }
 
     // 회원정보 수정 view
     @GetMapping("/user_infoUpdateView")
-    public String infoUpdateView() {
+    public String infoUpdateView(HttpSession session, Model model) {
+        UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
+        model.addAttribute("userDTO", mypageService.infoList(userDTO.getUser_id()));
         return "user/user_infoUpdateView";
     }
+
+    // 회원정보 수정
+    @PostMapping("/user_infoUpdataView")
+    public String infoModify(UserDTO userDTO) {
+        mypageService.infoModify(userDTO);
+        return "redirect:/user/infoUpdateView";
+    }
+
+    // 북마크 리스트
+    @GetMapping("/user_bookmarkView")
+    public String bookmarkListView(HttpSession session, Model model) {
+       UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
+        String id = userDTO.getUser_id();
+       List<BookmarkDTO> bookmarkList = mypageService.bookmarkView(id);
+//        System.out.println("bookmarkList = " + bookmarkList);
+       model.addAttribute("bookmarkList", bookmarkList);
+        return "user/bookmarkList";
+    }
+
+    // 북마크 삭제
+    @PostMapping("/user_bookmarkDel")
+    @ResponseBody
+    public void deleteBookmark(@RequestBody BookmarkDTO bookmarkDTO) {
+        Long bm_recipe_id = bookmarkDTO.getBm_recipe_id();
+        mypageService.bookmarkDelete(bm_recipe_id);
+    }
+
+
+
 
 }

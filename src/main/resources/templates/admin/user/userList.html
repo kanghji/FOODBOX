@@ -19,17 +19,19 @@
     <form id="frmTable">
     <table class="table table-bordered">
         <thead class="table-secondary">
-        <tr>
-            <th class="col-1">선택</th>
-            <th>회원번호</th>
-            <th>아이디</th>
+        <tr class="text-center">
+            <th width="5%">선택</th>
+            <th width="8%">회원번호</th>
+            <th width="8%">아이디</th>
             <th>비밀번호</th>
-            <th>이름</th>
-            <th>성별</th>
-            <th>생년월일</th>
+            <th width="7%">이름</th>
+            <th width="8%">성별</th>
+            <th width="12%">생년월일</th>
             <th>이메일</th>
-            <th>주소</th>
-            <th class="col-2">삭제</th>
+            <th width="8%">우편번호</th>
+            <th width="10%">도로명주소</th>
+            <th width="9%">상세주소</th>
+            <th width="6%">삭제</th>
         </tr>
         </thead>
 
@@ -48,7 +50,9 @@
                 <td th:text="${userList.user_gender}"></td>
                 <td th:text="${userList.user_birthday}"></td>
                 <td th:text="${userList.user_email}"></td>
-                <td th:text="${userList.user_zibunaddr}"></td>
+                <td th:text="${userList.user_zipcode}"></td>
+                <td th:text="${userList.user_roadaddr}"></td>
+                <td th:text="${userList.user_detailaddr}"></td>
 
                 <td>
                     <a class="btn btn-sm btn-danger" th:href="@{/admin/userDelete(user_no=${userList.user_no})}">삭제</a>

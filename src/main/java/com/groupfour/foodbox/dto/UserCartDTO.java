@@ -21,4 +21,11 @@ public class UserCartDTO {
     private int order_qty;
 
     private Date order_inputDate;
+
+    private int totPrice;
+
+    public void setTotPrice(int totPrice) {
+        this.totPrice = prod_price * order_qty;
+    }
+
 }

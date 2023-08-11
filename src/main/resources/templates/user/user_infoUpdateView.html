@@ -20,7 +20,7 @@
                             <label for="user_name">이름</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_name" name="user_name" class="update_input" value=""/>
+                            <input type="text" id="user_name" name="user_name" class="update_input" th:value="${userDTO.user_name}"/>
                         </div>
                     </div>
                     <div class="validation validation_input_name">
@@ -31,7 +31,7 @@
                             <label for="user_email">이메일</label>
                         </div>
                         <div class="input_box">
-                            <input type="password" id="user_email" name="user_email" class="update_input" value="" />
+                            <input type="email" id="user_email" name="user_email" class="update_input" th:value="${userDTO.user_email}" />
                         </div>
                         <button type="button" class="confirm_btn " onclick="emailBtn()">이메일 인증</button>
                     </div>
@@ -46,7 +46,7 @@
                             <label for="user_tel">휴대폰</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_tel" name="user_tel" class="update_input" value="" />
+                            <input type="text" id="user_tel" name="user_tel" class="update_input" th:value="${userDTO.user_tel}" />
                         </div>
 <!--                        <button type="button" class="confirm_btn" onclick="telBtn()">휴대폰 인증</button>-->
                     </div>
@@ -58,8 +58,8 @@
                             <span>성별</span>
                         </div>
                         <div class="gender_box">
-                            <label><input type="radio" name="user_gender" class="gender_radio" value="" readonly/> 남자</label>
-                            <label><input type="radio" name="user_gender" class="gender_radio" value="" readonly/> 여자</label>
+                            <label><input type="radio" th:checked="true" name="user_gender" class="gender_radio" th:value="${userDTO.user_gender}" readonly/> 남자</label>
+                            <label><input type="radio" th:checked="true" name="user_gender" class="gender_radio" th:value="${userDTO.user_gender}" readonly/> 여자</label>
                         </div>
                     </div>
                     <div class="userpw_box info_inner">
@@ -67,7 +67,7 @@
                             <label for="user_email">생년월일</label>
                         </div>
                         <div class="input_box">
-                            <input type="date" id="user_birthday" name="user_birthday" class="update_input" value="" readonly />
+                            <input type="date" id="user_birthday" name="user_birthday" class="update_input" th:value="${userDTO.user_birthday}" readonly />
                         </div>
                     </div>
                 </div>
@@ -77,27 +77,27 @@
                     <div class="addr_box">
                         <div class="info_inner userAddr_box">
                             <div class="label_box addr_label">
-                                <label for="user_zipcode">우편번호</label>
+                                <label for="sample4_postcode">우편번호</label>
                             </div>
                             <div class="input_box">
-                                <input type="text" id="user_zipcode" name="user_zipcode" class="addr_num_input" />
+                                <input type="text" id="sample4_postcode" name="user_zipcode" class="addr_num_input" th:value="${userDTO.user_zipcode}"/>
                             </div>
                         </div>
                         <div class="info_inner userAddr_box">
                             <div class="label_box zibun_label">
-                                <label for="user_zibunaddr">주소</label>
+                                <label for="sample4_roadAddress">주소</label>
                             </div>
                             <div class="input_box addr_seach addr_inner">
-                                <input type="text" id="user_zibunaddr" class="addr_input" name="user_zibunaddr" value="">
+                                <input type="text" id="sample4_roadAddress" class="addr_input" name="user_roadaddr" th:value="${userDTO.user_roadaddr}">
                             </div>
-                            <button type="button" class="addr_seachBtn" onclick="">주소 검색</button>
+                            <button type="button" class="addr_seachBtn" onclick="sample4_execDaumPostcode()">주소 검색</button>
                         </div>
                         <div class="info_inner userAddr_box">
                             <div class="label_box addr_label">
                                 <label for="user_detailaddr">상세주소</label>
                             </div>
                             <div class="input_box addr_detail addr_inner">
-                                <input type="text" id="user_detailaddr" class="addr_input" placeholder="상세주소 입력" name="user_detailaddr" value="">
+                                <input type="text" id="user_detailaddr" class="addr_input" placeholder="상세주소 입력" name="user_detailaddr" th:value="${userDTO.user_detailaddr}">
                             </div>
                         </div>
                     </div>

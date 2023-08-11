@@ -18,9 +18,9 @@
 
     <!-- 아이디 & 비밀번호 찾기 -->
     <div class="find_wrap">
-      <a class="find01" href="">아이디 찾기 </a>
+      <a class="find01" th:href="@{/user/findId}">아이디 찾기 </a>
       <span class="find_bar"></span>
-      <a class="find02" href="">비밀번호 찾기</a>
+      <a class="find02" th:href="@{/user/findPw}">비밀번호 찾기</a>
     </div>
 
     <!-- 로그인 & 회원가입 버튼-->
@@ -33,7 +33,8 @@
 </div>
 
 <!-- 푸터 -->
-  <th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<!--  <th:block th:replace="/user_inc/footer :: footerFragment"></th:block>-->
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>
 
 </body>
 </html>

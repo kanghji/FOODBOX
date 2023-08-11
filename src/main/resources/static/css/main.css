@@ -1,3 +1,4 @@
+
 /* section 01 */
 
 .img_box {
@@ -106,7 +107,8 @@
 
 .new__price {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 15px;
+    margin-top: 0.5em;
 }
 
 /* slider btn */

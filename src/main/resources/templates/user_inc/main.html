@@ -20,76 +20,23 @@
                 <div class="title__box">
                     <div class="new_title">
                         <h2>NEW</h2>
-                        <a href="#신상품페이지" class="more-btn">더보기 <i class="fa fa-angle-right"></i></a>
+                        <a href="/user/productPage?prod_spec=NEW" class="more-btn">더보기 <i class="fa fa-angle-right"></i></a>
                     </div>
                 </div>
                 <!-- new menu slider -->
                 <div class="new-slider__wrap">
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>상품명</p>
-                        <p class="new__price">가격</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-                            <!-- <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                    <div class="new-menu">
-                        <a href="#해당상품링크">
-<!--                            <img src="./image/main_sec2/07_main_메모리인제주.png" alt="" class="best__img01">-->
-                            <div class="img_test"></div>
-                        </a>
-                        <p>메모리 인 제주 20입</p>
-                        <p class="new__price">38,000원</p>
-                    </div>
-                </div>
+                    <th:block th:each=" productDTO : ${prodSlideList}">
+<!--                        <div class="new-menu">-->
+<!--                            <div class="img_test">-->
+<!--                                <a th:href="@{/user/productView(prod_code=${productDTO.prod_code})}">-->
+<!--                                    <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="상품이미지" class="best__img01">-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            <p th:text="${productDTO.prod_name}">상품명</p>-->
+<!--                            <p class="new__price" th:text="${productDTO.prod_price}">가격</p>-->
+<!--                        </div>-->
+                        <th:block th:replace="/user/productSlide"/>
+                    </th:block>
             </div>
         </section>
         <section class="section section_three">
@@ -98,9 +45,22 @@
                 <div class="title__box">
                     <div class="new_title">
                         <h2>BEST</h2>
-                        <a href="#베스트페이지" class="more-btn">더보기 <i class="fa fa-angle-right"></i></a>
+                        <a href="/user/productPage?prod_spec=BEST" class="more-btn">더보기 <i class="fa fa-angle-right"></i></a>
                     </div>
                 </div>
+<!--                <div class="best_imgs">-->
+<!--                    <th:block th:each=" productDTO : ${prodSlideList}">-->
+<!--                    <div class="new-menu">-->
+<!--                        <div class="img_test">-->
+<!--                            <a>-->
+<!--                                     <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="상품이미지" class="best__img01">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <p>상품명</p>-->
+<!--                        <p>가격</p>-->
+<!--                    </div>-->
+<!--                    </th:block>-->
+<!--                </div>-->
             </div>
         </section>
     </main>

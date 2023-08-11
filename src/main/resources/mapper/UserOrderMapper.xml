@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.groupfour.foodbox.mapper.user.UserOrderMapper">
+
+    <select id="userOrder" resultType="com.groupfour.foodbox.dto.UserOrderCheckDTO">
+        SELECT c.cart_no, c.user_id, c.prod_code, u.user_name, p.prod_name, p.prod_thumbnail,
+        p.prod_price, p.prod_qty, c.order_qty
+        FROM usercart c
+            JOIN user u
+            ON  c.user_id = u.user_id
+            JOIN product p
+            ON c.prod_code = p.prod_code
+        WHERE c.user_id = #{user_id}
+    </select>
+
+    <select id="userOrderInfo" resultType="userDTO">
+        SELECT * FROM user WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insertOrderList" useGeneratedKeys="true" keyProperty="order_no">
+        INSERT INTO orderlist (order_status, user_id, user_name, ordertotprice, order_inputDate)
+        VALUES(#{order_status}, #{user_id}, #{user_name}, #{orderTotPrice}, now())
+    </insert>
+
+    <insert id="insertOrderDetail">
+        INSERT INTO orderdetail(order_no, order_status, user_id, user_name, prod_code, prod_name, prod_thumbnail,
+        prod_price, prod_qty, order_qty, order_inputDate)
+        VALUES(#{order_no}, #{order_status}, #{user_id}, #{user_name}, #{prod_code}, #{prod_name}, #{prod_thumbnail}, #{prod_price},
+        #{prod_qty}, #{order_qty}, now())
+    </insert>
+
+    <select id="getUserOrderList">
+        SELECT * FROM orderdetail WHERE user_id = #{id}
+    </select>
+</mapper>
