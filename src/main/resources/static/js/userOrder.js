@@ -129,3 +129,18 @@ function payBtn(orderList) {
         }
     });
 }
+
+function orderCancle(order_no) {
+    $.ajax({
+        type: "post",
+        url: "/user/userOrder/delete",
+        data: JSON.stringify(order_no),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            window.location.replace("/user/userOrder/orderlist");
+        },
+        error: function (error) {
+            console.error("에러:", error);
+        }
+    });
+}

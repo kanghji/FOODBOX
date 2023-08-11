@@ -32,7 +32,19 @@
         #{prod_qty}, #{order_qty}, now())
     </insert>
 
-    <select id="getUserOrderList">
+    <select id="getUserOrderList" resultType="com.groupfour.foodbox.dto.UserOrderDTO">
+        SELECT * FROM orderlist where user_id = #{id}
+    </select>
+
+    <select id="getUserOrderDetail" resultType="com.groupfour.foodbox.dto.UserOrderDetailDTO">
         SELECT * FROM orderdetail WHERE user_id = #{id}
     </select>
+
+    <update id="userOrderDelete">
+        UPDATE orderdetail SET order_status = 'CANCLE' WHERE order_no = #{orderNo}
+    </update>
+
+    <update id="userOrderListDelete">
+        UPDATE orderlist SET order_status = 'CANCLE' WHERE order_no = #{orderNo}
+    </update>
 </mapper>
