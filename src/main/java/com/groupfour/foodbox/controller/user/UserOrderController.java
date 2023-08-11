@@ -41,8 +41,8 @@ public class UserOrderController {
 
     @PostMapping("/userOrder/pay")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void userPay(@RequestBody List<UserOrderCheckDTO> orderList) {
-        userOrderService.addOrderList(orderList);
+    public void userPay(@RequestBody UserOrderCheckDTO userOrderCheckDTO) {
+        userOrderService.addOrderList(userOrderCheckDTO);
     }
 
     @GetMapping("/userOrder/success")

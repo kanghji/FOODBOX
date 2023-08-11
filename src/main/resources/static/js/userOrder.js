@@ -116,10 +116,23 @@ function orderBtn(orderList) {
 
 function payBtn(orderList) {
 
+    let user_id = $("#user_id").val();
+    let user_name = $("#user_name").text();
+    let user_zipcode = $("#sample4_postcode").val();
+    let user_roaddr = $("#sample4_roadAddress").val();
+    let user_detailaddr = $("#user_detailaddr").val();
+
+    let userOrderCheckDTO = {user_id: user_id, user_name: user_name, user_zipcode: user_zipcode, user_roaddr: user_roaddr, user_detailaddr: user_detailaddr};
+
+    let data = {
+        orderList: orderList,
+        userOrderCheckDTO: userOrderCheckDTO
+    }
+
     $.ajax({
         type: "post",
         url: "/user/userOrder/pay",
-        data: JSON.stringify(orderList),
+        data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         success: function () {
             window.location.href = "/user/userOrder/success";

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +14,9 @@ public class UserOrderDTO {
     private OrderStatus order_status;
     private String user_id;
     private String user_name;
+    private String user_zipcode;
+    private String user_roadaddr;
+    private String user_detailaddr;
 
     private int orderTotPrice;
 
