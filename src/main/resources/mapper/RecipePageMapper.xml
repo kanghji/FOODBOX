@@ -28,5 +28,9 @@
     <select id="userCheck">
         SELECT * FROM user WHERE user_id=#{user_id}
     </select>
+    <select id="recommendProduct" resultType="productDTO">
+        SELECT * FROM product ORDER BY prod_code DESC
+        LIMIT 16
+    </select>
 </mapper>
 

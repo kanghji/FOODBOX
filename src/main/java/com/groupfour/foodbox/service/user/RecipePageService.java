@@ -1,9 +1,6 @@
 package com.groupfour.foodbox.service.user;
 
-import com.groupfour.foodbox.domain.BookmarkDTO;
-import com.groupfour.foodbox.domain.ProductPageDTO;
-import com.groupfour.foodbox.domain.RecipeDTO;
-import com.groupfour.foodbox.domain.UserDTO;
+import com.groupfour.foodbox.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +19,6 @@ public interface RecipePageService {
     int bookmarkRegister(BookmarkDTO bookmarkDTO);
     //사용자 정보가져오기
     UserDTO userCheck(String userId);
+    //추천상품 가져오기
+    List<ProductDTO> recommendProduct();
 }

@@ -41,6 +41,8 @@ public class RecipePageController {
     public String recipeView(Long id, Model model){
         RecipeDTO recipeDTO = recipePageService.recipeView(id);
         model.addAttribute("recipeDTO", recipeDTO);
+        List<ProductDTO> productList = recipePageService.recommendProduct();
+        model.addAttribute("productList", productList);
         return "/user/recipeView";
     }
     @PostMapping("/bookmarkRegister/{user_id}")

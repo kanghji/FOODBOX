@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
+<style>
+    .on_mouse,
+    .on_mouse a{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+    .on_mouse:hover,
+    .on_mouse a:hover{
+        opacity: 1;
+    }
+    .on_mouse a:hover{
+        background-color: #ffffffa1;
+    }
+</style>
   <div class="container mb-3" style="padding-top:150px;">
 
         <h4 class="w-100 mb-5 text-center">| R E C I P E |</h4>
@@ -40,7 +58,7 @@ function recipeLoad(viewPage){
             for(let i=0; i<recipeList.length; i++){
 
                 recipeViewLine+= '<div class="card me-5 mb-3" style="width:300px; border:none; height:300px;">'
-                    + '<a href="/user/recipeView?id='+recipeList[i].id+'" style="height:180px; overflow:hidden;">'
+                    + '<a href="/user/recipeView?id='+recipeList[i].id+'" style="height:160px; overflow:hidden;">'
                     + '<img class="card-image" src="'+recipeList[i].att_FILE_NO_MAIN+'" alt="Card image"'
                     + ' style="width:100%"></a>'
                     + '<div class="card-body text-center m-0 p-0">'
@@ -49,8 +67,8 @@ function recipeLoad(viewPage){
                     recipeViewLine += '<p>#'+recipeList[i].hash_TAG+'</p>';
                 }
                 recipeViewLine += '<p>['+recipeList[i].rcp_PAT2+'/'+recipeList[i].rcp_WAY2+']</p>'
-                    + '<p class="card-text" style="color:lightgray;">열랑 : '+recipeList[i].info_ENG+'</p>'
-                    + '</div></div>';
+                    + '<p class="card-text" style="color:darkgray;">열랑 : '+recipeList[i].info_ENG+'</p>'
+                    + '</div><div class="on_mouse"><a href="/user/recipeView?id='+recipeList[i].id+'"></a></div></div>';
                     if(recipeCount%4==0) {
                         recipeViewLine+='</div>'
                          +'<div class="d-flex mt-3 w-100">';
