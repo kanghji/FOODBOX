@@ -98,10 +98,14 @@ function pwModifyBtn(user_id) {
             data: JSON.stringify(user),
             contentType: 'application/json; charset=utf8',
             success: function (result) {
-                if (result > 0) {
+
+                if (pwConfirm == false) {
+                    alert("비밀번호가 일치하지 않습니다");
+                    return;
+                } else {
                     alert("비밀번호가 변경되었습니다");
-                    location.href = "/user/user_pwUpdataChkPage";
                 }
+                    location.href = "/user/user_pwUpdataChkPage";
             },
             error:function(){alert("비밀번호 변경 요청 실패");}
         });
