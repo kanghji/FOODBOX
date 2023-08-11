@@ -33,7 +33,7 @@ function userInfoBtn() {
 
 // 새 비밀번호 유효성 검사
 
-let newPwChk = "";
+let newPwChk = false;
 
 function inputNewPw(){
 
@@ -60,7 +60,7 @@ function inputNewPw(){
 
 // 새 비밀번호 확인 유효성 검사
 
-let pwConfirm = "";
+let pwConfirm = false;
 
 function inputNewPwChk() {
     let newPwChk = $("#new_pw_chk").val();
@@ -81,34 +81,17 @@ function inputNewPwChk() {
 // 새 비밀번호 변경
 
 function pwModifyBtn(user_id) {
-        let new_pw = document.getElementById('new_pw').value;
-        let user = {user_id: user_id, new_pw: new_pw};
-        // alert(user);
-        // alert(new_pw);
-        // alert(JSON.stringify(user));
-        // alert(user_id);
-        if (newPwChk == false) {
-            alert("최소 10글자 이상이어야하며, 영문/숫자/특수문자를 포함해야합니다");
-            return;
-        }
-
-        $.ajax({
-            url: '/user/user_pwModify',
-            type: 'post',
-            data: JSON.stringify(user),
-            contentType: 'application/json; charset=utf8',
-            success: function (result) {
-
-                if (pwConfirm == false) {
-                    alert("비밀번호가 일치하지 않습니다");
-                    return;
-                } else {
-                    alert("비밀번호가 변경되었습니다");
-                }
-                    location.href = "/user/user_pwUpdataChkPage";
-            },
-            error:function(){alert("비밀번호 변경 요청 실패");}
-        });
+    let new_pw = document.getElementById('new_pw').value;
+    let user = {user_id: user_id, new_pw: new_pw};
+    // alert(user);
+    // alert(new_pw);
+    // alert(JSON.stringify(user));
+    // alert(user_id);
+    if (newPwChk == false) {
+        alert("최소 10글자 이상이어야하며, 영문/숫자/특수문자를 포함해야합니다");
+        return;
+    }
+    location.href = "/user/user_pwUpdataChkPage";
 }
 
 // 북마크 삭제
@@ -122,8 +105,7 @@ function bookmarkDel(bm_recipe_id) {
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
             alert("책갈피가 삭제되었습니다");
-            // 삭제는 되는데 경로가 에러남 *** 확인!! ***
-            location.href = '/user/bookmarkList';
+            location.replace('/user/user_bookmarkView');
         }).fail(function (error) {
             alert("책갈피 삭제 에러");
         });
@@ -132,4 +114,107 @@ function bookmarkDel(bm_recipe_id) {
         return;
     }
 }
+
+// 휴대폰 번호 하이픈 이벤트 (정규식 방법)
+let hypenTel = (target) => {
+    target.value = target.value
+        .replace(/[^0-9]/g, '')
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    inputTel();
+}
+
+// 회원정보 수정 유효성 검사
+
+// 이름
+let nameChk = "";
+
+function inputName(){
+
+    let regName = /^[가-힣]+$/;
+    let nameInput = $("#user_name").val();
+
+    // 공백 체크
+    if (!nameInput || nameInput.trim() == "") {
+        $("#checkNameMsg").text("이름을 입력해주세요");
+        nameChk = false;
+        return;
+    }
+    // 한글 체크
+    // if(nameInput != regExpName) {
+    if(false === regName.test(nameInput)) {
+        $("#checkNameMsg").text("한글로 입력해주세요");
+        nameChk = false;
+        return;
+    } else {
+        $("#checkNameMsg").text(" ");
+        nameChk = true;
+    }
+}
+
+// 이메일
+let emailChk = "";
+
+function inputEmail() {
+    // let regEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+$/;
+    let regEmail = /^[0-9a-z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    let emailInput = $("#user_email").val();
+
+    if(false === regEmail.test(emailInput)) {
+        $("#checkEmailMsg").text("이메일 형식에 맞게 입력해주세요");
+        emailChk = false;
+        return;
+    } else {
+        $("#checkEmailMsg").text(" ");
+        emailChk= true;
+    }
+}
+
+
+// 휴대폰
+let telChk="";
+
+function inputTel() {
+    // let regTel = /^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$/;
+    let regTel = /^\d{3}-\d{3,4}-\d{4}$/;
+    let telInput =  $("#user_tel").val();
+
+    if (false === regTel.test(telInput)) {
+        $("#checkTelMsg").text("휴대폰 번호를 입력해주세요");
+        telChk = false;
+        return;
+    } else {
+        $("#checkTelMsg").text(" ");
+        telChk = true;
+    }
+}
+
+// 회원정보 수정 버튼 이벤트
+function userUpdateBtn() {
+    // let new_pw = document.getElementById('new_pw').value;
+    // let user = {user_id: user_id, new_pw: new_pw};
+    // if (newPwChk == false) {
+    //     alert("최소 10글자 이상이어야하며, 영문/숫자/특수문자를 포함해야합니다");
+    //     return;
+    // }
+    //
+    // $.ajax({
+    //     url: '/user/user_pwModify',
+    //     type: 'post',
+    //     data: JSON.stringify(user),
+    //     contentType: 'application/json; charset=utf8',
+    //     success: function (result) {
+    //
+    //         if (pwConfirm == false) {
+    //             alert("비밀번호가 일치하지 않습니다");
+    //             return;
+    //         } else {
+    //             alert("비밀번호가 변경되었습니다");
+    //         }
+    //         location.href = "/user/user_pwUpdataChkPage";
+    //     },
+    //     error:function(){alert("비밀번호 변경 요청 실패");}
+    // });
+}
+
+
 

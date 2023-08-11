@@ -3,7 +3,7 @@ package com.groupfour.foodbox.service.user;
 import com.groupfour.foodbox.domain.UserDTO;
 import org.springframework.stereotype.Service;
 
-import javax.mail.internet.MimeMessage;
+//import javax.mail.internet.MimeMessage;
 
 @Service
 public interface UserRegisterService {
