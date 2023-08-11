@@ -9,6 +9,9 @@
   <form th:action="@{/user/userLogin}" method="post">
 
     <p class="user_login">로그인</p>
+    <th:block th:if="${session.loginMsg != null}">
+      <p class="text-center text-danger" th:text="${session.loginMsg}"></p>
+    </th:block>
 
     <!-- 아이디 & 비밀번호 입력창-->
     <div class="inputbox_wrap">
