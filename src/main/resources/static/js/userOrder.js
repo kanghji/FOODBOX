@@ -118,11 +118,13 @@ function payBtn(orderList) {
 
     let user_id = $("#user_id").val();
     let user_name = $("#user_name").text();
+    let receiver_name = $("#receiver_name").val();
+    let receiver_tel = $("#receiver_tel").val();
     let user_zipcode = $("#sample4_postcode").val();
     let user_roaddr = $("#sample4_roadAddress").val();
     let user_detailaddr = $("#user_detailaddr").val();
 
-    let userOrderCheckDTO = {user_id: user_id, user_name: user_name, user_zipcode: user_zipcode, user_roaddr: user_roaddr, user_detailaddr: user_detailaddr};
+    let userOrderCheckDTO = {user_id: user_id, user_name: user_name, receiver_name: receiver_name, receiver_tel: receiver_tel, user_zipcode: user_zipcode, user_roaddr: user_roaddr, user_detailaddr: user_detailaddr};
 
     let data = {
         orderList: orderList,
