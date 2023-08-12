@@ -119,7 +119,13 @@ function payBtn(orderList) {
     let payMethod;
     let buyerEmail = document.getElementById('user_email').textContent;
     let amount = document.getElementById('cartTotPrice').value;
+    let prod_name;
 
+    if(orderList.length > 1) {
+        prod_name = orderList[0].prod_name + "외 " + (orderList.length - 1) + "개";
+    } else {
+        prod_name = orderList[0].prod_name;
+    }
 
     let user_id = $("#user_id").val();
     let user_name = $("#user_name").text();
@@ -129,7 +135,7 @@ function payBtn(orderList) {
     let user_roaddr = $("#sample4_roadAddress").val();
     let user_detailaddr = $("#user_detailaddr").val();
 
-    let userOrderCheckDTO = {user_id: user_id, user_name: user_name, receiver_name: receiver_name, receiver_tel: receiver_tel, user_zipcode: user_zipcode, user_roaddr: user_roaddr, user_detailaddr: user_detailaddr};
+    let userOrderCheckDTO = {user_id: user_id, user_name: user_name, receiver_name: receiver_name, receiver_tel: receiver_tel, user_zipcode: user_zipcode, user_roaddr: user_roaddr, user_detailaddr: user_detailaddr, prod_name: prod_name};
 
     let data = {
         orderList: orderList,
@@ -142,7 +148,7 @@ function payBtn(orderList) {
             pay_method: "card",
             merchant_uid: 'merchant_' + new Date().getTime(),
             amount: amount,
-            name: user_name,
+            name: prod_name,
             buyer_email: buyerEmail,
             buyer_name: user_name,
             buyer_tel: receiver_tel,

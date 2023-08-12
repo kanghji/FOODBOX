@@ -11,6 +11,7 @@ public class AdminOrderDTO {
     private int order_no;
     private OrderStatus order_status;
     private String user_id;
+    private String prod_name;
     private String user_name;
     private String receiver_name;
     private String receiver_tel;

@@ -17,6 +17,7 @@
         <th>주문 번호</th>
         <th>주문자 ID</th>
         <th>주문자 이름</th>
+        <th>주문상품</th>
         <th>받는사람 이름</th>
         <th>받는사람 전화번호</th>
         <th>주문배송주소</th>
@@ -33,6 +34,7 @@
           <td><a th:text="${orderDTO.order_no}" th:href="@{/admin/order/orderDetail(order_no=${orderDTO.order_no})}" style="text-decoration: underline; display: block;"></a></td>
           <td th:text="${orderDTO.user_id}"></td>
           <td th:text="${orderDTO.user_name}"></td>
+          <td><a th:text="${orderDTO.prod_name}" th:href="@{/admin/order/orderDetail(order_no=${orderDTO.order_no})}" style="text-decoration: underline; display: block;"></a></td>
           <td th:text="${orderDTO.receiver_name}"></td>
           <td th:text="${orderDTO.receiver_tel}"></td>
           <td th:text="|${orderDTO.user_zipcode} ${orderDTO.user_roadaddr} ${orderDTO.user_detailaddr}|"></td>

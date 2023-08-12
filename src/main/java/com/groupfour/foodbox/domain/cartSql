@@ -20,6 +20,7 @@ create table orderlist (
     order_status varchar(50),
     user_id varchar(50),
     user_name varchar(50),
+    prod_name varchar(200),
     receiver_name varchar(50),
     receiver_tel varchar(50),
     user_zipcode varchar(100),

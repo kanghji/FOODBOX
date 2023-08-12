@@ -52,6 +52,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 
         userOrderDTO.setUser_id(checkDTO.getUser_id());
         userOrderDTO.setUser_name(checkDTO.getUser_name());
+        userOrderDTO.setProd_name(checkDTO.getProd_name());
         userOrderDTO.setUser_zipcode(checkDTO.getUser_zipcode());
         userOrderDTO.setReceiver_name(checkDTO.getReceiver_name());
         userOrderDTO.setReceiver_tel(checkDTO.getReceiver_tel());
