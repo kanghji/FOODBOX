@@ -8,7 +8,7 @@
     td{vertical-align:middle;}
 </style>
 
-<div class="container col-6" style="padding-top: 150px; height: 1000px">
+<div class="container" style="padding-top: 150px; height: 1000px">
 
     <h3>주문 리스트</h3>
     <table class="table table-bordered">
@@ -16,6 +16,8 @@
         <tr>
             <th>주문번호</th>
             <th>주문자 이름</th>
+            <th>받는사람 이름</th>
+            <th>받는사람 전화번호</th>
             <th>배송지 주소</th>
             <th>주문합계</th>
             <th>주문날짜</th>
@@ -38,6 +40,10 @@
                     </td>
 
                     <td th:text="${dto.user_name}"></td>
+
+                    <td th:text="${dto.receiver_name}"></td>
+
+                    <td th:text="${dto.receiver_tel}"></td>
 
                     <td th:text="|${dto.user_zipcode} ${dto.user_roadaddr} ${dto.user_detailaddr}|"></td>
 

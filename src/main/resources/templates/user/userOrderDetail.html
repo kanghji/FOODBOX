@@ -8,7 +8,7 @@
     td{vertical-align:middle;}
 </style>
 
-<div class="container col-6" style="padding-top: 150px; height: 1000px">
+<div class="container" style="padding-top: 150px; height: 1000px">
 
         <h3>주문상세 리스트</h3>
         <table class="table table-bordered">
@@ -40,7 +40,6 @@
                         </td>
                         <td th:text="${dto.prod_name}"></td>
                         <td th:text="|${dto.order_qty}개|"></td>
-                        </td>
                         <td th:text="${#numbers.formatInteger(dto.prod_price, 0, 'COMMA') + '원'}">
                         </td>
 

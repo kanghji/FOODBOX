@@ -12,6 +12,8 @@ public class UserOrderCheckDTO {
 
     private String user_id;
     private String user_name;
+    private String receiver_name;
+    private String receiver_tel;
     private String user_zipcode;
     private String user_roaddr;
     private String user_detailaddr;

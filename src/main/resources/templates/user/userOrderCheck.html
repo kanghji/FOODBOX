@@ -78,7 +78,7 @@
             </tr>
             <tr>
                 <td>이름</td>
-                <td th:text="${userDTO.user_name}"></td>
+                <td><input type="text" id="receiver_name" th:value="${userDTO.user_name}"></td>
             </tr>
             <tr>
                 <td>우편번호</td>
@@ -100,7 +100,7 @@
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td th:text="${userDTO.user_tel}"></td>
+                <td><input type="text" id="receiver_tel" th:value="${userDTO.user_tel}"></td>
             </tr>
             <tr>
                 <td><b>결제정보</b></td>
