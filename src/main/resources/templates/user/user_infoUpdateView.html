@@ -5,7 +5,7 @@
     <div class="userinfo_wrap">
         <p class="infoupdate_title">회원 정보 수정</p>
         <div class="userinfo_pwChk">
-            <form class="userinfo_input" action="" method="post">
+            <form class="userinfo_input" id="userinfo_form" th:action="@{/user/user_infoUpdateView}" method="post">
                 <div class="infoupdate_inner">
                     <div class="userinfo_box info_inner">
                         <div class="label_box user_label">
@@ -33,8 +33,9 @@
                         <div class="input_box">
                             <input type="email" id="user_email" name="user_email" class="update_input" onkeyup="inputEmail()" th:value="${userDTO.user_email}" />
                         </div>
-                        <button type="button" class="confirm_btn " onclick="emailBtn()">이메일 인증</button>
+                        <button type="button" class="confirm_btn " onclick="emailCheck()">이메일 인증</button>
                     </div>
+                    <div class="register_content_wrap" id="confirmEmail" style="display:none;"></div>
                     <div class="validation validation_input_name">
                         <p class="validation_text" id="checkEmailMsg"></p>
                     </div>
@@ -68,7 +69,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- </form> -->
                 <div class="userupdate_btn_box addr_update">
                     <p class="addr_title">기본 배송지</p>
                     <div class="addr_box">
@@ -77,7 +77,7 @@
                                 <label for="sample4_postcode">우편번호</label>
                             </div>
                             <div class="input_box">
-                                <input type="text" id="sample4_postcode" name="user_zipcode" class="addr_num_input" th:value="${userDTO.user_zipcode}"/>
+                                <input type="text" id="sample4_postcode" name="user_zipcode" class="addr_num_input" th:value="${userDTO.user_zipcode}" readonly/>
                             </div>
                         </div>
                         <div class="info_inner userAddr_box">
@@ -101,13 +101,12 @@
                 </div>
             </form>
             <div class="btn_inner">
-                <button type="button" class="userUpdate_btn deleteBtn" onclick="userDeleteBtn()">탈퇴하기</button>
-                <button type="button" class="userUpdate_btn" onclick="userUpdateBtn()">회원정보수정</button>
+                <button type="reset" class="userUpdate_btn deleteBtn" th:onclick="|userDeleteBtn(${userDTO.user_no})|">탈퇴하기</button>
+                <button type="submit" class="userUpdate_btn" onclick="userUpdateBtn()">회원정보수정</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<!--<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>-->
 <th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>
