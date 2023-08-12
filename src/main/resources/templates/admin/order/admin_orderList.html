@@ -14,29 +14,32 @@
     <table class="table table-bordered">
       <thead class="table-secondary text-center">
       <tr>
-        <th>주문 코드</th>
+        <th>주문 번호</th>
         <th>주문자 ID</th>
         <th>주문자 이름</th>
-        <th>주문 상품명</th>
-        <th>주문수량</th>
-        <th>주문상태</th>
+        <th>받는사람 이름</th>
+        <th>받는사람 전화번호</th>
         <th>주문배송주소</th>
+        <th>주문상태</th>
         <th>주문합계</th>
-        <th>삭제</th>
+        <th>주문날짜</th>
+        <th>주문취소</th>
       </tr>
 
       </thead>
       <tbody class="text-center">
-      <th:block th:each="productDTO : ${productList}">
+      <th:block th:each="orderDTO : ${orderList}">
         <tr>
-          <td  th:text="${productDTO.prod_code}"></td>
-          <td th:text="${productDTO.prod_cat_code}"></td>
-          <td ><a th:text="${productDTO.prod_name}" th:href="@{/admin/productInfo(prod_code=${productDTO.prod_code})}"></a></td>
-          <td th:text="${productDTO.prod_brand}"></td>
-          <td th:text="${productDTO.prod_qty}"></td>
-          <td th:text="${productDTO.prod_price}"></td>
-          <td th:text="${productDTO.prod_inputdate}"></td>
-          <td><a class="btn btn-danger btn-sm" th:href="@{/admin/productDelete(prod_code=${productDTO.prod_code})}">삭제</a></td>
+          <td><a th:text="${orderDTO.order_no}" th:href="@{/admin/order/orderDetail(order_no=${orderDTO.order_no})}" style="text-decoration: underline; display: block;"></a></td>
+          <td th:text="${orderDTO.user_id}"></td>
+          <td th:text="${orderDTO.user_name}"></td>
+          <td th:text="${orderDTO.receiver_name}"></td>
+          <td th:text="${orderDTO.receiver_tel}"></td>
+          <td th:text="|${orderDTO.user_zipcode} ${orderDTO.user_roadaddr} ${orderDTO.user_detailaddr}|"></td>
+          <td th:text="${orderDTO.order_status}"></td>
+          <td th:text="${orderDTO.orderTotPrice}"></td>
+          <td th:text="${orderDTO.order_inputDate}"></td>
+          <td><a class="btn btn-danger btn-sm">주문취소</a></td>
         </tr>
       </th:block>
       </tbody>
@@ -45,18 +48,19 @@
 </div>
 <ul class="pagination justify-content-center">
   <li class="page-item" th:class="${pageDTO.prevPage<=0} ? 'disabled'">
-    <a class="page-link" th:href="@{/admin/productList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
+    <a class="page-link" th:href="@{/admin/order/orderList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
   </li>
   <th:block th:each="i: ${#numbers.sequence(pageDTO.blockStart,pageDTO.blockEnd)}">
     <th:block th:if="${i!=0}">
       <li class="page-item" th:classappend="${pageDTO.viewPage == i? 'active':''}">
-        <a class="page-link" th:href="@{/admin/productList(viewPage=${i},keyword=${keyword},searchType=${searchType})}">[[${i}]]</a>
+        <a class="page-link" th:href="@{/admin/order/orderList(viewPage=${i},keyword=${keyword},searchType=${searchType})}">[[${i}]]</a>
       </li>
     </th:block>
   </th:block>
   <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage} ? 'disabled'">
-    <a class="page-link" th:href="@{/admin/productList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
+    <a class="page-link" th:href="@{/admin/order/orderList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
   </li>
 </ul>
+<th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
 </body>
 </html>

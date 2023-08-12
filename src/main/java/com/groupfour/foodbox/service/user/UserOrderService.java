@@ -12,7 +12,7 @@ public interface UserOrderService {
 
     UserDTO userOrderInfo(String userId);
 
-    void addOrderList(List<UserOrderCheckDTO> orderList);
+    void addOrderList(UserOrderCheckDTO userOrderCheckDTO);
 
     List<UserOrderDTO> getUserOrderList(String id);
 

@@ -38,21 +38,37 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
-    public void addOrderList(List<UserOrderCheckDTO> orderList) {
+    public void addOrderList(UserOrderCheckDTO userOrderCheckDTO) {
         UserOrderDTO userOrderDTO = new UserOrderDTO();
+
+        List<UserOrderCheckDTO> orderList = userOrderCheckDTO.getOrderList();
+        UserOrderCheckDTO checkDTO = userOrderCheckDTO.getUserOrderCheckDTO();
 
         int orderTotPrice = 0;
         for(UserOrderCheckDTO dto: orderList) {
-            userOrderDTO.setUser_id(dto.getUser_id());
-            userOrderDTO.setUser_name(dto.getUser_name());
             orderTotPrice += dto.getTotPrice();
         }
         userOrderDTO.setOrderTotPrice(orderTotPrice);
+
+        userOrderDTO.setUser_id(checkDTO.getUser_id());
+        userOrderDTO.setUser_name(checkDTO.getUser_name());
+        userOrderDTO.setUser_zipcode(checkDTO.getUser_zipcode());
+        userOrderDTO.setReceiver_name(checkDTO.getReceiver_name());
+        userOrderDTO.setReceiver_tel(checkDTO.getReceiver_tel());
+        userOrderDTO.setUser_roadaddr(checkDTO.getUser_roaddr());
+        userOrderDTO.setUser_detailaddr(checkDTO.getUser_detailaddr());
+
+
         userOrderDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
         userOrderMapper.insertOrderList(userOrderDTO);
 
         String id = userOrderDTO.getUser_id();
         String name = userOrderDTO.getUser_name();
+        String zipcode = userOrderDTO.getUser_zipcode();
+        String roadaddr = userOrderDTO.getUser_roadaddr();
+        String detailaddr = userOrderDTO.getUser_detailaddr();
+        String receiver_name = userOrderDTO.getReceiver_name();
+        String receiver_tel = userOrderDTO.getReceiver_tel();
         int generatedOrderNo = userOrderDTO.getOrder_no();
 
         for(UserOrderCheckDTO dto: orderList) {
@@ -61,6 +77,11 @@ public class UserOrderServiceImpl implements UserOrderService {
             userOrderDetailDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
             userOrderDetailDTO.setUser_id(id);
             userOrderDetailDTO.setUser_name(name);
+            userOrderDetailDTO.setReceiver_name(receiver_name);
+            userOrderDetailDTO.setReceiver_tel(receiver_tel);
+            userOrderDetailDTO.setUser_zipcode(zipcode);
+            userOrderDetailDTO.setUser_roadaddr(roadaddr);
+            userOrderDetailDTO.setUser_detailaddr(detailaddr);
             userOrderDetailDTO.setProd_code(dto.getProd_code());
             userOrderDetailDTO.setProd_name(dto.getProd_name());
             userOrderDetailDTO.setProd_thumbnail(dto.getProd_thumbnail());

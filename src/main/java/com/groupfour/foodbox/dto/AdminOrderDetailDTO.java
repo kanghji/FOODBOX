@@ -2,15 +2,12 @@ package com.groupfour.foodbox.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@ToString
-public class UserOrderDetailDTO {
-
+public class AdminOrderDetailDTO {
     private int order_detail_no;
     private int order_no;
     private OrderStatus order_status;
@@ -37,5 +34,4 @@ public class UserOrderDetailDTO {
     public void setTotPrice(int totPrice) {
         this.totPrice = prod_price * order_qty;
     }
-
 }
