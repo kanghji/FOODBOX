@@ -40,7 +40,6 @@
                         </td>
                         <td th:text="${dto.prod_name}"></td>
                         <td th:text="|${dto.order_qty}개|"></td>
-                        </td>
                         <td th:text="${#numbers.formatInteger(dto.prod_price, 0, 'COMMA') + '원'}">
                         </td>
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.groupfour.foodbox.mapper.admin.AdminOrderMapper">
+
+    <select id="orderList" resultType="com.groupfour.foodbox.dto.AdminOrderDTO">
+        SELECT * FROM orderlist;
+    </select>
+
+    <select id="orderDetail" resultType="com.groupfour.foodbox.dto.AdminOrderDetailDTO">
+        SELECT * FROM orderDetail WHERE order_no = #{orderNo};
+    </select>
+
+</mapper>
