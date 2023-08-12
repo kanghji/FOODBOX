@@ -26,6 +26,24 @@ public class UserLoginServiceImpl implements UserLoginService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    //유저정보 가져오기(카카오로그인)
+    public UserDTO getUser(String user_id) {
+        // 익명클래스를 사용하면 가독성이 떨어져서 람다식으로 치환해서 사용한다.
+//        User findUser = userRepository.findByUsername(username).orElseGet(new Supplier<User>() {
+//            @Override
+//            public User get() {
+//                return new User();
+//            }
+//        });
+
+        // 검색결과가 없으면 빈 객체를 리턴한다.
+        UserDTO findUser = userLoginMapper.findByUserId(user_id).orElseGet(()->{
+            return new UserDTO();
+        });
+
+        return findUser;
+
+    }
 
     // 로그인 하기
     @Override
