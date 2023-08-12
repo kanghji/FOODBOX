@@ -28,6 +28,7 @@ public class UserRegisterServiceImpl implements UserRegisterService {
     // 회원 가입
     @Override
     public int userRegister(UserDTO userDto) {
+        System.out.println("userDto = " + userDto);
         userDto.setUser_pw(passwordEncoder.encode(userDto.getUser_pw()));
         int n = userRegisterMapper.userRegister(userDto);
         return n;
