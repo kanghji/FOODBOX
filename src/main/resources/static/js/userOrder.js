@@ -99,11 +99,10 @@ function orderBtn(orderList) {
                         url: "/payment/complete",
                         method: "post",
                         headers: {"Content-Type": "application/json"},
-                        data: {
+                        data: JSON.stringify(orderList)
                             // imp_uid: rsp.imp_uid,
                             // merchant_uid: rsp.merchant_uid
-                            orderList: orderList
-                        }
+
                     }).done(function (data) {
                         // location.replace('/user/order/payment-result');
                     });
@@ -115,6 +114,12 @@ function orderBtn(orderList) {
 }
 
 function payBtn(orderList) {
+
+    let pg;
+    let payMethod;
+    let buyerEmail = document.getElementById('user_email').textContent;
+    let amount = document.getElementById('cartTotPrice').value;
+
 
     let user_id = $("#user_id").val();
     let user_name = $("#user_name").text();
@@ -131,18 +136,37 @@ function payBtn(orderList) {
         userOrderCheckDTO: userOrderCheckDTO
     }
 
-    $.ajax({
-        type: "post",
-        url: "/user/userOrder/pay",
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        success: function () {
-            window.location.href = "/user/userOrder/success";
+    IMP.init("imp63140874");
+    IMP.request_pay({
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            amount: amount,
+            name: user_name,
+            buyer_email: buyerEmail,
+            buyer_name: user_name,
+            buyer_tel: receiver_tel,
+            buyer_addr: user_roaddr,
+            buyer_postcode: user_zipcode
         },
-        error: function (error) {
-            console.error("에러:", error);
-        }
-    });
+        function(rsp) {
+            if (rsp.success) {
+                $.ajax({
+                    type: "post",
+                    url: "/user/userOrder/pay",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        window.location.href = "/user/userOrder/success";
+                    },
+                    error: function (error) {
+                        console.error("에러:", error);
+                    }
+                });
+            } else {
+                alert("결제에 실패하였습니다. 에러 : " + rsp.error_msg);
+            }
+        });
 }
 
 function orderList() {
