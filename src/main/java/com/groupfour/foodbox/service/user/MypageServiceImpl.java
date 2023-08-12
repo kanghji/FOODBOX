@@ -36,6 +36,7 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public void infoModify(UserDTO userDTO) {
         mypageMapper.infoUpdate(userDTO);
+//        System.out.println("회원정보수정 mapper = " + userDTO);
     }
 
     @Override
@@ -47,6 +48,11 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public void bookmarkDelete(Long bm_recipe_id) {
         mypageMapper.bookmarkDel(bm_recipe_id);
+    }
+
+    @Override
+    public void userDelete(int user_no) {
+        mypageMapper.userDelete(user_no);
     }
 
 
