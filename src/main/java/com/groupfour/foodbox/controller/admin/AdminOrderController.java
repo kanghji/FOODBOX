@@ -22,11 +22,15 @@ public class AdminOrderController {
     AdminOrderService adminOrderService;
 
 
+
     @GetMapping("/orderList")
     public String orderList(@RequestParam(defaultValue = "ALL") String keyword,
-                            @RequestParam(defaultValue="ALL") String searchType,
+                            @RequestParam(defaultValue = "ALL") String searchType,
                             PageDTO pageDTO, Model model) {
-        List<AdminOrderDTO> orderList = adminOrderService.orderList();
+        int orderListCount = adminOrderService.orderListCount();
+        pageDTO.setValue(orderListCount);
+
+        List<AdminOrderDTO> orderList = adminOrderService.orderList(pageDTO);
 
         model.addAttribute("orderList", orderList);
         model.addAttribute("keyword",keyword);
@@ -40,7 +44,11 @@ public class AdminOrderController {
     public String orderDetail(@RequestParam(defaultValue = "ALL") String keyword,
                             @RequestParam(defaultValue="ALL") String searchType,
                             PageDTO pageDTO, int order_no, Model model) {
-        List<AdminOrderDetailDTO> orderDetail = adminOrderService.orderDetail(order_no);
+
+        int orderDetailCount = adminOrderService.orderDetailCount(order_no);
+        pageDTO.setValue(orderDetailCount);
+
+        List<AdminOrderDetailDTO> orderDetail = adminOrderService.orderDetail(order_no, pageDTO);
 
         int orderTotprice = 0;
 
