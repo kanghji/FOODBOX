@@ -1,5 +1,6 @@
 package com.groupfour.foodbox.service.admin;
 
+import com.groupfour.foodbox.domain.PageDTO;
 import com.groupfour.foodbox.dto.AdminOrderDTO;
 import com.groupfour.foodbox.dto.AdminOrderDetailDTO;
 
@@ -7,7 +8,13 @@ import java.util.List;
 
 public interface AdminOrderService {
 
-    List<AdminOrderDTO> orderList();
+    int orderListCount();
 
-    List<AdminOrderDetailDTO> orderDetail(int orderNo);
+    List<AdminOrderDTO> orderList(PageDTO pageDTO);
+
+    int orderDetailCount(int orderNo);
+
+    List<AdminOrderDetailDTO> orderDetail(int orderNo, PageDTO pageDTO);
+
+
 }

@@ -48,17 +48,17 @@
 </div>
 <ul class="pagination justify-content-center">
   <li class="page-item" th:class="${pageDTO.prevPage<=0} ? 'disabled'">
-    <a class="page-link" th:href="@{/admin/productList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
+    <a class="page-link" th:href="@{/admin/order/orderList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
   </li>
   <th:block th:each="i: ${#numbers.sequence(pageDTO.blockStart,pageDTO.blockEnd)}">
     <th:block th:if="${i!=0}">
       <li class="page-item" th:classappend="${pageDTO.viewPage == i? 'active':''}">
-        <a class="page-link" th:href="@{/admin/productList(viewPage=${i},keyword=${keyword},searchType=${searchType})}">[[${i}]]</a>
+        <a class="page-link" th:href="@{/admin/order/orderList(viewPage=${i},keyword=${keyword},searchType=${searchType})}">[[${i}]]</a>
       </li>
     </th:block>
   </th:block>
   <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage} ? 'disabled'">
-    <a class="page-link" th:href="@{/admin/productList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
+    <a class="page-link" th:href="@{/admin/order/orderList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
   </li>
 </ul>
 <th:block th:replace="/admin/admin_bottom :: footerFragment"></th:block>
