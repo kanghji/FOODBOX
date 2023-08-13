@@ -14,6 +14,7 @@ public class UserOrderDTO {
     private OrderStatus order_status;
     private String user_id;
     private String user_name;
+    private String prod_name;
     private String receiver_name;
     private String receiver_tel;
     private String user_zipcode;

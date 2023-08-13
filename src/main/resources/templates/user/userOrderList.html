@@ -16,6 +16,7 @@
         <tr>
             <th>주문번호</th>
             <th>주문자 이름</th>
+            <th>주문상품</th>
             <th>받는사람 이름</th>
             <th>받는사람 전화번호</th>
             <th>배송지 주소</th>
@@ -36,10 +37,14 @@
             <th:block th:each="dto : ${orderList}">
                 <tr>
                     <td>
-                        <a th:href="@{/user/userOrder/orderdetail(order_no=${dto.order_no})}" th:text="|${dto.order_no} 상세보기|" style="text-decoration: underline; display: block;"/>
+                        <a th:href="@{/user/userOrder/orderdetail(order_no=${dto.order_no})}" th:text="${dto.order_no}" style="text-decoration: underline; display: block;"/>
                     </td>
 
                     <td th:text="${dto.user_name}"></td>
+
+                    <td>
+                        <a th:href="@{/user/userOrder/orderdetail(order_no=${dto.order_no})}" th:text="${dto.prod_name}" style="text-decoration: underline; display: block;"/>
+                    </td>
 
                     <td th:text="${dto.receiver_name}"></td>
 
