@@ -34,6 +34,11 @@ public class UserRegisterController {
     // 회원가입
     @PostMapping("/userRegister")
     public String userRegisterPost(UserDTO userDto) {
+        System.out.println("userDto.getUser_id() = " + userDto.getUser_id());
+        System.out.println("userDto.getUser_birthday() = " + userDto.getUser_birthday());
+//        if(userDto.getUser_birthday().equals("") || userDto.getUser_birthday() == null) {
+//            userDto.setUser_birthday();
+//        }
         int n = userRegisterService.userRegister(userDto);
 
         return "redirect:/user/userLogin";

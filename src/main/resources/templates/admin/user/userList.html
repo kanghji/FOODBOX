@@ -5,16 +5,25 @@
 <div class="container w-75 mt-5">
     <h3>회원 리스트</h3>
     <!-- 회원 검색 기능-->
-    <form action="/admin/userSearch" method="post">
-        <input type="text" id="user_name" name="user_name" placeholder="회원이름">
-
-        <select id="user_gender" name="user_gender">
+    <form action="/admin/userList" method="post">
+        <select id="searchType" name="searchType">
             <option value="ALL">전체</option>
             <option value="남자">남</option>
             <option value="여자">여</option>
         </select>
-        <input class="btn btn-sm btn-warning" type="submit" value="검색">
+        <input type="text" id="keyword" name="keyword" placeholder="회원이름">
+        <input class="btn btn-sm btn-warning" type="submit" value="회원검색">
     </form>
+<!--    <form action="/admin/userSearch" method="post">-->
+<!--        <input type="text" id="user_name" name="user_name" placeholder="회원이름">-->
+
+<!--        <select id="user_gender" name="user_gender">-->
+<!--            <option value="ALL">전체</option>-->
+<!--            <option value="남자">남</option>-->
+<!--            <option value="여자">여</option>-->
+<!--        </select>-->
+<!--        <input class="btn btn-sm btn-warning" type="submit" value="검색">-->
+<!--    </form>-->
 <!--회원 리스트 부분-->
     <form id="frmTable">
     <table class="table table-bordered">
@@ -43,7 +52,6 @@
                 <input type="checkbox" name="chkUno" th:value="${userList.user_no}">
                 </td>
                 <td th:text="${userList.user_no}"></td>
-<!--                <td th:text="${userList.user_id}"></td>-->
                 <td><a th:text="${userList.user_id}" th:href="@{/admin/userInfo(user_no=${userList.user_no})}"></a></td>
                 <td th:text="${userList.user_pw}"></td>
                 <td th:text="${userList.user_name}"></td>
@@ -68,20 +76,26 @@
     <button class="btn btn-danger" type="button" onclick="onDelete()">선택 삭제</button>
 </div>
 
-<!-- 페이지네이션 -->
+
+
+<!-- 페이지 네이션-->
 <ul class="pagination justify-content-center">
-    <li class="page-item">
-        <a class="page-link" href="">이전</a>
+    <li class="page-item" th:class="${pageDTO.prevPage<=0} ? 'disabled'">
+<!--    <li class="page-item" th:class="${pageDTO.prevPage<=0}">-->
+        <a class="page-link" th:href="@{/admin/userList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
     </li>
-
-    <li class="page-item">
-        <a class="page-link" href="">1</a>
-    </li>
-
-    <li class="page-item">
-        <a class="page-link" href="">다음</a>
+    <th:block th:each="i: ${#numbers.sequence(pageDTO.blockStart,pageDTO.blockEnd)}">
+        <li class="page-item ${pageDTO.viewPage == i ? 'active':''}">
+            <a class="page-link" th:href="@{/admin/userList(viewPage=${i},keyword=${keyword},searchType=${searchType})}">[[${i}]]</a>
+        </li>
+    </th:block>
+    <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage} ? 'disabled'">
+<!--    <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage}">-->
+        <a class="page-link" th:href="@{/admin/userList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
     </li>
 </ul>
+
+
 
 <!-- 회원 선택 삭제 시 체크 안하고 삭제 누르면 alert 뜸 -->
 

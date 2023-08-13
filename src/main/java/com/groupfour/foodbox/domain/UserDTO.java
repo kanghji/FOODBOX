@@ -3,6 +3,7 @@ package com.groupfour.foodbox.domain;
 
 import lombok.Data;
 
+import java.sql.Date;
 
 
 @Data
@@ -15,7 +16,7 @@ public class UserDTO {
         private String user_email;
         private String user_tel;
         private String user_gender;
-        private String user_birthday;
+        private Date user_birthday;
         private String user_zipcode;
         private String user_roadaddr;
         private String user_detailaddr;

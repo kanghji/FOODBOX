@@ -1,8 +1,8 @@
 
 // 상품 검색
-$(document).ready(function prodSearchBtn(){
-
-
-
-});
+// $(document).ready(function prodSearchBtn(){
+//
+//
+//
+// });
 

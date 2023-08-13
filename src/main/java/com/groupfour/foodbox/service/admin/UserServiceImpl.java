@@ -1,7 +1,10 @@
 package com.groupfour.foodbox.service.admin;
 
+import com.groupfour.foodbox.domain.PageDTO;
+import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.admin.UserMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +16,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    // 회원 리스트
+//    // 회원 리스트
+//    @Override
+//    public List<UserDTO> userList() {
+//        List<UserDTO> userList = userMapper.userList();
+//        return userList;
+//    }
+
+    // 회원리스트
     @Override
-    public List<UserDTO> userList() {
-        List<UserDTO> userList = userMapper.userList();
+    public List<UserDTO> userList(String keyword, String searchType, PageDTO pageDTO) {
+        List<UserDTO> userList = userMapper.userList(keyword,searchType, pageDTO);
         return userList;
     }
+
+    @Override
+    public int userCount(String keyword, String searchType) {
+        int userCount = userMapper.userCount(keyword,searchType);
+        return userCount;
+    }
+
 
     // 회원 삭제
     @Override
@@ -52,6 +69,5 @@ public class UserServiceImpl implements UserService {
     public void userModify(UserDTO userDto){
         userMapper.userModify(userDto);
     }
-
 
 }

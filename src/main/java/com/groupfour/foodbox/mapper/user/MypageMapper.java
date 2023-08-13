@@ -23,4 +23,6 @@ public interface MypageMapper {
     List<BookmarkDTO> bookmarkView(String id);
 
     void bookmarkDel(Long bm_recipe_id);
+
+    void userDelete(int user_no);
 }

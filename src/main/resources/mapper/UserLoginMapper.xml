@@ -21,6 +21,12 @@
         WHERE user_id = #{param1} AND user_email=#{param2}
     </update>
 
+    <!--유저정보 가져오기-->
+    <select id="findByUserId" resultType="userDTO">
+        SELECT * FROM user WHERE user_id = #{user_id}
+    </select>
+
+
 
 
 </mapper>
