@@ -5,9 +5,9 @@ user_id varchar(50) not null,
 user_pw varchar(200) not null,
 user_email varchar(50) not null,
 user_tel varchar(50) not null,
-user_gender varchar(50) not null,
-user_birthday date not null,
-user_zipcode varchar(100) null,
-user_roadaddr varchar(100) null,
+user_gender varchar(50)  null,
+user_birthday date  null,
+user_zipcode varchar(100) not null,
+user_roadaddr varchar(100) not null,
 user_detailaddr varchar(100) not null
 );

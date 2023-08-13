@@ -4,12 +4,34 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.groupfour.foodbox.mapper.admin.UserMapper">
 
-    <!--회원 리스트-->
-    <select id="userList">
-        select user_no, user_name, user_id, user_pw, user_email, user_tel,
-        user_gender, user_birthday, user_zipcode, user_roadaddr, user_detailaddr
-        from user
+<!--    &lt;!&ndash;회원 리스트&ndash;&gt;-->
+<!--    <select id="userList">-->
+<!--        select user_no, user_name, user_id, user_pw, user_email, user_tel,-->
+<!--        user_gender, user_birthday, user_zipcode, user_roadaddr, user_detailaddr-->
+<!--        from user-->
+<!--    </select>-->
+
+    <select id="userCount" resultType="Integer">
+        SELECT count(*) FROM user
+        WHERE 1=1
     </select>
+
+    <!--회원 리스트-->
+    <select id="userList" resultType="userDTO">
+        SELECT * FROM user
+        WHERE 1=1
+        ORDER BY user_no ASC LIMIT #{pageDTO.startIndex}, #{pageDTO.cntPerPage}
+    </select>
+    <sql id="criteria">
+        <if test="searchType != 'ALL'.toString()">
+            AND user_gender = #{searchType}
+        </if>
+
+        <if test="!keyword.equals('ALL')">
+            AND user_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+
+    </sql>
 
     <!--회원 삭제-->
     <delete id="userDelete">
