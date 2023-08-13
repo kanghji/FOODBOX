@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
+<style>
+  .table>thead {
+    vertical-align: middle;
+  }
+  td {
+    word-break: break-all;
+  }
+</style>
 <div class="container w-75 mt-3">
   <h3 class="mt-3 text-center">주문 리스트</h3>
   <form action="/admin/productList" method="post">
@@ -14,7 +22,7 @@
     <table class="table table-bordered">
       <thead class="table-secondary text-center">
       <tr>
-        <th>주문 번호</th>
+        <th>주문번호</th>
         <th>주문자 ID</th>
         <th>주문자 이름</th>
         <th>주문상품</th>
@@ -38,9 +46,9 @@
           <td th:text="${orderDTO.receiver_name}"></td>
           <td th:text="${orderDTO.receiver_tel}"></td>
           <td th:text="|${orderDTO.user_zipcode} ${orderDTO.user_roadaddr} ${orderDTO.user_detailaddr}|"></td>
-          <td th:text="${orderDTO.order_status}"></td>
-          <td th:text="${orderDTO.orderTotPrice}"></td>
-          <td th:text="${orderDTO.order_inputDate}"></td>
+          <td th:text="${orderDTO.order_status.status}"></td>
+          <td th:text="${#numbers.formatInteger(orderDTO.orderTotPrice, 0, 'COMMA') + '원'}"></td>
+          <td th:text="${#temporals.format(orderDTO.order_inputDate, 'YYYY-MM-dd HH:mm')}"></td>
           <td><a class="btn btn-danger btn-sm">주문취소</a></td>
         </tr>
       </th:block>
