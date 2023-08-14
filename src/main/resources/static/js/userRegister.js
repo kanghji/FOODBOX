@@ -31,6 +31,7 @@ function inputPw(){
     let regPw = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{10,20}$/;
     let pw = $("#user_pw").val();
 
+
     if(pw == "") {
         $("#pwMsg").text("비밀번호를 입력해주세요.");
         pwChk = false;
@@ -79,6 +80,7 @@ function inputName() {
     // 특수문자,영어,숫자는 사용불가 한글만 입력가능
     let regName = /^[가-힣]{2,15}$/;
     let name = $("#user_name").val();
+    console.log(name);
 
     if (name == "") {
         $("#nameMsg").text("이름을 입력해주세요.");
@@ -331,7 +333,7 @@ function userJoin(){
         alert("아이디 중복체크를 해주세요.")
         return;
     }
-
+console.log(pwChk);
     <!--pwChk가 false 면 가입 안되고 리턴됨-->
     if(pwChk==false){
         alert("비밀번호를 확인해주세요.");
@@ -389,7 +391,6 @@ function userJoin(){
         alert("생년월일을 확인해주세요.")
         return;
     }
-
 
 
     <!--이용약관 동의 안하면 false 여서 가입 안되고 리턴됨-->
