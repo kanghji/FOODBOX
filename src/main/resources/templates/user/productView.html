@@ -90,6 +90,7 @@
     </div>
 </div>
 </th:block>
+<!--댓글등록-->
 <hr class="container mt-3">
 <div class="container mt-3 mb-3" id="replyTextInput">
 
@@ -118,6 +119,7 @@
     <ul class="pagination justify-content-center my-5">
     </ul>
 <script>
+    //댓글 로그인 체크
     function replyLoginCheck(){
         if([[${session.userLoginDto?.user_id==null}]]){
             alert("로그인이 필요한 서비스입니다");

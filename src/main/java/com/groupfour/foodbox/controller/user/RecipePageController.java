@@ -60,4 +60,26 @@ public class RecipePageController {
         }
         return "fail";
     }
+    //레시피 댓글
+    @GetMapping("/recipeReply/{reply_recipe_code}/{viewPage}")
+    @ResponseBody
+    public ReplyPageDTO replyPageDTO(@PathVariable("reply_recipe_code") int reply_recipe_code,
+                                     @PathVariable("viewPage") int viewPage){
+        ReplyPageDTO replyPageDTO = recipePageService.recipeReply(reply_recipe_code, viewPage);
+        return replyPageDTO;
+    }
+    @PostMapping("/recipeReplyRegister")
+    @ResponseBody
+    public String recipeReplyRegister(@RequestBody RecipeReplyDTO recipeReply){
+        int n = recipePageService.recipeReplyRegister(recipeReply);
+        return n==1?"ok":"fail";
+    }
+    //댓글 삭제
+    @GetMapping("/recipeReplyDelete/{reply_num}/{reply_recipe_code}")
+    public String prodReplyDelete(@PathVariable("reply_num") int reply_num,
+                                  @PathVariable("reply_recipe_code") int reply_recipe_code){
+        int n = recipePageService.recipeReplyDelete(reply_num);
+        return "redirect:/user/recipeView?id="+reply_recipe_code;
+    }
+
 }
