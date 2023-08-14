@@ -18,5 +18,6 @@ public class SearchServiceImpl implements SearchService {
         List<ProductDTO> SearchList = searchMapper.getSearchList(prod_name);
         return SearchList;
     }
+
 }
 

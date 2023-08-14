@@ -2,6 +2,8 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 /*@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@500&family=Rowdies:wght@300&family=Rubik+Mono+One&display=swap');
+
 
 /* 초기화 */
 
@@ -64,7 +66,8 @@ a:hover {
 
 .logo {
     /*font-family: 'Black Han Sans', sans-serif;*/
-    font-family: 'Lilita One', cursive;
+    /*font-family: 'Lilita One', cursive;*/
+    font-family: 'Exo 2', sans-serif;
     /*font-family: 'Rowdies', cursive;*/
 }
 
@@ -155,3 +158,4 @@ a:hover {
     /*font-size: 15px;*/
     font-weight: 500;
 }
+
