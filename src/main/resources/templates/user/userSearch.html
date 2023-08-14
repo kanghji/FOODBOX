@@ -5,44 +5,40 @@
     <!--  검색창   -->
     <div class="search-box">
         <div class="search_inner">
-            <form th:action="@{/user/prodSeach}" method="post">
-                <input type="search" id="prod_name" name="prod_name" placeholder="검색어를 입력해주세요" size="40" autofocus  class="search__inp">
-                <button type="submit" class="searchBtn" onclick="prodSearchBtn()" value="noSearch">
-                        <i class="fa fa-search fa-lg search__img"></i>
-                </button>
-            </form>
+            <input type="search" id="prod_name" name="prod_name" placeholder="검색어를 입력해주세요" size="40" autofocus  class="search__inp">
+            <button type="submit" class="searchBtn" onclick="SearchBtn()" value="noSearch">
+                    <i class="fa fa-search fa-lg search__img"></i>
+            </button>
         </div>
     </div>
     <!--  버튼 클릭시 해당 검색결과 목록을 보여줌  -->
     <div class="btn__box">
             <div class="btn__inner">
-                    <button type="button" class="prod_btn search_btn" value="0" onclick="prodSearchBtn()">상품 <span>&lbbrk;0&rbbrk;</span></button>
-                    <button type="button" class="recipe_btn search_btn" value="1" onclick="recipeSearchBtn()">레시피 <span>&lbbrk;0&rbbrk;</span></button>
+                    <button type="button" class="prod_btn search_btn" onclick="prodSearchBtn()" value="noSearch">상품 <span>&lbbrk;0&rbbrk;</span></button>
+                    <button type="button" class="recipe_btn search_btn" onclick="recipeSearchBtn()">레시피 <span>&lbbrk;0&rbbrk;</span></button>
             </div>
     </div>
-    <!-- 검색 키워드가 없을떄 보여짐  -->
-    <!-- 키워드 값이 없으면 보이기   -->
-    <!--    <th:block th:if="${getProdSearchList.keyword == null || getRecipeSearchList.keyword == null }">-->
-    <th:block th:unless="${#strings.isEmpty(getProdSearchList)  == false}">
+    <!-- 검색 결과가 없을 때 -->
+    <th:block th:if="|${prodSearchList == 0 || prodSearchList.size() == 0}|">
         <div class="no_search__box">
             <div class="no_search">
                 <p>검색된 결과가 없습니다</p>
             </div>
         </div>
     </th:block>
-    <!--  검색 결과 목록  -->
-    <!--  상품 키워드 값이 있으면 목록 보이기  -->
+
+    <!--  상품 검색 결과 목록  -->
     <div class="prod_search_list searchBtn w-100 ps-5 d-flex justify-content-center">
         <div class="col-sm-9">
             <div class="d-flex mt-3 w-100">
-                <th:block th:each="productDTO, getProdSearchList : ${getProdSearchList}" th:if="${#strings.isEmpty(getProdSearchList)  == false}">
+                <th:block th:each="productDTO, prodSearchList : ${prodSearchList}">
                     <th:block th:replace="/user/productPreview"/>
                 </th:block>
                 <div class="w-100" id="productpreview"></div>
             </div>
         </div>
     </div>
-    <!--  레시피 키워드 값이 있으면 목록 보이기  -->
+    <!--  레시피 검색 결과 목록 -->
 <!--    <div class="prod_search_list searchBtn w-100 ps-5 d-flex justify-content-center">-->
 <!--        <div class="col-sm-9">-->
 <!--            <div class="d-flex mt-3 w-100">-->
@@ -58,5 +54,5 @@
 
 
 
-<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<!--<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>-->
 <th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>

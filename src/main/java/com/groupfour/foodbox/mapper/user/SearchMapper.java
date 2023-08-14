@@ -9,4 +9,5 @@ import java.util.List;
 public interface SearchMapper {
 
     List<ProductDTO> getSearchList(String prod_name);
+
 }
