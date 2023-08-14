@@ -2,6 +2,7 @@ package com.groupfour.foodbox.service.user;
 
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.dto.UserOrderCheckDTO;
+import com.groupfour.foodbox.dto.UserOrderDTO;
 import com.groupfour.foodbox.dto.UserOrderDetailDTO;
 
 import java.util.List;
@@ -11,7 +12,11 @@ public interface UserOrderService {
 
     UserDTO userOrderInfo(String userId);
 
-    void addOrderList(List<UserOrderCheckDTO> orderList);
+    void addOrderList(UserOrderCheckDTO userOrderCheckDTO);
 
-    List<UserOrderDetailDTO> getUserOrderList(String id);
+    List<UserOrderDTO> getUserOrderList(String id);
+
+    List<UserOrderDetailDTO> getUserOrderDetail(int order_no);
+
+    void userOrderDelete(int orderNo);
 }

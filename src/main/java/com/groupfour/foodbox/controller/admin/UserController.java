@@ -1,5 +1,8 @@
 package com.groupfour.foodbox.controller.admin;
 
+import com.groupfour.foodbox.domain.CategoryDTO;
+import com.groupfour.foodbox.domain.PageDTO;
+import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.admin.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +22,26 @@ public class UserController {
     private UserService userService;
 
     // 회원리스트
-    @GetMapping("/userList")
-    public String userList(Model model){
-        // data 만들기
-        List<UserDTO> userList = userService.userList();
-        model.addAttribute("userList", userList);
+    @RequestMapping("/userList")
+    public String userList(@RequestParam(defaultValue = "ALL") String keyword,
+                              @RequestParam(defaultValue="ALL") String searchType,
+                              PageDTO pageDTO, Model model){
+        int userCount = userService.userCount(keyword,searchType);
+        pageDTO.setValue(userCount);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("searchType",searchType);
+        model.addAttribute("pageDTO", pageDTO);
 
+        List<UserDTO> userList = userService.userList(keyword,searchType, pageDTO);
+        model.addAttribute("userList", userList);
         return "/admin/user/userList";
     }
+
 
     // 회원삭제
     @RequestMapping ("/userDelete")
     public String userDelete(int user_no){
-        int n = userService.userDelete(user_no);
+        userService.userDelete(user_no);
 
         return "redirect:/admin/userList";
     }
@@ -42,7 +52,7 @@ public class UserController {
         System.out.println("chkList = " + chkList);
 
         if(chkList != null) {
-            int n = userService.usersDelete(chkList);
+            userService.usersDelete(chkList);
         }
         return  "redirect:/admin/userList";
     }

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @Service
 public interface UserLoginService {
+    //유저정보 가져오기
+    UserDTO getUser(String user_id);
     // 로그인하기
     boolean userLogin(UserDTO userDto, HttpServletRequest req);
 

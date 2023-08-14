@@ -4,6 +4,24 @@
 <!-- header -->
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
+<style>
+    ul {
+        padding-left: 0px
+    }
+
+    li {
+        display: inline;
+    }
+
+    li:not(:nth-child(1)) {
+        margin-left: 20px;
+    }
+
+    ul li input {
+        margin-right: 5px;
+    }
+</style>
+
 <div class="container" style="padding-top: 150px">
     <section class="w-75 ps-5">
         <h2 class="mb-5">주문 / 결제</h2>
@@ -60,6 +78,7 @@
             </thead>
             <tbody>
             <tr>
+                <input type="hidden" th:value="${userDTO.user_id}"/>
                 <td>이름</td>
                 <td id="user_name" th:text="${userDTO.user_name}"></td>
             </tr>
@@ -77,19 +96,29 @@
             </tr>
             <tr>
                 <td>이름</td>
-                <td th:text="${userDTO.user_name}"></td>
+                <td><input type="text" id="receiver_name" th:value="${userDTO.user_name}"></td>
             </tr>
             <tr>
                 <td>우편번호</td>
-                <td id="user_zipcode" th:text="${userDTO.user_zipcode}"></td>
+                <td>
+                    <div class="content_box">
+                    <input class="register_content_box" type="text" id="sample4_postcode" name="user_zipcode" placeholder="우편번호" th:value="${userDTO.user_zipcode}" readonly required/>
+                    <input class="register_content_button" type="button" onclick="sample4_execDaumPostcode()" value="주소검색"/>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>배송지 주소</td>
-                <td id="user_addr" th:text="|${userDTO.user_roadaddr} ${userDTO.user_detailaddr}|"></td>
+                <td>
+                    <div class="content_box">
+                    <input class="register_content_box" type="text" id="sample4_roadAddress" name="user_roadaddr" placeholder="도로명주소" th:value="${userDTO.user_roadaddr}" readonly/>
+                    <input class="register_content_box" type="text" id="user_detailaddr" name="user_detailaddr" placeholder="상세주소를 입력해주세요." th:value="${userDTO.user_detailaddr}"/>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td th:text="${userDTO.user_tel}"></td>
+                <td><input type="text" id="receiver_tel" th:value="${userDTO.user_tel}"></td>
             </tr>
             <tr>
                 <td><b>결제정보</b></td>
@@ -100,8 +129,23 @@
                 <td th:text="${#numbers.formatInteger(cartTotPrice, 0, 'COMMA')}"> 원</td>
             </tr>
 
+            <tr>
+                <td>결제방법</td>
+                <td>
+                    <ul>
+                        <li>
+                            <label><input type="radio" name="radioTxt" value="html5_inicis" checked>카드결제</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="radioTxt" value="kakaopay">카카오페이</label>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
             </tbody>
         </table>
+
+
 
         <div class="text-center p-4">
             <button class="btn btn-primary" th:onclick="payBtn([[${orderList}]])">결제하기</button>
@@ -113,7 +157,9 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script src="/js/zipcode.js"></script>
 <script src="/js/userOrder.js"></script>
 <script src="/js/userOrderCheck.js"></script>
 <!-- footer -->
 <th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>

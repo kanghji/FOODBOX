@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.service.user.UserRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,10 @@ public class UserRegisterController {
     @Autowired
     private UserRegisterService userRegisterService;
 
+    //비밀번호 암호화
+//    @Autowired
+  //  private PasswordEncoder passwordEncoder;
+
     // 회원가입 페이지로 이동
     @GetMapping("/userRegister")
     public String userRegister(UserDTO userDto) {
@@ -29,6 +34,11 @@ public class UserRegisterController {
     // 회원가입
     @PostMapping("/userRegister")
     public String userRegisterPost(UserDTO userDto) {
+        System.out.println("userDto.getUser_id() = " + userDto.getUser_id());
+        System.out.println("userDto.getUser_birthday() = " + userDto.getUser_birthday());
+//        if(userDto.getUser_birthday().equals("") || userDto.getUser_birthday() == null) {
+//            userDto.setUser_birthday();
+//        }
         int n = userRegisterService.userRegister(userDto);
 
         return "redirect:/user/userLogin";

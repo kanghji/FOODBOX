@@ -3,7 +3,7 @@
 
 <link href="/css/userRegister.css" rel="stylesheet"/>
 <script src="/js/zipcode.js"></script>
-<script src="/js/userRegister.js."></script>
+<script src="/js/userRegister.js"></script>
 
 <!-- 컨텐츠 영역 -->
 <div class="user_register_wrap">
@@ -28,13 +28,13 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16"  placeholder="아이디를 입력해주세요."onkeyup="inputId()" required/>
+                    <input class="register_content_box" type="text" id="user_id" name="user_id" maxlength="16"  placeholder="아이디를 입력해주세요."onkeyup="inputId()"/>
                     <p class="chkMsg" id="idMsg"></p>
                 </div>
             </div>
             <div class="register_content03">
                 <div class="content_button">
-                    <input class="register_content_button" type="button" onclick="checkUser_id()" value="중복확인"/>
+                    <input class="register_content_button" id="duplicateChk" type="button" onclick="checkUser_id()" value="중복확인"/>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="password" id="user_pw" name="user_pw" onkeyup="inputPw()" placeholder="비밀번호를 입력해주세요." required/>
+                    <input class="register_content_box" type="password" id="user_pw" name="user_pw" onkeyup="inputPw()" placeholder="비밀번호를 입력해주세요."/>
                     <p class="chkMsg" id="pwMsg"></p>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="password" id="user_pw2" name="user_pw2" placeholder="비밀번호를 다시 입력해주세요." onkeyup="inputPwChk()" required/>
+                    <input class="register_content_box" type="password" id="user_pw2" name="user_pw2" placeholder="비밀번호를 다시 입력해주세요." onkeyup="inputPwChk()"/>
                     <p class="chkMsg" id="checkPwMsg"></p>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="text" id="user_name" name="user_name" onclick="inputName()" placeholder="이름을 입력해주세요." required/>
+                    <input class="register_content_box" type="text" id="user_name" name="user_name" onkeyup="inputName()" placeholder="이름을 입력해주세요."/>
                     <p class="chkMsg" id="nameMsg"></p>
                 </div>
             </div>
@@ -98,42 +98,23 @@
             </div>
             <div class="register_content02">
                 <div class="content_box">
-                    <input class="register_content_box" type="email" id="user_email" name="user_email" onkeyup="inputEmail()" placeholder="이메일을 입력해주세요." required/>
+                    <input class="register_content_box" type="email" id="user_email" name="user_email" onkeyup="inputEmail()" placeholder="이메일을 입력해주세요."/>
                     <p class="chkMsg" id="emailMsg"></p>
                 </div>
             </div>
             <div class="register_content03">
                 <div class="content_button">
-                    <input class="register_content_button" type="button" onclick="emailCheck()" value="인증메일" required/>
+                    <input class="register_content_button" type="button" onclick="emailCheck()" value="인증메일"/>
                 </div>
             </div>
-            <!-- 이메일 인증코드 확인하기 -->
-<!--            <div class="row" id="confirmEmail">-->
-<!--            </div>-->
+
         </div>
         <div class="register_content_wrap" id="confirmEmail" style="display:none;">
 
         </div>
-<!--        &lt;!&ndash; 이메일  인증번호 입력부분&ndash;&gt;-->
-<!--        <div class="register_content_wrap">-->
-<!--            <div class="register_content01">-->
-<!--                <span class="must_write03">이메일 인증번호</span>-->
-<!--                <span class="must_write04">&ast;</span>-->
-<!--            </div>-->
-<!--            <div class="register_content02">-->
-<!--                <div class="content_box">-->
-<!--                    <input class="register_content_box" type="text" name="user_email" id="confirmEmail" placeholder="인증번호를 입력해주세요."/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="register_content03">-->
-<!--                <div class="content_button">-->
-<!--                    <input class="register_content_button" type="button" onclick="" value="확인"/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
         <!-- 주소 입력부분-->
-<!--        <div class="adress_wrap">-->
+
             <div class="register_content_wrap">
                 <div class="register_content01">
                     <span class="must_write03">우편번호</span>
@@ -141,7 +122,7 @@
                 </div>
                 <div class="register_content02">
                     <div class="content_box">
-                        <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_zipcode" onkeyup="inputPostCode()" placeholder="우편번호" readonly required/></p>
+                        <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_postcode" onkeyup="inputPostCode()" placeholder="우편번호"/></p>
                         <p class="chkMsg" id="postCodeMsg"></p>
                     </div>
                 </div>
@@ -178,7 +159,7 @@
                 </div>
                 <div class="register_content03"></div>
             </div>
-<!--        </div>-->
+
             <!-- 전화번호 입력부분-->
             <div class="register_content_wrap">
                 <div class="register_content01">
@@ -202,8 +183,8 @@
                 </div>
                 <div class="register_content02">
                     <div class="content_box">
-                        <p><input class="register_content_box" type="date" id="user_birthday" name="user_birthday" onkeyup="inputBirthDay()" min="1990-01-01" max="2022-12-31"
-                                  data-placeholder="생년월일" required></p>
+                        <p><input class="register_content_box" type="date" id="user_birthday" name="user_birthday" min="1990-01-01" max="2022-12-31"
+                                onchange="inputBirthDay()"  data-placeholder="생년월일"></p>
                         <p class="chkMsg" id="birthDayMsg"></p>
                     </div>
                 </div>
@@ -241,7 +222,7 @@
                             <div style="overflow:auto; width:380px; height:370px;">
                                 <th:block th:replace="/user/agreement01"></th:block>
                             </div>
-                            <div class="modal_close_button"><button id="modalCloseButton">확인</button></div>
+                            <div class="modal_close_button"><button type="button" id="modalCloseButton">확인</button></div>
                         </div>
                     </div>
 
@@ -259,7 +240,7 @@
                     <div style="overflow:auto; width:380px; height:370px;">
                         <th:block th:replace="/user/agreement02"></th:block>
                     </div>
-                    <div class="modal_close_button"><button id="modalCloseButton2">확인</button></div>
+                    <div class="modal_close_button"><button type="button" id="modalCloseButton2">확인</button></div>
                 </div>
             </div>
 
@@ -286,149 +267,33 @@
 
 <script>
 
-
-    <!--아이디 중복체크-->
-    function checkUser_id(){
-        let user_id = $('#user_id').val();
-
-        $.ajax({
-            url:"/user/checkUser_id",
-            type: "post",
-            data:{"user_id":user_id}, // 서버에 전송할 데이터
-            success: function(responseData){
-                // responseData = "yes" or "no", yes:사용가능 no:사용불가
-                console.log(responseData)
-                if(responseData == "yes"){
-
-                    alert("사용 가능한 아이디입니다.");
-                    $("#register_button").attr("type","submit");
-                    idChk="true";
-                }else{
-                    alert("이미 사용중인 아이디입니다.");
-                    $("#register_button").attr("type","button");
-                    $("#register_button").on("click",function (){
-                        alert("아이디 중복체크를 다시 하세요!!");
-                        idChk="false";
-                    })
-
-                }
-            },
-            error : function(){
-                alert("서버에러 입니다.");
-            }
-        });
-    }
-
-    <!-- 이메일 인증-->
-    // let serverUUID = "";
-    // let isEmailChk = false;
-    // function emailCheck(){
-    //     let uEmail = $("#user_email").val();
-    //
-    //
-    //     $.ajax({
-    //         url:"/user/emailConfirm",
-    //         type: "get",
-    //         data: {"uEmail":uEmail},
-    //         success: function(ePw){
-    //             if(ePw != "fail"){
-    //                 serverUUID = ePw;
-    //                 console.log("이메일 인증코드 : " + ePw);
-    //                 // $("#confirmEmail").html('<div class="content_box">'
-    //                 //     +'<input class="register_content_box" value="인증번호를 입력해주세요." type="text" id="confirmUUID"/></div>'
-    //                 //     +'<div>'
-    //                 //     +'<span onclick="emailConfirm()"> 인증코드확인</span></div>'
-    //                 // $("#confirmEmail").html(
-    //                 //     +'<div class="content_box">'
-    //                 //     +'<input class="register_content_box" value="인증번호를 입력해주세요." type="text" id="confirmUUID"/></div>'
-    //                 //     +'<div class="register_content03">'
-    //                 //     +'<div class="content_button">'
-    //                 //     +'<span onclick="emailConfirm()">인증코드확인</span></div>'
-    //                 //     +'</div>'
-    //                 //     +'</div>'
-    //                 // );
-    //                 $('#confirmEmail').show();
-    //                 $("#confirmEmail").html('<div class="register_content01">'
-    //                 +'<span class="must_write03">이메일 인증</span>'
-    //                     +'<span class="must_write04">&ast;</span>'
-    //                     +'</div>'
-    //                     +'<div class="register_content02">'
-    //                     +'<div class="content_box">'
-    //                     +'<input class="register_content_box" type="text" id="confirmUUID" maxLength="16" placeholder="인증번호를 입력해주세요."/>'
-    //                     +'<p class="chkMsg"></p>'
-    //                     +'</div>'
-    //                     +'</div>'
-    //                     +'<div class="register_content03">'
-    //                     +'<div class="content_button">'
-    //                     +'<input class="register_content_button" type="button" onclick="emailConfirm()" value="이메일인증"/>'
-    //                     +'</div>'
-    //                     +'</div>');
-    //
-    //
-    //             }else{
-    //                 alert("이메일을 다시 확인하세요!!");
-    //                 $("#user_email").select();
-    //             }
-    //         },
-    //         error:function(){
-    //             alert("인증 실패!!");
-    //         }
-    //     });
-    // }
-    //
-    // function emailConfirm(){
-    //     let confirmUUID = $("#confirmUUID").val();
-    //
-    //     if(confirmUUID == null || confirmUUID ==""){
-    //         alert("인증 코드 확인하세요!!!");
-    //         $("#confirmUUID").select();
-    //     }else if(serverUUID == confirmUUID){
-    //         alert("인증 성공!!");
-    //         isEmailChk = true;
-    //     }else{
-    //         alert("인증코드를 다시 확인하세요!!");
-    //         $("#confirmUUID").select();
-    //         return;
-    //     }
-    // }
-    // $('#allCheck').click(function(){
-    //     let checked = $('#allCheck').is(':checked');
-    //     if(checked)
-    //         $('input:checkbox').prop('checked',true);
-    //     if(!checked)
-    //         $('input:checkbox').prop('checked',false);
-    // });
-    // $('#ToU').click(function(){
-    //     let touchk = $('#ToU').is(':checked');
-    //     let privacychk = $('#privacy').is(':checked');
-    //     if(touchk&&!privacychk)
-    //         $('#allCheck').prop('checked',false);
-    //     if(!touchk)
-    //         $('#allCheck').prop('checked',false);
-    //     if(touchk&&privacychk)
-    //         $('#allCheck').prop('checked',true);
-    // });
-    // $('#privacy').click(function(){
-    //     let touchk = $('#ToU').is(':checked');
-    //     let privacychk = $('#privacy').is(':checked');
-    //     if(privacychk&&!touchk)
-    //         $('#allCheck').prop('checked',false);
-    //     if(!privacychk)
-    //         $('#allCheck').prop('checked',false);
-    //     if(touchk&&privacychk)
-    //         $('#allCheck').prop('checked',true);
-    // });
-    // function userJoin(){
-    //     // if(idChk=="false") return;
-    //     let ToU = document.getElementById('ToU');
-    //     if(ToU.checked===false) {
-    //         alert("이용약관 동의는 필수사항입니다");
-    //         return;
-    //     }
-    //     document.user_register_form.submit();
-    // }
-
-
+    $('#allCheck').click(function(){
+        let checked = $('#allCheck').is(':checked');
+        if(checked)
+            $('input:checkbox').prop('checked',true);
+        if(!checked)
+            $('input:checkbox').prop('checked',false);
+    });
+    $('#ToU').click(function(){
+        let touchk = $('#ToU').is(':checked');
+        let privacychk = $('#privacy').is(':checked');
+        if(touchk&&!privacychk)
+            $('#allCheck').prop('checked',false);
+        if(!touchk)
+            $('#allCheck').prop('checked',false);
+        if(touchk&&privacychk)
+            $('#allCheck').prop('checked',true);
+    });
+    $('#privacy').click(function(){
+        let touchk = $('#ToU').is(':checked');
+        let privacychk = $('#privacy').is(':checked');
+        if(privacychk&&!touchk)
+            $('#allCheck').prop('checked',false);
+        if(!privacychk)
+            $('#allCheck').prop('checked',false);
+        if(touchk&&privacychk)
+            $('#allCheck').prop('checked',true);
+    });
 
     <!-- 모달-->
     const modalOpenButton = document.getElementById('modalOpenButton');
@@ -454,8 +319,6 @@
         modal2.classList.add('hidden');
     });
 </script>
-
-
 
 
 </body>
