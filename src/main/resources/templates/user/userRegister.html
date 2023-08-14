@@ -118,7 +118,9 @@
                 </div>
                 <div class="register_content02">
                     <div class="content_box">
-                        <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_postcode" onkeyup="inputPostCode()" placeholder="우편번호"/></p>
+<!--                        <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_postcode" disabled onkeyup="inputPostCode()" placeholder="우편번호"/></p>-->
+                        <p><input class="register_content_box" type="text" id="sample4_postcode"
+                                  name="user_zipcode" readonly placeholder="우편번호"/></p>
                         <p class="chkMsg" id="postCodeMsg"></p>
                     </div>
                 </div>
@@ -181,7 +183,6 @@
                     <div class="content_box">
                         <p><input class="register_content_box" type="date" id="user_birthday" name="user_birthday" min="1990-01-01" max="2022-12-31"
                                 onchange="inputBirthDay()"  data-placeholder="생년월일"></p>
-                        <p class="chkMsg" id="birthDayMsg"></p>
                     </div>
                 </div>
                 <div class="register_content03"></div>
@@ -214,7 +215,7 @@
 
                     <div id="modalContainer" class="hidden">
                         <div id="modalContent">
-                            <h5>푸드박스 이용약관 (필수)</h5>
+                            <h5 class="modal_title">푸드박스 이용약관 (필수)</h5>
                             <div style="overflow:auto; width:380px; height:370px;">
                                 <th:block th:replace="/user/agreement01"></th:block>
                             </div>
@@ -258,6 +259,7 @@
 
 
 <!-- 푸터-->
+<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
 <th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>
 
 
@@ -299,6 +301,8 @@
     const modal = document.getElementById('modalContainer');
     const modal2 = document.getElementById('modalContainer2');
 
+
+
     modalOpenButton.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
@@ -314,6 +318,21 @@
     modalCloseButton2.addEventListener('click', () => {
         modal2.classList.add('hidden');
     });
+
+    //모달팝업을 열 때 스크롤 막기
+        $('html, body').css({'overflow': 'hidden', 'height': '100%'}); // 모달팝업 중 html,body의 scroll을 hidden시킴
+    $('#element').on('scroll touchmove mousewheel', function(event) { // 터치무브와 마우스휠 스크롤 방지
+        event.preventDefault();
+        event.stopPropagation();
+
+        return false;
+    });
+
+
+    //모달팝업을 닫을 때 스크롤 다시 열기
+        $('html, body').css({'overflow': 'auto', 'height': '100%'}); //scroll hidden 해제
+    $('#element').off('scroll touchmove mousewheel'); // 터치무브 및 마우스휠 스크롤 가능
+
 </script>
 
 

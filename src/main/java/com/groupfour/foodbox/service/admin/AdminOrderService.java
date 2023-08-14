@@ -17,4 +17,7 @@ public interface AdminOrderService {
     List<AdminOrderDetailDTO> orderDetail(int orderNo, PageDTO pageDTO);
 
 
+    List<AdminOrderDetailDTO> getOrderDetail(int orderNo);
+
+    void adminOrderDelete(int orderNo);
 }

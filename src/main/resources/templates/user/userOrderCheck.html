@@ -5,19 +5,19 @@
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
 <style>
-    ul {
-        padding-left: 0px
+    td ul {
+        padding-left: 0px;
     }
 
-    li {
+    td ul li {
         display: inline;
     }
 
-    li:not(:nth-child(1)) {
+    td ul li:not(:nth-child(1)) {
         margin-left: 20px;
     }
 
-    ul li input {
+    td ul li input {
         margin-right: 5px;
     }
 </style>
@@ -156,7 +156,6 @@
 
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script src="/js/zipcode.js"></script>
 <script src="/js/userOrder.js"></script>
 <script src="/js/userOrderCheck.js"></script>

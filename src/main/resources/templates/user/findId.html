@@ -1,7 +1,7 @@
 
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
-<div class="container w-50" style="padding-top:300px;">
+<div class="container w-50" style="padding-top:200px;">
     <form action="/user/findId" method="post" name="product_input_form">
 
     <!-- Tab panes -->
@@ -11,7 +11,7 @@
                 <div id="findIdSuccess" style="display:none" class="px-4 mt-2">
                     <p class="text-center mt-4">가입시 아이디는 <b><span id="resultId"></span></b>입니다.</p>
                     <div class="d-flex justify-content-center">
-                        <a class="btn mt-3 p-2 w-50" style="background-color:#f29a1a; color:white;" type="button" href="">로그인</a>
+                        <a class="btn mt-3 p-2 w-50" style="background-color:#f29a1a; color:white;" type="button" th:href="@{/user/userLogin}">로그인</a>
                     </div>
                 </div>
             <div class="d-flex justify-content-center">

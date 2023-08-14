@@ -54,5 +54,32 @@ public class RecipePageServiceImpl implements RecipePageService {
         UserDTO userDTO = recipePageMapper.userCheck(user_id);
         return userDTO;
     }
+    //레시피별 댓글 리스트
+    @Override
+    public ReplyPageDTO recipeReply(int reply_recipe_code, int viewPage) {
+        int recipeReplyCount = recipePageMapper.recipeReplyCount(reply_recipe_code);
+        int recipeRatingSum = recipePageMapper.recipeRatingSum(reply_recipe_code);
+        if(recipeRatingSum==0) recipeRatingSum=0;
+        ReplyPageDTO replyPageDTO = new ReplyPageDTO();
+        replyPageDTO.setViewPage(viewPage);
+        replyPageDTO.setRecipeRatingSum(recipeRatingSum);
+        replyPageDTO.setValue(recipeReplyCount);
+        List<RecipeReplyDTO> recipeReplyList = recipePageMapper.recipeReply(reply_recipe_code, replyPageDTO);
+        System.out.println("recipeReplyList = " + recipeReplyList);
+        replyPageDTO.setRecipeList(recipeReplyList);
+        return replyPageDTO;
+    }
 
+    @Override
+    public int recipeReplyRegister(RecipeReplyDTO recipeReply) {
+        int n = recipePageMapper.recipeReplyRegister(recipeReply);
+        return n;
+    }
+
+    @Override
+    public int recipeReplyDelete(int reply_num) {
+                int n = recipePageMapper.recipeReplyDelete(reply_num);
+        return n;
+    }
 }
+

@@ -76,3 +76,7 @@ create table bookmark(
     foreign key (bm_recipe_id) references recipeinfo(id)
 	on delete cascade
 );
+-- 탈퇴자수 체크
+create table withdrawals_user(
+	withdrawals_num int
+);

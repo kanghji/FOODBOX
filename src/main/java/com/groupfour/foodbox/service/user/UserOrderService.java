@@ -18,5 +18,5 @@ public interface UserOrderService {
 
     List<UserOrderDetailDTO> getUserOrderDetail(int order_no);
 
-    void userOrderDelete(int orderNo);
+    void userOrderDelete(int orderNo, List<UserOrderDetailDTO> orderDetail);
 }

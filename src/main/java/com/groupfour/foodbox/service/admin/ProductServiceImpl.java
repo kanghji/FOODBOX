@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void adminProductRegister(MultipartHttpServletRequest mr, HttpServletRequest request) {
         // 이미지 저장 경로
-        String savePath = "F:\\foodbox_new\\foodbox\\src\\main\\resources\\static\\image";
+        String savePath = "C:\\foodbox\\src\\main\\resources\\static\\image";
         System.out.println(savePath);
 
         Map map = new HashMap();
@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService{
             }//if
         }//while
         System.out.println("map = " + map);
-//        for(int i=0; i<30; i++) {
+        for(int i=0; i<30; i++) {
             productMapper.adminProductRegister(map);
             for (Object objkey : map.keySet()) {
                 String key = objkey.toString();
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService{
                     productMapper.adminProductImageRegister(keyValue);
                 }
             }
-//        }
+        }
     }
     //상품리스트
     @Override
@@ -119,7 +119,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void adminProductModify(MultipartHttpServletRequest mr, HttpServletRequest request) {
         // 이미지 저장 경로
-        String savePath = "F:\\foodbox_new\\foodbox\\src\\main\\resources\\static\\image";
+        String savePath = "C:\\foodbox\\src\\main\\resources\\static\\image";
         System.out.println(savePath);
 
         Map map = new HashMap();
@@ -226,7 +226,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void adminProductDelete(int prod_code, HttpServletRequest request) {
-        String realPath = "F:\\foodbox_new\\foodbox\\src\\main\\resources\\static\\image";
+        String realPath = "C:\\foodbox\\src\\main\\resources\\static\\image";
         List<ProductImageDTO> productImageList = productMapper.productImageList(prod_code);
         File delFIle = null;
         for(ProductImageDTO productImageDTO : productImageList){
