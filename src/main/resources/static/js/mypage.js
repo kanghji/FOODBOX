@@ -127,7 +127,7 @@ let hypenTel = (target) => {
 
 // 이름
 
-function inputName(){
+function nameInput(){
 
     let regName = /^[가-힣]+$/;
     let nameInput = $("#user_name").val();
@@ -148,7 +148,7 @@ function inputName(){
 
 // 이메일
 
-function inputEmail() {
+function emailInput() {
     let regEmail = /^[0-9a-z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     let emailInput = $("#user_email").val();
 
@@ -163,7 +163,7 @@ function inputEmail() {
 
 // 휴대폰
 
-function inputTel() {
+function telInput() {
     let regTel = /^\d{3}-\d{3,4}-\d{4}$/;
     let telInput =  $("#user_tel").val();
 
