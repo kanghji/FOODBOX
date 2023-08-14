@@ -11,7 +11,11 @@ $(function (){
 function userInfoBtn() {
 
     let pwInput = $("#user_pw_input").val();
-    let userDTO = $("#user_pw_db").val();
+    let pw_check = $("#pw_check").val();
+    if(pw_check != null) {
+        alert(pw_check);
+    }
+    // let userDTO = $("#user_pw_db").val();
 
     // 비밀번호를 입력하지 않은 경우
     if (!pwInput|| pwInput.trim() == "") {
@@ -20,11 +24,11 @@ function userInfoBtn() {
         return;
     }
     // 입력한 비밀번호와 데이터에 저장된 비밀번호 불일치 여부
-    if (pwInput != userDTO) {
-        alert("비밀번호가 일치하지 않습니다");
-        $("#user_pw_input").focus();
-        return;
-    }
+    // if (pwInput != userDTO) {
+    //     alert("비밀번호가 일치하지 않습니다");
+    //     $("#user_pw_input").focus();
+    //     return;
+    // }
     // 일치하면 비밀번호 변경 페이지로 이동
     document.userinfo_input.submit();
 

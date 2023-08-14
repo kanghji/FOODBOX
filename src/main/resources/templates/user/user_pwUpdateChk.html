@@ -9,7 +9,7 @@
                 <p>비밀번호 재확인</p>
                 <p>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요</p>
             </div>
-            <form name="userinfo_input" th:action="@{/user/user_pwUpdate}" method="post">
+            <form name="userinfo_input" th:action="@{/user/user_pwUpdateChk}" method="post">
                 <div class="pwChk_box">
                     <div class="username_box pwChk_inner">
                         <div class="label_box user_label">
@@ -25,7 +25,8 @@
                         </div>
                         <div class="input_box">
                             <input type="password" id="user_pw_input" name="user_pw" class="info_input" minlength="10" placeholder="현재 비밀번호를 입력해주세요" />
-                            <input type="hidden" id="user_pw_db" name="user_pw_db" class="info_input" minlength="10" th:value="${userDTO.user_pw}" />
+                            <input type="hidden" id="pw_check" th:value="${msg}"/>
+<!--                            <input type="hidden" id="user_pw_db" name="user_pw_db" class="info_input" minlength="10" th:value="${userDTO.user_pw}" />-->
                         </div>
                         <p id="infoPwChk_text"></p>
                     </div>
