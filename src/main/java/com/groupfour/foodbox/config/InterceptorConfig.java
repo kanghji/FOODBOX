@@ -40,7 +40,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/user/checkUser_id/**")
                 //이메일 유효성 검사
                 .excludePathPatterns("/user/emailConfirm/**")
-                .excludePathPatterns("/user/userLogin");
+                .excludePathPatterns("/user/userLogin")
+                .excludePathPatterns("/user/search")
+                .excludePathPatterns("/user/prodSearch");
+
 
 
     }

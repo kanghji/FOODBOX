@@ -14,12 +14,14 @@
     <select id="userCount" resultType="Integer">
         SELECT count(*) FROM user
         WHERE 1=1
+        <include refid="criteria"></include>
     </select>
 
     <!--회원 리스트-->
     <select id="userList" resultType="userDTO">
         SELECT * FROM user
         WHERE 1=1
+        <include refid="criteria"></include>
         ORDER BY user_no ASC LIMIT #{pageDTO.startIndex}, #{pageDTO.cntPerPage}
     </select>
     <sql id="criteria">
