@@ -6,11 +6,11 @@ import com.groupfour.foodbox.dto.AdminOrderDetailDTO;
 import com.groupfour.foodbox.dto.UserOrderDetailDTO;
 import com.groupfour.foodbox.service.admin.AdminOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -64,5 +64,15 @@ public class AdminOrderController {
 
         return "/admin/order/admin_orderDetail";
     }
+
+    @PostMapping("/delete")
+    @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void adminOrderDelete(@RequestBody int order_no) {
+        List<AdminOrderDetailDTO> orderDetail = adminOrderService.getOrderDetail(order_no);
+        adminOrderService.adminOrderDelete(order_no);
+    }
+
+
 
 }

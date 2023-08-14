@@ -82,3 +82,23 @@ function orderCancle(order_no) {
         return;
     }
 }
+
+function adminOrderCancle(order_no) {
+    if(confirm("주문을 취소하시겠습니까?") == true) {
+        $.ajax({
+            type: "post",
+            url: "/admin/order/delete",
+            data: JSON.stringify(order_no),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                window.location.replace("/admin/order/orderList");
+                alert("주문취소 되었습니다");
+            },
+            error: function (error) {
+                console.error("에러:", error);
+            }
+        });
+    } else {
+        return;
+    }
+}
