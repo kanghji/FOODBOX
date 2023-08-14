@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.sql.Date;
 import java.util.Map;
 
 
@@ -98,7 +100,7 @@ public class KakaoLoginServiceImpl implements KakaoLoginService{
         userDTO.setUser_name("?");
         userDTO.setUser_tel("010");
         userDTO.setUser_gender("?");
-        userDTO.setUser_birthday("2020-08-12");
+        userDTO.setUser_birthday(Date.valueOf("2020-08-12"));
         userDTO.setUser_detailaddr("?");
 
 

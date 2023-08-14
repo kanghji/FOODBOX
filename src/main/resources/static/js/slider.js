@@ -5,7 +5,7 @@ $(function (){
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2500,
+        autoplaySpeed: 2200,
         speed: 850,
         cssEase: "ease-in-out",
         dots: false,

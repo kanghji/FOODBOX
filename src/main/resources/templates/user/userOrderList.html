@@ -5,14 +5,19 @@
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
 <style>
-    td{vertical-align:middle;}
+    .table>thead {
+        vertical-align: middle;
+    }
+    td {
+        word-break: break-all;
+    }
 </style>
 
 <div class="container" style="padding-top: 150px; height: 1000px">
 
-    <h3>주문 리스트</h3>
+    <h4 class="w-100 mb-5 text-center">| 주 문 내 역 |</h4>
     <table class="table table-bordered">
-        <thead>
+        <thead class="table-secondary text-center">
         <tr>
             <th>주문번호</th>
             <th>주문자 이름</th>

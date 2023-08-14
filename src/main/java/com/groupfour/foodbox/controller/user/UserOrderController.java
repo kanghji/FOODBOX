@@ -8,6 +8,7 @@ import com.groupfour.foodbox.service.user.UserOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +41,7 @@ public class UserOrderController {
     }
 
     @PostMapping("/userOrder/pay")
+    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void userPay(@RequestBody UserOrderCheckDTO userOrderCheckDTO) {
         userOrderService.addOrderList(userOrderCheckDTO);
