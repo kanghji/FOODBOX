@@ -55,4 +55,8 @@
     <update id="deleteOrder_qty">
         UPDATE product SET prod_qty = #{prod_qty} WHERE prod_code = #{prod_code}
     </update>
+
+    <select id="getProdInfo" resultType="com.groupfour.foodbox.dto.UserOrderCheckDTO">
+        SELECT * FROM product WHERE prod_code = #{prodCode}
+    </select>
 </mapper>

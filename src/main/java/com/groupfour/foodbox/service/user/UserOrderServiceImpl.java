@@ -97,6 +97,57 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
+    public void addFastPay(UserOrderCheckDTO userOrderCheckDTO) {
+
+        UserOrderCheckDTO userFastPayDTO = userOrderCheckDTO.getUserFastPayDTO();
+        UserOrderCheckDTO checkDTO = userOrderCheckDTO.getUserOrderCheckDTO();
+        userFastPayDTO.setTotPrice(userFastPayDTO.getTotPrice());
+
+        UserOrderDTO userOrderDTO = new UserOrderDTO();
+        userOrderDTO.setUser_id(checkDTO.getUser_id());
+        userOrderDTO.setUser_name(checkDTO.getUser_name());
+        userOrderDTO.setProd_name(checkDTO.getProd_name());
+        userOrderDTO.setUser_zipcode(checkDTO.getUser_zipcode());
+        userOrderDTO.setReceiver_name(checkDTO.getReceiver_name());
+        userOrderDTO.setReceiver_tel(checkDTO.getReceiver_tel());
+        userOrderDTO.setUser_roadaddr(checkDTO.getUser_roaddr());
+        userOrderDTO.setUser_detailaddr(checkDTO.getUser_detailaddr());
+        userOrderDTO.setOrderTotPrice(userFastPayDTO.getTotPrice());
+        userOrderDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
+
+        userOrderMapper.insertOrderList(userOrderDTO);
+
+        String id = userOrderDTO.getUser_id();
+        String name = userOrderDTO.getUser_name();
+        String zipcode = userOrderDTO.getUser_zipcode();
+        String roadaddr = userOrderDTO.getUser_roadaddr();
+        String detailaddr = userOrderDTO.getUser_detailaddr();
+        String receiver_name = userOrderDTO.getReceiver_name();
+        String receiver_tel = userOrderDTO.getReceiver_tel();
+        int generatedOrderNo = userOrderDTO.getOrder_no();
+
+        UserOrderDetailDTO userOrderDetailDTO = new UserOrderDetailDTO();
+        userOrderDetailDTO.setOrder_no(generatedOrderNo);
+        userOrderDetailDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
+        userOrderDetailDTO.setUser_id(id);
+        userOrderDetailDTO.setUser_name(name);
+        userOrderDetailDTO.setReceiver_name(receiver_name);
+        userOrderDetailDTO.setReceiver_tel(receiver_tel);
+        userOrderDetailDTO.setUser_zipcode(zipcode);
+        userOrderDetailDTO.setUser_roadaddr(roadaddr);
+        userOrderDetailDTO.setUser_detailaddr(detailaddr);
+        userOrderDetailDTO.setProd_code(userFastPayDTO.getProd_code());
+        userOrderDetailDTO.setProd_name(userFastPayDTO.getProd_name());
+        userOrderDetailDTO.setProd_thumbnail(userFastPayDTO.getProd_thumbnail());
+        userOrderDetailDTO.setProd_price(userFastPayDTO.getProd_price());
+        userOrderDetailDTO.setOrder_qty(userFastPayDTO.getOrder_qty());
+        userOrderDetailDTO.setProd_qty(userFastPayDTO.getProd_qty() - userFastPayDTO.getOrder_qty());
+
+        userOrderMapper.insertOrderDetail(userOrderDetailDTO);
+        userOrderMapper.updateProd_qty(userOrderDetailDTO);
+    }
+
+    @Override
     public List<UserOrderDTO> getUserOrderList(String id) {
         List<UserOrderDTO> orderlist = userOrderMapper.getUserOrderList(id);
 
@@ -129,5 +180,11 @@ public class UserOrderServiceImpl implements UserOrderService {
             }
         }
 
+    }
+
+    @Override
+    public UserOrderCheckDTO getProdInfo(int prodCode) {
+        UserOrderCheckDTO getProdInfo = userOrderMapper.getProdInfo(prodCode);
+        return getProdInfo;
     }
 }

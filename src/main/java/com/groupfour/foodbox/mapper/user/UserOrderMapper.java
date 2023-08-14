@@ -29,4 +29,6 @@ public interface UserOrderMapper {
     int updateProd_qty(UserOrderDetailDTO userOrderDetailDTO);
 
     int deleteOrder_qty(int prod_code, int prod_qty);
+
+    UserOrderCheckDTO getProdInfo(int prodCode);
 }
