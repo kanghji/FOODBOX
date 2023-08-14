@@ -2,11 +2,11 @@ $(document).ready(function() {
     numberOfMember();
 });
 function graph(){
-    let html='<div id="graph" class="w-100 h-100">\n' +
-        '        <div id="graph-top" class="d-flex align-items-center w-100" style="height:10%;">\n' +
+    let html='<div id="graph" class="w-100 h-100 shadow">\n' +
+        '        <div id="graph-top" class="d-flex align-items-center w-100" style="height:20%;">\n' +
         '\n' +
         '        </div>\n' +
-        '        <div id="graph-middle" class="d-flex w-100" style="height:90%;">\n' +
+        '        <div id="graph-middle" class="d-flex w-100" style="height:80%;">\n' +
         '            <div id="graph-middle-left" class="" style="width:10%; height:90%;">\n' +
         '\n' +
         '            </div>\n' +
@@ -25,11 +25,11 @@ function graph(){
 }
 
 function salesgraph(){
-    let html='<div id="graph" class="w-100" style="height: 50%; ">\n' +
-        '        <div id="graph-top" class="d-flex align-items-center w-100" style="height:10%;">\n' +
+    let html='<div id="graph" class="w-100 shadow" style="height: 50%; ">\n' +
+        '        <div id="graph-top" class="d-flex align-items-center w-100" style="height:20%;">\n' +
         '\n' +
         '        </div>\n' +
-        '        <div id="graph-middle" class="d-flex w-100" style="height:90%;">\n' +
+        '        <div id="graph-middle" class="d-flex w-100" style="height:80%;">\n' +
         '            <div id="graph-middle-left" class="" style="width:10%; height:90%;">\n' +
         '\n' +
         '            </div>\n' +
@@ -47,16 +47,16 @@ function salesgraph(){
     $('#graphView').html(html);
 }
 function monthlygraph(){
-    let html='<div id="monthlygraph" class="w-100" style="height: 50%; ">\n' +
-        '        <div id="monthlygraph-top" class="d-flex align-items-center w-100" style="height:10%;">\n' +
+    let html='<div id="monthlygraph" class="w-100 shadow" style="height: 50%; ">\n' +
+        '        <div id="monthlygraph-top" class="d-flex align-items-center w-100" style="height:20%;">\n' +
         '\n' +
         '        </div>\n' +
-        '        <div id="monthlygraph-middle" class="d-flex w-100" style="height:90%;">\n' +
-        '            <div id="graph-middle-left" class="" style="width:10%; height:90%;">\n' +
+        '        <div id="monthlygraph-middle" class="d-flex w-100" style="height:80%;">\n' +
+        '            <div id="monthlygraph-middle-left" class="" style="width:10%; height:90%;">\n' +
         '\n' +
         '            </div>\n' +
         '            <div id="monthlygraph-middle-middle" class="h-100" style="width:80%;">\n' +
-        '                <div id="graph-middle-middle-top" class="w-100 border" style="height:90%;">\n' +
+        '                <div id="monthlygraph-middle-middle-top" class="d-flex w-100 border" style="height:90%;">\n' +
         '\n' +
         '                </div>\n' +
         '                <div id="monthlygraph-middle-middle-bottom" class="d-flex w-100" style="height:10%;">\n' +
@@ -72,7 +72,7 @@ function monthlygraph(){
 function numberOfMember(){
 
     $.ajax({
-        url: "/numberOfMember",
+        url: "/admin/numberOfMember",
         type: "get",
         success: (statisticDTO) => {
             graph();
@@ -129,7 +129,7 @@ function numberOfMember(){
 }
 function total_sales(){
     $.ajax({
-        url: "/totalsales",
+        url: "/admin/totalsales",
         type: "get",
         success: (statisticDTO) => {
             console.log(statisticDTO);
@@ -175,28 +175,29 @@ function total_sales(){
 
                 +'            </div>';
             mgraphmlcode+='<div class="d-flex flex-column justify-content-end align-items-end" style="height:100%;width:100%;">';
-            for(let j = 0; j<=100; j+=25){
-                mgraphmlcode+='<h7 style="height:25%;">'+j+'</h7>';
+            for(let j = 100; j>=0; j-=25){
+                mgraphmlcode+='<div class="w-100 d-flex justify-content-end align-items-end pe-2" style="height:25%;"><h7>'+j+'</h7></div>';
 
             }
             mgraphmlcode+='</div>';
             let check=false;
             for(let i = 0; i<12; i++){
-                mgraphmmtcode +='<div class="d-flex justify-content-center align-items-end" style="width:'+100/12+'%; height:100%; background-color:#eeeeee;">\n'
-                    +'                    <div style="width:40px; height:';
+                mgraphmmtcode +='<div class="d-flex flex-column justify-content-end align-items-center" style="width:'+100/12+'%; height:100%; background-color:#eeeeee;">\n';
+
                 check=false;
                 for(let j =0; j<statisticDTO.month_sales.length; j++){
                     if(statisticDTO.month_sales[j].month==(i+1)) {
-                        mgraphmmtcode += statisticDTO.month_sales[j].sales / 10000 + '%; background-color: dodgerblue;"></div>\n';
-                            // + '                    <h7>' + statisticDTO.month_sales[j].sales / 10000 + '</h7>\n';
+                        mgraphmmtcode +=   '<h7 class="mb-2">' + statisticDTO.month_sales[j].sales / 10000 + '</h7>\n'
+                            + '<div style="width:40px; height:'+statisticDTO.month_sales[j].sales / 10000 + '%; background-color: dodgerblue;"></div>\n';
+
                         check=true;
                     }
                 }
                 if(!check){
-                    mgraphmmtcode += '0%; background-color: dodgerblue;"></div>\n';
-                        // + '                    <h7 class="ms-2">0</h7>\n';
+                    mgraphmmtcode += '<div style="width:40px; height:0%; background-color: dodgerblue;"></div>\n';
+
                 }
-                    mgraphmmtcode +='                </div>\n';
+                    mgraphmmtcode +='</div>\n';
 
                     mgraphmmbcode+='<div class="d-flex justify-content-center" style="width:'+100/12+'%;"><h7>'
                         +(i+1)
@@ -238,7 +239,7 @@ function term_sales_search(){
         return;
     }
     $.ajax({
-        url: "/termSales/"+start_date+"/"+end_date,
+        url: "/admin/termSales/"+start_date+"/"+end_date,
         type: "get",
         success: (statisticDTO) => {
             graph();
@@ -250,7 +251,7 @@ function term_sales_search(){
             graphtcode+='<div class="w-100">' +
                 '<div class="d-flex w-100 justify-contnet-start align-items-center"><input type="date" ' +
                 'class="form-control ms-3 me-1" style="width:10%" name="start_date" id="start_date">' +
-                '-><input type="date" class="form-control ms-1" style="width:10%" name="end_date" id="end_date">' +
+                '-><input type="date" class="form-control ps-3" style="width:10%" name="end_date" id="end_date">' +
                 '<input type="button" class="btn btn-sm btn-warning" value="검색" onclick="term_sales_search()"></div>' +
                 '<div class="d-flex justify-content-center w-100 text-center">' +
                 '<h2>기간별 매출조회</h2></div>'
@@ -287,7 +288,7 @@ function term_sales_search(){
 }
 function product_sales(prod_code){
     $.ajax({
-        url: "/productSales/"+prod_code,
+        url: "/admin/productSales/"+prod_code,
         type: "get",
         success: (statisticDTO) => {
             salesgraph();
@@ -321,7 +322,6 @@ function product_sales(prod_code){
             $('#graph-middle-left').append(graphmlcode);
             $('#graph-middle-middle-top').append(graphmmtcode);
             $('#graph-middle-middle-bottom').append(graphmmbcode);
-
             monthlygraph();
 
             let mgraphtcode="";
@@ -329,33 +329,40 @@ function product_sales(prod_code){
             let mgraphmmtcode="";
             let mgraphmmbcode="";
             let today = new Date();
+            // alert(statisticDTO.month_sales[0].month);
+            mgraphtcode+='<div class="w-100">\n' +
+                '                <div class="d-flex justify-content-center w-100 text-center" sytle="height:30px;"><h4>월별 매출액</h4></div>\n'
+                +'                <div style="width: 90%">'
+                +    '<div class="d-flex w-100 justify-content-end me-3"><h7>단위수: 만원</h7></div></div>\n'
+
+                +'            </div>';
+            mgraphmlcode+='<div class="d-flex flex-column justify-content-end align-items-end" style="height:100%;width:100%;">';
+            for(let j = 100; j>=0; j-=25){
+                mgraphmlcode+='<div class="w-100 d-flex justify-content-end align-items-end pe-2" style="height:25%;"><h7>'+j+'</h7></div>';
+
+            }
+            mgraphmlcode+='</div>';
+            let check=false;
             for(let i = 0; i<12; i++){
-                mgraphtcode+='<div class="w-100">\n' +
-                    '                <div class="d-flex justify-content-center w-100 text-center" sytle="height:30px;"><h4>월별 매출액</h4></div>\n'
-                    +'                <div style="width: 90%">'
-                    +    '<div class="d-flex w-100 justify-content-end me-3"><h7>단위수: 만원</h7></div></div>\n'
+                mgraphmmtcode +='<div class="d-flex flex-column justify-content-end align-items-center" style="width:'+100/12+'%; height:100%; background-color:#eeeeee;">\n';
 
-                    +'            </div>';
-                mgraphmlcode+='<div class="d-flex w-100 justify-content-end align-items-end text-center" style="height:100%;"';
-                for(let i = 0; i<=100; i+=25){
-                    mgraphmlcode+='<h7>'+i+'</h7>';
+                check=false;
+                for(let j =0; j<statisticDTO.month_sales.length; j++){
+                    if(statisticDTO.month_sales[j].month==(i+1)) {
+                        mgraphmmtcode +=   '<h7 class="mb-2">' + statisticDTO.month_sales[j].sales / 10000 + '</h7>\n'
+                            + '<div style="width:40px; height:'+statisticDTO.month_sales[j].sales / 10000 + '%; background-color: dodgerblue;"></div>\n';
+
+                        check=true;
+                    }
+                }
+                if(!check){
+                    mgraphmmtcode += '<div style="width:40px; height:0%; background-color: dodgerblue;"></div>\n';
 
                 }
-                mgraphmlcode+='</div>';
+                mgraphmmtcode +='</div>\n';
 
-                mgraphmmtcode +='<div class="d-flex w-100 justify-content-center align-items-end" style="height:100%; background-color:#eeeeee;">\n'
-                    +'                    <div style="width:25px; height:';
-                if(statisticDTO.month_sales[i].getMonth()==i+1&& statisticDTO.month_sales[i].getSales()!=0) {
-                    mgraphmmtcode += (statisticDTO.month_sales[i].getSales()) / 10000 + '%; background-color: dodgerblue;"></div>\n'
-                        +'                    <h7 class="ms-2">' + (statisticDTO.month_sales[i].getSales()) / 10000 + '</h7>\n';
-                }else{
-                    mgraphmmtcode += '0%; background-color: dodgerblue;"></div>\n'
-                        +'                    <h7 class="ms-2">0</h7>\n';
-                }
-                mgraphmmtcode +='                </div>\n';
-
-                mgraphmmbcode+='<div class="d-flex justify-content-center" style="width:'+12/100+'%;"><h7>'
-                    +today.getMonth()+i
+                mgraphmmbcode+='<div class="d-flex justify-content-center" style="width:'+100/12+'%;"><h7>'
+                    +(i+1)
                     +'월</h7></div>';
 
             }
@@ -377,9 +384,13 @@ function openSales() {
     var to = document.getElementById("total");
     var te = document.getElementById("term");
     var p = document.getElementById("product");
+    var e = document.getElementById("product_list");
     to.style.display = ((to.style.display!='none') ? 'none' : 'block');
     te.style.display = ((te.style.display!='none') ? 'none' : 'block');
     p.style.display = ((p.style.display!='none') ? 'none' : 'block');
+    if(p.style.display=='none'){
+        e.style.display='none';
+    }
 }
 function productListOpen() {
     var e = document.getElementById("product_list");

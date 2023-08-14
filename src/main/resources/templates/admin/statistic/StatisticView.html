@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
-<!--    <div class="sidebar border-right" style="width:250px; background-color:#fefefe;">-->
-<!--        <div id="num_member" class="border-bottom ps-5 d-flex align-items-center" style="height:50px; cursor:pointer;" data-toggle="collapse" data-target="#num_member_all"><h5 class="text-center">회원통계 ∨</h5></div>-->
-<!--        <div id="num_member_all" class="d-none border-bottom ps-5 d-flex align-items-center" data-parent="#num_member" style="height:50px;" onclick=""><h7 class="p-3 text-center">전체 회원통계</h7></div>-->
-<!--        <div class="border-bottom ps-5 d-flex align-items-center" onclick="salestoggle()" style="height:50px; cursor:pointer;"><h5 class="text-center">매출 통계 ∨</h5></div>-->
-<!--        <div id="total_sales" class="border-bottom ps-5 d-flex align-items-center" style="height:50px; display:none;" onclick=""><h7 class="p-3 text-center">전체 매출</h7></div>-->
-<!--        <div id="term_sales" class="border-bottom ps-5 d-flex align-items-center" style="height:50px; display:none;" onclick=""><h7 class="p-3 text-center">기간별 매출</h7></div>-->
-<!--        <div id="product_sales" class="border-bottom ps-5 d-flex align-items-center" style="height:50px; display:none;" onclick=""><h7 class="p-3 text-center">상품별 매출</h7></div>-->
-<!--    </div>-->
-<!--</div>-->
+
 <div class="d-flex w-100 m-0 p-0" id="viewpart" style="height: 100vh;">
     <div class="d-flex flex-column" style="margin:0; padding:0; width:250px; height:100%; border-left:3px; cursor:pointer; border-right:2px;">
         <div id="num_member" style="padding-left:30px; padding-top: 5px; padding-bottom:5px; background-color: #eeeeee;">
@@ -42,31 +34,13 @@
         <div id="product_list" style="flex-grow:1; flex-direction: column; overflow: scroll; display:none;">
             <th:block th:each="productDTO : ${productDTOList}">
                 <h7 th:text="'['+${productDTO.prod_code}+']'+${productDTO.prod_name}"
-                     class="w-100" style="cursor:pointer; height:40px;padding-left:40px; padding-top: 5px; padding-bottom:5px;" th:onclick="|product_sales(${productDTO.prod_code})|"></h7>
+                     class="w-100" style="cursor:pointer; height:40px;padding-left:40px; padding-top: 5px; padding-bottom:5px; white-space: nowrap;" th:onclick="|product_sales(${productDTO.prod_code})|"></h7>
             </th:block>
         </div>
     </div>
 
     <div id="graphView" class="w-100 h-100">
-<!--    <div id="graph" class="w-100">-->
-<!--        <div id="graph-top" class="d-flex align-items-center w-100" style="height:10%;">-->
 
-<!--        </div>-->
-<!--        <div id="graph-middle" class="d-flex w-100" style="height:90%;">-->
-<!--            <div id="graph-middle-left" class="" style="width:10%; height:90%;">-->
-
-<!--            </div>-->
-<!--            <div id="graph-middle-middle" class="h-100" style="width:80%;">-->
-<!--                <div id="graph-middle-middle-top" class="w-100 border" style="height:90%;">-->
-
-<!--                </div>-->
-<!--                <div id="graph-middle-middle-bottom" class="d-flex w-100" style="height:10%;">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div id="graph-middle-right" class="d-flex h-100" style="width:10%;">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     </div>
 </div>
 

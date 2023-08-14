@@ -45,5 +45,14 @@
         FROM orderdetail
         WHERE prod_code = #{prod_code}
     </select>
+    <select id="mothlSalesList" resultType="monthlySalesDTO">
+    SELECT MONTH(order_inputDate) AS month,
+        IFNULL((SELECT prod_price FROM product WHERE prod_code = #{prod_code})
+        *(SELECT sum(order_qty) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS sales
+    FROM orderdetail
+    WHERE prod_code = #{prod_code}
+    GROUP BY month
+    ORDER BY month
+</select>
 
 </mapper>
