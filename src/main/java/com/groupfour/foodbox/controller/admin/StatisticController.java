@@ -1,18 +1,16 @@
 package com.groupfour.foodbox.controller.admin;
 
+import com.groupfour.foodbox.domain.MonthlySalesDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.StatisticDTO;
 import com.groupfour.foodbox.service.admin.StatisticService;
-import org.apache.ibatis.javassist.ClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class StatisticController {
     @Autowired
     private StatisticService statisticService;
@@ -64,8 +63,10 @@ public class StatisticController {
         StatisticDTO statisticDTO = new StatisticDTO();
         int total_sales = statisticService.productSales(prod_code);
         int order_num = statisticService.productOrderNum(prod_code);
+        List<MonthlySalesDTO> monthlySalesList = statisticService.mothlSalesList(prod_code);
         statisticDTO.setTotal_sales(total_sales);
         statisticDTO.setOrder_num(order_num);
+        statisticDTO.setMonth_sales(monthlySalesList);
         return statisticDTO;
     }
 

@@ -7,6 +7,7 @@ import com.groupfour.foodbox.dto.UserOrderCheckDTO;
 import com.groupfour.foodbox.dto.UserOrderDTO;
 import com.groupfour.foodbox.dto.UserOrderDetailDTO;
 import com.groupfour.foodbox.mapper.user.UserOrderMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,10 +88,11 @@ public class UserOrderServiceImpl implements UserOrderService {
             userOrderDetailDTO.setProd_name(dto.getProd_name());
             userOrderDetailDTO.setProd_thumbnail(dto.getProd_thumbnail());
             userOrderDetailDTO.setProd_price(dto.getProd_price());
-            userOrderDetailDTO.setProd_qty(dto.getProd_qty());
             userOrderDetailDTO.setOrder_qty(dto.getOrder_qty());
+            userOrderDetailDTO.setProd_qty(dto.getProd_qty() - dto.getOrder_qty());
 
             userOrderMapper.insertOrderDetail(userOrderDetailDTO);
+            userOrderMapper.updateProd_qty(userOrderDetailDTO);
         }
     }
 
@@ -113,8 +115,19 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
-    public void userOrderDelete(int orderNo) {
-        userOrderMapper.userOrderDelete(orderNo);
-        userOrderMapper.userOrderListDelete(orderNo);
+    public void userOrderDelete(int orderNo, List<UserOrderDetailDTO> orderDetail) {
+
+
+        for(UserOrderDetailDTO dto : orderDetail) {
+            if (dto.getOrder_status() == (OrderStatus.ORDERSUCCESS)) {
+                userOrderMapper.userOrderDelete(orderNo);
+                userOrderMapper.userOrderListDelete(orderNo);
+                dto.setProd_qty(dto.getProd_qty() + dto.getOrder_qty());
+                int prod_code = dto.getProd_code();
+                int prod_qty = dto.getProd_qty();
+                userOrderMapper.deleteOrder_qty(prod_code, prod_qty);
+            }
+        }
+
     }
 }

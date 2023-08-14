@@ -14,16 +14,16 @@
                     </small>
                 </p>
                 <div class="d-flex justify-content-center">
-                    <a class="btn mt-3 p-2 w-50" style="background-color:#f29a1a; color:white;" type="button" href="">로그인</a>
+                    <a class="btn mt-3 p-2 w-50" style="background-color:#f29a1a; color:white;" type="button" th:href="@{/user/userLogin}">로그인</a>
                 </div>
             </div>
             <div class="d-flex justify-content-center">
                 <div id="findPwBefore" class="px-4 mt-4 w-75">
-                    <p>회원정보에 등록한 이름과 이메일이 같아야 비밀번호를 찾을 수 있습니다</p>
+                    <p>회원정보에 등록한 아이디와 이메일이 같아야 비밀번호를 찾을 수 있습니다</p>
                     <div class="d-flex mb-4 align-items-center">
-                        <h6 class="me-3" style="width:70px;">이름</h6>
-                        <input class="form-control p-2" style="height:60px;" type="text" id="user_name" name="user_name"
-                               placeholder="이름을 입력하세요"/>
+                        <h6 class="me-3" style="width:70px;">아이디</h6>
+                        <input class="form-control p-2" style="height:60px;" type="text" id="user_id" name="user_id"
+                               placeholder="아이디를 입력하세요"/>
                     </div>
                     <div class="d-flex mb-3 align-items-center">
                         <h6 class="me-3" style="width:70px;">이메일</h6>

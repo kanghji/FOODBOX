@@ -100,7 +100,7 @@ public class UserLoginServiceImpl implements UserLoginService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        tempPw = passwordEncoder.encode(tempPw);
         int n = userLoginMapper.findPw(uid, uEmail, tempPw);
 
         return n;

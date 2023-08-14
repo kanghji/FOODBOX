@@ -19,4 +19,13 @@ public interface AdminOrderMapper {
     List<AdminOrderDetailDTO> orderDetail(int orderNo, PageDTO pageDTO);
 
 
+    List<AdminOrderDetailDTO> getOrderDetail(int orderNo);
+
+    void adminOrderDelete(int orderNo);
+
+    void adminOrderListDelete(int orderNo);
+
+    int deleteOrder_qty(int prodCode, int prodQty);
+
+
 }
