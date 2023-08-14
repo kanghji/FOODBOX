@@ -31,6 +31,12 @@ public class SearchController {
     public List<ProductDTO> prodSearch(@RequestBody @RequestParam(value = "prod_name", defaultValue = "noSearch") String prod_name) {
         List<ProductDTO> getProdSearchList = searchService.getProdSearchList(prod_name);
         System.out.println("getProdSearchList = " + getProdSearchList);
+
+        if (prod_name.trim().isEmpty()) {
+
+        }
+
+
         return getProdSearchList;
     }
 
