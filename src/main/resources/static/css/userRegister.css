@@ -200,9 +200,22 @@
     height: 40px;
 }
 
+.modal_title{
+    text-align: center;
+}
+
 .modal_close_button{
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
+
+.modal_close_button2{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 
 #modalOpenButton{
     cursor: pointer;
@@ -223,9 +236,11 @@
     top: 0;
     left: 0;
     display: flex;
+    text-align: start;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }
 
 
@@ -239,6 +254,7 @@
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }
 
 #modalContent {
@@ -246,7 +262,7 @@
     background-color: #ffffff;
     width: 300px;
     height: 150px;
-    padding: 15px;
+    padding: 25px;
 }
 
 #modalContent2 {
@@ -254,7 +270,7 @@
     background-color: #ffffff;
     width: 300px;
     height: 150px;
-    padding: 15px;
+    padding: 25px;
 }
 
 #modalContainer.hidden {
