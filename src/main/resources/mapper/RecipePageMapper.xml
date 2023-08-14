@@ -42,7 +42,7 @@
         VALUES(#{reply_recipe_code}, #{reply_user_id},#{reply_content}, #{reply_rating})
     </insert>
     <select id="recipeReplyCount" resultType="Integer">
-        SELECT count(*) FROM recipe_reply WHERE reply_recipe_code=#{reply_recipe_code}
+        SELECT ifnull(count(*),0) FROM recipe_reply WHERE reply_recipe_code=#{reply_recipe_code}
     </select>
     <select id="recipeRatingSum" resultType="Integer">
         SELECT ifnull(SUM(reply_rating),0) FROM recipe_reply WHERE reply_recipe_code=#{reply_recipe_code}
