@@ -26,14 +26,15 @@
     <select id="termSales" resultType="Integer">
         SELECT ifnull(sum(ordertotprice),0) AS total_sales
         FROM orderlist
-        WHERE order_inputDate <![CDATA[<=]]> #{end_date}
-        AND order_inputDate<![CDATA[>=]]>#{start_date}
+        WHERE order_inputDate BETWEEN #{start_date}
+        AND  DATE_ADD(#{end_date}, interval 1  DAY)
     </select>
     <select id="termOrderNum" resultType="Integer">
         SELECT ifnull(count(*),0) AS order_num
         FROM orderlist
-        WHERE order_inputDate <![CDATA[<=]]> #{end_date}
-        AND order_inputDate<![CDATA[>=]]>#{start_date}
+        WHERE order_inputDate BETWEEN #{start_date}
+        AND  DATE_ADD(#{end_date}, interval 1  DAY)
+
     </select>
     <select id="productSales" resultType="Integer">
         SELECT IFNULL((SELECT prod_price FROM product WHERE prod_code = #{prod_code})
