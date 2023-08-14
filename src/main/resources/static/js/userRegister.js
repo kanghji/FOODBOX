@@ -119,31 +119,37 @@ function inputEmail() {
     }
 }
 
-// 주소 유효성 검사
-
+// // 주소 유효성 검사
+//
 let postCodeChk = false;
-
-function inputPostCode() {
-
-
-    // 우편번호 숫자만 5개
-    let regPostCode = /\d{5}/;
-    let postCode = $("#user_postcode").val();
-
-
-    if (postCode == "") {
-        $("#postCodeMsg").text("우편번호를 입력해주세요.");
-        postCodeChk = false;
-        return;
-    } else if (false === regPostCode.test(postCode)) {
-        $("#postCodeMsg").text('올바른 우편번호가 아닙니다.');
-        postCodeChk = false;
-        return;
-    } else {
-        $('#postCodeMsg').text("  ");
-        postCodeChk = true;
-    }
-}
+//
+// function inputPostCode() {
+//
+//
+//     // 우편번호 숫자만 5개
+//     // let regPostCode = /\d{5}/;
+//     let postCode = $("#sample4_postcode").val();
+//     alert(postCode);
+//     if (postCode != "") {
+//         postCodeChk = true;
+//     }
+//
+//
+//
+//     // if (postCode == "") {
+//     //     $("#postCodeMsg").text("우편번호를 입력해주세요.");
+//     //     postCodeChk = false;
+//     //     return;
+//     // } else
+//     //     if (false === regPostCode.test(postCode)) {
+//     //     $("#postCodeMsg").text('올바른 우편번호가 아닙니다.');
+//     //     postCodeChk = false;
+//     //     return;
+//     // } else {
+//     //     // $('#postCodeMsg').text("  ");
+//     //     postCodeChk = true;
+//     // }
+// }
 
 
 
@@ -360,7 +366,12 @@ function userJoin(){
         return;
     }
 
+    console.log(postCodeChk);
     // <!--주소를 입력 안하면 false 가 되서 가입 안되고 리턴됨-->
+    let postCode = $("#sample4_postcode").val();
+    if (postCode != "") {
+        postCodeChk = true;
+    }
     if(postCodeChk==false){
         alert("주소를 확인해주세요.")
         return;
