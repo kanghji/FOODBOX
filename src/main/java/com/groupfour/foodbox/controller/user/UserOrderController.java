@@ -79,9 +79,11 @@ public class UserOrderController {
     }
 
     @PostMapping("/userOrder/delete")
+    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void userOrderDelete(@RequestBody String order_no) {
         int userNo = Integer.parseInt(order_no);
-        userOrderService.userOrderDelete(userNo);
+        List<UserOrderDetailDTO> orderDetail = userOrderService.getUserOrderDetail(userNo);
+        userOrderService.userOrderDelete(userNo, orderDetail);
     }
 }
