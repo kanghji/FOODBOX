@@ -146,17 +146,13 @@
 
 /* 유효성 검사 */
 
-.validation, .validation_input_name {
+.validation {
     color: #f03f40;
     font-size: 13px;
 }
 
 .validation {
     padding: 0.5em 0 1em 9em ;
-}
-
-.validation_input_name {
-    padding-left: 12em;
 }
 
 /* 주소 검색 */

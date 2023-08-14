@@ -5,38 +5,40 @@ import com.groupfour.foodbox.service.user.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class SearchController {
 
     @Autowired
     private SearchService searchService;
 
-    // 검색
-    @PostMapping("/user/prodSeach")
+    // 검색 페이지 이동
+    @GetMapping("/search")
+    public String searchPage(Model model, String prod_name) {
+        List<ProductDTO> prodSearchList = searchService.getProdSearchList(prod_name);
+        model.addAttribute("prodSearchList", prodSearchList);
+        return "user/userSearch";
+    }
+
+
+    // 상품 검색
+    @PostMapping("/prodSearch")
     @ResponseBody
-    public List<ProductDTO> prodSearch(@RequestParam(value = "prod_name", defaultValue = "noSearch") String prod_name) {
+    public List<ProductDTO> prodSearch(@RequestBody @RequestParam(value = "prod_name", defaultValue = "noSearch") String prod_name) {
         List<ProductDTO> getProdSearchList = searchService.getProdSearchList(prod_name);
         System.out.println("getProdSearchList = " + getProdSearchList);
 
-        // 사용자가 입력한 키워드가 null이거나 빈 문자열이면
-//        if (getProdSearchList.isEmpty()) {
-//            model.addAttribute("productDTO", "noSearch");
-//
-//        } else {
-//            model.addAttribute("productDTO", getProdSearchList);
-//        }
+        if (prod_name.trim().isEmpty()) {
+
+        }
+
 
         return getProdSearchList;
     }
 
-
-
-
+    // 레시피 검색
 }

@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.BookmarkDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.user.MypageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -15,6 +16,9 @@ public class MypageServiceImpl implements MypageService{
     @Autowired
     MypageMapper mypageMapper;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public UserDTO infoUpdateChk(String user_id) {
 //        System.out.println("mypageMapper.infoUpdateChk(user_id) = " + mypageMapper.infoUpdateChk(user_id));
@@ -23,6 +27,7 @@ public class MypageServiceImpl implements MypageService{
 
     @Override
     public int pwModify(UserDTO userDTO) {
+        userDTO.setUser_pw(passwordEncoder.encode(userDTO.getUser_pw()));
         int new_pw = mypageMapper.pwUpdate(userDTO);
        return new_pw;
     }
@@ -36,6 +41,7 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public void infoModify(UserDTO userDTO) {
         mypageMapper.infoUpdate(userDTO);
+//        System.out.println("회원정보수정 mapper = " + userDTO);
     }
 
     @Override
@@ -47,6 +53,11 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public void bookmarkDelete(Long bm_recipe_id) {
         mypageMapper.bookmarkDel(bm_recipe_id);
+    }
+
+    @Override
+    public void userDelete(int user_no) {
+        mypageMapper.userDelete(user_no);
     }
 
 

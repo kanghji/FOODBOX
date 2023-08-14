@@ -18,4 +18,6 @@ public interface MypageService {
     List<BookmarkDTO> bookmarkView(String id);
 
     void bookmarkDelete(Long bm_recipe_id);
+
+    void userDelete(int user_no);
 }

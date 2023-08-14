@@ -49,7 +49,7 @@ public class MyPageController {
     }
 
     // 새 비밀번호 변경 후 페이지 이동
-    @GetMapping("/user_pwUpdataChkPage")
+    @GetMapping("/user_pwUpdateChkPage")
     public String pwModifyOk() {
         return "redirect:/user/user_pwUpdateChk";
     }
@@ -63,19 +63,27 @@ public class MyPageController {
     }
 
     // 회원정보 수정
-    @PostMapping("/user_infoUpdataView")
+    @PostMapping("/user_infoUpdateView")
     public String infoModify(UserDTO userDTO) {
         mypageService.infoModify(userDTO);
-        return "redirect:/user/infoUpdateView";
+//        System.out.println("회원 정보 수정 controller = " + userDTO);
+        return "redirect:/user/user_infoUpdateView";
+    }
+
+    // 회원 삭제
+    @PostMapping("/user_deleteUser")
+    public @ResponseBody void deleteUser(@RequestBody UserDTO userDTO, HttpSession session) {
+        session.invalidate();
+        int user_no = userDTO.getUser_no();
+        mypageService.userDelete(user_no);
     }
 
     // 북마크 리스트
     @GetMapping("/user_bookmarkView")
     public String bookmarkListView(HttpSession session, Model model) {
        UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
-        String id = userDTO.getUser_id();
+       String id = userDTO.getUser_id();
        List<BookmarkDTO> bookmarkList = mypageService.bookmarkView(id);
-//        System.out.println("bookmarkList = " + bookmarkList);
        model.addAttribute("bookmarkList", bookmarkList);
         return "user/bookmarkList";
     }
@@ -87,8 +95,4 @@ public class MyPageController {
         Long bm_recipe_id = bookmarkDTO.getBm_recipe_id();
         mypageService.bookmarkDelete(bm_recipe_id);
     }
-
-
-
-
 }
