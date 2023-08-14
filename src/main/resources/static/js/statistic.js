@@ -219,10 +219,10 @@ function term_sales(){
     let graphtcode="";
 
     graphtcode+='<div class="w-100">' +
-        '<div class="d-flex justify-contnet-start"><input type="date" ' +
+        '<div class="d-flex justify-content-start ms-3 align-items-center"><input type="date" ' +
         'class="form-control me-1" style="width:10%" name="start_date" id="start_date">' +
-        '-><input type="date" class="form-control ms-1" style="width:10%" name="end_date" id="end_date">' +
-        '<input type="button" class="btn btn-sm btn-warning" value="검색" onclick="term_sales_search()"></div>' +
+        '~<input type="date" class="form-control ms-1" style="width:10%" name="end_date" id="end_date">' +
+        '<input type="button" class="btn btn-sm btn-warning ms-2" value="검색" onclick="term_sales_search()"></div>' +
         '<div class="d-flex justify-content-center w-100 text-center">' +
         '<h2>기간별 매출조회</h2></div></div>';
     $('#graph-top').append(graphtcode);
