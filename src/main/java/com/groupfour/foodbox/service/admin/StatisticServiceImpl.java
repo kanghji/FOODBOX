@@ -42,8 +42,8 @@ public class StatisticServiceImpl implements StatisticService{
     //기간별 매출액 조회
     @Override
     public int termSales(String start_date, String end_date) {
-        System.out.println("start_date = " + start_date);
-        System.out.println("end_date = " + end_date);
+//        System.out.println("start_date = " + start_date);
+//        System.out.println("end_date = " + end_date);
         int total_sales = statisticMapper.termSales(start_date, end_date);
 
         return total_sales;
@@ -52,7 +52,7 @@ public class StatisticServiceImpl implements StatisticService{
     @Override
     public int termOrderNum(String start_date, String end_date) {
         int order_num = statisticMapper.termOrderNum(start_date, end_date);
-        System.out.println("order_num = " + order_num);
+//        System.out.println("order_num = " + order_num);
         return order_num;
     }
     //상품리스트조회
@@ -72,5 +72,11 @@ public class StatisticServiceImpl implements StatisticService{
     public int productOrderNum(int prod_code) {
         int order_num = statisticMapper.productOrderNum(prod_code);
         return order_num;
+    }
+    //상품별 월별 매출
+    @Override
+    public List<MonthlySalesDTO> mothlSalesList(int prod_code) {
+        List<MonthlySalesDTO> monthlySalesList = statisticMapper.mothlSalesList(prod_code);
+        return monthlySalesList;
     }
 }

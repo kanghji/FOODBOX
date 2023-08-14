@@ -28,4 +28,6 @@ public interface StatisticMapper {
     int productSales(int prod_code);
     //상품별 매출건수
     int productOrderNum(int prod_code);
+    //상품별 월별 매출
+    List<MonthlySalesDTO> mothlSalesList(int prodCode);
 }
