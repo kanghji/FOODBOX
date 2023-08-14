@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.groupfour.foodbox.mapper.admin.StatisticMapper">
+    <select id="productList" resultType="productDTO">
+        SELECT * FROM product
+    </select>
+<select id="numberOfMember" resultType="statisticDTO">
+    SELECT count(*) AS num_member FROM user
+</select>
+<select id="numberOfWithdrawals" resultType="Integer">
+    SELECT ifnull(withdrawals_num, 0) FROM withdrawals_user
+</select>
+    <select id="totalsales" resultType="Integer">
+        SELECT ifnull(sum(ordertotprice),0) AS total_sales FROM orderlist
+    </select>
+    <select id="monthlyList" resultType="monthlySalesDTO">
+        SELECT MONTH(order_inputDate) AS month,
+        ifnull(sum(ordertotprice),0) AS sales
+        FROM orderlist
+        GROUP BY month
+        ORDER BY month
+    </select>
+    <select id="termSales" resultType="Integer">
+        SELECT ifnull(sum(ordertotprice),0) AS total_sales
+        FROM orderlist
+        WHERE order_inputDate <![CDATA[<=]]> #{end_date}
+        AND order_inputDate<![CDATA[>=]]>#{start_date}
+    </select>
+    <select id="termOrderNum" resultType="Integer">
+        SELECT ifnull(count(*),0) AS order_num
+        FROM orderlist
+        WHERE order_inputDate <![CDATA[<=]]> #{end_date}
+        AND order_inputDate<![CDATA[>=]]>#{start_date}
+    </select>
+    <select id="productSales" resultType="Integer">
+        SELECT IFNULL((SELECT prod_price FROM product WHERE prod_code = #{prod_code})
+        *(SELECT sum(order_qty) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS total_sales;
+    </select>
+    <select id="productOrderNum" resultType="Integer">
+        SELECT ifnull(count(*),0) AS order_num
+        FROM orderdetail
+        WHERE prod_code = #{prod_code}
+    </select>
+
+</mapper>
