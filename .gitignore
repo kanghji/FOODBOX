@@ -37,5 +37,3 @@ out/
 .vscode/
 
 src/main/resources/static/image/
-
-src/main/java/com/groupfour/foodbox/service/admin/ProductServiceImpl.java
