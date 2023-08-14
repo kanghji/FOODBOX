@@ -1,14 +1,17 @@
 
-// 상품 검색
+// 검색
 function prodSearchBtn(obj) {
+    // 검색결과리스트 출력 부분 변수 선언
     let searchListArea = $(".searchArea");
 
     // let btns = document.querySelectorAll('.search_btn');
     // $('.search_btn').removeClass('active');
 
-    console.log(obj.getAttribute('data-mode'));
+    // 사용자가 입력한 키워드를 가져와서 변수 선언
+    // console.log(obj.getAttribute('data-mode'));
     let mode = obj.getAttribute('data-mode');
 
+    // 조건문을 사용하여 입력한 값이
     if(mode == 'z'){
         mode = $('.active').data('mode');
         console.log("mode : " + mode);
