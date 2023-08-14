@@ -14,6 +14,9 @@
     <insert id="adminProductImageRegister">
         INSERT INTO product_image(image_prod_code, image_prod_image)VALUES((SELECT prod_code FROM product ORDER BY prod_code DESC LIMIT 1), #{image_prod_image})
     </insert>
+    <insert id="adminProductImageModify">
+        INSERT INTO product_image(image_prod_code, image_prod_image)VALUES(#{prod_code}, #{image_prod_image})
+    </insert>
     <select id="productCount" resultType="Integer">
         SELECT count(*) FROM product
         WHERE 1=1

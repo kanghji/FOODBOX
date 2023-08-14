@@ -2,7 +2,24 @@
 <!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
 
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
-
+<style>
+    .on_mouse,
+    .on_mouse a{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+    .on_mouse:hover,
+    .on_mouse a:hover{
+        opacity: 1;
+    }
+    .on_mouse a:hover{
+        background-color: #ffffffa1;
+    }
+</style>
   <div class="container" style="padding-top:150px;">
       <th:block th:if="${prod_spec=='ALL'}">
         <h4 class="w-100 mb-5 text-center">| C A T E G O R Y |</h4>
@@ -51,7 +68,6 @@
                   </div>
           </div>
 
-
           </div>
       </section>
 
@@ -61,9 +77,8 @@
 $(window).scroll(()=>{
    let checkNum=$(window).scrollTop()-($(document).height()-$(window).height());
    console.log(checkNum);
-   if(checkNum<1&&checkNum>-1){
+   if(checkNum<1&&checkNum>-1&&[[${pageDTO.totalPage>viewPage}]]){
        viewPage++;
-       // alert(viewPage);
        productLoad(viewPage);
    }
 });
@@ -74,19 +89,9 @@ function productLoad(viewPage){
 
     $.ajax({
         type: 'get',
-        // data: JSON.stringify({
-        //     category_code : "[[${category_code}]]",
-        //     prod_spec : "[[${prod_spec}]]",
-        //     priceSort : "[[${priceSort}]]",
-        //     viewPage : viewPage
-        // }),
-        // contentType: "application/json; charset=utf8",
-        // url:"/user/productPageRoad?category_code="+category_code+"&prod_spec="+prod_spec+"&priceSort="+priceSort+"&viewPage="+viewPage,
         url:"/user/productPageRoad/"+category_code+"/"+prod_spec+"/"+priceSort+"/"+viewPage,
 
         success: function(productList) {
-            // let productList = data.list;
-
             let productViewLine='</div><div class="d-flex mt-3 w-100">';
             let productCount =1;
             for(let i=0; i<productList.length; i++){
@@ -95,12 +100,12 @@ function productLoad(viewPage){
                     +'<a href="/user/productView?prod_code='+productList[i].prod_code+'" style="height:180px; overflow:hidden;">'
                     +'<img class="card-image" src="/image/'+productList[i].prod_thumbnail+'" alt="Card image" style="width:100%">'
                     +'</a>'
-                    +'<div class="card-body">'
+                    +'<div class="card-body w-100 p-2">'
                     +'<h7 class="" style="font-size:15px;">'
                     +'<b>'+productList[i].prod_brand+productList[i].prod_name+'</b></h7>'
                     +'<p class="card-text">'+productList[i].prod_price+'</p>'
                     +'</div>'
-                    +'</div>';
+                    +'<div class="on_mouse"><a href="/user/productView?prod_code='+productList[i].prod_code+'"></a></div></div>';
                     if(productCount%4==0) {
                      productViewLine+='</div>'
                          +'<div class="d-flex mt-3 w-100">';

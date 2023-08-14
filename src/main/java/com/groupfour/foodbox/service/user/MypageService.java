@@ -1,8 +1,9 @@
 package com.groupfour.foodbox.service.user;
 
+import com.groupfour.foodbox.domain.BookmarkDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public interface MypageService {
 
@@ -13,4 +14,10 @@ public interface MypageService {
     UserDTO infoList(String user_id);
 
     void infoModify(UserDTO userDTO);
+
+    List<BookmarkDTO> bookmarkView(String id);
+
+    void bookmarkDelete(Long bm_recipe_id);
+
+    void userDelete(int user_no);
 }

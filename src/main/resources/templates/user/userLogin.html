@@ -10,6 +10,9 @@
   <form th:action="@{/user/userLogin}" method="post">
 
     <p class="user_login">로그인</p>
+    <th:block th:if="${session.loginMsg != null}">
+      <p class="text-center text-danger" th:text="${session.loginMsg}"></p>
+    </th:block>
 
     <div class="input_wrap">
     <!-- 아이디 & 비밀번호 입력창-->
@@ -29,6 +32,8 @@
     <div class="register_wrap">
       <input class="registerbox01" type="submit" value="로그인"/>
       <div class="registerbox02"><a class="registerbox03" th:href="@{/user/userRegister}">회원가입</a></div>
+      <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=ea90d7e3863b99ec87024ee49f5015f3&redirect_uri=http://localhost:8800/oauth/kakao">
+        <img src="/image/kakao_login_medium_narrow.png"></a>
     </div>
     </div>
 

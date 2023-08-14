@@ -5,7 +5,7 @@
 
 <mapper namespace="com.groupfour.foodbox.mapper.user.UserOrderMapper">
 
-    <select id="userOrder" resultType="com.groupfour.foodbox.dto.UserOrderDTO">
+    <select id="userOrder" resultType="com.groupfour.foodbox.dto.UserOrderCheckDTO">
         SELECT c.cart_no, c.user_id, c.prod_code, u.user_name, p.prod_name, p.prod_thumbnail,
         p.prod_price, p.prod_qty, c.order_qty
         FROM usercart c
@@ -19,4 +19,32 @@
     <select id="userOrderInfo" resultType="userDTO">
         SELECT * FROM user WHERE user_id = #{userId}
     </select>
+
+    <insert id="insertOrderList" useGeneratedKeys="true" keyProperty="order_no">
+        INSERT INTO orderlist (order_status, user_id, user_name, prod_name, receiver_name, receiver_tel, user_zipcode, user_roadaddr, user_detailaddr, ordertotprice, order_inputDate)
+        VALUES(#{order_status}, #{user_id}, #{user_name}, #{prod_name}, #{receiver_name}, #{receiver_tel}, #{user_zipcode}, #{user_roadaddr}, #{user_detailaddr}, #{orderTotPrice}, now())
+    </insert>
+
+    <insert id="insertOrderDetail">
+        INSERT INTO orderdetail(order_no, order_status, user_id, user_name, receiver_name, receiver_tel, user_zipcode, user_roadaddr, user_detailaddr, prod_code, prod_name, prod_thumbnail,
+        prod_price, prod_qty, order_qty, order_inputDate)
+        VALUES(#{order_no}, #{order_status}, #{user_id}, #{user_name}, #{receiver_name}, #{receiver_tel}, #{user_zipcode}, #{user_roadaddr}, #{user_detailaddr}, #{prod_code}, #{prod_name}, #{prod_thumbnail}, #{prod_price},
+        #{prod_qty}, #{order_qty}, now())
+    </insert>
+
+    <select id="getUserOrderList" resultType="com.groupfour.foodbox.dto.UserOrderDTO">
+        SELECT * FROM orderlist where user_id = #{id}
+    </select>
+
+    <select id="getUserOrderDetail" resultType="com.groupfour.foodbox.dto.UserOrderDetailDTO">
+        SELECT * FROM orderdetail WHERE order_no = #{order_no}
+    </select>
+
+    <update id="userOrderDelete">
+        UPDATE orderdetail SET order_status = 'CANCLE' WHERE order_no = #{orderNo}
+    </update>
+
+    <update id="userOrderListDelete">
+        UPDATE orderlist SET order_status = 'CANCLE' WHERE order_no = #{orderNo}
+    </update>
 </mapper>

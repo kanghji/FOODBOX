@@ -1,30 +1,84 @@
+function payBtn(orderList) {
 
-function orderBtn () {
-    requestPay();
+    let pg = $('input[name="radioTxt"]:checked').val();
+    let buyerEmail = document.getElementById('user_email').textContent;
+    let amount = document.getElementById('cartTotPrice').value;
+    let prod_name;
 
-    function requestPay() {
-        IMP.init("");
-        IMP.request_pay({
-                pg: "html5_inicis",		//KG이니시스 pg파라미터 값
-                pay_method: "card",		//결제 방법
-                merchant_uid: "1234578",//주문번호
-                name: "당근 10kg",		//상품 명
-                amount: 200,			//금액
-                buyer_email: "gildong@gmail.com",
-                buyer_name: "홍길동",
-                buyer_tel: "010-4242-4242",
-                buyer_addr: "서울특별시 강남구 신사동",
-                buyer_postcode: "01181"
-            },
-            function (rsp) {
-                //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-                if (rsp.success) {
-                    alert("결제성공");
-                    //서버 검증 요청 부분
-                } else {
-                    alert("결제에 실패하였습니다. 에러 : " + rsp.error_msg);
-                }
+    if(orderList.length > 1) {
+        prod_name = orderList[0].prod_name + "외 " + (orderList.length - 1) + "개";
+    } else {
+        prod_name = orderList[0].prod_name;
+    }
+
+    let user_id = $("#user_id").val();
+    let user_name = $("#user_name").text();
+    let receiver_name = $("#receiver_name").val();
+    let receiver_tel = $("#receiver_tel").val();
+    let user_zipcode = $("#sample4_postcode").val();
+    let user_roaddr = $("#sample4_roadAddress").val();
+    let user_detailaddr = $("#user_detailaddr").val();
+
+
+    let userOrderCheckDTO = {user_id: user_id, user_name: user_name, receiver_name: receiver_name, receiver_tel: receiver_tel, user_zipcode: user_zipcode, user_roaddr: user_roaddr, user_detailaddr: user_detailaddr, prod_name: prod_name};
+
+    let data = {
+        orderList: orderList,
+        userOrderCheckDTO: userOrderCheckDTO
+    }
+
+    IMP.init("imp63140874");
+    IMP.request_pay({
+            pg: pg,
+            pay_method: "card",
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            amount: amount,
+            name: prod_name,
+            buyer_email: buyerEmail,
+            buyer_name: user_name,
+            buyer_tel: receiver_tel,
+            buyer_addr: user_roaddr + user_detailaddr,
+            buyer_postcode: user_zipcode
+        },
+        function(rsp) {
+            if (rsp.success) {
+                $.ajax({
+                    type: "post",
+                    url: "/user/userOrder/pay",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        window.location.href = "/user/userOrder/success";
+                    },
+                    error: function (error) {
+                        console.error("에러:", error);
+                    }
+                });
+            } else {
+                alert("결제에 실패하였습니다. 에러 : " + rsp.error_msg);
             }
-        );
+        });
+}
+
+function orderList() {
+}
+
+function orderCancle(order_no) {
+    if(confirm("주문을 취소하시겠습니까?") == true) {
+        $.ajax({
+            type: "post",
+            url: "/user/userOrder/delete",
+            data: JSON.stringify(order_no),
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                window.location.replace("/user/userOrder/orderlist");
+                alert("주문취소 되었습니다");
+            },
+            error: function (error) {
+                console.error("에러:", error);
+            }
+        });
+    } else {
+        return;
     }
 }

@@ -17,8 +17,21 @@
         </select>
         <!--  회원정보 수정 -->
         <update id="infoUpdate">
-            UPDATE user SET user_name = #{user_name}, user_email = #{user_email}, user_tel = #{user_tel},
+            UPDATE user
+            SET user_name = #{user_name}, user_email = #{user_email}, user_tel = #{user_tel},
             user_zipcode = #{user_zipcode}, user_roadaddr = #{user_roadaddr}, user_detailaddr = #{user_detailaddr}
             WHERE user_id = #{user_id}
         </update>
+        <!-- 회원정보 삭제   -->
+        <delete id="userDelete">
+            DELETE FROM user WHERE user_no = #{user_no}
+        </delete>
+        <!--  북마크 리스트  -->
+        <select id="bookmarkView" resultType="bookmarkDTO">
+            SELECT * FROM bookmark WHERE bm_user_no = (SELECT user_no FROM user WHERE user_id = #{id})
+        </select>
+        <!-- 북마크 삭제   -->
+        <delete id="bookmarkDel">
+            DELETE FROM bookmark WHERE bm_recipe_id = #{bm_recipe_id}
+        </delete>
 </mapper>

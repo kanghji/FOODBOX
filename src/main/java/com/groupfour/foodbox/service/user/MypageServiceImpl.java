@@ -1,9 +1,13 @@
 package com.groupfour.foodbox.service.user;
 
+import com.groupfour.foodbox.domain.BookmarkDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.user.MypageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import java.util.List;
 
 @Service
 public class MypageServiceImpl implements MypageService{
@@ -32,6 +36,23 @@ public class MypageServiceImpl implements MypageService{
     @Override
     public void infoModify(UserDTO userDTO) {
         mypageMapper.infoUpdate(userDTO);
+//        System.out.println("회원정보수정 mapper = " + userDTO);
+    }
+
+    @Override
+    public List<BookmarkDTO> bookmarkView(String id) {
+        List<BookmarkDTO> bookmarkList = mypageMapper.bookmarkView(id);
+        return bookmarkList;
+    }
+
+    @Override
+    public void bookmarkDelete(Long bm_recipe_id) {
+        mypageMapper.bookmarkDel(bm_recipe_id);
+    }
+
+    @Override
+    public void userDelete(int user_no) {
+        mypageMapper.userDelete(user_no);
     }
 
 

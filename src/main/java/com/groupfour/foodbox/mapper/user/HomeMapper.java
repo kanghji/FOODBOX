@@ -9,4 +9,5 @@ import java.util.List;
 public interface HomeMapper {
     List<ProductDTO> prodSlideList();
 
+
 }

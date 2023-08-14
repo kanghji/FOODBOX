@@ -3,7 +3,7 @@
 
 <link href="/css/userRegister.css" rel="stylesheet"/>
 <script src="/js/zipcode.js"></script>
-<script src="/js/userRegister.js."></script>
+<script src="/js/userRegister.js"></script>
 
 <!-- 컨텐츠 영역 -->
 <div class="user_register_wrap">
@@ -122,7 +122,9 @@
                 </div>
                 <div class="register_content02">
                     <div class="content_box">
-                        <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_postcode" onkeyup="inputPostCode()" placeholder="우편번호"/></p>
+<!--                        <p><input class="register_content_box" type="text" id="sample4_postcode" name="user_postcode" disabled onkeyup="inputPostCode()" placeholder="우편번호"/></p>-->
+                        <p><input class="register_content_box" type="text" id="sample4_postcode"
+                                  name="user_zipcode" readonly placeholder="우편번호"/></p>
                         <p class="chkMsg" id="postCodeMsg"></p>
                     </div>
                 </div>
@@ -222,7 +224,7 @@
                             <div style="overflow:auto; width:380px; height:370px;">
                                 <th:block th:replace="/user/agreement01"></th:block>
                             </div>
-                            <div class="modal_close_button"><button id="modalCloseButton">확인</button></div>
+                            <div class="modal_close_button"><button type="button" id="modalCloseButton">확인</button></div>
                         </div>
                     </div>
 
@@ -240,7 +242,7 @@
                     <div style="overflow:auto; width:380px; height:370px;">
                         <th:block th:replace="/user/agreement02"></th:block>
                     </div>
-                    <div class="modal_close_button"><button id="modalCloseButton2">확인</button></div>
+                    <div class="modal_close_button"><button type="button" id="modalCloseButton2">확인</button></div>
                 </div>
             </div>
 

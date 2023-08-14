@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!-- 헤더 -->
-<th:block th:replace="/admin/inc/admin_header :: headerFragment"></th:block>
+<th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
 <div class="container w-75 mt-5">
     <h3>회원 리스트</h3>
     <!-- 회원 검색 기능-->
@@ -30,7 +30,7 @@
         <thead class="table-secondary">
         <tr class="text-center">
             <th width="5%">선택</th>
-            <th width="8%">회원번호</th>
+            <th width="9%">회원번호</th>
             <th width="8%">아이디</th>
             <th>비밀번호</th>
             <th width="7%">이름</th>
@@ -81,7 +81,6 @@
 <!-- 페이지 네이션-->
 <ul class="pagination justify-content-center">
     <li class="page-item" th:class="${pageDTO.prevPage<=0} ? 'disabled'">
-<!--    <li class="page-item" th:class="${pageDTO.prevPage<=0}">-->
         <a class="page-link" th:href="@{/admin/userList(viewPage=${pageDTO.prevPage},keyword=${keyword},searchType=${searchType})}">이전</a>
     </li>
     <th:block th:each="i: ${#numbers.sequence(pageDTO.blockStart,pageDTO.blockEnd)}">
@@ -90,7 +89,6 @@
         </li>
     </th:block>
     <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage} ? 'disabled'">
-<!--    <li class="page-item"th:class="${pageDTO.blockEnd>=pageDTO.totalPage}">-->
         <a class="page-link" th:href="@{/admin/userList(viewPage=${pageDTO.nextPage},keyword=${keyword},searchType=${searchType})}">다음</a>
     </li>
 </ul>
@@ -104,7 +102,7 @@
 
 function onDelete() {
         let chkBoxes = document.getElementsByName("chkUno");
-        frm.setAttribute("action", "/user/usersDelete");
+        frm.setAttribute("action", "/admin/usersDelete");
 
         let cnt = 0;
         for (let chk of chkBoxes) {
