@@ -21,4 +21,11 @@ public interface RecipePageService {
     UserDTO userCheck(String userId);
     //추천상품 가져오기
     List<ProductDTO> recommendProduct();
+
+    //레시피 댓글
+    ReplyPageDTO recipeReply(int reply_recipe_code, int viewPage);
+
+    int recipeReplyRegister(RecipeReplyDTO recipeReply);
+
+    int recipeReplyDelete(int reply_num);
 }

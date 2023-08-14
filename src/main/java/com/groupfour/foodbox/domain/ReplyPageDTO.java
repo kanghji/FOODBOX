@@ -16,9 +16,12 @@ public class ReplyPageDTO {
     private int totalPage;
     private int totalCnt;
     private int startRowNum;
-    
+
+
     private List<ProductReplyDTO> list;
+    private List<RecipeReplyDTO> recipeList;
     private int productRatingSum;
+    private int recipeRatingSum;
 
     private int startIndex; // 각페이지별 시작값(offset, 0, 10, 20,...)
     private int cntPerPage = 5;
