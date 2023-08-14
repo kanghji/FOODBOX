@@ -1,5 +1,6 @@
 package com.groupfour.foodbox.service.admin;
 
+import com.groupfour.foodbox.domain.MonthlySalesDTO;
 import com.groupfour.foodbox.domain.ProductDTO;
 import com.groupfour.foodbox.domain.StatisticDTO;
 
@@ -23,4 +24,6 @@ public interface StatisticService {
     int productSales(int prod_code);
     //상품별 매출 건수
     int productOrderNum(int prod_code);
+    //상품별 월별 합계
+    List<MonthlySalesDTO> mothlSalesList(int prod_code);
 }
