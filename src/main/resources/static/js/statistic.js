@@ -229,6 +229,14 @@ function term_sales(){
 function term_sales_search(){
     let start_date = $('#start_date').val();
     let end_date = $('#end_date').val();
+    if(start_date==""){
+        alert("시작날짜를 입력하세요");
+        return;
+    }
+    if(end_date==""){
+        alert("종료날짜를 입력하세요")
+        return;
+    }
     $.ajax({
         url: "/termSales/"+start_date+"/"+end_date,
         type: "get",
