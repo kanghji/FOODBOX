@@ -7,9 +7,11 @@ import com.groupfour.foodbox.service.user.MypageService;
 import com.groupfour.foodbox.service.user.RecipePageService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.awt.print.Book;
@@ -25,18 +27,35 @@ public class MyPageController {
     @Autowired
     RecipePageService recipePageService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     // 비밀번호 재확인
     @GetMapping("/user_pwUpdateChk")
     public String infoUpdateChkView(HttpSession session, Model model) {
         UserDTO userDTO = (UserDTO) session.getAttribute("userLoginDto");
         model.addAttribute("userDTO", mypageService.infoUpdateChk(userDTO.getUser_id()));
+
 //        System.out.println("DB 비밀번호 : " + mypageService.infoUpdateChk(userDTO.getUser_id()));
         return "user/user_pwUpdateChk";
     }
 
     // 비밀번호 재확인 후 비밀번호 변경 페이지 이동
-    @PostMapping("/user_pwUpdate")
+    @PostMapping("/user_pwUpdateChk")
+    public String pwUpdateCheck(String user_id, String user_pw, RedirectAttributes rttr) {
+        UserDTO userDTO = mypageService.infoUpdateChk(user_id);
+        String db_pw = userDTO.getUser_pw();
+        if(passwordEncoder.matches(user_pw, db_pw)) {
+            return "redirect:/user/user_pwModify";
+        } else {
+            rttr.addFlashAttribute("msg", "비밀번호를 다시 확인해 주세요.");
+            return "redirect:/user/user_pwUpdateChk";
+        }
+    }
+
+    @GetMapping("/user_pwModify")
     public String pwUpdateView() {
+
         return "user/user_pwUpdate";
     }
 

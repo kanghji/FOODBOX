@@ -24,6 +24,7 @@ function prodSearchBtn(obj) {
     console.log(prod_name);
 
     if(mode ==='p'){
+
         $.ajax({
             type: 'post',
             url: '/user/prodSeach',
@@ -32,13 +33,13 @@ function prodSearchBtn(obj) {
             // contentType: 'application/json; charset=utf8',
             success: (data) => {
                 // let str = "";
-                let productViewLine = '</div><div class="d-flex flex-column mt-3 m-auto">';
+                let productViewLine = '</div><div class="d-flex w-100 justify-content-center mt-3">';
                 let productCount = 0;
 
                 // if(data) callback(data);
                 if(data.length != 0 ){
                     for(let i=0; i < data.length; i++ ){
-                        productViewLine +=
+                        // productViewLine +=
                             // + '<p>'+data[i].prod_name+'<img src="/image/'+data[i].prod_thumbnail+'" width="100px"/>'+' :: '+data[i].prod_comment+'</p>';
                             productViewLine += '<div class="card me-2 mb-3" style="width:265px; border:none; height:300px;">'
                                 + '<div class="d-flex justify-content-center">'
@@ -53,7 +54,11 @@ function prodSearchBtn(obj) {
                                 + '</div>';
                             if ((i+1) % 4 == 0) {
                                 productViewLine += '</div>'
-                                    + '<div class="d-flex flex-column mt-3">';
+                                    + '<div class="d-flex justify-content-center mt-3">';
+                            }
+                            if((data.length-(i+1))<4 && ((i+1)%4==0)){
+                                productViewLine += '</div>'
+                                    + '<div class="d-flex justify-content-start mt-3" style="width:1232px;">';
                             }
                                 productCount++;
                         }
@@ -78,6 +83,10 @@ function prodSearchBtn(obj) {
             // data:JSON.stringify(jsonObj),
             // contentType: 'application/json; charset=utf8',
             success: (data) => {
+
+                // let productViewLine = '</div><div class="d-flex flex-column mt-3 m-auto">';
+                // let productCount = 0;
+
                 console.log(data);
                 // if(data) callback(data);
                 let str = "";
@@ -87,7 +96,7 @@ function prodSearchBtn(obj) {
                         str +='<p>'+data[i].rcp_NM+' :: '+data[i].rcp_PAT2+'</p>';
                     }
                 }else{
-                    str += "검색된 결과가 없습니다!!";
+                    productViewLine += "검색된 결과가 없습니다!!";
                 }
                 searchListArea.html(str);
             },
