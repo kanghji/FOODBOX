@@ -66,7 +66,7 @@
                                 </p>
                             </div>
                             <div class="best_link">
-                                <a href="/user/productPage?prod_spec=NEW" class="more_new">
+                                <a href="/user/recipe" class="more_best">
                                     Read more &nbsp;&nbsp;<i class="fa fa-arrow-right new_more_icon"></i>
                                 </a>
                             </div>
@@ -100,7 +100,7 @@
                                 </p>
                             </div>
                             <div class="best_link">
-                                <a href="/user/recipe" class="more_best">
+                                <a href="/user/productPage?prod_spec=NEW" class="more_new">
                                     Read more &nbsp;&nbsp;<i class="fa fa-arrow-right best_more_icon"></i>
                                 </a>
                             </div>
@@ -118,18 +118,18 @@
                             <a href="/user/productPage" class="more-btn">더 보기 <i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
-                    <!-- new menu slider -->
+                    <!-- recommend menu slider -->
                     <div class="new-slider__wrap">
                         <th:block th:each=" productDTO : ${prodSlideList}">
-                            <!--                        <div class="new-menu">-->
-                            <!--                            <div class="img_test">-->
-                            <!--                                <a th:href="@{/user/productView(prod_code=${productDTO.prod_code})}">-->
-                            <!--                                    <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="상품이미지" class="best__img01">-->
-                            <!--                                </a>-->
-                            <!--                            </div>-->
-                            <!--                            <p th:text="${productDTO.prod_name}">상품명</p>-->
-                            <!--                            <p class="new__price" th:text="${productDTO.prod_price}">가격</p>-->
-                            <!--                        </div>-->
+<!--                        <div class="new-menu">-->
+<!--                            <div class="img_test">-->
+<!--                                <a th:href="@{/user/productView(prod_code=${productDTO.prod_code})}">-->
+<!--                                    <img th:src="@{/image/}+${productDTO.prod_thumbnail}" alt="상품이미지" class="best__img01">-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            <p th:text="${productDTO.prod_name}">상품명</p>-->
+<!--                            <p class="new__price" th:text="${productDTO.prod_price}">가격</p>-->
+<!--                        </div>-->
                             <th:block th:replace="/user/productSlide"/>
                         </th:block>
                     </div>
