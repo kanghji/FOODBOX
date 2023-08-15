@@ -6,6 +6,7 @@ import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.admin.UserMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +17,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-//    // 회원 리스트
-//    @Override
-//    public List<UserDTO> userList() {
-//        List<UserDTO> userList = userMapper.userList();
-//        return userList;
-//    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // 회원리스트
     @Override
@@ -64,9 +61,16 @@ public class UserServiceImpl implements UserService {
         return userMapper.userInfo(user_no);
     }
 
+//    // 회원 수정
+//    @Override
+//    public void userModify(UserDTO userDto){
+//        userMapper.userModify(userDto);
+//    }
+
     // 회원 수정
     @Override
     public void userModify(UserDTO userDto){
+        userDto.setUser_pw(passwordEncoder.encode(userDto.getUser_pw()));
         userMapper.userModify(userDto);
     }
 
