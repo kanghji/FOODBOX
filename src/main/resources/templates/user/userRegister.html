@@ -1,9 +1,6 @@
 <!-- 헤더 -->
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
-<link href="/css/userRegister.css" rel="stylesheet"/>
-
-
 <!-- 컨텐츠 영역 -->
 <div class="user_register_wrap">
 
@@ -169,7 +166,7 @@
                 </div>
                 <div class="register_content02">
                     <div class="content_box">
-                        <input class="register_content_box" type="text" id="user_tel" oninput="hypenTel(this)" name="user_tel" onkeyup="inputTel()" placeholder="전화번호를 입력해주세요."/>
+                        <input class="register_content_box" type="text" id="user_tel" name="user_tel" onkeyup="inputTel()" oninput="hypenTel(this)"placeholder="전화번호를 입력해주세요."/>
                         <p class="chkMsg" id="telMsg"></p>
                     </div>
                 </div>

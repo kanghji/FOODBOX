@@ -9,22 +9,26 @@ $(function (){
 
 // 비밀번호 재확인 버튼 클릭 이벤트
 function userInfoBtn() {
-
-    let pwInput = $("#user_pw_input").val();
-    let userDTO = $("#user_pw_db").val();
-
-    // 비밀번호를 입력하지 않은 경우
-    if (!pwInput|| pwInput.trim() == "") {
-        alert("현재 비밀번호를 입력해주세요");
-        $("#user_pw_input").focus();
-        return;
-    }
+    //
+    // let pwInput = $("#user_pw_input").val();
+    // let pw_check = $("#pw_check").val();
+    // if(pw_check != null) {
+    //     alert(pw_check);
+    // }
+    // // let userDTO = $("#user_pw_db").val();
+    //
+    // // 비밀번호를 입력하지 않은 경우
+    // if (!pwInput|| pwInput.trim() == "") {
+    //     alert("현재 비밀번호를 입력해주세요");
+    //     $("#user_pw_input").focus();
+    //     return;
+    // }
     // 입력한 비밀번호와 데이터에 저장된 비밀번호 불일치 여부
-    if (pwInput != userDTO) {
-        alert("비밀번호가 일치하지 않습니다");
-        $("#user_pw_input").focus();
-        return;
-    }
+    // if (pwInput != userDTO) {
+    //     alert("비밀번호가 일치하지 않습니다");
+    //     $("#user_pw_input").focus();
+    //     return;
+    // }
     // 일치하면 비밀번호 변경 페이지로 이동
     document.userinfo_input.submit();
 
@@ -80,17 +84,27 @@ function inputNewPwChk() {
 // 새 비밀번호 변경
 
 function pwModifyBtn(user_id) {
-    // let new_pw = document.getElementById('new_pw').value;
-    // let user = {user_id: user_id, new_pw: new_pw};
-    // alert(user);
-    // alert(new_pw);
-    // alert(JSON.stringify(user));
-    // alert(user_id);
+    let new_pw = document.getElementById('new_pw').value;
+    let user = {user_id: user_id, new_pw: new_pw};
+
     if (newPwChk == false) {
         alert("최소 10글자 이상이어야하며, 영문/숫자/특수문자를 포함해야합니다");
         return;
     }
-    location.href = "/user/user_pwUpdataChkPage";
+
+    $.ajax({
+        type: "post",
+        url: "/user/user_pwModify",
+        data: JSON.stringify(user),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            location.href = "/user/user_pwUpdateChkPage";
+        },
+        error: function (error) {
+            console.error("에러:", error);
+        }
+    });
+
 }
 
 // 북마크 삭제
@@ -127,7 +141,7 @@ let hypenTel = (target) => {
 
 // 이름
 
-function inputName(){
+function nameInput(){
 
     let regName = /^[가-힣]+$/;
     let nameInput = $("#user_name").val();
@@ -148,7 +162,7 @@ function inputName(){
 
 // 이메일
 
-function inputEmail() {
+function emailInput() {
     let regEmail = /^[0-9a-z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     let emailInput = $("#user_email").val();
 
@@ -163,7 +177,7 @@ function inputEmail() {
 
 // 휴대폰
 
-function inputTel() {
+function telInput() {
     let regTel = /^\d{3}-\d{3,4}-\d{4}$/;
     let telInput =  $("#user_tel").val();
 

@@ -8,7 +8,7 @@
             SELECT * FROM user WHERE user_id = #{user_id}
         </select>
         <!-- 비밀번호 수정 -->
-        <update id="pwUpdate" parameterType="userDTO">
+        <update id="pwUpdate">
             UPDATE user SET user_pw = #{new_pw} WHERE user_id = #{user_id}
         </update>
         <!-- 회원 정보 불러오기  -->
