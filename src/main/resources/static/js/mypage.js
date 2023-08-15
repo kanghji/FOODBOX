@@ -84,17 +84,27 @@ function inputNewPwChk() {
 // 새 비밀번호 변경
 
 function pwModifyBtn(user_id) {
-    // let new_pw = document.getElementById('new_pw').value;
-    // let user = {user_id: user_id, new_pw: new_pw};
-    // alert(user);
-    // alert(new_pw);
-    // alert(JSON.stringify(user));
-    // alert(user_id);
+    let new_pw = document.getElementById('new_pw').value;
+    let user = {user_id: user_id, new_pw: new_pw};
+
     if (newPwChk == false) {
         alert("최소 10글자 이상이어야하며, 영문/숫자/특수문자를 포함해야합니다");
         return;
     }
-    location.href = "/user/user_pwUpdateChkPage";
+
+    $.ajax({
+        type: "post",
+        url: "/user/user_pwModify",
+        data: JSON.stringify(user),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            location.href = "/user/user_pwUpdateChkPage";
+        },
+        error: function (error) {
+            console.error("에러:", error);
+        }
+    });
+
 }
 
 // 북마크 삭제

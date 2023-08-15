@@ -27,9 +27,9 @@ public class MypageServiceImpl implements MypageService{
 
     @Override
     public int pwModify(UserDTO userDTO) {
-        userDTO.setUser_pw(passwordEncoder.encode(userDTO.getUser_pw()));
-        int new_pw = mypageMapper.pwUpdate(userDTO);
-       return new_pw;
+        userDTO.setNew_pw(passwordEncoder.encode(userDTO.getNew_pw()));
+
+        return mypageMapper.pwUpdate(userDTO);
     }
 
     @Override
