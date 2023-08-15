@@ -39,14 +39,14 @@ public class UserOrderServiceImpl implements UserOrderService {
     }
 
     @Override
-    public void addOrderList(UserOrderCheckDTO userOrderCheckDTO) {
+    public int addOrderList(UserOrderCheckDTO userOrderCheckDTO) {
         UserOrderDTO userOrderDTO = new UserOrderDTO();
 
         List<UserOrderCheckDTO> orderList = userOrderCheckDTO.getOrderList();
         UserOrderCheckDTO checkDTO = userOrderCheckDTO.getUserOrderCheckDTO();
 
         int orderTotPrice = 0;
-        for(UserOrderCheckDTO dto: orderList) {
+        for (UserOrderCheckDTO dto : orderList) {
             orderTotPrice += dto.getTotPrice();
         }
         userOrderDTO.setOrderTotPrice(orderTotPrice);
@@ -62,7 +62,7 @@ public class UserOrderServiceImpl implements UserOrderService {
 
 
         userOrderDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
-        userOrderMapper.insertOrderList(userOrderDTO);
+        int n = userOrderMapper.insertOrderList(userOrderDTO);
 
         String id = userOrderDTO.getUser_id();
         String name = userOrderDTO.getUser_name();
@@ -73,7 +73,7 @@ public class UserOrderServiceImpl implements UserOrderService {
         String receiver_tel = userOrderDTO.getReceiver_tel();
         int generatedOrderNo = userOrderDTO.getOrder_no();
 
-        for(UserOrderCheckDTO dto: orderList) {
+        for (UserOrderCheckDTO dto : orderList) {
             UserOrderDetailDTO userOrderDetailDTO = new UserOrderDetailDTO();
             userOrderDetailDTO.setOrder_no(generatedOrderNo);
             userOrderDetailDTO.setOrder_status(OrderStatus.ORDERSUCCESS);
@@ -93,7 +93,14 @@ public class UserOrderServiceImpl implements UserOrderService {
 
             userOrderMapper.insertOrderDetail(userOrderDetailDTO);
             userOrderMapper.updateProd_qty(userOrderDetailDTO);
+
         }
+        return n;
+    }
+
+    @Override
+    public void deleteCart(String userId) {
+        userOrderMapper.deleteCart(userId);
     }
 
     @Override

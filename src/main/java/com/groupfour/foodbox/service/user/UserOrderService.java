@@ -12,7 +12,7 @@ public interface UserOrderService {
 
     UserDTO userOrderInfo(String userId);
 
-    void addOrderList(UserOrderCheckDTO userOrderCheckDTO);
+    int addOrderList(UserOrderCheckDTO userOrderCheckDTO);
 
     void addFastPay(UserOrderCheckDTO userOrderCheckDTO);
 
@@ -24,4 +24,5 @@ public interface UserOrderService {
 
     UserOrderCheckDTO getProdInfo(int prodCode);
 
+    void deleteCart(String userId);
 }
