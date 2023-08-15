@@ -1,6 +1,14 @@
 
+
+
 // 검색
 function prodSearchBtn(obj) {
+
+    // 키워드가 없거나 공백일 때 전체 상품으로 검색
+    let noSearch = $("#prod_name").val();
+    if (!noSearch || noSearch.trim() == "") {
+        alert("전체 상품/레시피가 검색됩니다");
+    }
 
     // 검색결과리스트 출력 부분 변수 선언
     let searchListArea = $(".searchArea");
@@ -35,7 +43,6 @@ function prodSearchBtn(obj) {
             // data:JSON.stringify(jsonObj),
             // contentType: 'application/json; charset=utf8',
             success: (data) => {
-                // let str = "";
                 let productViewLine = '</div><div class="d-flex w-100 justify-content-center mt-3">';
                 let productCount = 0;
 
@@ -65,14 +72,11 @@ function prodSearchBtn(obj) {
                             }
                                 productCount++;
                         }
-                        // document.getElementById('prodspanCnt').innerHTML='('+productCount+')';
-                        // $('#productpreview').html(productViewLine);
-                } else{
+                } else {
                     productViewLine += "검색된 결과가 없습니다";
                 }
                 document.getElementById('prodspanCnt').innerHTML='('+productCount+')';
                 searchListArea.html(productViewLine);
-                // $('#productpreview').html(productViewLine);
             },
             error: () => {
                 alert("상품 에러");
@@ -89,7 +93,6 @@ function prodSearchBtn(obj) {
 
                 // console.log(data);
                 // if(data) callback(data);
-                // let str = "";
                 let recipeViewLine='</div><div class="d-flex w-100 justify-content-center mt-3">';
                 let recipeCount = 0;
 
@@ -130,70 +133,3 @@ function prodSearchBtn(obj) {
         });
     }
 }
-
-
-
-
-// 검색 버튼
-// function SearchBtn() {
-//
-//     let noSearch = $("#prod_name").val();
-//
-//     if (!noSearch || noSearch.trim() == "") {
-//         alert("검색어를 입력해주세요");
-//         return;
-//     }
-//     $.ajax({
-//         url: '/user/prodSearch',
-//         type: 'post',
-//         data: {prod_name: $('#prod_name').val()},
-//         success: function (data) {
-//             let productViewLine = '</div><div class="d-flex mt-3">';
-//
-//             if (!data) {
-//                 // alert("검색 결과가 없습니다");
-//                 // location.href="/user/prodSearch";
-//                 productViewLine += '<p>검색결과가 없습니다</p>';
-//                 $('#productpreview').html(productViewLine);
-//             } else {
-//                 prodSearchBtn();
-//             }
-//
-//         }
-//     })
-// }
-//
-// // 상품 탭 버튼
-// function prodSearchBtn() {
-//     $.ajax({
-//         url: '/user/prodSearch',
-//         type: 'post',
-//         data: {prod_name: $('#prod_name').val()},
-//         success: function (data) {
-//             // alert(data);
-//             let productViewLine = '</div><div class="d-flex flex-column mt-3">';
-//             let productCount = 0;
-//
-//             for (let i = 0; i < data.length; i++) {
-//                 productViewLine += '<div class="card me-2 mb-3" style="width:265px; border:none; height:300px;">'
-//                     + '<div class="d-flex justify-content-center">'
-//                     + '<a href="/user/productView?prod_code=' + data[i].prod_code + '" style="height:180px; overflow:hidden;">'
-//                     + '<img class="card-image" src="/image/' + data[i].prod_thumbnail + '" alt="Card image" style="width:70%">'
-//                     + '</a></div>'
-//                     + '<div class="mt-3" style="width:70%;">'
-//                     + '<h7  style="font-size:15px;">'
-//                     + '<b class="mt-2">' + data[i].prod_brand + data[i].prod_name + '</b></h7>'
-//                     + '<p class="mt-3">' + data[i].prod_price + '</p>'
-//                     + '</div>'
-//                     + '</div>';
-//                 if ((i+1) % 4 == 0) {
-//                     productViewLine += '</div>'
-//                         + '<div class="d-flex flex-column mt-3">';
-//                 }
-//                 productCount++;
-//             }
-//             document.getElementById('prodspanCnt').innerHTML='('+productCount+')';
-//             $('#productpreview').html(productViewLine);
-//         }
-//     })
-// }
