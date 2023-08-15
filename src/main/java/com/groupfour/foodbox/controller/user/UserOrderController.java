@@ -72,7 +72,10 @@ public class UserOrderController {
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void userPay(@RequestBody UserOrderCheckDTO userOrderCheckDTO) {
-        userOrderService.addOrderList(userOrderCheckDTO);
+        int n = userOrderService.addOrderList(userOrderCheckDTO);
+        if (n > 0) {
+            userOrderService.deleteCart(userOrderCheckDTO.getUserOrderCheckDTO().getUser_id());
+        }
     }
 
     @PostMapping("/userOrder/fastPay")

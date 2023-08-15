@@ -14,7 +14,7 @@ public interface UserOrderMapper {
 
     UserDTO userOrderInfo(String userId);
 
-    void insertOrderList(UserOrderDTO userOrderDTO);
+    int insertOrderList(UserOrderDTO userOrderDTO);
 
     void insertOrderDetail(UserOrderDetailDTO userOrderDetailDTO);
 
@@ -31,4 +31,6 @@ public interface UserOrderMapper {
     int deleteOrder_qty(int prod_code, int prod_qty);
 
     UserOrderCheckDTO getProdInfo(int prodCode);
+
+    void deleteCart(String userId);
 }
