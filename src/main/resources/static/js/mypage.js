@@ -68,7 +68,7 @@ let pwCheck = false;
 function inputNewPwChk() {
     let newPwChk = $("#new_pw_chk").val();
 
-    if ($("#new_pw").val() != newPwChk) {
+    if ($("#new_pw").val() != newPwChk || newPwChk.trim() == "") {
         $("#checkPwMsg").text("동일한 비밀번호를 입력해주세요");
         pwCheck = false;
         return;
@@ -98,6 +98,7 @@ function pwModifyBtn(user_id) {
         data: JSON.stringify(user),
         contentType: "application/json; charset=utf-8",
         success: function () {
+            alert("비밀번호가 변경되었습니다");
             location.href = "/user/user_pwUpdateChkPage";
         },
         error: function (error) {

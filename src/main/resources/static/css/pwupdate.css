@@ -135,4 +135,8 @@
     border-bottom: 1.4px solid #333333;
 }
 
-
+.input_val {
+    padding: 0.5em 0 1em 11.8em;
+    color: #f03f40;
+    font-size: 13px;
+}
