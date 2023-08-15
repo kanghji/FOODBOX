@@ -9,20 +9,20 @@ $(function (){
 
 // 비밀번호 재확인 버튼 클릭 이벤트
 function userInfoBtn() {
-
-    let pwInput = $("#user_pw_input").val();
-    let pw_check = $("#pw_check").val();
-    if(pw_check != null) {
-        alert(pw_check);
-    }
-    // let userDTO = $("#user_pw_db").val();
-
-    // 비밀번호를 입력하지 않은 경우
-    if (!pwInput|| pwInput.trim() == "") {
-        alert("현재 비밀번호를 입력해주세요");
-        $("#user_pw_input").focus();
-        return;
-    }
+    //
+    // let pwInput = $("#user_pw_input").val();
+    // let pw_check = $("#pw_check").val();
+    // if(pw_check != null) {
+    //     alert(pw_check);
+    // }
+    // // let userDTO = $("#user_pw_db").val();
+    //
+    // // 비밀번호를 입력하지 않은 경우
+    // if (!pwInput|| pwInput.trim() == "") {
+    //     alert("현재 비밀번호를 입력해주세요");
+    //     $("#user_pw_input").focus();
+    //     return;
+    // }
     // 입력한 비밀번호와 데이터에 저장된 비밀번호 불일치 여부
     // if (pwInput != userDTO) {
     //     alert("비밀번호가 일치하지 않습니다");
@@ -94,7 +94,7 @@ function pwModifyBtn(user_id) {
         alert("최소 10글자 이상이어야하며, 영문/숫자/특수문자를 포함해야합니다");
         return;
     }
-    location.href = "/user/user_pwUpdataChkPage";
+    location.href = "/user/user_pwUpdateChkPage";
 }
 
 // 북마크 삭제
