@@ -1,6 +1,7 @@
 
 // 검색
 function prodSearchBtn(obj) {
+
     // 검색결과리스트 출력 부분 변수 선언
     let searchListArea = $(".searchArea");
 
@@ -11,20 +12,19 @@ function prodSearchBtn(obj) {
     // console.log(obj.getAttribute('data-mode'));
     let mode = obj.getAttribute('data-mode');
 
-    // 조건문을 사용하여 입력한 값이
     if(mode == 'z'){
         mode = $('.active').data('mode');
-        console.log("mode : " + mode);
-        console.log($(`[data-mode="mode"]`));
+        // console.log("mode : " + mode);
+        // console.log($(`[data-mode="mode"]`));
         $(`[data-mode="${mode}"]`).addClass('active');
     }else{
         $('.search_btn').removeClass('active');
         obj.classList.add('active');
     }
-    alert(mode);
+    // alert(mode);
 
     let prod_name = document.getElementById("prod_name").value;
-    console.log(prod_name);
+    // console.log(prod_name);
 
     if(mode ==='p'){
 
@@ -61,21 +61,21 @@ function prodSearchBtn(obj) {
                             }
                             if((data.length-(i+1))<4 && ((i+1)%4==0)){
                                 productViewLine += '</div>'
-                                    + '<div class="d-flex justify-content-start mt-3" style="width:1232px;">';
+                                    + '<div class="d-flex justify-content-start mt-3" style="width:1232px;margin:auto; padding-left: 4.2em">';
                             }
                                 productCount++;
                         }
                         // document.getElementById('prodspanCnt').innerHTML='('+productCount+')';
                         // $('#productpreview').html(productViewLine);
                 } else{
-                    productViewLine += "검색된 결과가 없습니다!!";
+                    productViewLine += "검색된 결과가 없습니다";
                 }
                 document.getElementById('prodspanCnt').innerHTML='('+productCount+')';
                 searchListArea.html(productViewLine);
                 // $('#productpreview').html(productViewLine);
             },
             error: () => {
-                alert("에러");
+                alert("상품 에러");
             }
         });
     }else if(mode ==='r'){
@@ -87,24 +87,45 @@ function prodSearchBtn(obj) {
             // contentType: 'application/json; charset=utf8',
             success: (data) => {
 
-                // let productViewLine = '</div><div class="d-flex flex-column mt-3 m-auto">';
-                // let productCount = 0;
-
-                console.log(data);
+                // console.log(data);
                 // if(data) callback(data);
-                let str = "";
+                // let str = "";
+                let recipeViewLine='</div><div class="d-flex w-100 justify-content-center mt-3">';
+                let recipeCount = 0;
+
                 // if(data) callback(data);
                 if(data.length != 0 ){
                     for(let i=0; i < data.length; i++ ){
-                        str +='<p>'+data[i].rcp_NM+' :: '+data[i].rcp_PAT2+'</p>';
+                        // str +='<p>'+data[i].rcp_NM+' :: '+data[i].rcp_PAT2+'</p>';
+                        recipeViewLine += '<div class="card me-2 mb-3" style="width:265px; border:none; height:300px;">'
+                            + '<div class="d-flex justify-content-center">'
+                            + '<a href="/user/recipeView?id='+data[i].id+'" style="height:180px; overflow:hidden;">'
+                            + '<img class="card-image" src="'+data[i].att_FILE_NO_MAIN+'" alt="Card image" style="width:70%">'
+                            + '</a></div>'
+                            + '<div class="mt-3" style="width:70%;">'
+                            + '<h7  style="font-size:15px;">'
+                            + '<b class="mt-2">'+ data[i].rcp_NM +'</b></h7>'
+                            + '<p class="mt-3">['+data[i].rcp_PAT2+'/'+data[i].rcp_WAY2+']</p>'
+                            + '</div>'
+                            + '</div>';
+                        if ((i+1) % 4 == 0) {
+                            recipeViewLine += '</div>'
+                                + '<div class="d-flex justify-content-center mt-3">';
+                        }
+                        if((data.length-(i+1))<4 && ((i+1)%4==0)){
+                            recipeViewLine += '</div>'
+                                + '<div class="d-flex justify-content-start mt-3" style="width:1232px;margin:auto; padding-left: 4.2em">';
+                        }
+                        recipeCount++;
                     }
                 }else{
-                    productViewLine += "검색된 결과가 없습니다!!";
+                    recipeViewLine += "검색된 결과가 없습니다";
                 }
-                searchListArea.html(str);
+                document.getElementById('recipeCnt').innerHTML='('+recipeCount+')';
+                searchListArea.html(recipeViewLine);
             },
             error: () => {
-                alert("에러");
+                alert("레시피 에러");
             }
         });
     }

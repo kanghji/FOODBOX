@@ -48,7 +48,7 @@ public class MyPageController {
         if(passwordEncoder.matches(user_pw, db_pw)) {
             return "redirect:/user/user_pwModify";
         } else {
-            rttr.addFlashAttribute("msg", "비밀번호를 다시 확인해 주세요.");
+            rttr.addAttribute("msg", "비밀번호를 다시 확인해 주세요");
             return "redirect:/user/user_pwUpdateChk";
         }
     }
