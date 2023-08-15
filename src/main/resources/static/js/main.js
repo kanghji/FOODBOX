@@ -37,7 +37,7 @@ $(function (){
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2200,
+        autoplaySpeed: 2000,
         speed: 850,
         cssEase: "ease-in-out",
         dots: false,
@@ -47,7 +47,7 @@ $(function (){
 
 });
 
-// 페이지 스크롤시 fade in 효과
+// 페이지 스크롤 효과
 AOS.init(); // 초기화
 
 

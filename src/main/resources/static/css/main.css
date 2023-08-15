@@ -142,6 +142,7 @@ strong {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    border: 1px solid #333333;
 }
 
 .prev-btn {
@@ -227,6 +228,3 @@ strong {
     top: 30%;
     right: -4%;
 }
-
-
-/* fade in  */
