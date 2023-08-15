@@ -1,4 +1,4 @@
-    let userCartObject = {
+let userCartObject = {
 
     insertCart: function (prod_code) {
 
@@ -35,4 +35,28 @@
         }
     }
 
+}
+
+let userFastOrder = {
+    insertOrder : function (prod_code) {
+        let order_qty = parseInt($("#order_qty").val());
+        let user_id = $("#user_id").val();
+
+        let userOrderCheckDTO = {
+            user_id: user_id, prod_code: prod_code, order_qty: order_qty
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/user/userOrder/fastOrder",
+            data: JSON.stringify(userOrderCheckDTO),
+            contentType: "application/json; charset=utf-8"
+        }).done(function (response) {
+            let responseJson = JSON.stringify(response);
+
+            location.href = "/user/userOrder/fastOrderView?response=" + encodeURIComponent(responseJson);
+        }).fail(function (error) {
+            alert("에러발생 : " + error);
+        });
+    }
 }

@@ -32,5 +32,23 @@
         SELECT * FROM product ORDER BY prod_code DESC
         LIMIT 8
     </select>
+    <select id="recipeReply" resultType="recipeReplyDTO">
+        SELECT * FROM recipe_reply WHERE reply_recipe_code=#{reply_recipe_code} ORDER BY reply_date DESC
+        LIMIT #{replyPageDTO.startIndex}, #{replyPageDTO.cntPerPage}
+    </select>
+
+    <insert id="recipeReplyRegister">
+        INSERT INTO recipe_reply(reply_recipe_code, reply_user_id, reply_content, reply_rating)
+        VALUES(#{reply_recipe_code}, #{reply_user_id},#{reply_content}, #{reply_rating})
+    </insert>
+    <select id="recipeReplyCount" resultType="Integer">
+        SELECT ifnull(count(*),0) FROM recipe_reply WHERE reply_recipe_code=#{reply_recipe_code}
+    </select>
+    <select id="recipeRatingSum" resultType="Integer">
+        SELECT ifnull(SUM(reply_rating),0) FROM recipe_reply WHERE reply_recipe_code=#{reply_recipe_code}
+    </select>
+    <delete id="recipeReplyDelete">
+        DELETE FROM recipe_reply WHERE reply_num=#{reply_num}
+    </delete>
 </mapper>
 

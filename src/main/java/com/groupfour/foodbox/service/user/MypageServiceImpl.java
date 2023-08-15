@@ -4,6 +4,7 @@ import com.groupfour.foodbox.domain.BookmarkDTO;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.mapper.user.MypageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -15,6 +16,9 @@ public class MypageServiceImpl implements MypageService{
     @Autowired
     MypageMapper mypageMapper;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public UserDTO infoUpdateChk(String user_id) {
 //        System.out.println("mypageMapper.infoUpdateChk(user_id) = " + mypageMapper.infoUpdateChk(user_id));
@@ -23,8 +27,9 @@ public class MypageServiceImpl implements MypageService{
 
     @Override
     public int pwModify(UserDTO userDTO) {
-        int new_pw = mypageMapper.pwUpdate(userDTO);
-       return new_pw;
+        userDTO.setNew_pw(passwordEncoder.encode(userDTO.getNew_pw()));
+
+        return mypageMapper.pwUpdate(userDTO);
     }
 
     @Override

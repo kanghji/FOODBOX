@@ -35,32 +35,36 @@
 <header class="header header__fixed">
     <div class="wrap">
         <div class="header_innerbox1">
-            <!-- logo -->
-            <h1 class="logo">
-                <a href="/">Food box</a>
-            </h1>
-            <!-- menu -->
-            <nav class="gnb">
-                <ul class="gnb__menu">
-                    <li class="gnb__store main_menu"  onmouseenter="storeSubmenuOver(this)" onmouseleave="storeSubmenuOut(this)">
-                        <a href="/user/productPage">스토어</a>
-                        <ul class="store__submenu submenu" id="storeCategory">
-<!--                            <li class="sub_title"><span>푸드</span></li>-->
-<!--                            <th:block th:each="categoryDTO : ${categoryList}">-->
-<!--                                <li><a th:href="@{/user/productPage(category_code=${categoryDTO.category_code}, category_name=${category_name})}" th:text="${categoryDTO.category_name}">카테고리</a></li>-->
-<!--                            </th:block>-->
-                        </ul>
-                    </li>
-                    <li class="gnb__best main_menu"><a href="/user/recipe">레시피</a></li>
-                    <li class="gnb__best main_menu"><a href="/user/productPage?prod_spec=BEST">베스트</a></li>
-                    <li class="gnb__new main_menu"><a href="/user/productPage?prod_spec=NEW">신상품</a></li>
-                </ul>
-            </nav>
+                <!-- logo -->
+            <div class="header_hi">
+                <div>
+                    <h1 class="logo">
+                        <a href="/">Food box</a>
+                    </h1>
+                </div>
+                <!-- menu -->
+                <nav class="gnb">
+                    <ul class="gnb__menu">
+                        <li class="gnb__store main_menu"  onmouseenter="storeSubmenuOver(this)" onmouseleave="storeSubmenuOut(this)">
+                            <a href="/user/productPage">스토어</a>
+                            <ul class="store__submenu submenu" id="storeCategory">
+    <!--                            <li class="sub_title"><span>푸드</span></li>-->
+    <!--                            <th:block th:each="categoryDTO : ${categoryList}">-->
+    <!--                                <li><a th:href="@{/user/productPage(category_code=${categoryDTO.category_code}, category_name=${category_name})}" th:text="${categoryDTO.category_name}">카테고리</a></li>-->
+    <!--                            </th:block>-->
+                            </ul>
+                        </li>
+                        <li class="gnb__best main_menu"><a href="/user/recipe">레시피</a></li>
+                        <li class="gnb__best main_menu"><a href="/user/productPage?prod_spec=BEST">베스트</a></li>
+                        <li class="gnb__new main_menu"><a href="/user/productPage?prod_spec=NEW">신상품</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <div class="header_innerbox2">
             <!-- search -->
             <div class="search inner_right">
-                <a th:href="@{/user/search}"><i class="fa fa-search fa-lg"></i></a>
+                <a th:href="@{/search}"><i class="fa fa-search fa-lg"></i></a>
             </div>
             <!-- cart -->
             <div class="cart inner_right">

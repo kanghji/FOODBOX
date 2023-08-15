@@ -34,4 +34,21 @@
 <!--        </if>-->
 
 <!--    </sql>-->
+
+    <update id="adminOrderDelete">
+        UPDATE orderdetail SET order_status = 'CANCLE' WHERE order_no = #{orderNo}
+    </update>
+
+    <update id="adminOrderListDelete">
+        UPDATE orderlist SET order_status = 'CANCLE' WHERE order_no = #{orderNo}
+    </update>
+
+    <select id="getOrderDetail" resultType="com.groupfour.foodbox.dto.AdminOrderDetailDTO">
+        SELECT * FROM orderDetail WHERE order_no = #{orderNo}
+    </select>
+
+    <update id="deleteOrder_qty">
+        UPDATE product SET prod_qty = #{prodQty} WHERE prod_code = #{prodCode}
+    </update>
+
 </mapper>

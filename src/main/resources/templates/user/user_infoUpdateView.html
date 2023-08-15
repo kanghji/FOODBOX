@@ -20,7 +20,7 @@
                             <label for="user_name">이름</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_name" name="user_name" class="update_input" onkeyup="inputName()" th:value="${userDTO.user_name}"/>
+                            <input type="text" id="user_name" name="user_name" class="update_input" onkeyup="nameInput()" th:value="${userDTO.user_name}"/>
                         </div>
                     </div>
                     <div class="validation validation_input_name">
@@ -31,9 +31,9 @@
                             <label for="user_email">이메일</label>
                         </div>
                         <div class="input_box">
-                            <input type="email" id="user_email" name="user_email" class="update_input" onkeyup="inputEmail()" th:value="${userDTO.user_email}" />
+                            <input type="email" id="user_email" name="user_email" class="update_input" onkeyup="emailInput()" th:value="${userDTO.user_email}" />
                         </div>
-                        <button type="button" class="confirm_btn " onclick="emailCheck()">이메일 인증</button>
+                        <button type="button" class="confirm_btn " onclick="emailCheck_two()">이메일 인증</button>
                     </div>
                     <div class="register_content_wrap" id="confirmEmail" style="display:none;"></div>
                     <div class="validation validation_input_name">
@@ -44,7 +44,7 @@
                             <label for="user_tel">휴대폰</label>
                         </div>
                         <div class="input_box">
-                            <input type="text" id="user_tel" name="user_tel" class="update_input" onkeyup="inputTel()" oninput="hypenTel(this)" maxlength="13" th:value="${userDTO.user_tel}" />
+                            <input type="text" id="user_tel" name="user_tel" class="update_input" onkeyup="telInput()" oninput="hypenTel(this)" maxlength="13" th:value="${userDTO.user_tel}" />
                         </div>
 <!--                        <button type="button" class="confirm_btn" onclick="telBtn()">휴대폰 인증</button>-->
                     </div>
@@ -108,5 +108,6 @@
     </div>
 </div>
 
+<script type="text/javascript" th:src="@{/js/infoUpdateEmailChk.js}"></script>
 
 <th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>

@@ -1,5 +1,6 @@
 package com.groupfour.foodbox.controller.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupfour.foodbox.domain.UserDTO;
 import com.groupfour.foodbox.dto.UserOrderCheckDTO;
 import com.groupfour.foodbox.dto.UserOrderDTO;
@@ -40,11 +41,48 @@ public class UserOrderController {
         return "/user/userOrderCheck";
     }
 
+    @GetMapping("/userOrder/fastOrderView")
+    public String fastOrderView(@RequestParam(name = "response") String responseJson, Model model) throws Exception{
+
+        UserOrderCheckDTO userOrderCheckDTO = new ObjectMapper().readValue(responseJson, UserOrderCheckDTO.class);
+
+        UserOrderCheckDTO checkDTO = userOrderService.getProdInfo(userOrderCheckDTO.getProd_code());
+        int cartTotPrice = 0;
+
+        checkDTO.setOrder_qty(userOrderCheckDTO.getOrder_qty());
+        checkDTO.setTotPrice(checkDTO.getTotPrice());
+        cartTotPrice = checkDTO.getTotPrice();
+
+        UserDTO userDTO = userOrderService.userOrderInfo(userOrderCheckDTO.getUser_id());
+
+        model.addAttribute("dto", checkDTO);
+        model.addAttribute("cartTotPrice", cartTotPrice);
+        model.addAttribute("userDTO", userDTO);
+
+        return "/user/userFastOrderCheck";
+    }
+
+    @PostMapping("/userOrder/fastOrder")
+    public @ResponseBody UserOrderCheckDTO fastOrder(@RequestBody UserOrderCheckDTO userOrderCheckDTO) {
+
+        return userOrderCheckDTO;
+    }
+
     @PostMapping("/userOrder/pay")
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void userPay(@RequestBody UserOrderCheckDTO userOrderCheckDTO) {
-        userOrderService.addOrderList(userOrderCheckDTO);
+        int n = userOrderService.addOrderList(userOrderCheckDTO);
+        if (n > 0) {
+            userOrderService.deleteCart(userOrderCheckDTO.getUserOrderCheckDTO().getUser_id());
+        }
+    }
+
+    @PostMapping("/userOrder/fastPay")
+    @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void fastPay(@RequestBody UserOrderCheckDTO userOrderCheckDTO) {
+        userOrderService.addFastPay(userOrderCheckDTO);
     }
 
     @GetMapping("/userOrder/success")
@@ -79,9 +117,12 @@ public class UserOrderController {
     }
 
     @PostMapping("/userOrder/delete")
+    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void userOrderDelete(@RequestBody String order_no) {
         int userNo = Integer.parseInt(order_no);
-        userOrderService.userOrderDelete(userNo);
+        List<UserOrderDetailDTO> orderDetail = userOrderService.getUserOrderDetail(userNo);
+        userOrderService.userOrderDelete(userNo, orderDetail);
     }
+
 }

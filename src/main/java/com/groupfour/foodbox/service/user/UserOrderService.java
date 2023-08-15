@@ -12,11 +12,17 @@ public interface UserOrderService {
 
     UserDTO userOrderInfo(String userId);
 
-    void addOrderList(UserOrderCheckDTO userOrderCheckDTO);
+    int addOrderList(UserOrderCheckDTO userOrderCheckDTO);
+
+    void addFastPay(UserOrderCheckDTO userOrderCheckDTO);
 
     List<UserOrderDTO> getUserOrderList(String id);
 
     List<UserOrderDetailDTO> getUserOrderDetail(int order_no);
 
-    void userOrderDelete(int orderNo);
+    void userOrderDelete(int orderNo, List<UserOrderDetailDTO> orderDetail);
+
+    UserOrderCheckDTO getProdInfo(int prodCode);
+
+    void deleteCart(String userId);
 }
