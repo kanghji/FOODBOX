@@ -1,9 +1,6 @@
 <!-- 헤더 -->
 <th:block th:replace="/user_inc/header :: headerFragment"></th:block>
 
-<link href="/css/userRegister.css" rel="stylesheet"/>
-
-
 <!-- 컨텐츠 영역 -->
 <div class="user_register_wrap">
 
@@ -236,7 +233,7 @@
             </div>
             <div id="modalContainer2" class="hidden">
                 <div id="modalContent2">
-                    <h5>푸드박스 개인정보 처리방침 (필수)</h5>
+                    <h5 class="modal_title">푸드박스 개인정보 처리방침 (필수)</h5>
                     <div style="overflow:auto; width:380px; height:370px;">
                         <th:block th:replace="/user/agreement02"></th:block>
                     </div>
