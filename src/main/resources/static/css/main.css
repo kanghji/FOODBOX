@@ -26,23 +26,6 @@
     left: 5%;
 }
 
-/*.add_recipe {*/
-/*    padding: 0.6em 0.5em;*/
-/*    font-size: 13px;*/
-/*    background-color: rgba(51, 51, 51, 0);*/
-/*    border: 1px solid #333;*/
-/*    cursor: pointer;*/
-/*    transition: .3s;*/
-/*    border-radius: 4px;*/
-/*}*/
-
-/*.add_recipe:hover {*/
-/*    color: #fff;*/
-/*    background-color: #555;*/
-/*    border: 1px solid #555;*/
-/*}*/
-
-
 /**************/
 
 .section_two {
@@ -53,7 +36,12 @@
     margin-top: 4em;
     margin-bottom: 3em;
     position: relative;
+    z-index: 0;
 }
+
+/*.new_wrap {*/
+/*   */
+/*}*/
 
 .best_text_wrap {
     position: absolute;
@@ -108,12 +96,12 @@ strong {
     position: absolute;
     right:60%;
     bottom: 24%;
-    /*border: 1px solid #333333;*/
 }
 
 .new_img_box {
-    width: 100%;
+    width: 500px;
     height: 480px;
+    margin-left: 20em;
 }
 
 .new_img {
@@ -130,7 +118,6 @@ strong {
     font-size: 13px;
     padding: 0.5em 0 1.3em 0;
 }
-
 
 /********* section 05 *********/
 
