@@ -36,6 +36,13 @@
         UPDATE product SET prod_qty = #{prod_qty} WHERE prod_code = #{prod_code}
     </update>
 
+    <delete id="deleteCart">
+        DELETE from usercart
+        <where>
+            FIND_IN_SET(user_id, #{userId});
+        </where>
+    </delete>
+
     <select id="getUserOrderList" resultType="com.groupfour.foodbox.dto.UserOrderDTO">
         SELECT * FROM orderlist where user_id = #{id}
     </select>
@@ -55,4 +62,8 @@
     <update id="deleteOrder_qty">
         UPDATE product SET prod_qty = #{prod_qty} WHERE prod_code = #{prod_code}
     </update>
+
+    <select id="getProdInfo" resultType="com.groupfour.foodbox.dto.UserOrderCheckDTO">
+        SELECT * FROM product WHERE prod_code = #{prodCode}
+    </select>
 </mapper>
