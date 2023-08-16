@@ -11,6 +11,7 @@
 </style>
 <div class="container w-75 mt-3">
   <h3 class="mt-3 text-center">주문 리스트</h3>
+  <button type="button" class="btn btn-primary"><a th:href="@{/admin/statistic}">주문 통계</a></button>
   <form action="/admin/productList" method="post">
     <select id="searchType" name="searchType">
       <option value="ALL">전체</option>
