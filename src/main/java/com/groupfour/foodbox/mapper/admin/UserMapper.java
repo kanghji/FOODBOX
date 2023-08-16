@@ -15,7 +15,7 @@ public interface UserMapper {
 //    List<UserDTO> userList();
 
     // 회원 리스트
-    List<UserDTO> userList(String keyword, String searchType, PageDTO pageDTO);
+    List<UserDTO> userList(@Param("keyword") String keyword, @Param("searchType") String searchType, @Param("pageDTO") PageDTO pageDTO);
 
 
     // 회원 삭제
@@ -25,7 +25,7 @@ public interface UserMapper {
     int usersDelete(List<String> chkList);
 
     // 회원 검색
-    List<UserDTO> userSearch(String user_name, String user_gender);
+    List<UserDTO> userSearch(@Param("user_name") String user_name, @Param("user_gender") String user_gender);
 
     // 회원 정보
     UserDTO userInfo(int user_no);
