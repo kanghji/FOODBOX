@@ -13,6 +13,7 @@
     .register_content_box {
         width: auto;
     }
+
     td ul {
         padding-left: 0px;
     }
@@ -47,8 +48,6 @@
 
             <tbody>
 
-            <!-- 장바구니 상품 출력하기 -->
-            <th:block th:each="dto: ${orderList}">
                 <tr>
                     <td><input type="checkbox" name="chk" th:value="${dto.prod_code}"/></td>
                     <td>
@@ -60,7 +59,6 @@
                     <td th:text="${#numbers.formatInteger(dto.totPrice, 0, 'COMMA') + '원'}"></td>
                 </tr>
 
-            </th:block>
 
             <tr>
                 <form th:action ="@{/user/userCartDelete}" name="cartForm" method="post">
@@ -156,7 +154,8 @@
 
 
         <div class="text-center p-4">
-            <button class="btn btn-primary" th:onclick="payBtn([[${orderList}]])">결제하기</button>
+
+            <button class="btn btn-primary" th:onclick="fastPayBtn([[${dto}]])">결제하기</button>
             <a th:href="@{/}" class="btn btn-outline-primary">계속 쇼핑하기</a>
         </div>
     </section>

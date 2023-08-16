@@ -1,6 +1,7 @@
 package com.groupfour.foodbox.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserOrderCheckDTO {
 
     private String user_id;
@@ -32,6 +34,7 @@ public class UserOrderCheckDTO {
 
     private List<UserOrderCheckDTO> orderList;
     private UserOrderCheckDTO userOrderCheckDTO;
+    private UserOrderCheckDTO userFastPayDTO;
 
     public void setTotPrice(int totPrice) {
         this.totPrice = prod_price * order_qty;

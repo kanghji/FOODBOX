@@ -57,6 +57,12 @@
     width: 50em;
 }
 
+.email_inner {
+    display: flex;
+    width: 30em;
+    margin: 2em 0;
+}
+
 .userinfo_box {
     margin-bottom: 1.5em;
 }
@@ -66,12 +72,16 @@
     padding-right: 5.3em;
 }
 
+.email_confirm_label {
+    padding-right: 3.5em;
+}
+
 .name_label, .gender_label, .zibun_label {
-    padding-right: 6.1em;
+    padding-right: 6.3em;
 }
 
 .birth_label, .addr_label {
-    padding-right: 4.3em;
+    padding-right: 4.2em;
 }
 
 /*!* 중복 *!*/
@@ -107,7 +117,7 @@
     font-weight: 500;
 }
 
-.confirm_btn, .addr_seachBtn {
+.confirm_btn, .addr_seachBtn, .email_check {
     width: 8.5em;
     height: 2.8em;
     border-radius: 4px;
@@ -117,6 +127,16 @@
     background-color: #fff;
     cursor: pointer;
     margin-left: 0.6em;
+}
+
+.email_check {
+    margin-left: 0.5em;
+    text-align: center;
+}
+
+.email_chk_box {
+    /*margin: 2.5em 0;*/
+    margin: 2em  1.3em 0 0 ;
 }
 
 /* 중복 */
@@ -149,9 +169,6 @@
 .validation {
     color: #f03f40;
     font-size: 13px;
-}
-
-.validation {
     padding: 0.5em 0 1em 9em ;
 }
 

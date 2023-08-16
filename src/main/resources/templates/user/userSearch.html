@@ -5,14 +5,11 @@
     <!--  검색창   -->
     <div class="search-box">
         <div class="search_inner">
-            <!--            <form th:action="@{/user/prodSeach}" method="post">-->
-            <!--            <form>-->
             <input type="search" id="prod_name" name="prod_name" placeholder="검색어를 입력해주세요"
                    size="40" autofocus  class="search__inp">
-            <button class="searchBtn" onclick="prodSearchBtn(this)" data-mode="z">
+            <button class="searchBtn" id="all_search_btn" onclick="prodSearchBtn(this)" data-mode="z">
                 <i class="fa fa-search fa-lg search__img"></i>
             </button>
-            <!--            </form>-->
         </div>
     </div>
     <!--  버튼 클릭시 해당 검색결과 목록을 보여줌  -->
@@ -21,38 +18,14 @@
             <button type="button" id="prod_keyword_btn"
                     data-mode="p" class="prod_btn search_btn active" onclick="prodSearchBtn(this)">상품 <span id="prodspanCnt">&lbbrk;0&rbbrk;</span></button>
             <button type="button" id="recipe_keyword_btn"
-                    data-mode="r" class="recipe_btn search_btn" onclick="prodSearchBtn(this)">레시피 <span>&lbbrk;0&rbbrk;</span></button>
+                    data-mode="r" class="recipe_btn search_btn" onclick="prodSearchBtn(this)">레시피 <span id="recipeCnt">&lbbrk;0&rbbrk;</span></button>
         </div>
     </div>
-    <!--  검색 결과 목록  -->
-    <!-- 상품 키워드 값이 있으면 목록 보이기-->
-    <!--    <div class="prod_search_list searchBtn w-100 ps-5 d-flex justify-content-center">-->
-    <div class="prod_search_list searchBtn" id="tab-1">
-        <div class="col-sm-9">
-            <div class="d-flex mt-3 w-100 tab_on">
-                <!--                <th:block th:each="productDTO, productDTO : ${getProdSearchList}" th:if="${#strings.isEmpty(getProdSearchList)  == false}">-->
-                <!--                    <th:block th:replace="/user/productPreview"/>-->
-                <!--</th:block>-->
-                <div class="w-100" id="productpreview"></div>
-            </div>
-        </div>
-    </div>
-    <!-- 검색 키워드가 없을떄 보여짐  -->
-    <!-- 키워드 값이 없으면 보이기   -->
-    <!--    <th:block th:if="${getProdSearchList.keyword == null || getRecipeSearchList.keyword == null }">-->
-    <!--    <th:block th:unless="${#strings.isEmpty(getProdSearchList)  == false}">-->
-    <!--        <div class="no_search__box">-->
-    <!--            <div class="no_search">-->
-    <!--                <p>검색된 결과가 없습니다</p>-->
-    <!--            </div>-->
-    <!--        </div>-->
+    <!-- 검색 결과 리스트 출력 부분 div -->
     <div class="searchArea w-100 d-flex flex-column justify-content-center">
 
     </div>
-
-
-    <!--</th:block>-->
 </div>
 
-<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>
+<!--<th:block th:replace="/user_inc/footer :: footerFragment"></th:block>-->
 <th:block th:replace="/user_inc/footer :: scriptFragment"></th:block>
