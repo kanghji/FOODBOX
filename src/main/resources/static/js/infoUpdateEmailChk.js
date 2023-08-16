@@ -17,11 +17,10 @@ function emailCheck_two(){
                 console.log("이메일 인증코드 : " + ePw);
 
                 $('#confirmEmail').show();
-                $("#confirmEmail").html('<div class="info_inner">'
+                $("#confirmEmail").html('<div class="email_inner">'
                     // +'<span class="must_write03">이메일 인증</span>'
-                    //  여기서부터 시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     + '<div class="label_box">'
-                    +'<label for="user_email">이메일 인증</label>'
+                    +'<label for="user_email" class="email_confirm_label">이메일 인증</label>'
                     // +'<span class="must_write04">&ast;</span>'
                     +'</div>'
                     +'<div class="input_box">'
@@ -32,10 +31,12 @@ function emailCheck_two(){
                     +'<p class="chkMsg"></p>'
                     +'</div>'
                     +'</div>'
-                    +'<div class="register_content03">'
-                    +'<div class="content_button">'
-                    +'<input class="register_content_button" type="button" onclick="emailConfirm_two()" value="인증확인"/>'
-                    +'</div>'
+                    // +'<div class="register_content03">'
+                    +'<div class="email_chk_box">'
+                    // +'<div class="content_button">'
+                    // +'<input class="register_content_button" type="button" onclick="emailConfirm_two()" value="인증확인"/>'
+                    +'<input class="email_check" onclick="emailConfirm_two()" value="인증확인" />'
+                    // +'</div>'
                     +'</div>');
 
             }else{

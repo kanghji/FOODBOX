@@ -62,9 +62,13 @@
 }
 
 .f-logo {
-    padding-top: 0.5em;
-    padding-left: 40em;
+    /*font-family: 'Exo 2', sans-serif;*/
+    /*font-size: 45px;*/
+    width: 170px;
+    color: #333333;
+    margin-left: 40em;
     /*border: 1px solid #333333;*/
+
 }
 
 .addr__info {

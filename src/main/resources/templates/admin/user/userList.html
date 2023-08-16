@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<style>
+    td {word-break:break-all;word-wrap:break-word;}
+</style>
 <!-- 헤더 -->
 <th:block th:replace="/admin/admin_header :: headerFragment"></th:block>
 <div class="container w-75 mt-5">
@@ -26,13 +29,13 @@
 <!--    </form>-->
 <!--회원 리스트 부분-->
     <form id="frmTable">
-    <table class="table table-bordered">
+    <table width="100px" class="table table-bordered">
         <thead class="table-secondary">
         <tr class="text-center">
             <th width="5%">선택</th>
             <th width="9%">회원번호</th>
             <th width="8%">아이디</th>
-            <th>비밀번호</th>
+            <th width="7%">비밀번호</th>
             <th width="7%">이름</th>
             <th width="8%">성별</th>
             <th width="12%">생년월일</th>
@@ -51,16 +54,16 @@
                 <td>
                 <input type="checkbox" name="chkUno" th:value="${userList.user_no}">
                 </td>
-                <td th:text="${userList.user_no}"></td>
-                <td><a th:text="${userList.user_id}" th:href="@{/admin/userInfo(user_no=${userList.user_no})}"></a></td>
-                <td th:text="${userList.user_pw}"></td>
-                <td th:text="${userList.user_name}"></td>
-                <td th:text="${userList.user_gender}"></td>
-                <td th:text="${userList.user_birthday}"></td>
+                <td width="5%" th:text="${userList.user_no}"></td>
+                <td width="9%"><a th:text="${userList.user_id}" th:href="@{/admin/userInfo(user_no=${userList.user_no})}"></a></td>
+                <td width="8%" th:text="${userList.user_pw}"></td>
+                <td width="7%" th:text="${userList.user_name}"></td>
+                <td width="8%" th:text="${userList.user_gender}"></td>
+                <td width="12%" th:text="${userList.user_birthday}"></td>
                 <td th:text="${userList.user_email}"></td>
-                <td th:text="${userList.user_zipcode}"></td>
-                <td th:text="${userList.user_roadaddr}"></td>
-                <td th:text="${userList.user_detailaddr}"></td>
+                <td width="8%" th:text="${userList.user_zipcode}"></td>
+                <td width="10%"th:text="${userList.user_roadaddr}"></td>
+                <td width="6%"th:text="${userList.user_detailaddr}"></td>
 
                 <td>
                     <a class="btn btn-sm btn-danger" th:href="@{/admin/userDelete(user_no=${userList.user_no})}">삭제</a>
