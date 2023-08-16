@@ -14,12 +14,13 @@
     SELECT ifnull(withdrawals_num, 0) FROM withdrawals_user
 </select>
     <select id="totalsales" resultType="Integer">
-        SELECT ifnull(sum(ordertotprice),0) AS total_sales FROM orderlist
+        SELECT ifnull(sum(ordertotprice),0) AS total_sales FROM orderlist WHERE order_status=ORDERSUCCESS
     </select>
     <select id="monthlyList" resultType="monthlySalesDTO">
         SELECT MONTH(order_inputDate) AS month,
         ifnull(sum(ordertotprice),0) AS sales
         FROM orderlist
+        WHERE order_status=ORDERSUCCESS
         GROUP BY month
         ORDER BY month
     </select>
@@ -28,22 +29,25 @@
         FROM orderlist
         WHERE order_inputDate BETWEEN #{start_date}
         AND  DATE_ADD(#{end_date}, interval 1  DAY)
+        AND order_status=ORDERSUCCESS
     </select>
     <select id="termOrderNum" resultType="Integer">
         SELECT ifnull(count(*),0) AS order_num
         FROM orderlist
         WHERE order_inputDate BETWEEN #{start_date}
         AND  DATE_ADD(#{end_date}, interval 1  DAY)
-
+        AND order_status=ORDERSUCCESS
     </select>
     <select id="productSales" resultType="Integer">
         SELECT IFNULL((SELECT prod_price FROM product WHERE prod_code = #{prod_code})
-        *(SELECT sum(order_qty) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS total_sales;
+        *(SELECT sum(order_qty) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS total_sales
+        AND order_status=ORDERSUCCESS
     </select>
     <select id="productOrderNum" resultType="Integer">
         SELECT ifnull(count(*),0) AS order_num
         FROM orderdetail
         WHERE prod_code = #{prod_code}
+        AND order_status=ORDERSUCCESS
     </select>
     <select id="mothlSalesList" resultType="monthlySalesDTO">
     SELECT MONTH(order_inputDate) AS month,
@@ -51,6 +55,7 @@
         *(SELECT sum(order_qty) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS sales
     FROM orderdetail
     WHERE prod_code = #{prod_code}
+        AND order_status=ORDERSUCCESS
     GROUP BY month
     ORDER BY month
 </select>
