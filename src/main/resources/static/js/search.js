@@ -1,5 +1,9 @@
 
-
+function enterkey() {
+    if (event.keyCode === 13) {
+        document.getElementById("all_search_btn").click();
+    }
+}
 
 // 검색
 function prodSearchBtn(obj) {
