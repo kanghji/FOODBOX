@@ -39,10 +39,9 @@
         AND order_status='ORDERSUCCESS'
     </select>
     <select id="productSales" resultType="Integer">
-        SELECT IFNULL((SELECT prod_price FROM product WHERE prod_code = #{prod_code})
-        *(SELECT sum(order_qty) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS total_sales
-        FROM orderdetail
-        WHERE order_status='ORDERSUCCESS'
+        SELECT
+        IFNULL((SELECT prod_price FROM product WHERE prod_code = #{prod_code}) *
+        (SELECT COALESCE(sum(order_qty),0) FROM orderdetail WHERE prod_code = #{prod_code}),0) AS total_sales
     </select>
     <select id="productOrderNum" resultType="Integer">
         SELECT ifnull(count(*),0) AS order_num
