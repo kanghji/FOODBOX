@@ -318,53 +318,50 @@
         });
 
 
-
-        /*북마크 로그인 체크 */
-        function likeLoginCheck() {
-            if ([[${session.userLoginDto?.user_id==null}]]) {
-                alert("로그인이 필요한 서비스입니다");
-                return;
-            }
-            bookmarkRegister([[${recipeDTO.id}]]);
-        }
-
-
-        function bookmarkRegister(id) {
-            let user_id = "[[${session.userLoginDto?.user_id}]]";
-            // let bm_recipe_id = [[${recipeDTO.id}]];
-            let bm_recipe_rcp_nm = "[[${recipeDTO.RCP_NM}]]";
-            let bm_recipe_att_file_no_main = "[[${recipeDTO.ATT_FILE_NO_MAIN}]]";
-            let bm_recipe_rcp_pat2 = "[[${recipeDTO.RCP_PAT2}]]";
-            let bm_recipe_rcp_way2 = "[[${recipeDTO.RCP_WAY2}]]";
-
-            let bookmark = {
-                bm_recipe_id: id, bm_recipe_rcp_nm, bm_recipe_rcp_nm,
-                bm_recipe_att_file_no_main: bm_recipe_att_file_no_main, bm_recipe_rcp_pat2: bm_recipe_rcp_pat2,
-                bm_recipe_rcp_way2, bm_recipe_rcp_way2
-            };
-            console.log(bookmark);
-            $.ajax({
-                url: "/user/bookmarkRegister/" + user_id,
-                data: JSON.stringify(bookmark), // JSON객체를 문자열(텍스트) 변환
-                contentType: "application/json; charset=utf8",
-                type: "post",
-                success: function (result) {
-                    if (result == "register") {
-                        alert("북마크 되었습니다.");
-                    } else if (result == "have") {
-                        alert("이미 북마크되어 있습니다.");
-                    } else {
-                        alert("등록 실패하였습니다.");
-                    }
-                },
-                error: () => {
-                    alert("요청을 실패하였습니다")
-                }
-            });
-        }
-
     });
+    /*북마크 로그인 체크 */
+    function likeLoginCheck() {
+        if ([[${session.userLoginDto?.user_id==null}]]) {
+            alert("로그인이 필요한 서비스입니다");
+            return;
+        }
+        bookmarkRegister([[${recipeDTO.id}]]);
+    }
 
+
+    function bookmarkRegister(id) {
+        let user_id = "[[${session.userLoginDto?.user_id}]]";
+        // let bm_recipe_id = [[${recipeDTO.id}]];
+        let bm_recipe_rcp_nm = "[[${recipeDTO.RCP_NM}]]";
+        let bm_recipe_att_file_no_main = "[[${recipeDTO.ATT_FILE_NO_MAIN}]]";
+        let bm_recipe_rcp_pat2 = "[[${recipeDTO.RCP_PAT2}]]";
+        let bm_recipe_rcp_way2 = "[[${recipeDTO.RCP_WAY2}]]";
+
+        let bookmark = {
+            bm_recipe_id: id, bm_recipe_rcp_nm, bm_recipe_rcp_nm,
+            bm_recipe_att_file_no_main: bm_recipe_att_file_no_main, bm_recipe_rcp_pat2: bm_recipe_rcp_pat2,
+            bm_recipe_rcp_way2, bm_recipe_rcp_way2
+        };
+        console.log(bookmark);
+        $.ajax({
+            url: "/user/bookmarkRegister/" + user_id,
+            data: JSON.stringify(bookmark), // JSON객체를 문자열(텍스트) 변환
+            contentType: "application/json; charset=utf8",
+            type: "post",
+            success: function (result) {
+                if (result == "register") {
+                    alert("북마크 되었습니다.");
+                } else if (result == "have") {
+                    alert("이미 북마크되어 있습니다.");
+                } else {
+                    alert("등록 실패하였습니다.");
+                }
+            },
+            error: () => {
+                alert("요청을 실패하였습니다")
+            }
+        });
+    }
 
 </script>
 
