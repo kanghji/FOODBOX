@@ -74,10 +74,11 @@
   </div>
 <script>
     let viewPage =1;
+    let totalPage= [[${pageDTO.totalPage}]];
 $(window).scroll(()=>{
    let checkNum=$(window).scrollTop()-($(document).height()-$(window).height());
    console.log(checkNum);
-   if(checkNum<1&&checkNum>-1&&[[${pageDTO.totalPage>viewPage}]]){
+   if(checkNum<1&&checkNum>-1&&totalPage>viewPage){
        viewPage++;
        productLoad(viewPage);
    }
