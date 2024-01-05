@@ -95,7 +95,7 @@
 ![mainpage_1](https://github.com/kanghji/FOODBOX/assets/123557480/64110e07-9616-4394-b723-e97cff5f7d24)
 
 ![mainpage_2](https://github.com/kanghji/FOODBOX/assets/123557480/4193611a-ce5a-410c-ba75-4b0a538bdfa1)
-> 1. 사용자의 편리성을 위해 직관적으로 보여줌
+> 1. 사용자의 편리성을 위해 심플하게 구성하여 직관적으로 보여줌
 > 2. read more 버튼을 통해 베스트/레시피/신상품 페이지로 이동
 > 3. 자동 슬라이드를 적용하여 추천상품을 보여주며 화살표를 클릭해도 옆으로 넘길 수 있음
 > 4. 더보기 버튼을 클릭하면 더 많은 추천상품을 볼 수 있음
