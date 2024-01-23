@@ -18,7 +18,7 @@
 사용자가 원하는 레시피를 제공하고 레시피에 맞는 식재료를 구입할 수 있습니다. </br>
 구입 후 별점과 댓글을 남길 수 있습니다. </br>
 원하는 레시피는 찜하기를 눌러서 언제든지 볼 수 있도록 '책갈피한레시피'에서 확인이 가능합니다. </br>
-검색창에 키워드를 입력하면 상품과 레시피 동시에 검색이 가능합니다.
+검색창에 키워드를 입력하면 상품과 레시피를 동시에 검색이 가능합니다.
 
 - 테이블 기능명세 </br>
 <https://docs.google.com/spreadsheets/d/16cfZ-7FTTPmlb0djrN9vKAgwdaXaeicsmYWm7aIQukk/edit?usp=sharing>
@@ -26,6 +26,12 @@
 - ERD 설계
 
 ![ERD](https://github.com/kanghji/FOODBOX/assets/123557480/deab930f-2adc-487d-bb08-11a0d7f833aa)
+
+### 담당 역할
+- 전반적인 UI 및 로고 디자인
+- 사용자 메인 페이지
+- 마이페이지
+- 검색 기능
 
 ### 주요 기능 
 - 회원가입 및 로그인
